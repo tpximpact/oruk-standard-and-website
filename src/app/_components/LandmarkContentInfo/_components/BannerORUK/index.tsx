@@ -1,8 +1,8 @@
-import styles from './BannerMHCLG.module.css'
+import styles from './BannerORUK.module.css'
 import { PageMargin } from '@/components/PageMargin'
 
-export const BannerMHCLG = () => (
-  <div className={styles.BannerMHCLG}>
+export const BannerORUK = () => (
+  <div className={styles.BannerORUK}>
     <PageMargin>
       <div className={styles.inner}>
         <div className={styles.supported}>Open Referral UK is supported by</div>

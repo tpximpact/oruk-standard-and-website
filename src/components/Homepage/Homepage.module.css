@@ -42,7 +42,7 @@
 }
 
 .conclusion {
-  border: 4px solid var(--colour-mhclg);
+  border: 4px solid var(--colour-oruk);
   height: auto;
 }
 
@@ -87,12 +87,12 @@
 .paddedmultiline {
   line-height: 1.4;
   padding: 10px 0;
-  border-left: 20px solid var(--colour-mhclg);
+  border-left: 20px solid var(--colour-oruk);
   width: 400px;
   margin: 20px auto;
 }
 .paddedmultiline h1 {
-  background-color: var(--colour-mhclg);
+  background-color: var(--colour-oruk);
   padding: 4px 0;
   color: #fff;
   display: inline;
