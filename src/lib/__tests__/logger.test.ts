@@ -1,17 +1,18 @@
+import { describe, it, expect, vi, beforeEach, afterEach, type SpyInstance } from 'vitest'
 import { logger } from '../logger'
 
 describe('logger', () => {
-  let consoleErrorSpy: jest.SpyInstance
-  let consoleWarnSpy: jest.SpyInstance
-  let consoleInfoSpy: jest.SpyInstance
-  let consoleDebugSpy: jest.SpyInstance
+  let consoleErrorSpy: SpyInstance
+  let consoleWarnSpy: SpyInstance
+  let consoleInfoSpy: SpyInstance
+  let consoleDebugSpy: SpyInstance
 
   beforeEach(() => {
-    jest.clearAllMocks()
-    consoleErrorSpy = jest.spyOn(console, 'error').mockImplementation()
-    consoleWarnSpy = jest.spyOn(console, 'warn').mockImplementation()
-    consoleInfoSpy = jest.spyOn(console, 'info').mockImplementation()
-    consoleDebugSpy = jest.spyOn(console, 'debug').mockImplementation()
+    vi.clearAllMocks()
+    consoleErrorSpy = vi.spyOn(console, 'error').mockImplementation(() => {})
+    consoleWarnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {})
+    consoleInfoSpy = vi.spyOn(console, 'info').mockImplementation(() => {})
+    consoleDebugSpy = vi.spyOn(console, 'debug').mockImplementation(() => {})
   })
 
   afterEach(() => {

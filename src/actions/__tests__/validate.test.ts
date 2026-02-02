@@ -1,7 +1,9 @@
+import { describe, it, expect, vi, beforeEach } from 'vitest'
+import * as nextNavigation from 'next/navigation'
 import { navigate } from '../validate'
 
-jest.mock('next/navigation', () => ({
-  redirect: jest.fn((url: string) => {
+vi.mock('next/navigation', () => ({
+  redirect: vi.fn((url: string) => {
     // Next.js redirect throws to exit the function
     throw new Error(`Redirect: ${url}`)
   })
@@ -9,12 +11,12 @@ jest.mock('next/navigation', () => ({
 
 describe('validate', () => {
   beforeEach(() => {
-    jest.clearAllMocks()
+    vi.clearAllMocks()
   })
 
   describe('navigate', () => {
     it('should redirect with correct parameters', async () => {
-      const { redirect } = require('next/navigation')
+      const redirect = vi.mocked(nextNavigation.redirect)
 
       const formData = new FormData()
       formData.append('uri', 'https://example.com/api/spec')
@@ -31,7 +33,7 @@ describe('validate', () => {
     })
 
     it('should handle URI with query parameters', async () => {
-      const { redirect } = require('next/navigation')
+      const redirect = vi.mocked(nextNavigation.redirect)
 
       const formData = new FormData()
       formData.append('uri', 'https://example.com/api/spec?version=1.0')
@@ -48,7 +50,7 @@ describe('validate', () => {
     })
 
     it('should build correct redirect URL', async () => {
-      const { redirect } = require('next/navigation')
+      const redirect = vi.mocked(nextNavigation.redirect)
 
       const formData = new FormData()
       formData.append('uri', 'https://test.com')
@@ -64,7 +66,7 @@ describe('validate', () => {
     })
 
     it('should handle empty URI gracefully', async () => {
-      const { redirect } = require('next/navigation')
+      const redirect = vi.mocked(nextNavigation.redirect)
 
       const formData = new FormData()
       formData.append('uri', '')

@@ -1,3 +1,4 @@
+import { describe, it, expect, vi } from 'vitest'
 import { renderHook, act } from '@testing-library/react'
 import { useFormReset } from '../use-form-reset'
 
@@ -27,7 +28,7 @@ describe('useFormReset', () => {
       result.current.current = formElement
     })
 
-    const resetSpy = jest.spyOn(formElement, 'reset')
+    const resetSpy = vi.spyOn(formElement, 'reset')
 
     act(() => {
       rerender({ status: 'SUCCESS', timestamp: initialTimestamp + 1000 })
@@ -55,7 +56,7 @@ describe('useFormReset', () => {
       result.current.current = formElement
     })
 
-    const resetSpy = jest.spyOn(formElement, 'reset')
+    const resetSpy = vi.spyOn(formElement, 'reset')
 
     act(() => {
       rerender({ status: 'ERROR', timestamp: timestamp + 1000 })
@@ -79,7 +80,7 @@ describe('useFormReset', () => {
       result.current.current = formElement
     })
 
-    const resetSpy = jest.spyOn(formElement, 'reset')
+    const resetSpy = vi.spyOn(formElement, 'reset')
 
     act(() => {
       rerender({ status: 'SUCCESS', timestamp })
@@ -116,7 +117,7 @@ describe('useFormReset', () => {
       result.current.current = formElement
     })
 
-    const resetSpy = jest.spyOn(formElement, 'reset')
+    const resetSpy = vi.spyOn(formElement, 'reset')
 
     // First rerender - should reset
     const newTimestamp = initialTimestamp + 1000

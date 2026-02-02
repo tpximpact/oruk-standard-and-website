@@ -1,19 +1,23 @@
+import { describe, it, expect, vi, beforeEach } from 'vitest'
 import { ValidationError } from '@/lib/mongodb-errors'
 
+// Set required environment variables
+process.env.GITHUB_CLIENT_ID = 'test-client-id'
+process.env.GITHUB_APP_PRIVATE_KEY = '-----BEGIN RSA PRIVATE KEY-----'
+process.env.GITHUB_INSTALLATION_ID = '12345'
+
 // Mock modules before importing the action
-jest.mock('next/cache', () => ({
-  revalidatePath: jest.fn()
+vi.mock('next/cache', () => ({
+  revalidatePath: vi.fn()
 }))
 
-jest.mock('@/repositories/service-repository', () => ({
-  ServiceRepository: jest.fn()
+vi.mock('@/repositories/service-repository')
+
+vi.mock('@/lib/github-service', () => ({
+  createVerificationIssue: vi.fn()
 }))
 
-jest.mock('@/lib/github-service', () => ({
-  createVerificationIssue: jest.fn()
-}))
-
-jest.mock('@/utilities/to-form-state', () => ({
+vi.mock('@/utilities/to-form-state', () => ({
   toFormState: (status: string, message: string) => ({
     status,
     message,
@@ -40,7 +44,7 @@ jest.mock('@/utilities/to-form-state', () => ({
   }
 }))
 
-jest.mock('@/models/service', () => ({
+vi.mock('@/models/service', () => ({
   serviceInputSchema: {
     parse: (data: any) => {
       // Simple validation for test
@@ -69,8 +73,16 @@ import { revalidatePath } from 'next/cache'
 
 describe('service-actions', () => {
   beforeEach(() => {
-    jest.clearAllMocks()
+    vi.clearAllMocks()
   })
+
+  const setupMockRepository = (mockCreate: any) => {
+    ;(ServiceRepository as any).mockImplementation(function () {
+      return {
+        create: mockCreate
+      }
+    })
+  }
 
   describe('createMessage', () => {
     it('should successfully create a service with GitHub issue', async () => {
@@ -96,11 +108,10 @@ describe('service-actions', () => {
         url: 'https://api.github.com/repos/owner/repo/issues/42'
       }
 
-      ;(ServiceRepository as jest.Mock).mockImplementation(() => ({
-        create: jest.fn().mockResolvedValue(mockService)
-      }))
-      ;(createVerificationIssue as jest.Mock).mockResolvedValue(mockIssue)
-      ;(revalidatePath as jest.Mock).mockResolvedValue(undefined)
+      const mockCreate = vi.fn().mockResolvedValue(mockService)
+      setupMockRepository(mockCreate)
+      ;(createVerificationIssue as any).mockResolvedValue(mockIssue)
+      ;(revalidatePath as any).mockResolvedValue(undefined)
 
       const result = await createMessage({}, formData)
 
@@ -128,11 +139,10 @@ describe('service-actions', () => {
         updateLink: '/developers/register/svc-123'
       }
 
-      ;(ServiceRepository as jest.Mock).mockImplementation(() => ({
-        create: jest.fn().mockResolvedValue(mockService)
-      }))
-      ;(createVerificationIssue as jest.Mock).mockRejectedValue(new Error('GitHub API error'))
-      ;(revalidatePath as jest.Mock).mockResolvedValue(undefined)
+      const mockCreate = vi.fn().mockResolvedValue(mockService)
+      setupMockRepository(mockCreate)
+      ;(createVerificationIssue as any).mockRejectedValue(new Error('GitHub API error'))
+      ;(revalidatePath as any).mockResolvedValue(undefined)
 
       const result = await createMessage({}, formData)
 
@@ -163,9 +173,9 @@ describe('service-actions', () => {
       formData.append('developerUrl', 'https://developer.example.com')
       formData.append('serviceUrl', 'https://service.example.com')
       formData.append('contactEmail', 'test@example.com')
-      ;(ServiceRepository as jest.Mock).mockImplementation(() => ({
-        create: jest.fn().mockRejectedValue(new Error('Database error'))
-      }))
+
+      const mockCreate = vi.fn().mockRejectedValue(new Error('Database error'))
+      setupMockRepository(mockCreate)
 
       const result = await createMessage({}, formData)
 
@@ -188,9 +198,8 @@ describe('service-actions', () => {
         duplicate: ['Service with this email already exists']
       })
 
-      ;(ServiceRepository as jest.Mock).mockImplementation(() => ({
-        create: jest.fn().mockRejectedValue(validationError)
-      }))
+      const mockCreate = vi.fn().mockRejectedValue(validationError)
+      setupMockRepository(mockCreate)
 
       const result = await createMessage({}, formData)
 
