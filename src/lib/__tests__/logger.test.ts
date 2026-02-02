@@ -1,11 +1,11 @@
-import { describe, it, expect, vi, beforeEach, afterEach, type SpyInstance } from 'vitest'
+import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
 import { logger } from '../logger'
 
 describe('logger', () => {
-  let consoleErrorSpy: SpyInstance
-  let consoleWarnSpy: SpyInstance
-  let consoleInfoSpy: SpyInstance
-  let consoleDebugSpy: SpyInstance
+  let consoleErrorSpy: any
+  let consoleWarnSpy: any
+  let consoleInfoSpy: any
+  let consoleDebugSpy: any
 
   beforeEach(() => {
     vi.clearAllMocks()

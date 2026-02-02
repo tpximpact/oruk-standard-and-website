@@ -49,7 +49,7 @@ describe('createVerificationIssue', () => {
     const result = await createVerificationIssue(serviceData)
 
     expect(octokit.rest.issues.create).toHaveBeenCalledTimes(1)
-    const callArg = octokit.rest.issues.create.mock.calls[0][0]
+    const callArg = (octokit.rest.issues.create as any).mock.calls[0][0]
     expect(callArg.owner).toBe('owner')
     expect(callArg.repo).toBe('repo')
     expect(callArg.title).toContain(serviceData.name)

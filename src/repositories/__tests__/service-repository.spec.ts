@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach, type Mock } from 'vitest'
-import type { Collection, ObjectId } from 'mongodb'
+import type { ObjectId } from 'mongodb'
 import { ServiceRepository } from '../service-repository'
 import { ServiceDocument } from '@/models/service'
 import { ValidationError } from '@/lib/mongodb-errors'

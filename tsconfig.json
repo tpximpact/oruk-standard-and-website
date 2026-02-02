@@ -22,7 +22,7 @@
         "name": "next"
       }
     ],
-    "types": ["@testing-library/jest-dom"],
+    "types": ["vitest/globals", "@testing-library/jest-dom"],
     "paths": {
       "@/components/*": ["./src/components/*"],
       "@/*": ["./src/*"]
@@ -36,8 +36,8 @@
     ".next/types/**/*.ts",
     "src/components/MarkdownComponentFromFile.tsx",
     ".next/dev/types/**/*.ts",
-    "jest.config.ts",
-    "jest.setup.ts"
+    "vitest.config.ts",
+    "vitest.setup.ts"
   ],
   "exclude": ["node_modules"]
 }
