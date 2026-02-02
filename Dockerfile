@@ -1,4 +1,4 @@
-# Production Dockerfile for MHCLG ORUK
+# Production Dockerfile for ORUK ORUK
 FROM node:20-alpine AS base
 
 # Install dependencies only when needed

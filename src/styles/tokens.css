@@ -38,15 +38,15 @@
   --colour-offwhite: #fcf9f5;
   --colour-mint: #75bea0;
   --color-gov-blue: #1d70b8;
-  --colour-mhclg: #00625e;
+  --colour-oruk: #00625e;
   --colour-tusk: #fcfbf2;
 
   /* see https://convertingcolors.com/hex-color-00625E.html */
-  --colour-mhclg-dark: #004a46;
-  --colour-mhclg-xdark: #003330;
-  --colour-mhclg-xxdark: #001f1b;
-  --colour-mhclg-light: #7eccc6;
-  --colour-mhclg-xlight: #9ae8e2;
+  --colour-oruk-dark: #004a46;
+  --colour-oruk-xdark: #003330;
+  --colour-oruk-xxdark: #001f1b;
+  --colour-oruk-light: #7eccc6;
+  --colour-oruk-xlight: #9ae8e2;
 
   --colour-grey-50: #f9fafb;
   --colour-grey-100: #f3f4f6;
@@ -63,7 +63,7 @@
   /* Theme colours */
   --theme-paper: var(--colour-offwhite);
   --theme-ink: var(--colour-black);
-  --theme-headline: var(--colour-mhclg);
+  --theme-headline: var(--colour-oruk);
   --theme-interaction: var(--colour-mint);
   --theme-anchor: var(--theme-ink);
   --theme-anchor-underline: var(--colour-mint);
@@ -102,7 +102,7 @@
   --HR-gradient-middle: #ccc;
   --HR-gradient-start: #ccc;
 
-  --Logo-gradient-color1: var(--colour-mhclg);
+  --Logo-gradient-color1: var(--colour-oruk);
   --Logo-gradient-color2: var(--govuk-colour-turquoise);
   --Logo-gradient-color3: #23a6d5;
   --Logo-gradient-color4: var(--HR-gradient-start);
@@ -138,7 +138,7 @@
   --VersionedDocumentation-legacy-border-color: #dc2626;
   --VersionedDocumentation-legacy-color: black;
 
-  --BannerMHCLG-ink: var(--colour-ink);
+  --BannerORUK-ink: var(--colour-ink);
   --Home-hero-bg: #fcf2e3;
   --Home-hero-fg: var(--theme-ink);
   --NoJsBanner-bg: #dc2626;
@@ -150,31 +150,31 @@
 }
 
 @media (prefers-color-scheme: dark) {
-  /* see also /Users/gjh/GitHub/mhclg-oruk/src/components/BannerMHCLG/BannerMHCLG.module.css */
+  /* see also /Users/gjh/GitHub/oruk-standard-and-website/src/components/BannerORUK/BannerORUK.module.css */
 
   /* 
 	
 	UNCOMMENT TO ENABLE DARK MODE 
 	
 	:root {
-		--theme-paper: var(--colour-mhclg-xdark);
+		--theme-paper: var(--colour-oruk-xdark);
 		--theme-ink: var(--colour-offwhite);
 		--theme-headline: var(--theme-ink);
 		--theme-anchor-underline: var(--colour-mint);
 		--theme-anchor-roll-underline: var(--theme-ink);
 		--Header-background-closed: var(--theme-paper);
-		--Header-background-open: var(--colour-mhclg-xxdark);
+		--Header-background-open: var(--colour-oruk-xxdark);
 		--Header-button-color: var(--theme-ink);
 		--Home-hero-fg: black;
-		--blockquote-bg: var(--colour-mhclg-xxdark);
-		--menu-blockquote-background: var(--colour-mhclg-xxdark);
-		--menu-blockquote-border: var(--colour-mhclg);
+		--blockquote-bg: var(--colour-oruk-xxdark);
+		--menu-blockquote-background: var(--colour-oruk-xxdark);
+		--menu-blockquote-border: var(--colour-oruk);
 		--tableSorting-color-fg: var(--theme-paper);
-		--tableSorting-arrow-bg: var(--colour-mhclg);
+		--tableSorting-arrow-bg: var(--colour-oruk);
 		--versioned-document-picker-fg: var(--theme-paper);
-		--Schema-property-eg-bg: var(--colour-mhclg-xxdark);
+		--Schema-property-eg-bg: var(--colour-oruk-xxdark);
 		--Schema-property-eg-fg: white;
-		--Validator-result-form-bg: var(--colour-mhclg-xxdark);
+		--Validator-result-form-bg: var(--colour-oruk-xxdark);
 	}
 
 	html * a {
