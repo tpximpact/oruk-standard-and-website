@@ -24,7 +24,7 @@ describe('validate', () => {
 
       try {
         await navigate(formData)
-        fail('Should have thrown redirect')
+        expect.fail('Should have thrown redirect')
       } catch (error: any) {
         expect(redirect).toHaveBeenCalledWith(
           '/developers/validator/validator-123?uri=https://example.com/api/spec'
@@ -41,7 +41,7 @@ describe('validate', () => {
 
       try {
         await navigate(formData)
-        fail('Should have thrown redirect')
+        expect.fail('Should have thrown redirect')
       } catch (error: any) {
         expect(redirect).toHaveBeenCalledWith(
           '/developers/validator/val-456?uri=https://example.com/api/spec?version=1.0'
