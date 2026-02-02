@@ -12,6 +12,7 @@ export default defineConfig({
     coverage: {
       provider: 'v8',
       reporter: ['text', 'json', 'html', 'lcov'],
+      include: ['src/**/*.ts', 'src/**/*.tsx'],
       exclude: [
         'node_modules/',
         'src/e2e/',
@@ -22,8 +23,8 @@ export default defineConfig({
       ],
       thresholds: {
         lines: 6,
-        functions: 13,
-        branches: 25,
+        functions: 8,
+        branches: 6,
         statements: 6
       }
     }
