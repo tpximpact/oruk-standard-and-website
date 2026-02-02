@@ -1,3 +1,4 @@
+import { describe, it, expect, vi } from 'vitest'
 import { render, screen } from '@testing-library/react'
 import { Button } from '../index'
 import userEvent from '@testing-library/user-event'
@@ -9,7 +10,7 @@ describe('Button', () => {
   })
 
   it('should handle click events', async () => {
-    const handleClick = jest.fn()
+    const handleClick = vi.fn()
     const user = userEvent.setup()
 
     render(<Button onClick={handleClick}>Click me</Button>)

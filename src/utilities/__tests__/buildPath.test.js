@@ -1,3 +1,4 @@
+import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
 import { buildPath } from '../buildPath'
 import { join } from 'path'
 
@@ -7,7 +8,7 @@ const mockCwd = '/mock/working/directory'
 
 describe('buildPath', () => {
   beforeEach(() => {
-    process.cwd = jest.fn(() => mockCwd)
+    process.cwd = vi.fn(() => mockCwd)
   })
 
   afterEach(() => {
