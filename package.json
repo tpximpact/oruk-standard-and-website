@@ -1,10 +1,10 @@
 {
   "private": true,
   "scripts": {
-    "test": "jest",
-    "test:watch": "jest --watch",
-    "test:ci": "jest --ci",
-    "test:coverage": "jest --coverage",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:ci": "vitest run",
+    "test:coverage": "vitest run --coverage",
     "e2e": "npx playwright test",
     "upd": "node 'src/scripts/update-frontmatter.js'",
     "dev": "NODE_OPTIONS=--no-webstorage next dev",
