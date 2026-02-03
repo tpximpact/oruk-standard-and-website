@@ -1,6 +1,15 @@
 import { NextRequest, NextResponse } from 'next/server'
 import redirects from './redirects.json'
 
+function generateNonce(): string {
+  const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/='
+  let nonce = ''
+  for (let i = 0; i < 32; i++) {
+    nonce += chars.charAt(Math.floor(Math.random() * chars.length))
+  }
+  return nonce
+}
+
 export function proxy(req: NextRequest) {
   const url = req.nextUrl.clone()
 
@@ -17,7 +26,36 @@ export function proxy(req: NextRequest) {
     return NextResponse.redirect(redirectUrl, 308)
   }
 
-  return NextResponse.next()
+  // Generate nonce for CSP
+  const nonce = generateNonce()
+  const requestHeaders = new Headers(req.headers)
+  requestHeaders.set('x-nonce', nonce)
+
+  // Create response
+  const response = NextResponse.next({
+    request: {
+      headers: requestHeaders
+    }
+  })
+
+  // Set CSP header with dynamic nonce
+  const cspHeader = [
+    `default-src 'self'`,
+    `script-src 'self' https://va.vercel-scripts.com https://vercel.live 'nonce-${nonce}'`,
+    `style-src 'self' 'unsafe-inline'`,
+    `img-src 'self' data: https://openreferraluk.org https://*.vercel-scripts.com`,
+    `font-src 'self' data:`,
+    `connect-src 'self' https://va.vercel-scripts.com https://*.herokuapp.com https://vercel.live`,
+    `frame-src 'self' https://vercel.live`,
+    `frame-ancestors 'self'`,
+    `base-uri 'self'`,
+    `form-action 'self'`
+  ].join('; ')
+
+  response.headers.set('Content-Security-Policy', cspHeader)
+  response.headers.set('x-nonce', nonce)
+
+  return response
 }
 
 // Run on all paths so we can catch root-level requests too

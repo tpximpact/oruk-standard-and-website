@@ -62,21 +62,6 @@ const nextConfig: NextConfig = {
       {
         key: 'Cross-Origin-Resource-Policy',
         value: 'cross-origin'
-      },
-      {
-        key: 'Content-Security-Policy',
-        value: [
-          "default-src 'self'",
-          "script-src 'self' https://va.vercel-scripts.com https://vercel.live",
-          "style-src 'self' 'unsafe-inline'",
-          "img-src 'self' data: https://openreferraluk.org https://*.vercel-scripts.com",
-          "font-src 'self' data:",
-          "connect-src 'self' https://va.vercel-scripts.com https://*.herokuapp.com https://vercel.live",
-          "frame-src 'self' https://vercel.live",
-          "frame-ancestors 'self'",
-          "base-uri 'self'",
-          "form-action 'self'"
-        ].join('; ')
       }
     ]
 
