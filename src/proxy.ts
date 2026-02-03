@@ -40,9 +40,11 @@ export function proxy(req: NextRequest) {
   })
 
   // Set CSP header with dynamic nonce
+  // Note: Vercel's infrastructure may inject scripts without nonce in production,
+  // so we include both nonce and unsafe-inline as fallback
   const cspHeader = [
     `default-src 'self'`,
-    `script-src 'self' https://va.vercel-scripts.com https://vercel.live 'nonce-${nonce}'`,
+    `script-src 'self' https://va.vercel-scripts.com https://vercel.live 'nonce-${nonce}' 'unsafe-inline'`,
     `style-src 'self' 'unsafe-inline'`,
     `img-src 'self' data: https://openreferraluk.org https://*.vercel-scripts.com`,
     `font-src 'self' data:`,
