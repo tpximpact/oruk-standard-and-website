@@ -1,8 +1,8 @@
 /* eslint no-console: 'off' */
 
-const fs = require('fs').promises
-const jsYaml = require('js-yaml')
-const path = require('path')
+import fs from 'fs/promises'
+import jsYaml from 'js-yaml'
+import path from 'path'
 
 /**
  * Updates the YAML front matter in a Markdown file with the file's modified date.
@@ -97,6 +97,4 @@ async function updateFrontMatter(
   }
 }
 
-module.exports = updateFrontMatter
-
-export {}
+export default updateFrontMatter
