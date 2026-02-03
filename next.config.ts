@@ -67,8 +67,8 @@ const nextConfig: NextConfig = {
         key: 'Content-Security-Policy',
         value: [
           "default-src 'self'",
-          "script-src 'self' 'unsafe-inline' https://va.vercel-scripts.com https://vercel.live",
-          "style-src 'self' 'unsafe-inline'",
+          "script-src 'self' https://va.vercel-scripts.com https://vercel.live",
+          "style-src 'self'",
           "img-src 'self' data: https://openreferraluk.org https://*.vercel-scripts.com",
           "font-src 'self' data:",
           "connect-src 'self' https://va.vercel-scripts.com https://*.herokuapp.com https://vercel.live",
