@@ -17,6 +17,16 @@ vi.mock('@/lib/github-service', () => ({
   createVerificationIssue: vi.fn()
 }))
 
+// Mock logger to suppress console output during tests
+vi.mock('@/lib/logger', () => ({
+  logger: {
+    info: vi.fn(),
+    error: vi.fn(),
+    warn: vi.fn(),
+    debug: vi.fn()
+  }
+}))
+
 vi.mock('@/utilities/to-form-state', () => ({
   toFormState: (status: string, message: string) => ({
     status,
