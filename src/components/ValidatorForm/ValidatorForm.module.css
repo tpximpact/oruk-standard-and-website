@@ -38,3 +38,12 @@
 .submit {
   margin-top: 1rem;
 }
+
+.formHeading {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+}
+
+.formWrapper {
+  margin-top: 6rem;
+}

@@ -1,6 +1,7 @@
 'use client'
 // https://github.com/microlinkhq/react-json-view
 import ReactJsonView from '@microlink/react-json-view'
+import styles from './JSONLiteral.module.css'
 
 interface JSONLiteralProps {
   data: any
@@ -13,10 +14,7 @@ export const JSONLiteral = ({ data }: JSONLiteralProps) => (
     collapseStringsAfterLength={48}
     enableClipboard={false}
     displayDataTypes={false}
-    style={{
-      padding: '2rem',
-      fontSize: '21px'
-    }}
+    className={styles.jsonContainer}
     theme={{
       base00: '#000',
       base01: '#fff',

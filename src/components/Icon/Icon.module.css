@@ -24,3 +24,16 @@
   z-index: -2;
   border: var(--local-border);
 }
+
+.svgStyles {
+  display: inline-block;
+  fill: none;
+  stroke-linecap: round;
+  stroke-miterlimit: 10;
+  vertical-align: middle;
+}
+
+.pathStyles {
+  stroke: inherit;
+  stroke-width: inherit;
+}

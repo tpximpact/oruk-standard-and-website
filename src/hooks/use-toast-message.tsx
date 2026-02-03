@@ -1,5 +1,6 @@
 import { useRef, useEffect } from 'react'
 import { toast } from 'react-hot-toast'
+import styles from './useToastMessage.module.css'
 
 interface FormState {
   status?: string
@@ -27,9 +28,9 @@ const useToastMessage = (formState: FormState) => {
   // stay usable without JS
   return (
     <noscript>
-      {formState.status === 'ERROR' && <div style={{ color: 'red' }}>{formState.message}</div>}
+      {formState.status === 'ERROR' && <div className={styles.error}>{formState.message}</div>}
 
-      {formState.status === 'SUCCESS' && <div style={{ color: 'green' }}>{formState.message}</div>}
+      {formState.status === 'SUCCESS' && <div className={styles.success}>{formState.message}</div>}
     </noscript>
   )
 }
