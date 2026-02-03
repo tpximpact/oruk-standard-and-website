@@ -44,7 +44,8 @@ async function updateFrontMatter(
 
     // Read file contents
     const fileContent = await fs.readFile(filePath, 'utf8')
-    let frontMatter, content
+    let frontMatter: Record<string, unknown>
+    let content: string
     // Parse front matter
     const frontMatterRegex = /^---\n(.*?)\n---\n/s
     const match = fileContent.match(frontMatterRegex)
@@ -52,17 +53,17 @@ async function updateFrontMatter(
       frontMatter = {}
       content = fileContent
     } else {
-      const frontMatterYaml = match[1]
+      const frontMatterYaml = match[1] || ''
       content = fileContent.replace(frontMatterRegex, '')
 
       // Load front matter YAML
-      frontMatter = jsYaml.load(frontMatterYaml)
+      frontMatter = (jsYaml.load(frontMatterYaml) as Record<string, unknown>) || {}
 
       // Check if date property exists and is current
       const currentDate = new Date()
       const existingDate = frontMatter[dateProperty]
       if (existingDate && !force) {
-        const existingDateObject = new Date(existingDate)
+        const existingDateObject = new Date(existingDate as string | number)
         if (
           existingDateObject.getFullYear() === currentDate.getFullYear() &&
           existingDateObject.getMonth() + 1 === currentDate.getMonth() + 1 &&
