@@ -6,7 +6,6 @@
     "test:ci": "vitest run",
     "test:coverage": "vitest run --coverage",
     "e2e": "npx playwright test",
-    "upd": "tsx src/scripts/update-frontmatter.ts",
     "dev": "NODE_OPTIONS=--no-webstorage next dev",
     "dev:ci": "next dev",
     "build": "next build",

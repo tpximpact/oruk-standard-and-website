@@ -38,13 +38,13 @@ const Message = ({
       <>
         <p>You can choose which version of the standard this page describes.</p>
 
-        <p style={{ fontWeight: 900 }}>
+        <p className={styles.boldText}>
           This is the latest version of the standard and is recommended for all users.
         </p>
       </>
     ) : (
       <>
-        <p style={{ fontWeight: 900 }}>This is an archived obsolete version of the standard.</p>
+        <p className={styles.boldText}>This is an archived obsolete version of the standard.</p>
         <p>
           For new projects, we strongly recommend you to use{' '}
           <a
@@ -52,7 +52,7 @@ const Message = ({
             onClick={() => {
               setVersion(currentVersion)
             }}
-            style={{ fontWeight: 900 }}
+            className={styles.boldText}
           >
             the latest version{' '}
           </a>

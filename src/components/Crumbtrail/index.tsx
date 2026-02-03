@@ -35,7 +35,7 @@ export const Crumbtrail = () => {
   return <Crumbs data={generateCrumbs(path)} />
 }
 
-export const Empty = () => <div style={{ marginTop: '6rem' }}></div>
+export const Empty = () => <div className={styles.emptySpace}></div>
 
 interface CrumbsProps {
   data: Crumb[]

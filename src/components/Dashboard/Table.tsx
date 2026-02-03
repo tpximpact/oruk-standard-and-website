@@ -46,7 +46,7 @@ const StatusReadout = ({ pass }: StatusReadoutProps) => {
   const status = pass ? STATUS.PASS : STATUS.FAIL
   return (
     <>
-      <span style={{ marginRight: '0.2rem' }}>
+      <span className={styles.iconMargin}>
         <Icon
           colour={getColourForStatus(status)}
           weight={4}

@@ -68,3 +68,7 @@
   background: var(--VersionedDocumentation-legacy-background);
   color: var(--VersionedDocumentation-legacy-color);
 }
+
+.boldText {
+  font-weight: 900;
+}

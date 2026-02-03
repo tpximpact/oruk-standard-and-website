@@ -80,8 +80,8 @@ interface MonthProps {
 
 const Month = ({ number, shaded, colour }: MonthProps) => (
   <td
-    style={{ '--bg': colour } as React.CSSProperties}
     className={shaded ? styles.shaded : styles.month}
+    style={{ backgroundColor: colour } as React.CSSProperties}
   >
     <span className={styles.screenreader}>
       {number + 1}: {shaded ? 'yes' : 'no'}

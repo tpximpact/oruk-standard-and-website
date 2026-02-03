@@ -69,6 +69,10 @@
   font-size: 1.5rem;
 }
 
+.onthispageBold {
+  font-weight: 300;
+}
+
 .content ul,
 .content ol {
   margin-left: 2rem;

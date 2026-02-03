@@ -11,7 +11,7 @@ There are several ways to achieve this last one. Your first port of call should 
 
 */
 
-import React, { CSSProperties } from 'react'
+import React from 'react'
 import css from './Icon.module.css'
 
 export interface IconType {
@@ -32,29 +32,22 @@ interface CircledIconProps extends IconProps {
 }
 
 const Icon = (props: IconProps) => {
-  const styles: { path: CSSProperties; svg: CSSProperties } = {
-    path: {
-      stroke: props.colour ? props.colour : 'currentColor',
-      strokeWidth: props.weight
-    },
-    svg: {
-      display: 'inline-block',
-      fill: 'none',
-      strokeLinecap: 'round',
-      strokeMiterlimit: '10',
-      verticalAlign: 'middle'
-    }
-  }
-
   return (
     <svg
-      className='Icon'
-      style={styles.svg}
+      className={`Icon ${css.svgStyles}`}
       width={`${props.size}px`}
       height={`${props.size}px`}
       viewBox='0 0 24 24'
     >
-      <path vectorEffect='non-scaling-stroke' style={styles.path} d={props.icon.path} />
+      <path
+        vectorEffect='non-scaling-stroke'
+        style={{
+          stroke: props.colour ? props.colour : 'currentColor',
+          strokeWidth: props.weight
+        }}
+        className={css.pathStyles}
+        d={props.icon.path}
+      />
     </svg>
   )
 }

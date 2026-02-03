@@ -92,9 +92,7 @@ export const MarkdownContentWithMenu = async ({ html, afterLinks }: ContentProps
           {afterLinks && <Afterlinks data={afterLinks} />}
         </div>
         <div>
-          <h2 className={styles.onthispage} style={{ fontWeight: 300 }}>
-            On this page
-          </h2>
+          <h2 className={`${styles.onthispage} ${styles.onthispageBold}`}>On this page</h2>
           <ol className={styles.menu}>
             {menu.map((item, i) => (
               <li key={i}>

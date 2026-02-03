@@ -28,3 +28,7 @@
 .list a {
   text-decoration: underline !important;
 }
+
+.heading {
+  margin-bottom: 4rem;
+}

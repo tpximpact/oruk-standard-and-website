@@ -26,7 +26,7 @@ interface SitemapProps {
 
 export const Sitemap = ({ showHeading = true, data }: SitemapProps) => (
   <PageMargin>
-    {showHeading && <h1 style={{ marginBottom: '4rem' }}>All pages on ORUK</h1>}
+    {showHeading && <h1 className={styles.heading}>All pages on ORUK</h1>}
     <List data={data}>
       <li>
         <Link href={'/'}>Home</Link>

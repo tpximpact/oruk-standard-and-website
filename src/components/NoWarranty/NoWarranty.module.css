@@ -1,0 +1,12 @@
+.warningBox {
+  border-color: var(--VersionedDocumentation-legacy-border-color);
+  background: var(--VersionedDocumentation-legacy-background);
+  color: var(--VersionedDocumentation-legacy-color);
+  padding: 2rem;
+  font-weight: 500;
+  margin-top: 1rem;
+}
+
+.strongWarning {
+  font-weight: 900;
+}
