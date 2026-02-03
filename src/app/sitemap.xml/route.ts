@@ -1,5 +1,5 @@
-import type { MetadataRoute } from 'next'
-import sitemapData from '@/../../content/sitemap.json'
+import { NextResponse } from 'next/server'
+import sitemapData from '../../../content/sitemap.json'
 
 interface SitemapNode {
   name: string
@@ -35,8 +35,8 @@ const processNodes = (
   baseUrl: string,
   parentPath: string = '',
   depth: number = 0
-): MetadataRoute.Sitemap => {
-  const sitemap: MetadataRoute.Sitemap = []
+): Array<{ url: string; changeFrequency: ChangeFrequency; priority: number }> => {
+  const sitemap: Array<{ url: string; changeFrequency: ChangeFrequency; priority: number }> = []
 
   nodes.forEach(node => {
     // Skip hidden nodes
@@ -58,7 +58,6 @@ const processNodes = (
     // Add this node to the sitemap
     sitemap.push({
       url: nodeUrl,
-      lastModified: new Date(),
       changeFrequency: getChangeFrequency(node.name, depth),
       priority: getPriorityForDepth(depth)
     })
@@ -73,21 +72,39 @@ const processNodes = (
   return sitemap
 }
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export async function GET() {
   const baseUrl = 'https://openreferraluk.org'
 
   // Add home page
-  const homePage: MetadataRoute.Sitemap = [
+  const pages = [
     {
       url: baseUrl,
-      lastModified: new Date(),
-      changeFrequency: 'weekly',
+      changeFrequency: 'weekly' as ChangeFrequency,
       priority: 1
-    }
+    },
+    ...processNodes(sitemapData as SitemapNode[], baseUrl)
   ]
 
-  // Process all sitemap nodes
-  const pages = processNodes(sitemapData as SitemapNode[], baseUrl)
+  // Generate XML
+  const xml = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+${pages
+  .map(
+    page => `  <url>
+    <loc>${page.url}</loc>
+    <lastmod>${new Date().toISOString()}</lastmod>
+    <changefreq>${page.changeFrequency}</changefreq>
+    <priority>${page.priority}</priority>
+  </url>`
+  )
+  .join('\n')}
+</urlset>`
 
-  return [...homePage, ...pages]
+  return new NextResponse(xml, {
+    status: 200,
+    headers: {
+      'Content-Type': 'application/xml',
+      'Cache-Control': 'public, s-maxage=3600, stale-while-revalidate=86400'
+    }
+  })
 }
