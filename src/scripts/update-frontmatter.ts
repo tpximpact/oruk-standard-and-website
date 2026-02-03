@@ -1,7 +1,7 @@
 /* eslint no-console: 'off' */
 
-const forEachFile = require('./forEachFile')
-const updateFrontMatter = require('./updateFrontMatter')
+import forEachFile from './forEachFile.js'
+import updateFrontMatter from './updateFrontMatter.js'
 
 async function handleFile(filePath: string) {
   updateFrontMatter(
@@ -15,5 +15,3 @@ async function handleFile(filePath: string) {
 forEachFile('./content', '.md', handleFile).catch((err: unknown) =>
   console.error('Error:', err instanceof Error ? err.message : String(err))
 )
-
-export {}
