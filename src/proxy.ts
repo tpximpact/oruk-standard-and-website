@@ -2,7 +2,8 @@ import { NextRequest, NextResponse } from 'next/server'
 import redirects from './redirects.json'
 
 function generateNonce(): string {
-  const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/='
+  // Use only CSP-safe characters (alphanumeric, - and _ for base64url)
+  const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_'
   let nonce = ''
   for (let i = 0; i < 32; i++) {
     nonce += chars.charAt(Math.floor(Math.random() * chars.length))
