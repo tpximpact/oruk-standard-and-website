@@ -114,7 +114,7 @@ const getFormat = ({
         }
         format = <>uuid {linked}</>
       } else if (data.enum) {
-        format = <code style={{ fontStyle: 'normal' }}>{data.enum.join(' | ')}</code>
+        format = <code className={styles.enumCode}>{data.enum.join(' | ')}</code>
       } else {
         format = data.format
       }

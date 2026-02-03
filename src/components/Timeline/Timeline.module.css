@@ -33,7 +33,7 @@
 }
 
 .shaded {
-  background: var(--bg);
+  background-color: var(--bg);
 }
 
 .screenreader {
@@ -57,4 +57,8 @@ td.month,
 th.month {
   text-align: center;
   border-left: 1px dotted var(--theme-ink);
+}
+
+.monthShaded {
+  --bg: var(--month-bg-color);
 }

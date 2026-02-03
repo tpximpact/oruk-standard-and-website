@@ -6,6 +6,7 @@ import { ServiceRepository } from '@/repositories/service-repository'
 import { ValidationError } from '@/lib/mongodb-errors'
 import { serviceInputSchema, type ServiceInput } from '@/models/service'
 import { createVerificationIssue } from '@/lib/github-service'
+import { logger } from '@/lib/logger'
 
 export const createMessage = async (_formState: any, formData: FormData): Promise<any> => {
   let data: ServiceInput
@@ -46,14 +47,14 @@ export const createMessage = async (_formState: any, formData: FormData): Promis
 
       html_url = issue.html_url
 
-      console.log(`Created GitHub issue #${issue.number} for service verification: ${issue.url}`)
+      logger.info(`Created GitHub issue #${issue.number} for service verification: ${issue.url}`)
     } catch (githubError) {
       // Log the error but don't fail the entire operation
       // The service was successfully created, GitHub issue creation is supplementary
-      console.error('Failed to create GitHub issue for service verification:', githubError)
+      logger.error('Failed to create GitHub issue for service verification:', githubError as Error)
     }
   } catch (error) {
-    console.error('Error creating service:', error)
+    logger.error('Error creating service:', { error })
 
     if (error instanceof ValidationError) {
       return fromErrorToFormState(error, values)

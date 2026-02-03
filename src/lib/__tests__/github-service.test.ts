@@ -1,8 +1,10 @@
-jest.mock('@/lib/github', () => ({
+import { describe, it, expect, vi, beforeEach, afterAll } from 'vitest'
+
+vi.mock('@/lib/github', () => ({
   octokit: {
     rest: {
       issues: {
-        create: jest.fn().mockResolvedValue({
+        create: vi.fn().mockResolvedValue({
           data: { id: 123, html_url: 'https://github.com/owner/repo/issues/1' }
         })
       }
@@ -14,7 +16,7 @@ describe('createVerificationIssue', () => {
   const OLD_ENV = process.env
 
   beforeEach(() => {
-    jest.resetModules()
+    vi.resetModules()
     process.env = { ...OLD_ENV }
     process.env.GITHUB_REPO_OWNER = 'owner'
     process.env.GITHUB_REPO_NAME = 'repo'
@@ -26,9 +28,9 @@ describe('createVerificationIssue', () => {
   })
 
   it('calls octokit issues.create with expected payload and returns response data', async () => {
-    // require the mocked modules so the mock is applied before importing the service
-    const { octokit } = require('@/lib/github')
-    const { createVerificationIssue } = require('@/lib/github-service')
+    // Import the mocked modules so the mock is applied
+    const { octokit } = await import('@/lib/github')
+    const { createVerificationIssue } = await import('@/lib/github-service')
 
     const serviceData: any = {
       id: 'svc-1',
@@ -47,7 +49,7 @@ describe('createVerificationIssue', () => {
     const result = await createVerificationIssue(serviceData)
 
     expect(octokit.rest.issues.create).toHaveBeenCalledTimes(1)
-    const callArg = octokit.rest.issues.create.mock.calls[0][0]
+    const callArg = (octokit.rest.issues.create as any).mock.calls[0][0]
     expect(callArg.owner).toBe('owner')
     expect(callArg.repo).toBe('repo')
     expect(callArg.title).toContain(serviceData.name)

@@ -1,18 +1,20 @@
-'use client'
+import { describe, it, expect, vi, beforeEach } from 'vitest'
+import * as nextNavigation from 'next/navigation'
+
 // Mock next/navigation for testing server actions
-jest.mock('next/navigation', () => ({
-  redirect: jest.fn()
+vi.mock('next/navigation', () => ({
+  redirect: vi.fn()
 }))
 
 import { navigate } from '../validate'
 
 describe('navigate', () => {
   beforeEach(() => {
-    jest.clearAllMocks()
+    vi.clearAllMocks()
   })
 
   it('should redirect to validator page with id and uri params', async () => {
-    const { redirect } = require('next/navigation')
+    const redirect = vi.mocked(nextNavigation.redirect)
 
     const formData = new FormData()
     formData.set('id', 'test-id-123')
@@ -26,7 +28,7 @@ describe('navigate', () => {
   })
 
   it('should handle empty uri', async () => {
-    const { redirect } = require('next/navigation')
+    const redirect = vi.mocked(nextNavigation.redirect)
 
     const formData = new FormData()
     formData.set('id', 'test-id-456')
@@ -38,7 +40,7 @@ describe('navigate', () => {
   })
 
   it('should encode special characters in uri', async () => {
-    const { redirect } = require('next/navigation')
+    const redirect = vi.mocked(nextNavigation.redirect)
 
     const formData = new FormData()
     formData.set('id', 'abc')

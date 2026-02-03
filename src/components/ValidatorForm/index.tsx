@@ -7,9 +7,7 @@ import styles from './ValidatorForm.module.css'
 import { Button } from '@/components/Button'
 import { useState, useRef, MouseEvent } from 'react'
 
-const Heading = ({ title }: { title: string }) => (
-  <h2 style={{ fontSize: '2rem', marginBottom: '2rem' }}>{title}</h2>
-)
+const Heading = ({ title }: { title: string }) => <h2 className={styles.formHeading}>{title}</h2>
 
 const Samples = () => (
   <div className={styles.samples}>
@@ -42,7 +40,7 @@ interface ValidatorFormProps {
 }
 
 export const ValidatorForm = (props: ValidatorFormProps) => (
-  <div style={{ marginTop: '6rem' }}>
+  <div className={styles.formWrapper}>
     <Columns layout={'42'}>
       <Form {...props} />
       <Samples />

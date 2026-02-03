@@ -5,7 +5,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.dev
-    container_name: mhclg-oruk-dev
+    container_name: oruk-standard-and-website-dev
     ports:
       - '3000:3000'
     volumes:

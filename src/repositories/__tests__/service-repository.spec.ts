@@ -1,12 +1,20 @@
-import type { Collection, ObjectId } from 'mongodb'
+import { describe, it, expect, vi, beforeEach, type Mock } from 'vitest'
+import type { ObjectId } from 'mongodb'
 import { ServiceRepository } from '../service-repository'
 import { ServiceDocument } from '@/models/service'
 import { ValidationError } from '@/lib/mongodb-errors'
 
-let mockCollection: jest.Mocked<Collection>
+let mockCollection: {
+  insertOne: Mock
+  findOne: Mock
+  find: Mock
+  updateOne: Mock
+  deleteOne: Mock
+  findOneAndUpdate: Mock
+}
 
-jest.mock('@/lib/mongodb', () => {
-  const getMongoClient = jest.fn(() =>
+vi.mock('@/lib/mongodb', () => {
+  const getMongoClient = vi.fn(() =>
     Promise.resolve({
       db: () => ({
         collection: () => mockCollection
@@ -14,7 +22,7 @@ jest.mock('@/lib/mongodb', () => {
     } as any)
   )
 
-  const getCollection = jest.fn((_name: string) => Promise.resolve(mockCollection))
+  const getCollection = vi.fn((_name: string) => Promise.resolve(mockCollection))
 
   return { getMongoClient, getCollection }
 })
@@ -40,17 +48,17 @@ describe('ServiceRepository', () => {
 
   beforeEach(() => {
     mockCollection = {
-      insertOne: jest.fn(),
-      findOne: jest.fn(),
-      find: jest.fn().mockReturnValue({
-        toArray: jest.fn()
+      insertOne: vi.fn(),
+      findOne: vi.fn(),
+      find: vi.fn().mockReturnValue({
+        toArray: vi.fn()
       }),
-      updateOne: jest.fn(),
-      deleteOne: jest.fn(),
-      findOneAndUpdate: jest.fn()
-    } as unknown as jest.Mocked<Collection>
+      updateOne: vi.fn(),
+      deleteOne: vi.fn(),
+      findOneAndUpdate: vi.fn()
+    } as any
     repository = new ServiceRepository()
-    jest.clearAllMocks()
+    vi.clearAllMocks()
   })
 
   describe('create', () => {
@@ -96,7 +104,7 @@ describe('ServiceRepository', () => {
   describe('findByPublisher', () => {
     it('should find services by publisher', async () => {
       const mockCursor = {
-        toArray: jest.fn().mockResolvedValue([testService] as never)
+        toArray: vi.fn().mockResolvedValue([testService] as never)
       }
       mockCollection.find.mockReturnValueOnce(mockCursor as any)
 
@@ -116,7 +124,7 @@ describe('ServiceRepository', () => {
   describe('findByEmail', () => {
     it('should find services by contact email', async () => {
       const mockCursor = {
-        toArray: jest.fn().mockResolvedValue([testService] as never)
+        toArray: vi.fn().mockResolvedValue([testService] as never)
       }
       mockCollection.find.mockReturnValueOnce(mockCursor as any)
 
@@ -171,7 +179,7 @@ describe('ServiceRepository', () => {
   describe('search', () => {
     it('should search services with query', async () => {
       const mockCursor = {
-        toArray: jest.fn().mockResolvedValue([testService] as never)
+        toArray: vi.fn().mockResolvedValue([testService] as never)
       }
       mockCollection.find.mockReturnValueOnce(mockCursor as any)
 

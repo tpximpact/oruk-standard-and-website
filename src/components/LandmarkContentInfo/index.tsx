@@ -3,7 +3,7 @@ import { PageMargin } from '@/components/PageMargin'
 import Link from 'next/link'
 //import { Menu } from '@/components/Menu'
 import { InfoMenu } from './_components/InfoMenu'
-import { BannerMHCLG } from './_components/BannerMHCLG'
+import { BannerORUK } from './_components/BannerORUK'
 
 interface InfoMenuItem {
   name: string
@@ -23,7 +23,7 @@ export const LandmarkContentInfo = ({
   infoItems
 }: LandmarkContentInfoProps) => (
   <footer id='pageFooter' role='contentInfo' className={styles.footer}>
-    <BannerMHCLG />
+    <BannerORUK />
     <div className={styles.bottom}>
       {showNav ? (
         <>
@@ -45,7 +45,7 @@ export const LandmarkContentInfo = ({
           Copyright © 2024-5 Open Referral UK. This site is released under the{' '}
           <a
             className={styles.break}
-            href='https://github.com/tpximpact/mhclg-oruk/blob/main/LICENSE'
+            href='https://github.com/tpximpact/oruk-standard-and-website/blob/main/LICENSE'
           >
             Creative Commons Attribution-ShareAlike 4.0 International Public License
           </a>

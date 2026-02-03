@@ -1,7 +1,7 @@
 /* eslint no-console: 'off' */
 
-const fs = require('fs').promises
-const path = require('path')
+import fs from 'fs/promises'
+import path from 'path'
 
 /**
  * Recursively loop through directories and apply a function to files with a given extension.
@@ -46,9 +46,7 @@ async function forEachFile(dir: string, ext: string, fn: (fp: string) => Promise
   }
 }
 
-module.exports = forEachFile
-
-export {}
+export default forEachFile
 
 /*
 // Example usage:

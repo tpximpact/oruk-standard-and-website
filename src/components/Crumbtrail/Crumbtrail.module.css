@@ -22,3 +22,7 @@
   color: var(--crumbtrail-separator-color);
   content: '/\00a0';
 }
+
+.emptySpace {
+  margin-top: 6rem;
+}
