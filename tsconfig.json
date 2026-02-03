@@ -37,7 +37,8 @@
     "src/components/MarkdownComponentFromFile.tsx",
     ".next/dev/types/**/*.ts",
     "vitest.config.ts",
-    "vitest.setup.ts"
+    "vitest.setup.ts",
+    ".next/dev/dev/types/**/*.ts"
   ],
   "exclude": ["node_modules"]
 }
