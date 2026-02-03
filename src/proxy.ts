@@ -1,16 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import redirects from './redirects.json'
 
-function generateNonce(): string {
-  // Use only CSP-safe characters (alphanumeric, - and _ for base64url)
-  const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_'
-  let nonce = ''
-  for (let i = 0; i < 32; i++) {
-    nonce += chars.charAt(Math.floor(Math.random() * chars.length))
-  }
-  return nonce
-}
-
 export function proxy(req: NextRequest) {
   const url = req.nextUrl.clone()
 
@@ -27,24 +17,14 @@ export function proxy(req: NextRequest) {
     return NextResponse.redirect(redirectUrl, 308)
   }
 
-  // Generate nonce for CSP
-  const nonce = generateNonce()
-  const requestHeaders = new Headers(req.headers)
-  requestHeaders.set('x-nonce', nonce)
-
   // Create response
-  const response = NextResponse.next({
-    request: {
-      headers: requestHeaders
-    }
-  })
+  const response = NextResponse.next()
 
-  // Set CSP header with dynamic nonce
-  // Note: Vercel's infrastructure may inject scripts without nonce in production,
-  // so we include both nonce and unsafe-inline as fallback
+  // Set CSP header - using 'unsafe-inline' to allow inline scripts flexibly
+  // Note: When nonce is present, 'unsafe-inline' is ignored, so we remove nonce
   const cspHeader = [
     `default-src 'self'`,
-    `script-src 'self' https://va.vercel-scripts.com https://vercel.live 'nonce-${nonce}' 'unsafe-inline'`,
+    `script-src 'self' https://va.vercel-scripts.com https://vercel.live 'unsafe-inline'`,
     `style-src 'self' 'unsafe-inline'`,
     `img-src 'self' data: https://openreferraluk.org https://*.vercel-scripts.com`,
     `font-src 'self' data:`,
@@ -56,7 +36,6 @@ export function proxy(req: NextRequest) {
   ].join('; ')
 
   response.headers.set('Content-Security-Policy', cspHeader)
-  response.headers.set('x-nonce', nonce)
 
   return response
 }
