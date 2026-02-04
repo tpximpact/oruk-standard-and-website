@@ -25,7 +25,7 @@
     "gray-matter": "^4.0.3",
     "html-react-parser": "^5.2.16",
     "marked": "^17.0.1",
-    "mongodb": "^7.0.0",
+    "mongodb": "^7.1.0",
     "next": "^16.1.6",
     "octokit": "^5.0.5",
     "react": "^19.2.4",
