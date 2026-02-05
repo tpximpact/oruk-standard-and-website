@@ -21,7 +21,7 @@ export function MobileSortSelector({
     { value: 'statusIsUp', label: 'Feed is live' },
     { value: 'statusIsValid', label: 'Feed is valid' },
     { value: 'schemaVersion', label: 'Schema Version' },
-    { value: 'testDate', label: 'Last Tested' }
+    { value: 'lastTested', label: 'Last Tested' }
   ]
 
   const directionLabel = currentDirection === 'asc' ? 'A-Z' : 'Z-A'
@@ -97,7 +97,7 @@ export function ServiceCard({ service, index: _index }: ServiceCardProps) {
         {renderField('Feed is live', service.statusIsUp)}
         {renderField('Feed is valid', service.statusIsValid)}
         {renderField('Schema Version', service.schemaVersion)}
-        {renderField('Last Tested', service.testDate)}
+        {renderField('Last Tested', service.lastTested)}
       </dl>
     </div>
   )

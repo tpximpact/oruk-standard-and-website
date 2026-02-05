@@ -80,7 +80,7 @@ export default async function Page(props: PageProps) {
       publisher: { value: getPublisher(), url: getPublisherUrl() },
       comment: { value: getDescription() },
       developer: { value: getDeveloper(), url: getDeveloperUrl() },
-      testDate: { value: s.testDate || s.lastTested, url: `/developers/dashboard/${s.id}` }
+      lastTested: { value: s.lastTested, url: `/developers/dashboard/${s.id}` }
     }
   })
 

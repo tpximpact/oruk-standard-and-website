@@ -3,7 +3,7 @@ export interface ServiceData {
   publisher: { value: string; url?: string }
   comment: { value: string }
   developer: { value: string; url?: string }
-  testDate: { value: Date | undefined; url?: string }
+  lastTested: { value: Date | undefined; url?: string }
 }
 
 export type SortField = keyof ServiceData

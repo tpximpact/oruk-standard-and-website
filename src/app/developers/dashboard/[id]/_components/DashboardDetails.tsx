@@ -17,7 +17,7 @@ interface TestResult {
   developer: { value: string; url: string }
   service: { value: string; url: string }
   isValid: boolean
-  testDate: { value: Date | undefined }
+  lastTested: { value: Date | undefined }
   payload: SectionData[]
 }
 
@@ -129,8 +129,8 @@ const Validation = ({ status, result }: ValidationProps) => {
       <div className={styles.field}>
         <span className={styles.label}>Last checked</span>
         <span className={styles.fv}>
-          {result.testDate.value ? (
-            <LocalisedDate value={result.testDate.value} options={fmtOptions} />
+          {result.lastTested.value ? (
+            <LocalisedDate value={result.lastTested.value} options={fmtOptions} />
           ) : (
             <>Not Tested</>
           )}

@@ -36,7 +36,7 @@
       "label": "Feed passes?",
       "dataType": "oruk:dataType.success"
     },
-    "testDate": {
+    "lastTested": {
       "label": "Last tested",
       "dataType": "oruk:dataType.dateTime"
     }
@@ -49,16 +49,16 @@
         "statusIsUp",
         "statusIsValid",
         "schemaVersion",
-        "testDate"
+        "lastTested"
       ],
-      "sortBy": ["name", "statusOverall", "schemaVersion", "testDate"],
+      "sortBy": ["name", "statusOverall", "schemaVersion", "lastTested"],
       "defaultSortDirection": "ascending",
       "defaultSortBy": "name",
       "showPassingRowsOnly": false
     },
     "directory": {
-      "columns": ["name", "publisher", "comment", "developer", "service", "testDate"],
-      "sortBy": ["name", "publisher", "developer", "testDate"],
+      "columns": ["name", "publisher", "comment", "developer", "service", "lastTested"],
+      "sortBy": ["name", "publisher", "developer", "lastTested"],
       "defaultSortDirection": "ascending",
       "defaultSortBy": "name",
       "showPassingRowsOnly": true

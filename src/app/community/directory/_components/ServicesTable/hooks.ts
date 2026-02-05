@@ -13,7 +13,7 @@ export function useSortedData(data: ServiceData[], sortConfig: SortConfig | null
 
       // Handle date sorting
       if (
-        sortConfig.field === 'testDate' &&
+        sortConfig.field === 'lastTested' &&
         typeof aValue === 'string' &&
         typeof bValue === 'string'
       ) {

@@ -4,7 +4,7 @@ export interface ServiceData {
   statusIsUp: { value: boolean; url?: string }
   statusIsValid: { value: boolean; url?: string }
   schemaVersion: { value: string; url?: string }
-  testDate: { value: Date | undefined; url?: string }
+  lastTested: { value: Date | undefined; url?: string }
 }
 
 export type SortField = keyof ServiceData
