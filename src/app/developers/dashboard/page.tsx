@@ -33,7 +33,7 @@ export default async function Page(props: PageProps) {
       statusIsUp: { value: s.statusIsUp },
       statusIsValid: { value: s.statusIsValid },
       schemaVersion: { value: String(s.schemaVersion || 'N/A') },
-      testDate: { value: s.testDate || s.lastTested, url: `/developers/dashboard/${s.id}` }
+      lastTested: { value: s.lastTested, url: `/developers/dashboard/${s.id}` }
     }
   })
 

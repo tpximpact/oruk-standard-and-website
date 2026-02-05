@@ -31,7 +31,7 @@
       "statusOverall": {
         "value": 1
       },
-      "testDate": {
+      "lastTested": {
         "value": "2024-08-06T18:00:07",
         "url": "/dashboard/test/000001"
       }
@@ -68,7 +68,7 @@
       "statusOverall": {
         "value": 1
       },
-      "testDate": {
+      "lastTested": {
         "value": "2024-08-06T12:00:07",
         "url": "/dashboard/test/000001"
       }
@@ -104,7 +104,7 @@
       "statusOverall": {
         "value": 1
       },
-      "testDate": {
+      "lastTested": {
         "value": "2024-08-06T12:00:07",
         "url": "/dashboard/test/000001"
       }
@@ -140,7 +140,7 @@
       "statusOverall": {
         "value": 1
       },
-      "testDate": {
+      "lastTested": {
         "value": "2024-08-06T12:00:07",
         "url": "/dashboard/test/000001"
       }
@@ -176,7 +176,7 @@
       "statusOverall": {
         "value": 1
       },
-      "testDate": {
+      "lastTested": {
         "value": "2024-08-06T12:00:07",
         "url": "/dashboard/test/000001"
       }
@@ -212,7 +212,7 @@
       "statusOverall": {
         "value": 1
       },
-      "testDate": {
+      "lastTested": {
         "value": "2024-08-06T12:00:07",
         "url": "/dashboard/test/000001"
       }
@@ -248,7 +248,7 @@
       "statusOverall": {
         "value": 1
       },
-      "testDate": {
+      "lastTested": {
         "value": "2024-08-06T12:00:07",
         "url": "/dashboard/test/000001"
       }
@@ -284,7 +284,7 @@
       "statusOverall": {
         "value": 1
       },
-      "testDate": {
+      "lastTested": {
         "value": "2024-08-06T12:00:07",
         "url": "/dashboard/test/000001"
       }
@@ -320,7 +320,7 @@
       "statusOverall": {
         "value": 1
       },
-      "testDate": {
+      "lastTested": {
         "value": "2024-08-06T12:00:07",
         "url": "/dashboard/test/000001"
       }
@@ -356,7 +356,7 @@
       "statusOverall": {
         "value": 1
       },
-      "testDate": {
+      "lastTested": {
         "value": "2024-08-06T12:00:07",
         "url": "/dashboard/test/000001"
       }
@@ -392,7 +392,7 @@
       "statusOverall": {
         "value": 1
       },
-      "testDate": {
+      "lastTested": {
         "value": "2024-08-06T12:00:07",
         "url": "/dashboard/test/000001"
       }
@@ -428,7 +428,7 @@
       "statusOverall": {
         "value": 1
       },
-      "testDate": {
+      "lastTested": {
         "value": "2024-08-06T12:00:07",
         "url": "/dashboard/test/000001"
       }
@@ -464,7 +464,7 @@
       "statusOverall": {
         "value": 1
       },
-      "testDate": {
+      "lastTested": {
         "value": "2024-08-06T12:00:07",
         "url": "/dashboard/test/000001"
       }
@@ -500,7 +500,7 @@
       "statusOverall": {
         "value": 1
       },
-      "testDate": {
+      "lastTested": {
         "value": "2024-08-06T12:00:07",
         "url": "/dashboard/test/000001"
       }
@@ -536,7 +536,7 @@
       "statusOverall": {
         "value": 1
       },
-      "testDate": {
+      "lastTested": {
         "value": "2024-08-06T12:00:07",
         "url": "/dashboard/test/000001"
       }
@@ -572,7 +572,7 @@
       "statusOverall": {
         "value": 1
       },
-      "testDate": {
+      "lastTested": {
         "value": "2024-08-06T12:00:07",
         "url": "/dashboard/test/000001"
       }
@@ -608,7 +608,7 @@
       "statusOverall": {
         "value": 1
       },
-      "testDate": {
+      "lastTested": {
         "value": "2024-08-06T12:00:07",
         "url": "/dashboard/test/000001"
       }
@@ -644,7 +644,7 @@
       "statusOverall": {
         "value": 1
       },
-      "testDate": {
+      "lastTested": {
         "value": "2024-08-06T12:00:07",
         "url": "/dashboard/test/000001"
       }
@@ -680,7 +680,7 @@
       "statusOverall": {
         "value": 1
       },
-      "testDate": {
+      "lastTested": {
         "value": "2024-08-06T12:00:07",
         "url": "/dashboard/test/000001"
       }
@@ -716,7 +716,7 @@
       "statusOverall": {
         "value": 1
       },
-      "testDate": {
+      "lastTested": {
         "value": "2024-08-06T12:00:07",
         "url": "/dashboard/test/000001"
       }
@@ -752,7 +752,7 @@
       "statusOverall": {
         "value": 1
       },
-      "testDate": {
+      "lastTested": {
         "value": "2024-08-06T12:00:07",
         "url": "/dashboard/test/000001"
       }
@@ -788,7 +788,7 @@
       "statusOverall": {
         "value": 1
       },
-      "testDate": {
+      "lastTested": {
         "value": "2024-08-06T12:00:07",
         "url": "/dashboard/test/000001"
       }
@@ -824,7 +824,7 @@
       "statusOverall": {
         "value": 1
       },
-      "testDate": {
+      "lastTested": {
         "value": "2024-08-06T12:00:07",
         "url": "/dashboard/test/000001"
       }
@@ -860,7 +860,7 @@
       "statusOverall": {
         "value": 1
       },
-      "testDate": {
+      "lastTested": {
         "value": "2024-08-06T12:00:07",
         "url": "/dashboard/test/000001"
       }
@@ -896,7 +896,7 @@
       "statusOverall": {
         "value": 1
       },
-      "testDate": {
+      "lastTested": {
         "value": "2024-08-06T12:00:07",
         "url": "/dashboard/test/000001"
       }
@@ -932,7 +932,7 @@
       "statusOverall": {
         "value": 1
       },
-      "testDate": {
+      "lastTested": {
         "value": "2024-08-06T12:00:07",
         "url": "/dashboard/test/000001"
       }
@@ -968,7 +968,7 @@
       "statusOverall": {
         "value": 1
       },
-      "testDate": {
+      "lastTested": {
         "value": "2024-08-06T12:00:07",
         "url": "/dashboard/test/000002"
       }
@@ -1003,7 +1003,7 @@
       "statusOverall": {
         "value": 0
       },
-      "testDate": {
+      "lastTested": {
         "value": "2024-08-06T10:00:07",
         "url": "/dashboard/test/000003"
       }
@@ -1047,7 +1047,7 @@
         "label": "Feed passes?",
         "valueType": "oruk:valueType.success"
       },
-      "testDate": {
+      "lastTested": {
         "label": "Last tested",
         "valueType": "oruk:valueType.dateTime"
       }
@@ -1060,7 +1060,7 @@
           "statusIsUp",
           "statusIsValid",
           "schemaVersion",
-          "testDate"
+          "lastTested"
         ],
         "defaultSortBy": [
           {
