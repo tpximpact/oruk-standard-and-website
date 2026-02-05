@@ -16,7 +16,7 @@ interface DataRow {
   statusIsUp: { value: number }
   statusIsValid: { value: number }
   statusOverall: { value: number }
-  testDate: { value: string; url: string }
+  lastTested: { value: string; url: string }
 }
 
 export const generate = ({ numRows, rowsPerPage, failEveryNRows }: GenerateParams) => ({
@@ -90,7 +90,7 @@ export const generateDataRow = (rowNum: number, fail: boolean): DataRow => {
     statusOverall: {
       value: fail ? 0 : 1
     },
-    testDate: {
+    lastTested: {
       value: '2024-08-06T18:' + padRowNum(rowNum) + ':07',
       url: '/developers/dashboard/' + rowNum
     }

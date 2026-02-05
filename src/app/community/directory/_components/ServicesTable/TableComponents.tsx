@@ -18,7 +18,7 @@ export function MobileSortSelector({
     { value: 'name', label: 'Name' },
     { value: 'publisher', label: 'Publisher' },
     { value: 'developer', label: 'Developer' },
-    { value: 'testDate', label: 'Last Tested' }
+    { value: 'lastTested', label: 'Last Tested' }
   ]
 
   const directionLabel = currentDirection === 'asc' ? 'A-Z' : 'Z-A'
@@ -90,7 +90,7 @@ export function ServiceCard({ service, index: _index }: ServiceCardProps) {
         {renderField('Name', service.name)}
         {renderField('Publisher', service.publisher)}
         {renderField('Developer', service.developer)}
-        {renderField('Last Tested', service.testDate)}
+        {renderField('Last Tested', service.lastTested)}
         {service.comment && service.comment.value && service.comment.value !== 'N/A' && (
           <div className={styles.cardField}>
             <dt className={styles.cardLabel}>Description:</dt>

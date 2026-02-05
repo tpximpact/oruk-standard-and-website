@@ -203,7 +203,7 @@ User → Dashboard Page → ServiceRepository → MongoDB → Service Documents
 - `statusIsUp` - Endpoint availability
 - `statusIsValid` - ORUK compliance
 - `statusOverall` - Combined health status
-- `testDate` - Last validation timestamp
+- `lastTested` - Last validation timestamp
 
 ### 2. API Validator Tool
 
@@ -335,7 +335,6 @@ interface ServiceDocument {
   statusIsUp: { value: boolean }
   statusIsValid: { value: boolean }
   statusOverall: { value: boolean }
-  testDate: { value: Date | null }
   lastTested: { value: Date | null }
   active: boolean
   createdAt: Date

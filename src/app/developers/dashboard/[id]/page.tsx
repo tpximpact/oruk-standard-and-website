@@ -48,7 +48,7 @@ function transformServiceForDashboard(service: any) {
       developer: { value: developerValue, url: developerUrl },
       service: { value: serviceValue, url: serviceUrl },
       isValid: Boolean(isValid),
-      testDate: { value: service.testDate || service.lastTested },
+      lastTested: { value: service.lastTested },
       payload: [
         {
           label: 'Service Details',

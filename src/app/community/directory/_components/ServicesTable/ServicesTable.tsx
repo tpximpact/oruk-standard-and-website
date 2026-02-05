@@ -19,7 +19,7 @@ const TABLE_HEADERS: TableHeaderConfig[] = [
   { key: 'publisher', label: 'Publisher', sortable: true },
   { key: 'comment', label: 'Description', sortable: false, className: styles.hiddenOnTablet },
   { key: 'developer', label: 'Developer', sortable: true, className: styles.hiddenOnTablet },
-  { key: 'testDate', label: 'Last Tested', sortable: true, className: styles.hiddenOnMobile }
+  { key: 'lastTested', label: 'Last Tested', sortable: true, className: styles.hiddenOnMobile }
 ]
 
 export function ServicesTable({

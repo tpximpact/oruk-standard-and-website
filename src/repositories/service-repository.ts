@@ -50,7 +50,6 @@ export class ServiceRepository extends BaseRepository<
       statusIsUp: { value: false },
       statusIsValid: { value: false },
       statusOverall: { value: false },
-      testDate: { value: null },
       lastTested: { value: null },
       active: flat.active ?? false,
       createdAt: now,

@@ -25,7 +25,7 @@ const TABLE_HEADERS: TableHeaderConfig[] = [
     sortable: true,
     className: styles.hiddenOnTablet
   },
-  { key: 'testDate', label: 'Last Tested', sortable: true, className: styles.hiddenOnMobile }
+  { key: 'lastTested', label: 'Last Tested', sortable: true, className: styles.hiddenOnMobile }
 ]
 
 export function DashboardTable({

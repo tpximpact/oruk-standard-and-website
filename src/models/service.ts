@@ -14,7 +14,6 @@ export const serviceBaseFieldsSchema = z.object({
   developerUrl: z.url().max(191),
   serviceUrl: z.url().max(191),
   contactEmail: z.email().max(191),
-  testDate: z.date().optional(),
   lastTested: z.date().optional(),
   active: z.boolean().optional().default(false)
 })
@@ -37,7 +36,6 @@ export const insertServiceSchema = z.object({
   statusIsUp: z.object({ value: z.boolean().optional().default(false) }).optional(),
   statusIsValid: z.object({ value: z.boolean().optional().default(false) }).optional(),
   statusOverall: z.object({ value: z.boolean().optional().default(false) }).optional(),
-  testDate: z.object({ value: z.date().nullable().optional() }).optional(),
   lastTested: z.object({ value: z.date().nullable().optional() }).optional(),
   active: z.boolean().optional().default(false),
   createdAt: z.date(),
@@ -70,7 +68,6 @@ export const serviceResponseSchema = z.object({
   statusNote: z.string().optional(),
   statusOverall: z.boolean().optional().default(false),
   createdAt: z.date(),
-  testDate: z.date().optional(),
   lastTested: z.date().optional(),
   updatedAt: z.date(),
   updateLink: z.string(),
@@ -105,7 +102,6 @@ export function toServiceResponse(doc: ServiceDocument): ServiceResponse {
     statusOverall: Boolean(doc.statusOverall?.value),
     createdAt: doc.createdAt,
     updatedAt: doc.updatedAt,
-    testDate: doc.testDate?.value ?? undefined,
     lastTested: doc.lastTested?.value ?? undefined,
     updateLink: `/developers/register/${doc._id.toHexString()}`,
     active: doc.active ?? false,
