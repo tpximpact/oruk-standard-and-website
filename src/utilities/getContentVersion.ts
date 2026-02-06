@@ -6,6 +6,7 @@ import { parseMarkdown } from './parseMarkdown'
 import { basename } from 'path'
 import fs from 'fs'
 import { unNestSchemata } from './unNestSchemata'
+import { SchemaResolver } from './SchemaResolver'
 
 interface ContentVersionOptions {
   contentFolder: string
@@ -24,7 +25,7 @@ export const getContentVersion = ({
     const contentParsed = contentRaw ? parseMarkdown(contentRaw)?.content : ''
 
     // load root json specification
-    const rootSpecFileName = 'openapi.bundled.json'
+    const rootSpecFileName = 'openapi.json'
     const rootSpecFilePath = join('../', specificationFolderPath, rootSpecFileName)
     const rootSpecRaw = read(rootSpecFilePath)
 
@@ -42,8 +43,13 @@ export const getContentVersion = ({
 
     const rootSpecParsed = JSON.parse(rootSpecRaw)
 
+    // Resolve all external schema references at runtime
+    const schemaDir = join(process.cwd(), specificationFolderPath, 'schemata')
+    const resolver = new SchemaResolver(schemaDir)
+    const rootSpecResolved = resolver.resolve(rootSpecParsed)
+
     // load schemata from root
-    let schemata = rootSpecParsed.components?.schemas || {}
+    let schemata = rootSpecResolved.components?.schemas || {}
     schemata = unNestSchemata(schemata) // some schemata - ie v1.0 has nested properties :-(
 
     // load schemata from file system
@@ -71,7 +77,7 @@ export const getContentVersion = ({
       htmlContent: contentParsed || '',
       rootSpec: {
         json: rootSpecRaw,
-        parsed: rootSpecParsed
+        parsed: rootSpecResolved // Use resolved version for display
       },
       schemata: schemata
     }
