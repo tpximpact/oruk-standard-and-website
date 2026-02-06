@@ -61,7 +61,7 @@
       "name": "taxonomy_term",
       "title": "Taxonomy Term",
       "description": "Each service can be categorized according to one or more taxonomy terms. The taxonomy_term object contains a list of taxonomy terms, their names, and, for hierarchical taxonomies, their structure.",
-      "$ref": "http://localhost:3000/specifications/3.0/schemata/taxonomy_term.json"
+      "$ref": "https://openreferraluk.org/specifications/3.0/schemata/taxonomy_term.json"
     }
   },
   "required": ["id"],

@@ -61,7 +61,7 @@
       "title": "Languages",
       "description": "The details of the languages that are spoken at locations or services. This does not include languages which can only be used with interpretation.",
       "items": {
-        "$ref": "http://localhost:3000/specifications/3.0/schemata/language.json"
+        "$ref": "https://openreferraluk.org/specifications/3.0/schemata/language.json"
       }
     }
   },

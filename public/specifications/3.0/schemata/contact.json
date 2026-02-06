@@ -62,7 +62,7 @@
       "title": "Attributes",
       "description": "A link between a service and one or more classifications that describe the nature of the service provided.",
       "items": {
-        "$ref": "http://localhost:3000/specifications/3.0/schemata/attribute.json"
+        "$ref": "https://openreferraluk.org/specifications/3.0/schemata/attribute.json"
       }
     }
   },
