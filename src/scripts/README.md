@@ -1,61 +1,92 @@
-# OpenAPI Bundling Script
+# OpenAPI Schema Resolution
 
 ## Overview
 
-The `bundle-openapi.ts` script resolves all external schema references in the OpenAPI specification and creates a fully bundled version with all schemas inline.
+The OpenAPI specification uses external schema references that are resolved at runtime when displaying the specification page. This approach keeps the public files accessible with proper URLs while providing a fully resolved schema for display.
 
-## Files
+## How It Works
 
-- **Input**: `public/specifications/3.0/openapi.json` (638 lines with external references)
-- **Output**: `public/specifications/3.0/openapi.bundled.json` (6,478 lines fully resolved)
+### Runtime Resolution (Default)
 
-## Usage
+The specification page automatically resolves all external schema references when loading:
 
-### Manual Generation
+1. **Public File**: `public/specifications/3.0/openapi.json` contains external references
+   - Example: `"$ref": "https://openreferraluk.org/specifications/3.0/schemata/service.json"`
+   - This file is publicly accessible and usable by external tools
+
+2. **Runtime Resolution**: When the page loads, `SchemaResolver` utility:
+   - Loads the main `openapi.json` file
+   - Identifies all `$ref` references to external schema files
+   - Loads each referenced schema from the local filesystem
+   - Recursively resolves nested references
+   - Handles circular references to prevent infinite loops
+   - Returns a fully resolved schema for display
+
+3. **Display**: The page shows the complete schema with all definitions inline
+
+### Build-Time Bundling (Optional)
+
+For cases where you need a pre-bundled file (e.g., for external distribution), you can generate a bundled version:
 
 ```bash
 yarn bundle-openapi
 ```
 
-### Automatic Generation
+This creates `public/specifications/3.0/openapi.bundled.json` with all schemas inline.
 
-The bundled version is automatically generated during the build process:
+## Files
 
-```bash
-yarn build
-```
+### Core Files
 
-## What It Does
+- **`src/utilities/SchemaResolver.ts`**: Runtime schema resolution utility
+- **`src/utilities/getContentVersion.ts`**: Loads and resolves specifications at runtime
+- **`src/scripts/bundle-openapi.ts`**: Optional build-time bundler
 
-1. Loads the main `openapi.json` file
-2. Identifies all `$ref` references to external schema files (e.g., `http://localhost:3000/specifications/3.0/schemata/service.json`)
-3. Loads each referenced schema file from the local filesystem
-4. Recursively resolves nested references within each schema
-5. Replaces all external references with inline schema definitions
-6. Handles circular references to prevent infinite loops
-7. Preserves internal references (like `#/components/parameters/search`)
+### Public Files
+
+- **`public/specifications/3.0/openapi.json`**: Main specification with external references (638 lines)
+- **`public/specifications/3.0/schemata/*.json`**: Individual schema files
+- **`public/specifications/3.0/openapi.bundled.json`**: Optional pre-bundled version (6,478 lines)
 
 ## Benefits
 
-- **Self-contained**: The bundled OpenAPI file contains all schema definitions inline
-- **External compatibility**: Third-party tools and services can validate against the schema without needing to resolve external URLs
-- **Better performance**: No need to fetch multiple schema files over the network
-- **Offline support**: The bundled file works without internet connectivity
+### Runtime Resolution
+
+- ✅ **Public accessibility**: External tools can fetch individual schema files
+- ✅ **Proper URL references**: Schemas reference the canonical URLs
+- ✅ **Maintainability**: Edit schemas in separate files
+- ✅ **No build step**: Changes are reflected immediately
+- ✅ **Smaller public files**: Original spec is only 638 lines
+
+### Optional Bundling
+
+- ✅ **Offline distribution**: Single file contains everything
+- ✅ **External validators**: Some tools work better with bundled files
+- ✅ **Performance**: No need to resolve at runtime (if using bundled version)
 
 ## Schema Resolution
 
-The script handles multiple URL patterns:
+The resolver handles multiple URL patterns:
 
 - `https://openreferraluk.org/specifications/3.0/schemata/*.json`
 - `http://localhost:3000/specifications/3.0/schemata/*.json`
 - `./schemata/*.json`
 - `*.json` (relative paths)
 
-All resolved schemas are loaded from `public/specifications/3.0/schemata/` directory.
+All schemas are loaded from `public/specifications/3.0/schemata/` directory.
 
-## Display
+## Usage
 
-The bundled version is used on the specifications page at `/developers/specifications`, configured in:
+### For Website Display
 
-- `src/utilities/getContentVersion.ts` (loads `openapi.bundled.json`)
-- `src/app/developers/specifications/page.tsx` (displays the specification)
+No action needed - schemas are automatically resolved at runtime when viewing `/developers/specifications`.
+
+### For External Distribution
+
+If you need a bundled file for external use:
+
+```bash
+yarn bundle-openapi
+```
+
+Then distribute `public/specifications/3.0/openapi.bundled.json`.
