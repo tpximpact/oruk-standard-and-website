@@ -1,18 +1,18 @@
 {
-  "openapi": "3.0.0",
+  "openapi": "3.0",
   "info": {
-    "title": "Open Referral UK Profile",
+    "title": "REQUIRED -- TITLE OF YOUR API HERE",
     "version": "HSDS-UK-3.0",
     "summary": "SUMMARY HERE",
-    "description": "Open Referral UK Profile for Version 3",
+    "description": "DESCRIPTION HERE",
     "contact": {
       "name": "YOUR CONTACT NAME HERE",
       "url": "YOUR CONTACT URL HERE",
       "email": "YOUR CONTACT EMAIL HERE"
     },
     "license": {
-      "name": "Creative Commons Attribution Share-Alike 4.0 license",
-      "url": "https://creativecommons.org/licenses/by/4.0/"
+      "name": "REQUIRED -- THE LICENSE OF YOUR API",
+      "url": "Url to the license used; mutually exclusive to the identifier field if used."
     }
   },
   "jsonSchemaDialect": "https://json-schema.org/draft/2020-12/schema",
@@ -35,7 +35,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "https://openreferraluk.org/specifications/3.0/schemata/api_details.json"
+                  "$ref": "https://raw.githubusercontent.com/tpximpact/OpenReferralApi/refs/heads/main/OpenReferralApi/Schemas/V3.0-UK/api_details.json"
                 }
               }
             }
@@ -66,7 +66,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "https://openreferraluk.org/specifications/3.0/schemata/service.json"
+                  "$ref": "https://raw.githubusercontent.com/tpximpact/OpenReferralApi/refs/heads/main/OpenReferralApi/Schemas/V3.0-UK/service.json"
                 }
               }
             }
@@ -124,7 +124,7 @@
                     "contents": {
                       "type": "array",
                       "items": {
-                        "$ref": "https://openreferraluk.org/specifications/3.0/schemata/service_list.json"
+                        "$ref": "https://raw.githubusercontent.com/tpximpact/OpenReferralApi/refs/heads/main/OpenReferralApi/Schemas/V3.0-UK/service_list.json"
                       }
                     }
                   },
@@ -165,7 +165,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "https://openreferraluk.org/specifications/3.0/schemata/taxonomy.json"
+                  "$ref": "https://raw.githubusercontent.com/tpximpact/OpenReferralApi/refs/heads/main/OpenReferralApi/Schemas/V3.0-UK/taxonomy.json"
                 }
               }
             }
@@ -204,7 +204,7 @@
                     "contents": {
                       "type": "array",
                       "items": {
-                        "$ref": "https://openreferraluk.org/specifications/3.0/schemata/taxonomy_list.json"
+                        "$ref": "https://raw.githubusercontent.com/tpximpact/OpenReferralApi/refs/heads/main/OpenReferralApi/Schemas/V3.0-UK/taxonomy_list.json"
                       }
                     }
                   },
@@ -245,7 +245,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "https://openreferraluk.org/specifications/3.0/schemata/taxonomy_term.json"
+                  "$ref": "https://raw.githubusercontent.com/tpximpact/OpenReferralApi/refs/heads/main/OpenReferralApi/Schemas/V3.0-UK/taxonomy_term.json"
                 }
               }
             }
@@ -301,7 +301,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "https://openreferraluk.org/specifications/3.0/schemata/taxonomy_term_list.json"
+                  "$ref": "https://raw.githubusercontent.com/tpximpact/OpenReferralApi/refs/heads/main/OpenReferralApi/Schemas/V3.0-UK/taxonomy_term_list.json"
                 }
               }
             }
@@ -338,7 +338,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "https://openreferraluk.org/specifications/3.0/schemata/organization.json"
+                  "$ref": "https://raw.githubusercontent.com/tpximpact/OpenReferralApi/refs/heads/main/OpenReferralApi/Schemas/V3.0-UK/organization.json"
                 }
               }
             }
@@ -380,7 +380,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "https://openreferraluk.org/specifications/3.0/schemata/organization_list.json"
+                  "$ref": "https://raw.githubusercontent.com/tpximpact/OpenReferralApi/refs/heads/main/OpenReferralApi/Schemas/V3.0-UK/organization_list.json"
                 }
               }
             }
@@ -412,7 +412,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "https://openreferraluk.org/specifications/3.0/schemata/service_at_location.json"
+                  "$ref": "https://raw.githubusercontent.com/tpximpact/OpenReferralApi/refs/heads/main/OpenReferralApi/Schemas/V3.0-UK/service_at_location.json"
                 }
               }
             }
@@ -469,7 +469,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "https://openreferraluk.org/specifications/3.0/schemata/service_at_location_list.json"
+                  "$ref": "https://raw.githubusercontent.com/tpximpact/OpenReferralApi/refs/heads/main/OpenReferralApi/Schemas/V3.0-UK/service_at_location_list.json"
                 }
               }
             }

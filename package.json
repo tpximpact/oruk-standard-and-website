@@ -9,6 +9,7 @@
     "dev": "NODE_OPTIONS=--no-webstorage next dev",
     "dev:ci": "next dev",
     "build": "next build",
+    "bundle-openapi": "npx tsx src/scripts/bundle-openapi.ts",
     "start": "next start",
     "tidy": "yarn prettier . --write",
     "lint": "yarn run eslint . --fix",
