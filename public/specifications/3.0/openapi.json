@@ -2,18 +2,32 @@
   "openapi": "3.0.0",
   "info": {
     "title": "Open Referral UK Profile",
-    "version": "3.0",
+    "version": "HSDS-UK-3.0",
+    "summary": "SUMMARY HERE",
     "description": "Open Referral UK Profile for Version 3",
+    "contact": {
+      "name": "YOUR CONTACT NAME HERE",
+      "url": "YOUR CONTACT URL HERE",
+      "email": "YOUR CONTACT EMAIL HERE"
+    },
     "license": {
       "name": "Creative Commons Attribution Share-Alike 4.0 license",
       "url": "https://creativecommons.org/licenses/by/4.0/"
     }
   },
+  "jsonSchemaDialect": "https://json-schema.org/draft/2020-12/schema",
+  "tags": [
+    {
+      "name": "Optional",
+      "description": "Optional endpoints that may not be implemented by all services"
+    }
+  ],
   "paths": {
     "/": {
       "get": {
+        "name": "API meta info - API & schema validation",
         "description": "Retrieve information about this API and its relationship with HSDS.",
-        "summary": "Retrieve information about this API and its relationship with HSDS.",
+        "summary": "Does the base endpoint return meta information about the API, and does it adhere to the schema",
         "operationId": "getAPIMetaInformation",
         "responses": {
           "200": {
@@ -21,23 +35,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "version": {
-                      "type": "string",
-                      "description": "HSDS version of this API."
-                    },
-                    "profile": {
-                      "type": "string",
-                      "format": "uri",
-                      "description": "URL of the information on the HSDS profile of this API."
-                    },
-                    "openapi_url": {
-                      "type": "string",
-                      "format": "uri",
-                      "description": "URL of the openapi JSON file which defines this API."
-                    }
-                  }
+                  "$ref": "https://openreferraluk.org/specifications/3.0/schemata/api_details.json"
                 }
               }
             }
@@ -58,8 +56,9 @@
         }
       ],
       "get": {
+        "name": "Service by id - API & schema validation",
         "description": "Retrieve fully nested service with all related data with id.",
-        "summary": "Retrieves a fully nested service with all related data with id.",
+        "summary": "Does the service by id endpoint return a fully nested service in the correct schema",
         "operationId": "getFullyNestedServiceById",
         "responses": {
           "200": {
@@ -67,7 +66,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "https://raw.githubusercontent.com/openreferral/uk-profile/main/schema/compiled/service.json"
+                  "$ref": "https://openreferraluk.org/specifications/3.0/schemata/service.json"
                 }
               }
             }
@@ -77,8 +76,9 @@
     },
     "/services": {
       "get": {
-        "description": "Retrieve fully nested service with all related data with id.",
-        "summary": "Retrieves paginated listings of services that only have one-to-one fields in them.",
+        "name": "Services list - API & schema validation",
+        "description": "Retrieves paginated listings of services that only have one-to-one fields in them.",
+        "summary": "Does the services list endpoint return a paginated list of services in the correct schema",
         "operationId": "getPaginatedListOfServices",
         "parameters": [
           {
@@ -91,25 +91,27 @@
             "$ref": "#/components/parameters/per_page"
           },
           {
+            "$ref": "#/components/parameters/format"
+          },
+          {
             "$ref": "#/components/parameters/taxonomy_term_id"
           },
           {
             "$ref": "#/components/parameters/taxonomy_id"
           },
           {
-            "$ref": "#/components/parameters/minimum_age"
+            "$ref": "#/components/parameters/organization_id"
           },
           {
-            "$ref": "#/components/parameters/maximum_age"
+            "$ref": "#/components/parameters/modified_after"
           },
           {
-            "$ref": "#/components/parameters/start_time"
+            "description": "Return array of just services with just 'id' and 'modified_date'.  When using this parameter aim to return all services within one page.",
+            "$ref": "#/components/parameters/minimal"
           },
           {
-            "$ref": "#/components/parameters/end_time"
-          },
-          {
-            "$ref": "#/components/parameters/day"
+            "description": "true, false return fully nested service.",
+            "$ref": "#/components/parameters/full"
           }
         ],
         "responses": {
@@ -122,7 +124,7 @@
                     "contents": {
                       "type": "array",
                       "items": {
-                        "$ref": "https://raw.githubusercontent.com/openreferral/uk-profile/main/schema/compiled/service_list.json"
+                        "$ref": "https://openreferraluk.org/specifications/3.0/schemata/service_list.json"
                       }
                     }
                   },
@@ -145,12 +147,15 @@
           "name": "id",
           "required": true,
           "description": "The id of the taxonomy that the request is intended to retrieve.",
+          "summary": "Does the taxonomy by id endpoint return the full information of a taxonomy in the correct schema",
           "schema": {
             "type": "string"
           }
         }
       ],
       "get": {
+        "tags": ["Optional"],
+        "name": "Taxonomy by id - API & schema validation",
         "description": "Full information on taxonomy.",
         "summary": "Retrieves full information on a taxonomy by {id}.",
         "operationId": "getTaxonomyById",
@@ -160,7 +165,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "https://raw.githubusercontent.com/openreferral/uk-profile/main/schema/taxonomy.json"
+                  "$ref": "https://openreferraluk.org/specifications/3.0/schemata/taxonomy.json"
                 }
               }
             }
@@ -170,15 +175,23 @@
     },
     "/taxonomies": {
       "get": {
+        "tags": ["Optional"],
+        "name": "Taxonomies list - API & schema validation",
         "description": "Paginated listing of taxonomies.",
-        "summary": "Paginated listing of taxonomies.",
+        "summary": "Does the taxonomies list endpoint return a paginated list of taxonomies in the correct schema",
         "operationId": "getPaginatedListOfTaxonomies",
         "parameters": [
+          {
+            "$ref": "#/components/parameters/search"
+          },
           {
             "$ref": "#/components/parameters/page"
           },
           {
             "$ref": "#/components/parameters/per_page"
+          },
+          {
+            "$ref": "#/components/parameters/format"
           }
         ],
         "responses": {
@@ -191,7 +204,7 @@
                     "contents": {
                       "type": "array",
                       "items": {
-                        "$ref": "https://raw.githubusercontent.com/openreferral/uk-profile/main/schema/taxonomy.json"
+                        "$ref": "https://openreferraluk.org/specifications/3.0/schemata/taxonomy_list.json"
                       }
                     }
                   },
@@ -214,12 +227,15 @@
           "name": "id",
           "required": true,
           "description": "The id of the taxonomy terms that the request is intended to retrieve.",
+          "summary": "Does the taxonomy term by id endpoint return the full information of a taxonomy term in the correct schema",
           "schema": {
             "type": "string"
           }
         }
       ],
       "get": {
+        "tags": ["Optional"],
+        "name": "Taxonomy term by id - API & schema validation",
         "description": "Full information on a taxonomy term.",
         "summary": "Full information on a taxonomy term.",
         "operationId": "getPaginatedListOfTaxonomyTerms",
@@ -229,7 +245,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "https://raw.githubusercontent.com/openreferral/uk-profile/main/schema/taxonomy_term.json"
+                  "$ref": "https://openreferraluk.org/specifications/3.0/schemata/taxonomy_term.json"
                 }
               }
             }
@@ -239,15 +255,44 @@
     },
     "/taxonomy_terms": {
       "get": {
-        "description": "Full information on a taxonomy term",
-        "summary": "Paginated listing of taxonomy terms",
+        "tags": ["Optional"],
+        "name": "Taxonomy terms list - API & schema validation",
+        "description": "Paginated listing of taxonomy terms",
+        "summary": "Does the taxonomy terms list endpoint return a paginated list of taxonomy terms in the correct schema",
         "operationId": "getTaxonomyTermById",
         "parameters": [
+          {
+            "$ref": "#/components/parameters/search"
+          },
           {
             "$ref": "#/components/parameters/page"
           },
           {
             "$ref": "#/components/parameters/per_page"
+          },
+          {
+            "$ref": "#/components/parameters/format"
+          },
+          {
+            "$ref": "#/components/parameters/taxonomy_id"
+          },
+          {
+            "name": "top_only",
+            "in": "query",
+            "required": false,
+            "description": "Only retrieve taxonomy terms that have not child terms.",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "parent_id",
+            "in": "query",
+            "required": false,
+            "description": "Recieve taxonomy terms that have a parent with this id.",
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -256,19 +301,86 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "properties": {
-                    "contents": {
-                      "type": "array",
-                      "items": {
-                        "$ref": "https://raw.githubusercontent.com/openreferral/uk-profile/main/schema/taxonomy_term.json"
-                      }
-                    }
-                  },
-                  "allOf": [
-                    {
-                      "$ref": "#/components/schemas/Page"
-                    }
-                  ]
+                  "$ref": "https://openreferraluk.org/specifications/3.0/schemata/taxonomy_term_list.json"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/organizations/{id}": {
+      "parameters": [
+        {
+          "in": "path",
+          "name": "id",
+          "required": true,
+          "description": "The id of the organization that the request is intended to retrieve.",
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "get": {
+        "tags": ["Optional"],
+        "name": "Organization by id - API & schema validation",
+        "description": "Fully nested organization with service array that contains simple information which could only contain the service.id.",
+        "summary": "Fully nested organization with service array that contains simple information which could only contain the service.id.",
+        "operationId": "getOrganizationById",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/full_service"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Fully nested organization with service array that contains simple information which could only contain the service.id.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "https://openreferraluk.org/specifications/3.0/schemata/organization.json"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/organizations": {
+      "get": {
+        "tags": ["Optional"],
+        "name": "Organizations list - API & schema validation",
+        "description": "Paginated list of basic Organization information.",
+        "summary": "Paginated list of basic Organization information",
+        "operationId": "getPaginatedListOfOrganizations",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/search"
+          },
+          {
+            "$ref": "#/components/parameters/full_service"
+          },
+          {
+            "description": "Contains full nested organization information",
+            "$ref": "#/components/parameters/full"
+          },
+          {
+            "$ref": "#/components/parameters/page"
+          },
+          {
+            "$ref": "#/components/parameters/per_page"
+          },
+          {
+            "$ref": "#/components/parameters/format"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Paginated list of basic Organization information.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "https://openreferraluk.org/specifications/3.0/schemata/organization_list.json"
                 }
               }
             }
@@ -289,8 +401,10 @@
         }
       ],
       "get": {
+        "tags": ["Optional"],
+        "name": "Service at location by id - API & schema validation",
         "description": "Retrieve fully nested service_at_location with all related data with specified id.",
-        "summary": "Retrieve fully nested service_at_location with all related data with specified id.",
+        "summary": "Does the service at location by id endpoint return a fully nested service at location in the correct schema",
         "operationId": "getServiceAtLocationWithNestedDataById",
         "responses": {
           "200": {
@@ -298,7 +412,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "https://raw.githubusercontent.com/openreferral/uk-profile/main/schema/compiled/service.json"
+                  "$ref": "https://openreferraluk.org/specifications/3.0/schemata/service_at_location.json"
                 }
               }
             }
@@ -308,18 +422,14 @@
     },
     "/service_at_locations": {
       "get": {
+        "tags": ["Optional"],
+        "name": "Service at locations list - API & schema validation",
         "description": "Retrieve paginated listings of service_at_location that only have one-to-one fields in them.",
-        "summary": "Retrieve paginated listings of service_at_location that only have one-to-one fields in them.",
+        "summary": "Does the service at locations list endpoint return a paginated list of service at locations in the correct schema",
         "operationId": "getPaginatedListOfServiceAtLocation",
         "parameters": [
           {
             "$ref": "#/components/parameters/search"
-          },
-          {
-            "$ref": "#/components/parameters/page"
-          },
-          {
-            "$ref": "#/components/parameters/per_page"
           },
           {
             "$ref": "#/components/parameters/taxonomy_term_id"
@@ -328,19 +438,23 @@
             "$ref": "#/components/parameters/taxonomy_id"
           },
           {
-            "$ref": "#/components/parameters/minimum_age"
+            "$ref": "#/components/parameters/organization_id"
           },
           {
-            "$ref": "#/components/parameters/maximum_age"
+            "$ref": "#/components/parameters/modified_after"
           },
           {
-            "$ref": "#/components/parameters/start_time"
+            "description": "true, false return fully nested service_at_location.",
+            "$ref": "#/components/parameters/full"
           },
           {
-            "$ref": "#/components/parameters/end_time"
+            "$ref": "#/components/parameters/page"
           },
           {
-            "$ref": "#/components/parameters/day"
+            "$ref": "#/components/parameters/per_page"
+          },
+          {
+            "$ref": "#/components/parameters/format"
           },
           {
             "$ref": "#/components/parameters/postcode"
@@ -355,19 +469,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "properties": {
-                    "contents": {
-                      "type": "array",
-                      "items": {
-                        "$ref": "https://raw.githubusercontent.com/openreferral/uk-profile/main/schema/compiled/service_at_location_list.json"
-                      }
-                    }
-                  },
-                  "allOf": [
-                    {
-                      "$ref": "#/components/schemas/Page"
-                    }
-                  ]
+                  "$ref": "https://openreferraluk.org/specifications/3.0/schemata/service_at_location_list.json"
                 }
               }
             }
@@ -527,51 +629,6 @@
         "in": "query",
         "required": false,
         "description": "Return results in the specified format. Default is `json`. Could be `ndjson` which should stream all the results without pagination.",
-        "schema": {
-          "type": "string"
-        }
-      },
-      "minimum_age": {
-        "name": "minimum_age",
-        "in": "query",
-        "required": false,
-        "description": "Return services with a minimum age of at least the specified value.",
-        "schema": {
-          "type": "number"
-        }
-      },
-      "maximum_age": {
-        "name": "maximum_age",
-        "in": "query",
-        "required": false,
-        "description": "Return services with a maximum age of at equal to or below the specified value.",
-        "schema": {
-          "type": "number"
-        }
-      },
-      "start_time": {
-        "name": "start_time",
-        "in": "query",
-        "required": false,
-        "description": "Return services with a start time of at least the specified value.",
-        "schema": {
-          "type": "time"
-        }
-      },
-      "end_time": {
-        "name": "end_time",
-        "in": "query",
-        "required": false,
-        "description": "Return services with a end time of at equal to or below the specified value.",
-        "schema": {
-          "type": "time"
-        }
-      },
-      "day": {
-        "name": "day",
-        "in": "query",
-        "required": false,
-        "description": "Return services with a day equal to the specified value.",
         "schema": {
           "type": "string"
         }
