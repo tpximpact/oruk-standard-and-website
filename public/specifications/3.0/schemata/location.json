@@ -104,7 +104,7 @@
       "title": "Addresses",
       "description": "The addresses of locations where organizations operate.",
       "items": {
-        "$ref": "https://openreferraluk.org/specifications/3.0/schemata/address.json"
+        "$ref": "http://localhost:3000/specifications/3.0/schemata/address.json"
       }
     },
     "accessibility": {
@@ -113,7 +113,7 @@
       "title": "Accessibility",
       "description": "The details of the arrangements for access to locations for people who have disabilities",
       "items": {
-        "$ref": "https://openreferraluk.org/specifications/3.0/schemata/accessibility.json"
+        "$ref": "http://localhost:3000/specifications/3.0/schemata/accessibility.json"
       }
     },
     "attributes": {
@@ -122,7 +122,7 @@
       "title": "Attributes",
       "description": "A link between a service and one or more classifications that describe the nature of the service provided.",
       "items": {
-        "$ref": "https://openreferraluk.org/specifications/3.0/schemata/attribute.json"
+        "$ref": "http://localhost:3000/specifications/3.0/schemata/attribute.json"
       }
     }
   },

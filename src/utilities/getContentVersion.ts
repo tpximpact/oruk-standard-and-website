@@ -24,7 +24,7 @@ export const getContentVersion = ({
     const contentParsed = contentRaw ? parseMarkdown(contentRaw)?.content : ''
 
     // load root json specification
-    const rootSpecFileName = 'openapi.json'
+    const rootSpecFileName = 'openapi.bundled.json'
     const rootSpecFilePath = join('../', specificationFolderPath, rootSpecFileName)
     const rootSpecRaw = read(rootSpecFilePath)
 

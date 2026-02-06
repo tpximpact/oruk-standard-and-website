@@ -182,7 +182,7 @@
       "title": "Schedules",
       "description": "The details of when a service or location is open. Entries are RFC 5545 RRULES.",
       "items": {
-        "$ref": "https://openreferraluk.org/specifications/3.0/schemata/schedule.json"
+        "$ref": "http://localhost:3000/specifications/3.0/schemata/schedule.json"
       }
     },
     "service_areas": {
@@ -191,7 +191,7 @@
       "title": "Service Areas",
       "description": "The details of the geographic area for which a service is available.",
       "items": {
-        "$ref": "https://openreferraluk.org/specifications/3.0/schemata/service_area.json"
+        "$ref": "http://localhost:3000/specifications/3.0/schemata/service_area.json"
       }
     },
     "service_at_locations": {
@@ -200,7 +200,7 @@
       "title": "Service At Locations",
       "description": "A link between a service and a specific location.",
       "items": {
-        "$ref": "https://openreferraluk.org/specifications/3.0/schemata/service_at_location.json"
+        "$ref": "http://localhost:3000/specifications/3.0/schemata/service_at_location.json"
       }
     },
     "languages": {
@@ -209,14 +209,14 @@
       "title": "Languages",
       "description": "The details of the languages that are spoken at locations or services. This does not include languages which can only be used with interpretation.",
       "items": {
-        "$ref": "https://openreferraluk.org/specifications/3.0/schemata/language.json"
+        "$ref": "http://localhost:3000/specifications/3.0/schemata/language.json"
       }
     },
     "organization": {
       "name": "organization",
       "title": "Organization",
       "description": "The details about each organization delivering services. Each service should be linked to the organization responsible for its delivery. One organization may deliver many services.",
-      "$ref": "https://openreferraluk.org/specifications/3.0/schemata/organization.json"
+      "$ref": "http://localhost:3000/specifications/3.0/schemata/organization.json"
     },
     "funding": {
       "name": "funding",
@@ -224,7 +224,7 @@
       "title": "Funding",
       "description": "The sources of funding for a service or organization.",
       "items": {
-        "$ref": "https://openreferraluk.org/specifications/3.0/schemata/funding.json"
+        "$ref": "http://localhost:3000/specifications/3.0/schemata/funding.json"
       }
     },
     "cost_options": {
@@ -233,7 +233,7 @@
       "title": "Cost Options",
       "description": "The costs of a service at certain points in time. This is an LGA Extension table. This table provides a structured version of the text information contained in the 'fees' field of the 'service' table.",
       "items": {
-        "$ref": "https://openreferraluk.org/specifications/3.0/schemata/cost_option.json"
+        "$ref": "http://localhost:3000/specifications/3.0/schemata/cost_option.json"
       }
     },
     "contacts": {
@@ -242,7 +242,7 @@
       "title": "Contacts",
       "description": "The details of the named contacts for services and organizations.",
       "items": {
-        "$ref": "https://openreferraluk.org/specifications/3.0/schemata/contact.json"
+        "$ref": "http://localhost:3000/specifications/3.0/schemata/contact.json"
       }
     },
     "attributes": {
@@ -251,7 +251,7 @@
       "title": "Attributes",
       "description": "A link between a service and one or more classifications that describe the nature of the service provided.",
       "items": {
-        "$ref": "https://openreferraluk.org/specifications/3.0/schemata/attribute.json"
+        "$ref": "http://localhost:3000/specifications/3.0/schemata/attribute.json"
       }
     }
   },
