@@ -1,0 +1,11 @@
+{
+  "name": "service_at_location_list",
+  "description": "List item schema for service at location.",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "service_at_location.json"
+    }
+  ],
+  "$id": "http://localhost:3000/specifications/3.0/schema/service_at_location_list.json"
+}

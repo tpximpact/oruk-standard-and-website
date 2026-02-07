@@ -1,0 +1,2564 @@
+{
+  "name": "organization",
+  "path": "organizations.csv",
+  "description": "The details about each organization delivering services. Each service should be linked to the organization responsible for its delivery. One organization may deliver many services.",
+  "datapackage_metadata": {
+    "format": "csv",
+    "mediatype": "text/csv",
+    "profile": "tabular-data-resource",
+    "order": 1
+  },
+  "type": "object",
+  "properties": {
+    "id": {
+      "name": "id",
+      "type": "string",
+      "title": "Identifier",
+      "description": "The identifier for the organization. Each organization must have a unique identifier.",
+      "format": "uuid",
+      "constraints": {
+        "unique": true
+      },
+      "example": "d9d5e0f5-d3ce-4f73-9a2f-4dd0ecc6c610",
+      "core": "Y"
+    },
+    "name": {
+      "name": "name",
+      "type": "string",
+      "title": "Name",
+      "description": "The official or public name of the organization.",
+      "constraints": {
+        "unique": false
+      },
+      "example": "Example Organization Inc.",
+      "core": "Y"
+    },
+    "description": {
+      "name": "description",
+      "type": "string",
+      "title": "Description",
+      "description": "A free text description containing a brief summary about the organization. It can contain markup such as HTML or Markdown.",
+      "constraints": {
+        "unique": false
+      },
+      "example": "Example Org is a non-profit organization dedicated to providing services to qualified beneficiaries",
+      "core": "Y"
+    },
+    "email": {
+      "name": "email",
+      "type": "string",
+      "title": "Email",
+      "description": "The contact e-mail address for the organization.",
+      "format": "email",
+      "constraints": {
+        "unique": false
+      },
+      "example": "email@example.com",
+      "core": "Y"
+    },
+    "website": {
+      "name": "website",
+      "type": "string",
+      "format": "uri",
+      "title": "Website",
+      "description": "The URL (website address) of the organization.",
+      "constraints": {
+        "unique": false
+      },
+      "example": "http://example.com",
+      "core": "Y"
+    },
+    "additional_websites": {
+      "name": "additional_websites",
+      "title": "Additional Websites",
+      "description": "The details of additional websites for the organization.",
+      "type": "array",
+      "items": {
+        "name": "url",
+        "path": "url.csv",
+        "description": "A URL with a label",
+        "datapackage_metadata": {
+          "format": "csv",
+          "mediatype": "text/csv",
+          "profile": "tabular-data-resource",
+          "order": 99
+        },
+        "type": "object",
+        "properties": {
+          "id": {
+            "name": "id",
+            "type": "string",
+            "title": "Identifier",
+            "description": "The identifier for the URL object. Each URL must have a unique identifier.",
+            "format": "uuid",
+            "constraints": {
+              "unique": true
+            },
+            "example": "30951f94-7b24-11ef-ba1b-a79405d4dcaa"
+          },
+          "label": {
+            "name": "label",
+            "type": "string",
+            "title": "Label",
+            "description": "The human-readable label for this url e.g. \u201cTwitter\u201d or \u201cWebsite\u201d.",
+            "constraints": {
+              "unique": false
+            },
+            "example": "Website"
+          },
+          "url": {
+            "name": "url",
+            "type": "string",
+            "format": "uri",
+            "title": "URL",
+            "description": "The URL for this URL object. This must be formatted as a valid URI.",
+            "constraints": {
+              "unique": false
+            },
+            "example": "https://example.org"
+          },
+          "organization_id": {
+            "name": "organization_id",
+            "type": "string",
+            "format": "uuid",
+            "title": "Organization Identifier",
+            "description": "The identifier for the organization associated with this URL object",
+            "constraints": {
+              "unique": false
+            },
+            "example": "d9d5e0f5-d3ce-4f73-9a2f-4dd0ecc6c610"
+          },
+          "service_id": {
+            "name": "service_id",
+            "type": "string",
+            "format": "uuid",
+            "title": "Service Identifier",
+            "description": "The identifier for the service associated with this URL object",
+            "constraints": {
+              "unique": false
+            },
+            "example": "ac148810-d857-441c-9679-408f346de14b"
+          },
+          "attributes": {
+            "name": "attributes",
+            "type": "array",
+            "title": "Attributes",
+            "description": "A link between a service and one or more classifications that describe the nature of the service provided.",
+            "items": {
+              "name": "attribute",
+              "path": "attribute.csv",
+              "description": "The other_attributes table creates a link between entities other than service and one or more classifications that describe the entity.",
+              "datapackage_metadata": {
+                "format": "csv",
+                "mediatype": "text/csv",
+                "profile": "tabular-data-resource",
+                "order": 4
+              },
+              "type": "object",
+              "properties": {
+                "id": {
+                  "name": "id",
+                  "type": "string",
+                  "title": "Identifier",
+                  "description": "The identifier of the attribute entry. Each attribute entry should have a unique identifier.",
+                  "format": "uuid",
+                  "constraints": {
+                    "unique": true
+                  },
+                  "example": "ae58cc39-8b70-4ab1-8aea-786882e5ac8e",
+                  "core": "Y"
+                },
+                "link_id": {
+                  "name": "link_id",
+                  "type": "string",
+                  "title": "Link Identifier",
+                  "description": "The identifier of the entity to which this taxonomy term applies.",
+                  "format": "uuid",
+                  "constraints": {
+                    "unique": false
+                  },
+                  "example": "f28dd44b-0c4d-479f-8e90-4c52219a8b3c",
+                  "core": "Y"
+                },
+                "taxonomy_term_id": {
+                  "name": "taxonomy_term_id",
+                  "type": "string",
+                  "title": "Taxonomy Term Identifier",
+                  "description": "The identifier of this taxonomy term from the taxonomy table.",
+                  "format": "uuid",
+                  "constraints": {
+                    "unique": false
+                  },
+                  "example": "3f7b145d-84af-42d7-8fae-eaca714b02b2",
+                  "core": "Y"
+                },
+                "link_type": {
+                  "name": "link_type",
+                  "type": "string",
+                  "title": "Link Type",
+                  "description": "A code taken from an enumerated open codelist to indicate what the taxonomy term describes, e.g. the service eligibility or intended audience.",
+                  "constraints": {
+                    "unique": false
+                  },
+                  "example": "link_type",
+                  "core": "Y"
+                },
+                "taxonomy_term": {
+                  "name": "taxonomy_term",
+                  "path": "taxonomy_terms.csv",
+                  "description": "Each service can be categorized according to one or more taxonomy terms. The taxonomy_term object contains a list of taxonomy terms, their names, and, for hierarchical taxonomies, their structure.",
+                  "datapackage_metadata": {
+                    "format": "csv",
+                    "mediatype": "text/csv",
+                    "profile": "tabular-data-resource",
+                    "order": 16
+                  },
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "name": "id",
+                      "type": "string",
+                      "title": "Identifier",
+                      "description": "The identifier for this taxonomy term. Each taxonomy term must have a unique identifier, within the scope of the dataset.",
+                      "format": "uuid",
+                      "constraints": {
+                        "unique": true
+                      },
+                      "example": "3f7b145d-84af-42d7-8fae-eaca714b02b2",
+                      "core": "Y"
+                    },
+                    "name": {
+                      "name": "name",
+                      "type": "string",
+                      "title": "Name",
+                      "description": "The taxonomy term itself.",
+                      "constraints": {
+                        "unique": false
+                      },
+                      "example": "name",
+                      "core": "Y"
+                    },
+                    "description": {
+                      "name": "description",
+                      "type": "string",
+                      "title": "Description",
+                      "description": "A free text description of the term.",
+                      "constraints": {
+                        "unique": false
+                      },
+                      "example": "description"
+                    },
+                    "parent_id": {
+                      "name": "parent_id",
+                      "type": "string",
+                      "title": "Parent Identifier",
+                      "description": "If this is a child term in a hierarchical taxonomy, give the identifier of the parent category. For top-level categories, this is not required.",
+                      "format": "uuid",
+                      "constraints": {
+                        "unique": false
+                      },
+                      "example": "0bc248fa-dc27-4650-9ba4-8f1a24ef16a2",
+                      "core": "Y"
+                    },
+                    "taxonomy": {
+                      "name": "taxonomy",
+                      "type": "string",
+                      "title": "Taxonomy",
+                      "description": "If this is an established taxonomy, a free text description of which taxonomy is in use. If possible, provide a URI.",
+                      "constraints": {
+                        "unique": false
+                      },
+                      "example": "taxonomy",
+                      "core": "Y"
+                    },
+                    "taxonomy_id": {
+                      "name": "taxonomy_id",
+                      "type": "string",
+                      "title": "Taxonomy Identifier",
+                      "description": "The identifier of the taxonomy containing the term.",
+                      "format": "uuid",
+                      "constraints": {
+                        "unique": false
+                      },
+                      "example": "07ff6aee-a219-438c-b694-d2fcb6c5373b"
+                    },
+                    "term_uri": {
+                      "name": "term_uri",
+                      "type": "string",
+                      "title": "Term URI",
+                      "description": "URI of the term.",
+                      "format": "uri",
+                      "constraints": {
+                        "unique": false
+                      },
+                      "example": "http://example.com"
+                    },
+                    "metadata": {
+                      "name": "metadata",
+                      "type": "array",
+                      "title": "Metadata",
+                      "description": "A record of the changes that have been made to the data in order to maintain provenance information.",
+                      "items": {
+                        "name": "metadata",
+                        "path": "metadata.csv",
+                        "description": "A record of the changes that have been made to the data in order to maintain provenance information.",
+                        "datapackage_metadata": {
+                          "format": "csv",
+                          "mediatype": "text/csv",
+                          "profile": "tabular-data-resource",
+                          "order": 17
+                        },
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "name": "id",
+                            "type": "string",
+                            "title": "Identifier",
+                            "description": "The identifier for this metadata. Each entry must have a unique identifier.",
+                            "format": "uuid",
+                            "constraints": {
+                              "unique": true
+                            },
+                            "example": "6cd71e9f-1013-49d9-8370-26b8f59d3e5a"
+                          },
+                          "resource_id": {
+                            "name": "resource_id",
+                            "type": "string",
+                            "title": "Resource Identifier",
+                            "description": "The identifier of the resource (service, program, location, address, or contact) that this metadata describes.",
+                            "format": "uuid",
+                            "constraints": {
+                              "unique": false
+                            },
+                            "example": "38960354-e7d2-4cfa-a368-820f729d6ccf"
+                          },
+                          "resource_type": {
+                            "name": "resource_type",
+                            "type": "string",
+                            "title": "Resource Type",
+                            "description": "The type of entity being referenced.",
+                            "constraints": {
+                              "unique": false
+                            },
+                            "example": "location"
+                          },
+                          "last_action_date": {
+                            "name": "last_action_date",
+                            "type": "string",
+                            "title": "Last Action Date",
+                            "description": "The date when data was changed.",
+                            "constraints": {
+                              "unique": false
+                            },
+                            "example": "2011-01-01",
+                            "datapackage_type": "date"
+                          },
+                          "last_action_type": {
+                            "name": "last_action_type",
+                            "type": "string",
+                            "title": "Last Action Type",
+                            "description": "The kind of change made to the data.",
+                            "constraints": {
+                              "unique": false
+                            },
+                            "example": "update"
+                          },
+                          "field_name": {
+                            "name": "field_name",
+                            "type": "string",
+                            "title": "Field Name",
+                            "description": "The name of field that has been modified.",
+                            "constraints": {
+                              "unique": false
+                            },
+                            "example": "name"
+                          },
+                          "previous_value": {
+                            "name": "previous_value",
+                            "type": "string",
+                            "title": "Previous Value",
+                            "description": "The previous value of the field that has been modified.",
+                            "constraints": {
+                              "unique": false
+                            },
+                            "example": "MyCity Civic Center"
+                          },
+                          "replacement_value": {
+                            "name": "replacement_value",
+                            "type": "string",
+                            "title": "Replacement Value",
+                            "description": "The new value of the field that has been modified.",
+                            "constraints": {
+                              "unique": false
+                            },
+                            "example": "MyCity New Civic Center"
+                          },
+                          "updated_by": {
+                            "name": "updated_by",
+                            "type": "string",
+                            "title": "Updated By",
+                            "description": "The name of the person who modified the field.",
+                            "constraints": {
+                              "unique": false
+                            },
+                            "example": "Ann Persona"
+                          }
+                        },
+                        "required": [
+                          "id",
+                          "last_action_date",
+                          "last_action_type",
+                          "field_name",
+                          "previous_value",
+                          "replacement_value",
+                          "updated_by"
+                        ],
+                        "tabular_required": ["resource_id", "resource_type"],
+                        "$id": "http://localhost:3000/specifications/3.0/schema/metadata.json"
+                      }
+                    },
+                    "term": {
+                      "name": "term",
+                      "type": "string",
+                      "title": "Term",
+                      "description": "The taxonomy term itself.",
+                      "constraints": {
+                        "unique": false
+                      },
+                      "example": "name",
+                      "core": "Y"
+                    }
+                  },
+                  "required": ["id", "name", "description"],
+                  "$id": "http://localhost:3000/specifications/3.0/schema/taxonomy_term.json",
+                  "title": "Taxonomy Term"
+                },
+                "metadata": {
+                  "name": "metadata",
+                  "type": "array",
+                  "title": "Metadata",
+                  "description": "A record of the changes that have been made to the data in order to maintain provenance information.",
+                  "items": {
+                    "name": "metadata",
+                    "path": "metadata.csv",
+                    "description": "A record of the changes that have been made to the data in order to maintain provenance information.",
+                    "datapackage_metadata": {
+                      "format": "csv",
+                      "mediatype": "text/csv",
+                      "profile": "tabular-data-resource",
+                      "order": 17
+                    },
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "name": "id",
+                        "type": "string",
+                        "title": "Identifier",
+                        "description": "The identifier for this metadata. Each entry must have a unique identifier.",
+                        "format": "uuid",
+                        "constraints": {
+                          "unique": true
+                        },
+                        "example": "6cd71e9f-1013-49d9-8370-26b8f59d3e5a"
+                      },
+                      "resource_id": {
+                        "name": "resource_id",
+                        "type": "string",
+                        "title": "Resource Identifier",
+                        "description": "The identifier of the resource (service, program, location, address, or contact) that this metadata describes.",
+                        "format": "uuid",
+                        "constraints": {
+                          "unique": false
+                        },
+                        "example": "38960354-e7d2-4cfa-a368-820f729d6ccf"
+                      },
+                      "resource_type": {
+                        "name": "resource_type",
+                        "type": "string",
+                        "title": "Resource Type",
+                        "description": "The type of entity being referenced.",
+                        "constraints": {
+                          "unique": false
+                        },
+                        "example": "location"
+                      },
+                      "last_action_date": {
+                        "name": "last_action_date",
+                        "type": "string",
+                        "title": "Last Action Date",
+                        "description": "The date when data was changed.",
+                        "constraints": {
+                          "unique": false
+                        },
+                        "example": "2011-01-01",
+                        "datapackage_type": "date"
+                      },
+                      "last_action_type": {
+                        "name": "last_action_type",
+                        "type": "string",
+                        "title": "Last Action Type",
+                        "description": "The kind of change made to the data.",
+                        "constraints": {
+                          "unique": false
+                        },
+                        "example": "update"
+                      },
+                      "field_name": {
+                        "name": "field_name",
+                        "type": "string",
+                        "title": "Field Name",
+                        "description": "The name of field that has been modified.",
+                        "constraints": {
+                          "unique": false
+                        },
+                        "example": "name"
+                      },
+                      "previous_value": {
+                        "name": "previous_value",
+                        "type": "string",
+                        "title": "Previous Value",
+                        "description": "The previous value of the field that has been modified.",
+                        "constraints": {
+                          "unique": false
+                        },
+                        "example": "MyCity Civic Center"
+                      },
+                      "replacement_value": {
+                        "name": "replacement_value",
+                        "type": "string",
+                        "title": "Replacement Value",
+                        "description": "The new value of the field that has been modified.",
+                        "constraints": {
+                          "unique": false
+                        },
+                        "example": "MyCity New Civic Center"
+                      },
+                      "updated_by": {
+                        "name": "updated_by",
+                        "type": "string",
+                        "title": "Updated By",
+                        "description": "The name of the person who modified the field.",
+                        "constraints": {
+                          "unique": false
+                        },
+                        "example": "Ann Persona"
+                      }
+                    },
+                    "required": [
+                      "id",
+                      "last_action_date",
+                      "last_action_type",
+                      "field_name",
+                      "previous_value",
+                      "replacement_value",
+                      "updated_by"
+                    ],
+                    "tabular_required": ["resource_id", "resource_type"],
+                    "$id": "http://localhost:3000/specifications/3.0/schema/metadata.json"
+                  }
+                },
+                "label": {
+                  "name": "label",
+                  "type": "string",
+                  "title": "Label",
+                  "description": "A free text label of the attribute.",
+                  "constraints": {
+                    "unique": false
+                  },
+                  "example": "An Example Label"
+                }
+              },
+              "required": ["id"],
+              "tabular_required": ["link_id", "taxonomy_term_id", "link_entity"],
+              "$id": "http://localhost:3000/specifications/3.0/schema/attribute.json"
+            }
+          },
+          "metadata": {
+            "name": "metadata",
+            "type": "array",
+            "title": "Metadata",
+            "description": "A record of the changes that have been made to the data in order to maintain provenance information.",
+            "items": {
+              "name": "metadata",
+              "path": "metadata.csv",
+              "description": "A record of the changes that have been made to the data in order to maintain provenance information.",
+              "datapackage_metadata": {
+                "format": "csv",
+                "mediatype": "text/csv",
+                "profile": "tabular-data-resource",
+                "order": 17
+              },
+              "type": "object",
+              "properties": {
+                "id": {
+                  "name": "id",
+                  "type": "string",
+                  "title": "Identifier",
+                  "description": "The identifier for this metadata. Each entry must have a unique identifier.",
+                  "format": "uuid",
+                  "constraints": {
+                    "unique": true
+                  },
+                  "example": "6cd71e9f-1013-49d9-8370-26b8f59d3e5a"
+                },
+                "resource_id": {
+                  "name": "resource_id",
+                  "type": "string",
+                  "title": "Resource Identifier",
+                  "description": "The identifier of the resource (service, program, location, address, or contact) that this metadata describes.",
+                  "format": "uuid",
+                  "constraints": {
+                    "unique": false
+                  },
+                  "example": "38960354-e7d2-4cfa-a368-820f729d6ccf"
+                },
+                "resource_type": {
+                  "name": "resource_type",
+                  "type": "string",
+                  "title": "Resource Type",
+                  "description": "The type of entity being referenced.",
+                  "constraints": {
+                    "unique": false
+                  },
+                  "example": "location"
+                },
+                "last_action_date": {
+                  "name": "last_action_date",
+                  "type": "string",
+                  "title": "Last Action Date",
+                  "description": "The date when data was changed.",
+                  "constraints": {
+                    "unique": false
+                  },
+                  "example": "2011-01-01",
+                  "datapackage_type": "date"
+                },
+                "last_action_type": {
+                  "name": "last_action_type",
+                  "type": "string",
+                  "title": "Last Action Type",
+                  "description": "The kind of change made to the data.",
+                  "constraints": {
+                    "unique": false
+                  },
+                  "example": "update"
+                },
+                "field_name": {
+                  "name": "field_name",
+                  "type": "string",
+                  "title": "Field Name",
+                  "description": "The name of field that has been modified.",
+                  "constraints": {
+                    "unique": false
+                  },
+                  "example": "name"
+                },
+                "previous_value": {
+                  "name": "previous_value",
+                  "type": "string",
+                  "title": "Previous Value",
+                  "description": "The previous value of the field that has been modified.",
+                  "constraints": {
+                    "unique": false
+                  },
+                  "example": "MyCity Civic Center"
+                },
+                "replacement_value": {
+                  "name": "replacement_value",
+                  "type": "string",
+                  "title": "Replacement Value",
+                  "description": "The new value of the field that has been modified.",
+                  "constraints": {
+                    "unique": false
+                  },
+                  "example": "MyCity New Civic Center"
+                },
+                "updated_by": {
+                  "name": "updated_by",
+                  "type": "string",
+                  "title": "Updated By",
+                  "description": "The name of the person who modified the field.",
+                  "constraints": {
+                    "unique": false
+                  },
+                  "example": "Ann Persona"
+                }
+              },
+              "required": [
+                "id",
+                "last_action_date",
+                "last_action_type",
+                "field_name",
+                "previous_value",
+                "replacement_value",
+                "updated_by"
+              ],
+              "tabular_required": ["resource_id", "resource_type"],
+              "$id": "http://localhost:3000/specifications/3.0/schema/metadata.json"
+            }
+          }
+        },
+        "required": ["id", "url"],
+        "$id": "http://localhost:3000/specifications/3.0/schema/url.json"
+      }
+    },
+    "logo": {
+      "name": "logo",
+      "type": "string",
+      "title": "Logo",
+      "description": "A URL to an image associated with the organization which can be presented alongside its name.",
+      "constraints": {
+        "unique": false
+      },
+      "example": "https://openreferral.org/wp-content/uploads/2018/02/OpenReferral_Logo_Green-4-1.png"
+    },
+    "uri": {
+      "name": "uri",
+      "type": "string",
+      "title": "URI",
+      "description": "A persistent identifier to uniquely identify the organization such as those provided by Open Corporates or some other relevant URI provider. This is not for listing the website of the organization: that can be done through the website field of the Organization.",
+      "format": "uri",
+      "constraints": {
+        "unique": false
+      },
+      "example": "http://example.com"
+    },
+    "parent_organization_id": {
+      "name": "parent_organization_id",
+      "type": "string",
+      "title": "Parent Organization Identifier",
+      "description": "The identifier of the organization's parent organization.",
+      "format": "uuid",
+      "constraints": {
+        "unique": false
+      },
+      "example": "cd09a387-91f4-4555-94ec-e799c35344cd"
+    },
+    "programs": {
+      "name": "programs",
+      "type": "array",
+      "title": "Programs",
+      "description": "The details of collection of related services.",
+      "items": {
+        "name": "program",
+        "path": "programs.csv",
+        "description": "The details of collections of related services.",
+        "datapackage_metadata": {
+          "format": "csv",
+          "mediatype": "text/csv",
+          "profile": "tabular-data-resource",
+          "order": 2
+        },
+        "type": "object",
+        "properties": {
+          "id": {
+            "name": "id",
+            "type": "string",
+            "title": "Identifier",
+            "description": "The identifier for the program. Each program must have a unique identifier.",
+            "format": "uuid",
+            "constraints": {
+              "unique": true
+            },
+            "example": "e7ec2e57-4540-43fa-b2c7-6be5a0ef7f42"
+          },
+          "organization_id": {
+            "name": "organization_id",
+            "type": "string",
+            "title": "Organization Identifier",
+            "description": "The identifier for the organization which the program belongs to. Each program must belong to a single organization, and the identifier for that organization should be given here.",
+            "format": "uuid",
+            "constraints": {
+              "unique": true
+            },
+            "example": "d9d5e0f5-d3ce-4f73-9a2f-4dd0ecc6c610"
+          },
+          "name": {
+            "name": "name",
+            "type": "string",
+            "title": "Name",
+            "description": "The name of the program.",
+            "constraints": {
+              "unique": false
+            },
+            "example": "Community Mental Health Support"
+          },
+          "alternate_name": {
+            "name": "alternate_name",
+            "type": "string",
+            "title": "Alternate Name",
+            "description": "The (optional) alternative name for the program.",
+            "constraints": {
+              "unique": false
+            },
+            "example": "MyCity Mental Health Group"
+          },
+          "description": {
+            "name": "description",
+            "type": "string",
+            "title": "Description",
+            "description": "A free text description of the program",
+            "constraints": {
+              "unique": false
+            },
+            "example": "Comprehensive Mental Health Services available to residents of MyCity including CBT and Counselling. This is not an emergency service and should not be used as an alternative to hospital and GP services."
+          },
+          "attributes": {
+            "name": "attributes",
+            "type": "array",
+            "title": "Attributes",
+            "description": "A link between a service and one or more classifications that describe the nature of the service provided.",
+            "items": {
+              "name": "attribute",
+              "path": "attribute.csv",
+              "description": "The other_attributes table creates a link between entities other than service and one or more classifications that describe the entity.",
+              "datapackage_metadata": {
+                "format": "csv",
+                "mediatype": "text/csv",
+                "profile": "tabular-data-resource",
+                "order": 4
+              },
+              "type": "object",
+              "properties": {
+                "id": {
+                  "name": "id",
+                  "type": "string",
+                  "title": "Identifier",
+                  "description": "The identifier of the attribute entry. Each attribute entry should have a unique identifier.",
+                  "format": "uuid",
+                  "constraints": {
+                    "unique": true
+                  },
+                  "example": "ae58cc39-8b70-4ab1-8aea-786882e5ac8e",
+                  "core": "Y"
+                },
+                "link_id": {
+                  "name": "link_id",
+                  "type": "string",
+                  "title": "Link Identifier",
+                  "description": "The identifier of the entity to which this taxonomy term applies.",
+                  "format": "uuid",
+                  "constraints": {
+                    "unique": false
+                  },
+                  "example": "f28dd44b-0c4d-479f-8e90-4c52219a8b3c",
+                  "core": "Y"
+                },
+                "taxonomy_term_id": {
+                  "name": "taxonomy_term_id",
+                  "type": "string",
+                  "title": "Taxonomy Term Identifier",
+                  "description": "The identifier of this taxonomy term from the taxonomy table.",
+                  "format": "uuid",
+                  "constraints": {
+                    "unique": false
+                  },
+                  "example": "3f7b145d-84af-42d7-8fae-eaca714b02b2",
+                  "core": "Y"
+                },
+                "link_type": {
+                  "name": "link_type",
+                  "type": "string",
+                  "title": "Link Type",
+                  "description": "A code taken from an enumerated open codelist to indicate what the taxonomy term describes, e.g. the service eligibility or intended audience.",
+                  "constraints": {
+                    "unique": false
+                  },
+                  "example": "link_type",
+                  "core": "Y"
+                },
+                "taxonomy_term": {
+                  "name": "taxonomy_term",
+                  "path": "taxonomy_terms.csv",
+                  "description": "Each service can be categorized according to one or more taxonomy terms. The taxonomy_term object contains a list of taxonomy terms, their names, and, for hierarchical taxonomies, their structure.",
+                  "datapackage_metadata": {
+                    "format": "csv",
+                    "mediatype": "text/csv",
+                    "profile": "tabular-data-resource",
+                    "order": 16
+                  },
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "name": "id",
+                      "type": "string",
+                      "title": "Identifier",
+                      "description": "The identifier for this taxonomy term. Each taxonomy term must have a unique identifier, within the scope of the dataset.",
+                      "format": "uuid",
+                      "constraints": {
+                        "unique": true
+                      },
+                      "example": "3f7b145d-84af-42d7-8fae-eaca714b02b2",
+                      "core": "Y"
+                    },
+                    "name": {
+                      "name": "name",
+                      "type": "string",
+                      "title": "Name",
+                      "description": "The taxonomy term itself.",
+                      "constraints": {
+                        "unique": false
+                      },
+                      "example": "name",
+                      "core": "Y"
+                    },
+                    "description": {
+                      "name": "description",
+                      "type": "string",
+                      "title": "Description",
+                      "description": "A free text description of the term.",
+                      "constraints": {
+                        "unique": false
+                      },
+                      "example": "description"
+                    },
+                    "parent_id": {
+                      "name": "parent_id",
+                      "type": "string",
+                      "title": "Parent Identifier",
+                      "description": "If this is a child term in a hierarchical taxonomy, give the identifier of the parent category. For top-level categories, this is not required.",
+                      "format": "uuid",
+                      "constraints": {
+                        "unique": false
+                      },
+                      "example": "0bc248fa-dc27-4650-9ba4-8f1a24ef16a2",
+                      "core": "Y"
+                    },
+                    "taxonomy": {
+                      "name": "taxonomy",
+                      "type": "string",
+                      "title": "Taxonomy",
+                      "description": "If this is an established taxonomy, a free text description of which taxonomy is in use. If possible, provide a URI.",
+                      "constraints": {
+                        "unique": false
+                      },
+                      "example": "taxonomy",
+                      "core": "Y"
+                    },
+                    "taxonomy_id": {
+                      "name": "taxonomy_id",
+                      "type": "string",
+                      "title": "Taxonomy Identifier",
+                      "description": "The identifier of the taxonomy containing the term.",
+                      "format": "uuid",
+                      "constraints": {
+                        "unique": false
+                      },
+                      "example": "07ff6aee-a219-438c-b694-d2fcb6c5373b"
+                    },
+                    "term_uri": {
+                      "name": "term_uri",
+                      "type": "string",
+                      "title": "Term URI",
+                      "description": "URI of the term.",
+                      "format": "uri",
+                      "constraints": {
+                        "unique": false
+                      },
+                      "example": "http://example.com"
+                    },
+                    "metadata": {
+                      "name": "metadata",
+                      "type": "array",
+                      "title": "Metadata",
+                      "description": "A record of the changes that have been made to the data in order to maintain provenance information.",
+                      "items": {
+                        "name": "metadata",
+                        "path": "metadata.csv",
+                        "description": "A record of the changes that have been made to the data in order to maintain provenance information.",
+                        "datapackage_metadata": {
+                          "format": "csv",
+                          "mediatype": "text/csv",
+                          "profile": "tabular-data-resource",
+                          "order": 17
+                        },
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "name": "id",
+                            "type": "string",
+                            "title": "Identifier",
+                            "description": "The identifier for this metadata. Each entry must have a unique identifier.",
+                            "format": "uuid",
+                            "constraints": {
+                              "unique": true
+                            },
+                            "example": "6cd71e9f-1013-49d9-8370-26b8f59d3e5a"
+                          },
+                          "resource_id": {
+                            "name": "resource_id",
+                            "type": "string",
+                            "title": "Resource Identifier",
+                            "description": "The identifier of the resource (service, program, location, address, or contact) that this metadata describes.",
+                            "format": "uuid",
+                            "constraints": {
+                              "unique": false
+                            },
+                            "example": "38960354-e7d2-4cfa-a368-820f729d6ccf"
+                          },
+                          "resource_type": {
+                            "name": "resource_type",
+                            "type": "string",
+                            "title": "Resource Type",
+                            "description": "The type of entity being referenced.",
+                            "constraints": {
+                              "unique": false
+                            },
+                            "example": "location"
+                          },
+                          "last_action_date": {
+                            "name": "last_action_date",
+                            "type": "string",
+                            "title": "Last Action Date",
+                            "description": "The date when data was changed.",
+                            "constraints": {
+                              "unique": false
+                            },
+                            "example": "2011-01-01",
+                            "datapackage_type": "date"
+                          },
+                          "last_action_type": {
+                            "name": "last_action_type",
+                            "type": "string",
+                            "title": "Last Action Type",
+                            "description": "The kind of change made to the data.",
+                            "constraints": {
+                              "unique": false
+                            },
+                            "example": "update"
+                          },
+                          "field_name": {
+                            "name": "field_name",
+                            "type": "string",
+                            "title": "Field Name",
+                            "description": "The name of field that has been modified.",
+                            "constraints": {
+                              "unique": false
+                            },
+                            "example": "name"
+                          },
+                          "previous_value": {
+                            "name": "previous_value",
+                            "type": "string",
+                            "title": "Previous Value",
+                            "description": "The previous value of the field that has been modified.",
+                            "constraints": {
+                              "unique": false
+                            },
+                            "example": "MyCity Civic Center"
+                          },
+                          "replacement_value": {
+                            "name": "replacement_value",
+                            "type": "string",
+                            "title": "Replacement Value",
+                            "description": "The new value of the field that has been modified.",
+                            "constraints": {
+                              "unique": false
+                            },
+                            "example": "MyCity New Civic Center"
+                          },
+                          "updated_by": {
+                            "name": "updated_by",
+                            "type": "string",
+                            "title": "Updated By",
+                            "description": "The name of the person who modified the field.",
+                            "constraints": {
+                              "unique": false
+                            },
+                            "example": "Ann Persona"
+                          }
+                        },
+                        "required": [
+                          "id",
+                          "last_action_date",
+                          "last_action_type",
+                          "field_name",
+                          "previous_value",
+                          "replacement_value",
+                          "updated_by"
+                        ],
+                        "tabular_required": ["resource_id", "resource_type"],
+                        "$id": "http://localhost:3000/specifications/3.0/schema/metadata.json"
+                      }
+                    },
+                    "term": {
+                      "name": "term",
+                      "type": "string",
+                      "title": "Term",
+                      "description": "The taxonomy term itself.",
+                      "constraints": {
+                        "unique": false
+                      },
+                      "example": "name",
+                      "core": "Y"
+                    }
+                  },
+                  "required": ["id", "name", "description"],
+                  "$id": "http://localhost:3000/specifications/3.0/schema/taxonomy_term.json",
+                  "title": "Taxonomy Term"
+                },
+                "metadata": {
+                  "name": "metadata",
+                  "type": "array",
+                  "title": "Metadata",
+                  "description": "A record of the changes that have been made to the data in order to maintain provenance information.",
+                  "items": {
+                    "name": "metadata",
+                    "path": "metadata.csv",
+                    "description": "A record of the changes that have been made to the data in order to maintain provenance information.",
+                    "datapackage_metadata": {
+                      "format": "csv",
+                      "mediatype": "text/csv",
+                      "profile": "tabular-data-resource",
+                      "order": 17
+                    },
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "name": "id",
+                        "type": "string",
+                        "title": "Identifier",
+                        "description": "The identifier for this metadata. Each entry must have a unique identifier.",
+                        "format": "uuid",
+                        "constraints": {
+                          "unique": true
+                        },
+                        "example": "6cd71e9f-1013-49d9-8370-26b8f59d3e5a"
+                      },
+                      "resource_id": {
+                        "name": "resource_id",
+                        "type": "string",
+                        "title": "Resource Identifier",
+                        "description": "The identifier of the resource (service, program, location, address, or contact) that this metadata describes.",
+                        "format": "uuid",
+                        "constraints": {
+                          "unique": false
+                        },
+                        "example": "38960354-e7d2-4cfa-a368-820f729d6ccf"
+                      },
+                      "resource_type": {
+                        "name": "resource_type",
+                        "type": "string",
+                        "title": "Resource Type",
+                        "description": "The type of entity being referenced.",
+                        "constraints": {
+                          "unique": false
+                        },
+                        "example": "location"
+                      },
+                      "last_action_date": {
+                        "name": "last_action_date",
+                        "type": "string",
+                        "title": "Last Action Date",
+                        "description": "The date when data was changed.",
+                        "constraints": {
+                          "unique": false
+                        },
+                        "example": "2011-01-01",
+                        "datapackage_type": "date"
+                      },
+                      "last_action_type": {
+                        "name": "last_action_type",
+                        "type": "string",
+                        "title": "Last Action Type",
+                        "description": "The kind of change made to the data.",
+                        "constraints": {
+                          "unique": false
+                        },
+                        "example": "update"
+                      },
+                      "field_name": {
+                        "name": "field_name",
+                        "type": "string",
+                        "title": "Field Name",
+                        "description": "The name of field that has been modified.",
+                        "constraints": {
+                          "unique": false
+                        },
+                        "example": "name"
+                      },
+                      "previous_value": {
+                        "name": "previous_value",
+                        "type": "string",
+                        "title": "Previous Value",
+                        "description": "The previous value of the field that has been modified.",
+                        "constraints": {
+                          "unique": false
+                        },
+                        "example": "MyCity Civic Center"
+                      },
+                      "replacement_value": {
+                        "name": "replacement_value",
+                        "type": "string",
+                        "title": "Replacement Value",
+                        "description": "The new value of the field that has been modified.",
+                        "constraints": {
+                          "unique": false
+                        },
+                        "example": "MyCity New Civic Center"
+                      },
+                      "updated_by": {
+                        "name": "updated_by",
+                        "type": "string",
+                        "title": "Updated By",
+                        "description": "The name of the person who modified the field.",
+                        "constraints": {
+                          "unique": false
+                        },
+                        "example": "Ann Persona"
+                      }
+                    },
+                    "required": [
+                      "id",
+                      "last_action_date",
+                      "last_action_type",
+                      "field_name",
+                      "previous_value",
+                      "replacement_value",
+                      "updated_by"
+                    ],
+                    "tabular_required": ["resource_id", "resource_type"],
+                    "$id": "http://localhost:3000/specifications/3.0/schema/metadata.json"
+                  }
+                },
+                "label": {
+                  "name": "label",
+                  "type": "string",
+                  "title": "Label",
+                  "description": "A free text label of the attribute.",
+                  "constraints": {
+                    "unique": false
+                  },
+                  "example": "An Example Label"
+                }
+              },
+              "required": ["id"],
+              "tabular_required": ["link_id", "taxonomy_term_id", "link_entity"],
+              "$id": "http://localhost:3000/specifications/3.0/schema/attribute.json"
+            }
+          },
+          "metadata": {
+            "name": "metadata",
+            "type": "array",
+            "title": "Metadata",
+            "description": "A record of the changes that have been made to the data in order to maintain provenance information.",
+            "items": {
+              "name": "metadata",
+              "path": "metadata.csv",
+              "description": "A record of the changes that have been made to the data in order to maintain provenance information.",
+              "datapackage_metadata": {
+                "format": "csv",
+                "mediatype": "text/csv",
+                "profile": "tabular-data-resource",
+                "order": 17
+              },
+              "type": "object",
+              "properties": {
+                "id": {
+                  "name": "id",
+                  "type": "string",
+                  "title": "Identifier",
+                  "description": "The identifier for this metadata. Each entry must have a unique identifier.",
+                  "format": "uuid",
+                  "constraints": {
+                    "unique": true
+                  },
+                  "example": "6cd71e9f-1013-49d9-8370-26b8f59d3e5a"
+                },
+                "resource_id": {
+                  "name": "resource_id",
+                  "type": "string",
+                  "title": "Resource Identifier",
+                  "description": "The identifier of the resource (service, program, location, address, or contact) that this metadata describes.",
+                  "format": "uuid",
+                  "constraints": {
+                    "unique": false
+                  },
+                  "example": "38960354-e7d2-4cfa-a368-820f729d6ccf"
+                },
+                "resource_type": {
+                  "name": "resource_type",
+                  "type": "string",
+                  "title": "Resource Type",
+                  "description": "The type of entity being referenced.",
+                  "constraints": {
+                    "unique": false
+                  },
+                  "example": "location"
+                },
+                "last_action_date": {
+                  "name": "last_action_date",
+                  "type": "string",
+                  "title": "Last Action Date",
+                  "description": "The date when data was changed.",
+                  "constraints": {
+                    "unique": false
+                  },
+                  "example": "2011-01-01",
+                  "datapackage_type": "date"
+                },
+                "last_action_type": {
+                  "name": "last_action_type",
+                  "type": "string",
+                  "title": "Last Action Type",
+                  "description": "The kind of change made to the data.",
+                  "constraints": {
+                    "unique": false
+                  },
+                  "example": "update"
+                },
+                "field_name": {
+                  "name": "field_name",
+                  "type": "string",
+                  "title": "Field Name",
+                  "description": "The name of field that has been modified.",
+                  "constraints": {
+                    "unique": false
+                  },
+                  "example": "name"
+                },
+                "previous_value": {
+                  "name": "previous_value",
+                  "type": "string",
+                  "title": "Previous Value",
+                  "description": "The previous value of the field that has been modified.",
+                  "constraints": {
+                    "unique": false
+                  },
+                  "example": "MyCity Civic Center"
+                },
+                "replacement_value": {
+                  "name": "replacement_value",
+                  "type": "string",
+                  "title": "Replacement Value",
+                  "description": "The new value of the field that has been modified.",
+                  "constraints": {
+                    "unique": false
+                  },
+                  "example": "MyCity New Civic Center"
+                },
+                "updated_by": {
+                  "name": "updated_by",
+                  "type": "string",
+                  "title": "Updated By",
+                  "description": "The name of the person who modified the field.",
+                  "constraints": {
+                    "unique": false
+                  },
+                  "example": "Ann Persona"
+                }
+              },
+              "required": [
+                "id",
+                "last_action_date",
+                "last_action_type",
+                "field_name",
+                "previous_value",
+                "replacement_value",
+                "updated_by"
+              ],
+              "tabular_required": ["resource_id", "resource_type"],
+              "$id": "http://localhost:3000/specifications/3.0/schema/metadata.json"
+            }
+          }
+        },
+        "required": ["id", "name", "description"],
+        "tabular_required": ["organization_id"],
+        "$id": "http://localhost:3000/specifications/3.0/schema/program.json"
+      }
+    },
+    "organization_identifiers": {
+      "name": "organization_identifiers",
+      "type": "array",
+      "title": "Organization Identifiers",
+      "description": "The details of the third party identifiers for organizations, such as: company registration number, charity number, tax registration number.",
+      "items": {
+        "name": "organization_identifier",
+        "path": "organization_identifiers.csv",
+        "description": "The details of the third party identifiers for organizations, such as: company registration number, charity number, tax registration number.",
+        "datapackage_metadata": {
+          "format": "csv",
+          "mediatype": "text/csv",
+          "profile": "tabular-data-resource",
+          "order": 20
+        },
+        "type": "object",
+        "properties": {
+          "id": {
+            "name": "id",
+            "type": "string",
+            "title": "Identifier",
+            "description": "The identifier for this organization identifier entry. Each entry must have a unique identifier.",
+            "format": "uuid",
+            "constraints": {
+              "unique": true
+            },
+            "example": "d4dbcebc-0802-47cb-8651-b937ac4f2f3e"
+          },
+          "organization_id": {
+            "name": "organization_id",
+            "type": "string",
+            "title": "Organization Identifier",
+            "description": "The identifier of the organization. This should match the uuid of an organization object.",
+            "format": "uuid",
+            "constraints": {
+              "unique": false
+            },
+            "example": "d9d5e0f5-d3ce-4f73-9a2f-4dd0ecc6c610"
+          },
+          "identifier_scheme": {
+            "name": "identifier_scheme",
+            "type": "string",
+            "title": "Identifier Scheme",
+            "description": "The scheme of the third party identifier, according to http://org-id.guide/.",
+            "constraints": {
+              "unique": false
+            },
+            "example": "GB-COH"
+          },
+          "identifier_type": {
+            "name": "identifier_type",
+            "type": "string",
+            "title": "Identifier Type",
+            "description": "A human-readable equivalent of the identifier_scheme. This may be used in cases where org-id.guide does not list an appropriate identifier scheme.",
+            "constraints": {
+              "unique": false
+            },
+            "example": "Company number"
+          },
+          "identifier": {
+            "name": "identifier",
+            "type": "string",
+            "title": "Third Party Identifier",
+            "description": "The third-party identifier value.",
+            "constraints": {
+              "unique": false
+            },
+            "example": "1234567"
+          },
+          "attributes": {
+            "name": "attributes",
+            "type": "array",
+            "title": "Attributes",
+            "description": "A link between a service and one or more classifications that describe the nature of the service provided.",
+            "items": {
+              "name": "attribute",
+              "path": "attribute.csv",
+              "description": "The other_attributes table creates a link between entities other than service and one or more classifications that describe the entity.",
+              "datapackage_metadata": {
+                "format": "csv",
+                "mediatype": "text/csv",
+                "profile": "tabular-data-resource",
+                "order": 4
+              },
+              "type": "object",
+              "properties": {
+                "id": {
+                  "name": "id",
+                  "type": "string",
+                  "title": "Identifier",
+                  "description": "The identifier of the attribute entry. Each attribute entry should have a unique identifier.",
+                  "format": "uuid",
+                  "constraints": {
+                    "unique": true
+                  },
+                  "example": "ae58cc39-8b70-4ab1-8aea-786882e5ac8e",
+                  "core": "Y"
+                },
+                "link_id": {
+                  "name": "link_id",
+                  "type": "string",
+                  "title": "Link Identifier",
+                  "description": "The identifier of the entity to which this taxonomy term applies.",
+                  "format": "uuid",
+                  "constraints": {
+                    "unique": false
+                  },
+                  "example": "f28dd44b-0c4d-479f-8e90-4c52219a8b3c",
+                  "core": "Y"
+                },
+                "taxonomy_term_id": {
+                  "name": "taxonomy_term_id",
+                  "type": "string",
+                  "title": "Taxonomy Term Identifier",
+                  "description": "The identifier of this taxonomy term from the taxonomy table.",
+                  "format": "uuid",
+                  "constraints": {
+                    "unique": false
+                  },
+                  "example": "3f7b145d-84af-42d7-8fae-eaca714b02b2",
+                  "core": "Y"
+                },
+                "link_type": {
+                  "name": "link_type",
+                  "type": "string",
+                  "title": "Link Type",
+                  "description": "A code taken from an enumerated open codelist to indicate what the taxonomy term describes, e.g. the service eligibility or intended audience.",
+                  "constraints": {
+                    "unique": false
+                  },
+                  "example": "link_type",
+                  "core": "Y"
+                },
+                "taxonomy_term": {
+                  "name": "taxonomy_term",
+                  "path": "taxonomy_terms.csv",
+                  "description": "Each service can be categorized according to one or more taxonomy terms. The taxonomy_term object contains a list of taxonomy terms, their names, and, for hierarchical taxonomies, their structure.",
+                  "datapackage_metadata": {
+                    "format": "csv",
+                    "mediatype": "text/csv",
+                    "profile": "tabular-data-resource",
+                    "order": 16
+                  },
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "name": "id",
+                      "type": "string",
+                      "title": "Identifier",
+                      "description": "The identifier for this taxonomy term. Each taxonomy term must have a unique identifier, within the scope of the dataset.",
+                      "format": "uuid",
+                      "constraints": {
+                        "unique": true
+                      },
+                      "example": "3f7b145d-84af-42d7-8fae-eaca714b02b2",
+                      "core": "Y"
+                    },
+                    "name": {
+                      "name": "name",
+                      "type": "string",
+                      "title": "Name",
+                      "description": "The taxonomy term itself.",
+                      "constraints": {
+                        "unique": false
+                      },
+                      "example": "name",
+                      "core": "Y"
+                    },
+                    "description": {
+                      "name": "description",
+                      "type": "string",
+                      "title": "Description",
+                      "description": "A free text description of the term.",
+                      "constraints": {
+                        "unique": false
+                      },
+                      "example": "description"
+                    },
+                    "parent_id": {
+                      "name": "parent_id",
+                      "type": "string",
+                      "title": "Parent Identifier",
+                      "description": "If this is a child term in a hierarchical taxonomy, give the identifier of the parent category. For top-level categories, this is not required.",
+                      "format": "uuid",
+                      "constraints": {
+                        "unique": false
+                      },
+                      "example": "0bc248fa-dc27-4650-9ba4-8f1a24ef16a2",
+                      "core": "Y"
+                    },
+                    "taxonomy": {
+                      "name": "taxonomy",
+                      "type": "string",
+                      "title": "Taxonomy",
+                      "description": "If this is an established taxonomy, a free text description of which taxonomy is in use. If possible, provide a URI.",
+                      "constraints": {
+                        "unique": false
+                      },
+                      "example": "taxonomy",
+                      "core": "Y"
+                    },
+                    "taxonomy_id": {
+                      "name": "taxonomy_id",
+                      "type": "string",
+                      "title": "Taxonomy Identifier",
+                      "description": "The identifier of the taxonomy containing the term.",
+                      "format": "uuid",
+                      "constraints": {
+                        "unique": false
+                      },
+                      "example": "07ff6aee-a219-438c-b694-d2fcb6c5373b"
+                    },
+                    "term_uri": {
+                      "name": "term_uri",
+                      "type": "string",
+                      "title": "Term URI",
+                      "description": "URI of the term.",
+                      "format": "uri",
+                      "constraints": {
+                        "unique": false
+                      },
+                      "example": "http://example.com"
+                    },
+                    "metadata": {
+                      "name": "metadata",
+                      "type": "array",
+                      "title": "Metadata",
+                      "description": "A record of the changes that have been made to the data in order to maintain provenance information.",
+                      "items": {
+                        "name": "metadata",
+                        "path": "metadata.csv",
+                        "description": "A record of the changes that have been made to the data in order to maintain provenance information.",
+                        "datapackage_metadata": {
+                          "format": "csv",
+                          "mediatype": "text/csv",
+                          "profile": "tabular-data-resource",
+                          "order": 17
+                        },
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "name": "id",
+                            "type": "string",
+                            "title": "Identifier",
+                            "description": "The identifier for this metadata. Each entry must have a unique identifier.",
+                            "format": "uuid",
+                            "constraints": {
+                              "unique": true
+                            },
+                            "example": "6cd71e9f-1013-49d9-8370-26b8f59d3e5a"
+                          },
+                          "resource_id": {
+                            "name": "resource_id",
+                            "type": "string",
+                            "title": "Resource Identifier",
+                            "description": "The identifier of the resource (service, program, location, address, or contact) that this metadata describes.",
+                            "format": "uuid",
+                            "constraints": {
+                              "unique": false
+                            },
+                            "example": "38960354-e7d2-4cfa-a368-820f729d6ccf"
+                          },
+                          "resource_type": {
+                            "name": "resource_type",
+                            "type": "string",
+                            "title": "Resource Type",
+                            "description": "The type of entity being referenced.",
+                            "constraints": {
+                              "unique": false
+                            },
+                            "example": "location"
+                          },
+                          "last_action_date": {
+                            "name": "last_action_date",
+                            "type": "string",
+                            "title": "Last Action Date",
+                            "description": "The date when data was changed.",
+                            "constraints": {
+                              "unique": false
+                            },
+                            "example": "2011-01-01",
+                            "datapackage_type": "date"
+                          },
+                          "last_action_type": {
+                            "name": "last_action_type",
+                            "type": "string",
+                            "title": "Last Action Type",
+                            "description": "The kind of change made to the data.",
+                            "constraints": {
+                              "unique": false
+                            },
+                            "example": "update"
+                          },
+                          "field_name": {
+                            "name": "field_name",
+                            "type": "string",
+                            "title": "Field Name",
+                            "description": "The name of field that has been modified.",
+                            "constraints": {
+                              "unique": false
+                            },
+                            "example": "name"
+                          },
+                          "previous_value": {
+                            "name": "previous_value",
+                            "type": "string",
+                            "title": "Previous Value",
+                            "description": "The previous value of the field that has been modified.",
+                            "constraints": {
+                              "unique": false
+                            },
+                            "example": "MyCity Civic Center"
+                          },
+                          "replacement_value": {
+                            "name": "replacement_value",
+                            "type": "string",
+                            "title": "Replacement Value",
+                            "description": "The new value of the field that has been modified.",
+                            "constraints": {
+                              "unique": false
+                            },
+                            "example": "MyCity New Civic Center"
+                          },
+                          "updated_by": {
+                            "name": "updated_by",
+                            "type": "string",
+                            "title": "Updated By",
+                            "description": "The name of the person who modified the field.",
+                            "constraints": {
+                              "unique": false
+                            },
+                            "example": "Ann Persona"
+                          }
+                        },
+                        "required": [
+                          "id",
+                          "last_action_date",
+                          "last_action_type",
+                          "field_name",
+                          "previous_value",
+                          "replacement_value",
+                          "updated_by"
+                        ],
+                        "tabular_required": ["resource_id", "resource_type"],
+                        "$id": "http://localhost:3000/specifications/3.0/schema/metadata.json"
+                      }
+                    },
+                    "term": {
+                      "name": "term",
+                      "type": "string",
+                      "title": "Term",
+                      "description": "The taxonomy term itself.",
+                      "constraints": {
+                        "unique": false
+                      },
+                      "example": "name",
+                      "core": "Y"
+                    }
+                  },
+                  "required": ["id", "name", "description"],
+                  "$id": "http://localhost:3000/specifications/3.0/schema/taxonomy_term.json",
+                  "title": "Taxonomy Term"
+                },
+                "metadata": {
+                  "name": "metadata",
+                  "type": "array",
+                  "title": "Metadata",
+                  "description": "A record of the changes that have been made to the data in order to maintain provenance information.",
+                  "items": {
+                    "name": "metadata",
+                    "path": "metadata.csv",
+                    "description": "A record of the changes that have been made to the data in order to maintain provenance information.",
+                    "datapackage_metadata": {
+                      "format": "csv",
+                      "mediatype": "text/csv",
+                      "profile": "tabular-data-resource",
+                      "order": 17
+                    },
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "name": "id",
+                        "type": "string",
+                        "title": "Identifier",
+                        "description": "The identifier for this metadata. Each entry must have a unique identifier.",
+                        "format": "uuid",
+                        "constraints": {
+                          "unique": true
+                        },
+                        "example": "6cd71e9f-1013-49d9-8370-26b8f59d3e5a"
+                      },
+                      "resource_id": {
+                        "name": "resource_id",
+                        "type": "string",
+                        "title": "Resource Identifier",
+                        "description": "The identifier of the resource (service, program, location, address, or contact) that this metadata describes.",
+                        "format": "uuid",
+                        "constraints": {
+                          "unique": false
+                        },
+                        "example": "38960354-e7d2-4cfa-a368-820f729d6ccf"
+                      },
+                      "resource_type": {
+                        "name": "resource_type",
+                        "type": "string",
+                        "title": "Resource Type",
+                        "description": "The type of entity being referenced.",
+                        "constraints": {
+                          "unique": false
+                        },
+                        "example": "location"
+                      },
+                      "last_action_date": {
+                        "name": "last_action_date",
+                        "type": "string",
+                        "title": "Last Action Date",
+                        "description": "The date when data was changed.",
+                        "constraints": {
+                          "unique": false
+                        },
+                        "example": "2011-01-01",
+                        "datapackage_type": "date"
+                      },
+                      "last_action_type": {
+                        "name": "last_action_type",
+                        "type": "string",
+                        "title": "Last Action Type",
+                        "description": "The kind of change made to the data.",
+                        "constraints": {
+                          "unique": false
+                        },
+                        "example": "update"
+                      },
+                      "field_name": {
+                        "name": "field_name",
+                        "type": "string",
+                        "title": "Field Name",
+                        "description": "The name of field that has been modified.",
+                        "constraints": {
+                          "unique": false
+                        },
+                        "example": "name"
+                      },
+                      "previous_value": {
+                        "name": "previous_value",
+                        "type": "string",
+                        "title": "Previous Value",
+                        "description": "The previous value of the field that has been modified.",
+                        "constraints": {
+                          "unique": false
+                        },
+                        "example": "MyCity Civic Center"
+                      },
+                      "replacement_value": {
+                        "name": "replacement_value",
+                        "type": "string",
+                        "title": "Replacement Value",
+                        "description": "The new value of the field that has been modified.",
+                        "constraints": {
+                          "unique": false
+                        },
+                        "example": "MyCity New Civic Center"
+                      },
+                      "updated_by": {
+                        "name": "updated_by",
+                        "type": "string",
+                        "title": "Updated By",
+                        "description": "The name of the person who modified the field.",
+                        "constraints": {
+                          "unique": false
+                        },
+                        "example": "Ann Persona"
+                      }
+                    },
+                    "required": [
+                      "id",
+                      "last_action_date",
+                      "last_action_type",
+                      "field_name",
+                      "previous_value",
+                      "replacement_value",
+                      "updated_by"
+                    ],
+                    "tabular_required": ["resource_id", "resource_type"],
+                    "$id": "http://localhost:3000/specifications/3.0/schema/metadata.json"
+                  }
+                },
+                "label": {
+                  "name": "label",
+                  "type": "string",
+                  "title": "Label",
+                  "description": "A free text label of the attribute.",
+                  "constraints": {
+                    "unique": false
+                  },
+                  "example": "An Example Label"
+                }
+              },
+              "required": ["id"],
+              "tabular_required": ["link_id", "taxonomy_term_id", "link_entity"],
+              "$id": "http://localhost:3000/specifications/3.0/schema/attribute.json"
+            }
+          },
+          "metadata": {
+            "name": "metadata",
+            "type": "array",
+            "title": "Metadata",
+            "description": "A record of the changes that have been made to the data in order to maintain provenance information.",
+            "items": {
+              "name": "metadata",
+              "path": "metadata.csv",
+              "description": "A record of the changes that have been made to the data in order to maintain provenance information.",
+              "datapackage_metadata": {
+                "format": "csv",
+                "mediatype": "text/csv",
+                "profile": "tabular-data-resource",
+                "order": 17
+              },
+              "type": "object",
+              "properties": {
+                "id": {
+                  "name": "id",
+                  "type": "string",
+                  "title": "Identifier",
+                  "description": "The identifier for this metadata. Each entry must have a unique identifier.",
+                  "format": "uuid",
+                  "constraints": {
+                    "unique": true
+                  },
+                  "example": "6cd71e9f-1013-49d9-8370-26b8f59d3e5a"
+                },
+                "resource_id": {
+                  "name": "resource_id",
+                  "type": "string",
+                  "title": "Resource Identifier",
+                  "description": "The identifier of the resource (service, program, location, address, or contact) that this metadata describes.",
+                  "format": "uuid",
+                  "constraints": {
+                    "unique": false
+                  },
+                  "example": "38960354-e7d2-4cfa-a368-820f729d6ccf"
+                },
+                "resource_type": {
+                  "name": "resource_type",
+                  "type": "string",
+                  "title": "Resource Type",
+                  "description": "The type of entity being referenced.",
+                  "constraints": {
+                    "unique": false
+                  },
+                  "example": "location"
+                },
+                "last_action_date": {
+                  "name": "last_action_date",
+                  "type": "string",
+                  "title": "Last Action Date",
+                  "description": "The date when data was changed.",
+                  "constraints": {
+                    "unique": false
+                  },
+                  "example": "2011-01-01",
+                  "datapackage_type": "date"
+                },
+                "last_action_type": {
+                  "name": "last_action_type",
+                  "type": "string",
+                  "title": "Last Action Type",
+                  "description": "The kind of change made to the data.",
+                  "constraints": {
+                    "unique": false
+                  },
+                  "example": "update"
+                },
+                "field_name": {
+                  "name": "field_name",
+                  "type": "string",
+                  "title": "Field Name",
+                  "description": "The name of field that has been modified.",
+                  "constraints": {
+                    "unique": false
+                  },
+                  "example": "name"
+                },
+                "previous_value": {
+                  "name": "previous_value",
+                  "type": "string",
+                  "title": "Previous Value",
+                  "description": "The previous value of the field that has been modified.",
+                  "constraints": {
+                    "unique": false
+                  },
+                  "example": "MyCity Civic Center"
+                },
+                "replacement_value": {
+                  "name": "replacement_value",
+                  "type": "string",
+                  "title": "Replacement Value",
+                  "description": "The new value of the field that has been modified.",
+                  "constraints": {
+                    "unique": false
+                  },
+                  "example": "MyCity New Civic Center"
+                },
+                "updated_by": {
+                  "name": "updated_by",
+                  "type": "string",
+                  "title": "Updated By",
+                  "description": "The name of the person who modified the field.",
+                  "constraints": {
+                    "unique": false
+                  },
+                  "example": "Ann Persona"
+                }
+              },
+              "required": [
+                "id",
+                "last_action_date",
+                "last_action_type",
+                "field_name",
+                "previous_value",
+                "replacement_value",
+                "updated_by"
+              ],
+              "tabular_required": ["resource_id", "resource_type"],
+              "$id": "http://localhost:3000/specifications/3.0/schema/metadata.json"
+            }
+          }
+        },
+        "required": ["id", "identifier_type", "identifier"],
+        "tabular_required": ["organization_id"],
+        "$id": "http://localhost:3000/specifications/3.0/schema/organization_identifier.json"
+      }
+    },
+    "attributes": {
+      "name": "attributes",
+      "type": "array",
+      "title": "Attributes",
+      "description": "A link between a service and one or more classifications that describe the nature of the service provided.",
+      "items": {
+        "name": "attribute",
+        "path": "attribute.csv",
+        "description": "The other_attributes table creates a link between entities other than service and one or more classifications that describe the entity.",
+        "datapackage_metadata": {
+          "format": "csv",
+          "mediatype": "text/csv",
+          "profile": "tabular-data-resource",
+          "order": 4
+        },
+        "type": "object",
+        "properties": {
+          "id": {
+            "name": "id",
+            "type": "string",
+            "title": "Identifier",
+            "description": "The identifier of the attribute entry. Each attribute entry should have a unique identifier.",
+            "format": "uuid",
+            "constraints": {
+              "unique": true
+            },
+            "example": "ae58cc39-8b70-4ab1-8aea-786882e5ac8e",
+            "core": "Y"
+          },
+          "link_id": {
+            "name": "link_id",
+            "type": "string",
+            "title": "Link Identifier",
+            "description": "The identifier of the entity to which this taxonomy term applies.",
+            "format": "uuid",
+            "constraints": {
+              "unique": false
+            },
+            "example": "f28dd44b-0c4d-479f-8e90-4c52219a8b3c",
+            "core": "Y"
+          },
+          "taxonomy_term_id": {
+            "name": "taxonomy_term_id",
+            "type": "string",
+            "title": "Taxonomy Term Identifier",
+            "description": "The identifier of this taxonomy term from the taxonomy table.",
+            "format": "uuid",
+            "constraints": {
+              "unique": false
+            },
+            "example": "3f7b145d-84af-42d7-8fae-eaca714b02b2",
+            "core": "Y"
+          },
+          "link_type": {
+            "name": "link_type",
+            "type": "string",
+            "title": "Link Type",
+            "description": "A code taken from an enumerated open codelist to indicate what the taxonomy term describes, e.g. the service eligibility or intended audience.",
+            "constraints": {
+              "unique": false
+            },
+            "example": "link_type",
+            "core": "Y"
+          },
+          "taxonomy_term": {
+            "name": "taxonomy_term",
+            "path": "taxonomy_terms.csv",
+            "description": "Each service can be categorized according to one or more taxonomy terms. The taxonomy_term object contains a list of taxonomy terms, their names, and, for hierarchical taxonomies, their structure.",
+            "datapackage_metadata": {
+              "format": "csv",
+              "mediatype": "text/csv",
+              "profile": "tabular-data-resource",
+              "order": 16
+            },
+            "type": "object",
+            "properties": {
+              "id": {
+                "name": "id",
+                "type": "string",
+                "title": "Identifier",
+                "description": "The identifier for this taxonomy term. Each taxonomy term must have a unique identifier, within the scope of the dataset.",
+                "format": "uuid",
+                "constraints": {
+                  "unique": true
+                },
+                "example": "3f7b145d-84af-42d7-8fae-eaca714b02b2",
+                "core": "Y"
+              },
+              "name": {
+                "name": "name",
+                "type": "string",
+                "title": "Name",
+                "description": "The taxonomy term itself.",
+                "constraints": {
+                  "unique": false
+                },
+                "example": "name",
+                "core": "Y"
+              },
+              "description": {
+                "name": "description",
+                "type": "string",
+                "title": "Description",
+                "description": "A free text description of the term.",
+                "constraints": {
+                  "unique": false
+                },
+                "example": "description"
+              },
+              "parent_id": {
+                "name": "parent_id",
+                "type": "string",
+                "title": "Parent Identifier",
+                "description": "If this is a child term in a hierarchical taxonomy, give the identifier of the parent category. For top-level categories, this is not required.",
+                "format": "uuid",
+                "constraints": {
+                  "unique": false
+                },
+                "example": "0bc248fa-dc27-4650-9ba4-8f1a24ef16a2",
+                "core": "Y"
+              },
+              "taxonomy": {
+                "name": "taxonomy",
+                "type": "string",
+                "title": "Taxonomy",
+                "description": "If this is an established taxonomy, a free text description of which taxonomy is in use. If possible, provide a URI.",
+                "constraints": {
+                  "unique": false
+                },
+                "example": "taxonomy",
+                "core": "Y"
+              },
+              "taxonomy_id": {
+                "name": "taxonomy_id",
+                "type": "string",
+                "title": "Taxonomy Identifier",
+                "description": "The identifier of the taxonomy containing the term.",
+                "format": "uuid",
+                "constraints": {
+                  "unique": false
+                },
+                "example": "07ff6aee-a219-438c-b694-d2fcb6c5373b"
+              },
+              "term_uri": {
+                "name": "term_uri",
+                "type": "string",
+                "title": "Term URI",
+                "description": "URI of the term.",
+                "format": "uri",
+                "constraints": {
+                  "unique": false
+                },
+                "example": "http://example.com"
+              },
+              "metadata": {
+                "name": "metadata",
+                "type": "array",
+                "title": "Metadata",
+                "description": "A record of the changes that have been made to the data in order to maintain provenance information.",
+                "items": {
+                  "name": "metadata",
+                  "path": "metadata.csv",
+                  "description": "A record of the changes that have been made to the data in order to maintain provenance information.",
+                  "datapackage_metadata": {
+                    "format": "csv",
+                    "mediatype": "text/csv",
+                    "profile": "tabular-data-resource",
+                    "order": 17
+                  },
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "name": "id",
+                      "type": "string",
+                      "title": "Identifier",
+                      "description": "The identifier for this metadata. Each entry must have a unique identifier.",
+                      "format": "uuid",
+                      "constraints": {
+                        "unique": true
+                      },
+                      "example": "6cd71e9f-1013-49d9-8370-26b8f59d3e5a"
+                    },
+                    "resource_id": {
+                      "name": "resource_id",
+                      "type": "string",
+                      "title": "Resource Identifier",
+                      "description": "The identifier of the resource (service, program, location, address, or contact) that this metadata describes.",
+                      "format": "uuid",
+                      "constraints": {
+                        "unique": false
+                      },
+                      "example": "38960354-e7d2-4cfa-a368-820f729d6ccf"
+                    },
+                    "resource_type": {
+                      "name": "resource_type",
+                      "type": "string",
+                      "title": "Resource Type",
+                      "description": "The type of entity being referenced.",
+                      "constraints": {
+                        "unique": false
+                      },
+                      "example": "location"
+                    },
+                    "last_action_date": {
+                      "name": "last_action_date",
+                      "type": "string",
+                      "title": "Last Action Date",
+                      "description": "The date when data was changed.",
+                      "constraints": {
+                        "unique": false
+                      },
+                      "example": "2011-01-01",
+                      "datapackage_type": "date"
+                    },
+                    "last_action_type": {
+                      "name": "last_action_type",
+                      "type": "string",
+                      "title": "Last Action Type",
+                      "description": "The kind of change made to the data.",
+                      "constraints": {
+                        "unique": false
+                      },
+                      "example": "update"
+                    },
+                    "field_name": {
+                      "name": "field_name",
+                      "type": "string",
+                      "title": "Field Name",
+                      "description": "The name of field that has been modified.",
+                      "constraints": {
+                        "unique": false
+                      },
+                      "example": "name"
+                    },
+                    "previous_value": {
+                      "name": "previous_value",
+                      "type": "string",
+                      "title": "Previous Value",
+                      "description": "The previous value of the field that has been modified.",
+                      "constraints": {
+                        "unique": false
+                      },
+                      "example": "MyCity Civic Center"
+                    },
+                    "replacement_value": {
+                      "name": "replacement_value",
+                      "type": "string",
+                      "title": "Replacement Value",
+                      "description": "The new value of the field that has been modified.",
+                      "constraints": {
+                        "unique": false
+                      },
+                      "example": "MyCity New Civic Center"
+                    },
+                    "updated_by": {
+                      "name": "updated_by",
+                      "type": "string",
+                      "title": "Updated By",
+                      "description": "The name of the person who modified the field.",
+                      "constraints": {
+                        "unique": false
+                      },
+                      "example": "Ann Persona"
+                    }
+                  },
+                  "required": [
+                    "id",
+                    "last_action_date",
+                    "last_action_type",
+                    "field_name",
+                    "previous_value",
+                    "replacement_value",
+                    "updated_by"
+                  ],
+                  "tabular_required": ["resource_id", "resource_type"],
+                  "$id": "http://localhost:3000/specifications/3.0/schema/metadata.json"
+                }
+              },
+              "term": {
+                "name": "term",
+                "type": "string",
+                "title": "Term",
+                "description": "The taxonomy term itself.",
+                "constraints": {
+                  "unique": false
+                },
+                "example": "name",
+                "core": "Y"
+              }
+            },
+            "required": ["id", "name", "description"],
+            "$id": "http://localhost:3000/specifications/3.0/schema/taxonomy_term.json",
+            "title": "Taxonomy Term"
+          },
+          "metadata": {
+            "name": "metadata",
+            "type": "array",
+            "title": "Metadata",
+            "description": "A record of the changes that have been made to the data in order to maintain provenance information.",
+            "items": {
+              "name": "metadata",
+              "path": "metadata.csv",
+              "description": "A record of the changes that have been made to the data in order to maintain provenance information.",
+              "datapackage_metadata": {
+                "format": "csv",
+                "mediatype": "text/csv",
+                "profile": "tabular-data-resource",
+                "order": 17
+              },
+              "type": "object",
+              "properties": {
+                "id": {
+                  "name": "id",
+                  "type": "string",
+                  "title": "Identifier",
+                  "description": "The identifier for this metadata. Each entry must have a unique identifier.",
+                  "format": "uuid",
+                  "constraints": {
+                    "unique": true
+                  },
+                  "example": "6cd71e9f-1013-49d9-8370-26b8f59d3e5a"
+                },
+                "resource_id": {
+                  "name": "resource_id",
+                  "type": "string",
+                  "title": "Resource Identifier",
+                  "description": "The identifier of the resource (service, program, location, address, or contact) that this metadata describes.",
+                  "format": "uuid",
+                  "constraints": {
+                    "unique": false
+                  },
+                  "example": "38960354-e7d2-4cfa-a368-820f729d6ccf"
+                },
+                "resource_type": {
+                  "name": "resource_type",
+                  "type": "string",
+                  "title": "Resource Type",
+                  "description": "The type of entity being referenced.",
+                  "constraints": {
+                    "unique": false
+                  },
+                  "example": "location"
+                },
+                "last_action_date": {
+                  "name": "last_action_date",
+                  "type": "string",
+                  "title": "Last Action Date",
+                  "description": "The date when data was changed.",
+                  "constraints": {
+                    "unique": false
+                  },
+                  "example": "2011-01-01",
+                  "datapackage_type": "date"
+                },
+                "last_action_type": {
+                  "name": "last_action_type",
+                  "type": "string",
+                  "title": "Last Action Type",
+                  "description": "The kind of change made to the data.",
+                  "constraints": {
+                    "unique": false
+                  },
+                  "example": "update"
+                },
+                "field_name": {
+                  "name": "field_name",
+                  "type": "string",
+                  "title": "Field Name",
+                  "description": "The name of field that has been modified.",
+                  "constraints": {
+                    "unique": false
+                  },
+                  "example": "name"
+                },
+                "previous_value": {
+                  "name": "previous_value",
+                  "type": "string",
+                  "title": "Previous Value",
+                  "description": "The previous value of the field that has been modified.",
+                  "constraints": {
+                    "unique": false
+                  },
+                  "example": "MyCity Civic Center"
+                },
+                "replacement_value": {
+                  "name": "replacement_value",
+                  "type": "string",
+                  "title": "Replacement Value",
+                  "description": "The new value of the field that has been modified.",
+                  "constraints": {
+                    "unique": false
+                  },
+                  "example": "MyCity New Civic Center"
+                },
+                "updated_by": {
+                  "name": "updated_by",
+                  "type": "string",
+                  "title": "Updated By",
+                  "description": "The name of the person who modified the field.",
+                  "constraints": {
+                    "unique": false
+                  },
+                  "example": "Ann Persona"
+                }
+              },
+              "required": [
+                "id",
+                "last_action_date",
+                "last_action_type",
+                "field_name",
+                "previous_value",
+                "replacement_value",
+                "updated_by"
+              ],
+              "tabular_required": ["resource_id", "resource_type"],
+              "$id": "http://localhost:3000/specifications/3.0/schema/metadata.json"
+            }
+          },
+          "label": {
+            "name": "label",
+            "type": "string",
+            "title": "Label",
+            "description": "A free text label of the attribute.",
+            "constraints": {
+              "unique": false
+            },
+            "example": "An Example Label"
+          }
+        },
+        "required": ["id"],
+        "tabular_required": ["link_id", "taxonomy_term_id", "link_entity"],
+        "$id": "http://localhost:3000/specifications/3.0/schema/attribute.json"
+      }
+    },
+    "metadata": {
+      "name": "metadata",
+      "type": "array",
+      "title": "Metadata",
+      "description": "A record of the changes that have been made to the data in order to maintain provenance information.",
+      "items": {
+        "name": "metadata",
+        "path": "metadata.csv",
+        "description": "A record of the changes that have been made to the data in order to maintain provenance information.",
+        "datapackage_metadata": {
+          "format": "csv",
+          "mediatype": "text/csv",
+          "profile": "tabular-data-resource",
+          "order": 17
+        },
+        "type": "object",
+        "properties": {
+          "id": {
+            "name": "id",
+            "type": "string",
+            "title": "Identifier",
+            "description": "The identifier for this metadata. Each entry must have a unique identifier.",
+            "format": "uuid",
+            "constraints": {
+              "unique": true
+            },
+            "example": "6cd71e9f-1013-49d9-8370-26b8f59d3e5a"
+          },
+          "resource_id": {
+            "name": "resource_id",
+            "type": "string",
+            "title": "Resource Identifier",
+            "description": "The identifier of the resource (service, program, location, address, or contact) that this metadata describes.",
+            "format": "uuid",
+            "constraints": {
+              "unique": false
+            },
+            "example": "38960354-e7d2-4cfa-a368-820f729d6ccf"
+          },
+          "resource_type": {
+            "name": "resource_type",
+            "type": "string",
+            "title": "Resource Type",
+            "description": "The type of entity being referenced.",
+            "constraints": {
+              "unique": false
+            },
+            "example": "location"
+          },
+          "last_action_date": {
+            "name": "last_action_date",
+            "type": "string",
+            "title": "Last Action Date",
+            "description": "The date when data was changed.",
+            "constraints": {
+              "unique": false
+            },
+            "example": "2011-01-01",
+            "datapackage_type": "date"
+          },
+          "last_action_type": {
+            "name": "last_action_type",
+            "type": "string",
+            "title": "Last Action Type",
+            "description": "The kind of change made to the data.",
+            "constraints": {
+              "unique": false
+            },
+            "example": "update"
+          },
+          "field_name": {
+            "name": "field_name",
+            "type": "string",
+            "title": "Field Name",
+            "description": "The name of field that has been modified.",
+            "constraints": {
+              "unique": false
+            },
+            "example": "name"
+          },
+          "previous_value": {
+            "name": "previous_value",
+            "type": "string",
+            "title": "Previous Value",
+            "description": "The previous value of the field that has been modified.",
+            "constraints": {
+              "unique": false
+            },
+            "example": "MyCity Civic Center"
+          },
+          "replacement_value": {
+            "name": "replacement_value",
+            "type": "string",
+            "title": "Replacement Value",
+            "description": "The new value of the field that has been modified.",
+            "constraints": {
+              "unique": false
+            },
+            "example": "MyCity New Civic Center"
+          },
+          "updated_by": {
+            "name": "updated_by",
+            "type": "string",
+            "title": "Updated By",
+            "description": "The name of the person who modified the field.",
+            "constraints": {
+              "unique": false
+            },
+            "example": "Ann Persona"
+          }
+        },
+        "required": [
+          "id",
+          "last_action_date",
+          "last_action_type",
+          "field_name",
+          "previous_value",
+          "replacement_value",
+          "updated_by"
+        ],
+        "tabular_required": ["resource_id", "resource_type"],
+        "$id": "http://localhost:3000/specifications/3.0/schema/metadata.json"
+      }
+    }
+  },
+  "required": ["id", "name", "description"],
+  "$id": "http://localhost:3000/specifications/3.0/schema/compiled/organization.json"
+}
