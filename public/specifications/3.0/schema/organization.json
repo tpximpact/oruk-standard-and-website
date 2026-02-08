@@ -59,14 +59,23 @@
     "website": {
       "name": "website",
       "type": "string",
+      "format": "uri",
       "title": "Website",
       "description": "The URL (website address) of the organization.",
-      "format": "uri",
       "constraints": {
         "unique": false
       },
       "example": "http://example.com",
       "core": "Y"
+    },
+    "additional_websites": {
+      "name": "additional_websites",
+      "title": "Additional Websites",
+      "description": "The details of additional websites for the organization.",
+      "type": "array",
+      "items": {
+        "$ref": "url.json"
+      }
     },
     "logo": {
       "name": "logo",
@@ -100,13 +109,22 @@
       },
       "example": "cd09a387-91f4-4555-94ec-e799c35344cd"
     },
+    "programs": {
+      "name": "programs",
+      "type": "array",
+      "title": "Programs",
+      "description": "The details of collection of related services.",
+      "items": {
+        "$ref": "program.json"
+      }
+    },
     "organization_identifiers": {
       "name": "organization_identifiers",
       "type": "array",
       "title": "Organization Identifiers",
       "description": "The details of the third party identifiers for organizations, such as: company registration number, charity number, tax registration number.",
       "items": {
-        "$ref": "https://openreferraluk.org/specifications/3.0/schema/organization_identifier.json"
+        "$ref": "organization_identifier.json"
       }
     },
     "attributes": {
@@ -115,9 +133,19 @@
       "title": "Attributes",
       "description": "A link between a service and one or more classifications that describe the nature of the service provided.",
       "items": {
-        "$ref": "https://openreferraluk.org/specifications/3.0/schema/attribute.json"
+        "$ref": "attribute.json"
+      }
+    },
+    "metadata": {
+      "name": "metadata",
+      "type": "array",
+      "title": "Metadata",
+      "description": "A record of the changes that have been made to the data in order to maintain provenance information.",
+      "items": {
+        "$ref": "metadata.json"
       }
     }
   },
-  "required": ["id", "name", "description"]
+  "required": ["id", "name", "description"],
+  "$id": "https://openreferraluk.org/specifications/3.0/schema/organization.json"
 }

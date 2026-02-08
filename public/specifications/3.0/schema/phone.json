@@ -61,9 +61,19 @@
       "title": "Languages",
       "description": "The details of the languages that are spoken at locations or services. This does not include languages which can only be used with interpretation.",
       "items": {
-        "$ref": "https://openreferraluk.org/specifications/3.0/schema/language.json"
+        "$ref": "language.json"
+      }
+    },
+    "metadata": {
+      "name": "metadata",
+      "type": "array",
+      "title": "Metadata",
+      "description": "A record of the changes that have been made to the data in order to maintain provenance information.",
+      "items": {
+        "$ref": "metadata.json"
       }
     }
   },
-  "required": ["id", "number"]
+  "required": ["id", "number"],
+  "$id": "https://openreferraluk.org/specifications/3.0/schema/phone.json"
 }

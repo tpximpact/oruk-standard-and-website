@@ -46,13 +46,32 @@
       "example": "3a19ff88-4620-4d17-9830-ac1d859eb5d5",
       "core": "Y"
     },
+    "service_areas": {
+      "name": "service_areas",
+      "type": "array",
+      "title": "Service Areas",
+      "description": "The details of the geographic area for which a service is available.",
+      "items": {
+        "$ref": "service_area.json"
+      }
+    },
     "location": {
       "name": "location",
       "title": "Location",
       "description": "The details of the locations where organizations operate. Locations may be virtual, and one organization may have many locations.",
-      "$ref": "https://openreferraluk.org/specifications/3.0/schema/location.json"
+      "$ref": "location.json"
+    },
+    "metadata": {
+      "name": "metadata",
+      "type": "array",
+      "title": "Metadata",
+      "description": "A record of the changes that have been made to the data in order to maintain provenance information.",
+      "items": {
+        "$ref": "metadata.json"
+      }
     }
   },
   "required": ["id"],
-  "tabular_required": ["service_id", "location_id"]
+  "tabular_required": ["service_id", "location_id"],
+  "$id": "https://openreferraluk.org/specifications/3.0/schema/service_at_location.json"
 }

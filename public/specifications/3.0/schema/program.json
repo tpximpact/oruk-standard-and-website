@@ -1,12 +1,12 @@
 {
-  "name": "organization_identifier",
-  "path": "organization_identifiers.csv",
-  "description": "The details of the third party identifiers for organizations, such as: company registration number, charity number, tax registration number.",
+  "name": "program",
+  "path": "programs.csv",
+  "description": "The details of collections of related services.",
   "datapackage_metadata": {
     "format": "csv",
     "mediatype": "text/csv",
     "profile": "tabular-data-resource",
-    "order": 20
+    "order": 2
   },
   "type": "object",
   "properties": {
@@ -14,53 +14,53 @@
       "name": "id",
       "type": "string",
       "title": "Identifier",
-      "description": "The identifier for this organization identifier entry. Each entry must have a unique identifier.",
+      "description": "The identifier for the program. Each program must have a unique identifier.",
       "format": "uuid",
       "constraints": {
         "unique": true
       },
-      "example": "d4dbcebc-0802-47cb-8651-b937ac4f2f3e"
+      "example": "e7ec2e57-4540-43fa-b2c7-6be5a0ef7f42"
     },
     "organization_id": {
       "name": "organization_id",
       "type": "string",
       "title": "Organization Identifier",
-      "description": "The identifier of the organization. This should match the uuid of an organization object.",
+      "description": "The identifier for the organization which the program belongs to. Each program must belong to a single organization, and the identifier for that organization should be given here.",
       "format": "uuid",
       "constraints": {
-        "unique": false
+        "unique": true
       },
       "example": "d9d5e0f5-d3ce-4f73-9a2f-4dd0ecc6c610"
     },
-    "identifier_scheme": {
-      "name": "identifier_scheme",
+    "name": {
+      "name": "name",
       "type": "string",
-      "title": "Identifier Scheme",
-      "description": "The scheme of the third party identifier, according to http://org-id.guide/.",
+      "title": "Name",
+      "description": "The name of the program.",
       "constraints": {
         "unique": false
       },
-      "example": "GB-COH"
+      "example": "Community Mental Health Support"
     },
-    "identifier_type": {
-      "name": "identifier_type",
+    "alternate_name": {
+      "name": "alternate_name",
       "type": "string",
-      "title": "Identifier Type",
-      "description": "A human-readable equivalent of the identifier_scheme. This may be used in cases where org-id.guide does not list an appropriate identifier scheme.",
+      "title": "Alternate Name",
+      "description": "The (optional) alternative name for the program.",
       "constraints": {
         "unique": false
       },
-      "example": "Company number"
+      "example": "MyCity Mental Health Group"
     },
-    "identifier": {
-      "name": "identifier",
+    "description": {
+      "name": "description",
       "type": "string",
-      "title": "Third Party Identifier",
-      "description": "The third-party identifier value.",
+      "title": "Description",
+      "description": "A free text description of the program",
       "constraints": {
         "unique": false
       },
-      "example": "1234567"
+      "example": "Comprehensive Mental Health Services available to residents of MyCity including CBT and Counselling. This is not an emergency service and should not be used as an alternative to hospital and GP services."
     },
     "attributes": {
       "name": "attributes",
@@ -81,7 +81,7 @@
       }
     }
   },
-  "required": ["id", "identifier_type", "identifier"],
+  "required": ["id", "name", "description"],
   "tabular_required": ["organization_id"],
-  "$id": "https://openreferraluk.org/specifications/3.0/schema/organization_identifier.json"
+  "$id": "https://openreferraluk.org/specifications/3.0/schema/program.json"
 }

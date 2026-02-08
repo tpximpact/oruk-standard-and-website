@@ -115,7 +115,7 @@
       "name": "address_type",
       "type": "string",
       "title": "Address Type",
-      "description": "The type of address which may be physical, postal, or virtual.",
+      "description": "The type of address which may be `physical`, `postal`, or `virtual`.",
       "constraints": {
         "unique": false
       },
@@ -129,7 +129,16 @@
       "title": "Attributes",
       "description": "A link between a service and one or more classifications that describe the nature of the service provided.",
       "items": {
-        "$ref": "https://openreferraluk.org/specifications/3.0/schema/attribute.json"
+        "$ref": "attribute.json"
+      }
+    },
+    "metadata": {
+      "name": "metadata",
+      "type": "array",
+      "title": "Metadata",
+      "description": "A record of the changes that have been made to the data in order to maintain provenance information.",
+      "items": {
+        "$ref": "metadata.json"
       }
     }
   },
@@ -141,5 +150,6 @@
     "postal_code",
     "country",
     "address_type"
-  ]
+  ],
+  "$id": "https://openreferraluk.org/specifications/3.0/schema/address.json"
 }

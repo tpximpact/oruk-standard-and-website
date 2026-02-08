@@ -41,7 +41,17 @@
         "unique": false
       },
       "example": "This service is funded partially by the MyCity local government and via grants made by charity funding bodies. We also operate a for-profit department which is used to partially cover the expense of the public service"
+    },
+    "metadata": {
+      "name": "metadata",
+      "type": "array",
+      "title": "Metadata",
+      "description": "A record of the changes that have been made to the data in order to maintain provenance information.",
+      "items": {
+        "$ref": "metadata.json"
+      }
     }
   },
-  "required": ["id"]
+  "required": ["id"],
+  "$id": "https://openreferraluk.org/specifications/3.0/schema/funding.json"
 }

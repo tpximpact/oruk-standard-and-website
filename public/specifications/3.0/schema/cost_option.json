@@ -83,8 +83,18 @@
         "unique": false
       },
       "example": "per 1 hour session"
+    },
+    "metadata": {
+      "name": "metadata",
+      "type": "array",
+      "title": "Metadata",
+      "description": "A record of the changes that have been made to the data in order to maintain provenance information.",
+      "items": {
+        "$ref": "metadata.json"
+      }
     }
   },
   "required": ["id"],
-  "tabular_required": ["service_id"]
+  "tabular_required": ["service_id"],
+  "$id": "https://openreferraluk.org/specifications/3.0/schema/cost_option.json"
 }

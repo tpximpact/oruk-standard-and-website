@@ -1,12 +1,12 @@
 {
-  "name": "contact",
-  "path": "contacts.csv",
-  "description": "The details of the named contacts for services and organizations.",
+  "name": "required_document",
+  "path": "required_documents.csv",
+  "description": "The details of any documents that are required in order to access or use services.",
   "datapackage_metadata": {
     "format": "csv",
     "mediatype": "text/csv",
     "profile": "tabular-data-resource",
-    "order": 8
+    "order": 13
   },
   "type": "object",
   "properties": {
@@ -14,47 +14,44 @@
       "name": "id",
       "type": "string",
       "title": "Identifier",
-      "description": "The identifier for the contact. Each contact must have a unique identifier.",
+      "description": "The identifier for the document. Each document must have a unique identifier.",
       "format": "uuid",
       "constraints": {
         "unique": true
       },
-      "example": "1e7efce3-639b-4880-940c-b95cd30cdb50",
-      "core": "Y"
+      "example": "f6ad7e69-b9c8-42ce-92db-92cedb4c05c0"
     },
     "service_id": {
       "name": "service_id",
       "type": "string",
       "title": "Service Identifier",
-      "description": "The identifier of the service for which this is a contact.",
+      "description": "The identifier of the service for which this entry describes the required document.",
       "format": "uuid",
       "constraints": {
         "unique": false
       },
-      "example": "ac148810-d857-441c-9679-408f346de14b",
-      "core": "Y"
+      "example": "ac148810-d857-441c-9679-408f346de14b"
     },
-    "name": {
-      "name": "name",
+    "document": {
+      "name": "document",
       "type": "string",
-      "title": "Name",
-      "description": "The name of the contact.",
+      "title": "Document",
+      "description": "A free text description of the document required to apply for or receive the service.",
       "constraints": {
         "unique": false
       },
-      "example": "Ann Persona",
-      "core": "Y"
+      "example": "Any official identification document (Passport, Driver's Licence, identity card) and evidence of address such as an official letter from local or national government. A driver's license which shows your name, photograph, and address can be used as a sole identification document."
     },
-    "title": {
-      "name": "title",
+    "uri": {
+      "name": "uri",
       "type": "string",
-      "title": "Title",
-      "description": "The job title of the contact.",
+      "title": "URI",
+      "description": "A web link to the document.",
+      "format": "uri",
       "constraints": {
         "unique": false
       },
-      "example": "Reception Manager",
-      "core": "Y"
+      "example": "http://example.com"
     },
     "attributes": {
       "name": "attributes",
@@ -76,5 +73,5 @@
     }
   },
   "required": ["id"],
-  "$id": "https://openreferraluk.org/specifications/3.0/schema/contact.json"
+  "$id": "https://openreferraluk.org/specifications/3.0/schema/required_document.json"
 }

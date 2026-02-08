@@ -86,7 +86,7 @@
       "name": "freq",
       "type": "string",
       "title": "Frequency",
-      "description": "iCal - How often the frequency repeats.",
+      "description": "iCal - How often the frequency repeats. Values can be `WEEKLY` or `MONTHLY`",
       "constraints": {
         "unique": false
       },
@@ -192,7 +192,17 @@
         "unique": false
       },
       "example": "Some of our staff will be unavailable during their lunch break which may be any 30 minute period between 1200 and 1400"
+    },
+    "metadata": {
+      "name": "metadata",
+      "type": "array",
+      "title": "Metadata",
+      "description": "A record of the changes that have been made to the data in order to maintain provenance information.",
+      "items": {
+        "$ref": "metadata.json"
+      }
     }
   },
-  "required": ["id"]
+  "required": ["id"],
+  "$id": "https://openreferraluk.org/specifications/3.0/schema/schedule.json"
 }
