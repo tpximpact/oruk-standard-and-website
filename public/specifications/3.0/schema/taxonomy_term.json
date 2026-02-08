@@ -88,15 +88,6 @@
       },
       "example": "http://example.com"
     },
-    "metadata": {
-      "name": "metadata",
-      "type": "array",
-      "title": "Metadata",
-      "description": "A record of the changes that have been made to the data in order to maintain provenance information.",
-      "items": {
-        "$ref": "metadata.json"
-      }
-    },
     "term": {
       "name": "term",
       "type": "string",
@@ -109,6 +100,5 @@
       "core": "Y"
     }
   },
-  "required": ["id", "name", "description"],
-  "$id": "https://openreferraluk.org/specifications/3.0/schema/taxonomy_term.json"
+  "required": ["id", "name", "description"]
 }

@@ -34,18 +34,6 @@
       "example": "ac148810-d857-441c-9679-408f346de14b",
       "core": "Y"
     },
-    "service_at_location_id": {
-      "name": "service_at_location_id",
-      "type": "string",
-      "title": "Service At Location Identifier",
-      "description": "The identifier of the service at location object linked to this object.",
-      "format": "uuid",
-      "constraints": {
-        "unique": false
-      },
-      "example": "e94c9f38-1e8f-4564-91d4-d53501ab1765",
-      "core": "Y"
-    },
     "name": {
       "name": "name",
       "type": "string",
@@ -87,15 +75,6 @@
       },
       "example": "http://example.com"
     },
-    "metadata": {
-      "name": "metadata",
-      "type": "array",
-      "title": "Metadata",
-      "description": "A record of the changes that have been made to the data in order to maintain provenance information.",
-      "items": {
-        "$ref": "metadata.json"
-      }
-    },
     "service_area": {
       "name": "service_area",
       "type": "string",
@@ -108,6 +87,5 @@
       "core": "Y"
     }
   },
-  "required": ["id"],
-  "$id": "https://openreferraluk.org/specifications/3.0/schema/service_area.json"
+  "required": ["id"]
 }

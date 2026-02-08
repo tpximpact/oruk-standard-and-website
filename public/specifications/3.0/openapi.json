@@ -36,7 +36,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "https://openreferraluk.org/specifications/3.0/schemata/api_details.json"
+                  "$ref": "https://openreferraluk.org/specifications/3.0/schema/api_details.json"
                 }
               }
             }
@@ -68,7 +68,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "https://openreferraluk.org/specifications/3.0/schemata/service.json"
+                  "$ref": "https://openreferraluk.org/specifications/3.0/schema/service.json"
                 }
               }
             }
@@ -127,7 +127,7 @@
                     "contents": {
                       "type": "array",
                       "items": {
-                        "$ref": "https://openreferraluk.org/specifications/3.0/schemata/service_list.json"
+                        "$ref": "https://openreferraluk.org/specifications/3.0/schema/service_list.json"
                       }
                     }
                   },
@@ -169,7 +169,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "https://openreferraluk.org/specifications/3.0/schemata/taxonomy.json"
+                  "$ref": "https://openreferraluk.org/specifications/3.0/schema/taxonomy.json"
                 }
               }
             }
@@ -209,7 +209,7 @@
                     "contents": {
                       "type": "array",
                       "items": {
-                        "$ref": "https://openreferraluk.org/specifications/3.0/schemata/taxonomy_list.json"
+                        "$ref": "https://openreferraluk.org/specifications/3.0/schema/taxonomy_list.json"
                       }
                     }
                   },
@@ -251,7 +251,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "https://openreferraluk.org/specifications/3.0/schemata/taxonomy_term.json"
+                  "$ref": "https://openreferraluk.org/specifications/3.0/schema/taxonomy_term.json"
                 }
               }
             }
@@ -308,7 +308,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "https://openreferraluk.org/specifications/3.0/schemata/taxonomy_term_list.json"
+                  "$ref": "https://openreferraluk.org/specifications/3.0/schema/taxonomy_term_list.json"
                 }
               }
             }
@@ -345,7 +345,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "https://openreferraluk.org/specifications/3.0/schemata/organization.json"
+                  "$ref": "https://openreferraluk.org/specifications/3.0/schema/organization.json"
                 }
               }
             }
@@ -387,7 +387,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "https://openreferraluk.org/specifications/3.0/schemata/organization_list.json"
+                  "$ref": "https://openreferraluk.org/specifications/3.0/schema/organization_list.json"
                 }
               }
             }
@@ -420,7 +420,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "https://openreferraluk.org/specifications/3.0/schemata/service_at_location.json"
+                  "$ref": "https://openreferraluk.org/specifications/3.0/schema/service_at_location.json"
                 }
               }
             }
@@ -478,7 +478,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "https://openreferraluk.org/specifications/3.0/schemata/service_at_location_list.json"
+                  "$ref": "https://openreferraluk.org/specifications/3.0/schema/service_at_location_list.json"
                 }
               }
             }

@@ -26,7 +26,7 @@
       "name": "location_type",
       "type": "string",
       "title": "Location Type",
-      "description": "The type of location, which may be either `physical`, `postal`, or `virtual`.",
+      "description": "The type of location, which may be either physical, postal, or virtual.",
       "constraints": {
         "unique": false
       },
@@ -104,7 +104,7 @@
       "title": "Addresses",
       "description": "The addresses of locations where organizations operate.",
       "items": {
-        "$ref": "https://openreferraluk.org/specifications/3.0/schemata/address.json"
+        "$ref": "https://openreferraluk.org/specifications/3.0/schema/address.json"
       }
     },
     "accessibility": {
@@ -113,7 +113,7 @@
       "title": "Accessibility",
       "description": "The details of the arrangements for access to locations for people who have disabilities",
       "items": {
-        "$ref": "https://openreferraluk.org/specifications/3.0/schemata/accessibility.json"
+        "$ref": "https://openreferraluk.org/specifications/3.0/schema/accessibility.json"
       }
     },
     "attributes": {
@@ -122,19 +122,9 @@
       "title": "Attributes",
       "description": "A link between a service and one or more classifications that describe the nature of the service provided.",
       "items": {
-        "$ref": "https://openreferraluk.org/specifications/3.0/schemata/attribute.json"
-      }
-    },
-    "metadata": {
-      "name": "metadata",
-      "type": "array",
-      "title": "Metadata",
-      "description": "The metadata table contains a record of the changes that have been made to the data in order to maintain provenance information.",
-      "items": {
-        "$ref": "metadata.json"
+        "$ref": "https://openreferraluk.org/specifications/3.0/schema/attribute.json"
       }
     }
   },
-  "required": ["id", "location_type"],
-  "$id": "https://openreferraluk.org/specifications/3.0/schema/location.json"
+  "required": ["id", "location_type"]
 }
