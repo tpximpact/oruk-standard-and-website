@@ -106,7 +106,7 @@
       "title": "Organization Identifiers",
       "description": "The details of the third party identifiers for organizations, such as: company registration number, charity number, tax registration number.",
       "items": {
-        "$ref": "https://staging.openreferraluk.org/specifications/3.0/schema/organization_identifier.json"
+        "$ref": "https://openreferraluk.org/specifications/3.0/schema/organization_identifier.json"
       }
     },
     "attributes": {
@@ -115,7 +115,7 @@
       "title": "Attributes",
       "description": "A link between a service and one or more classifications that describe the nature of the service provided.",
       "items": {
-        "$ref": "https://staging.openreferraluk.org/specifications/3.0/schema/attribute.json"
+        "$ref": "https://openreferraluk.org/specifications/3.0/schema/attribute.json"
       }
     }
   },
