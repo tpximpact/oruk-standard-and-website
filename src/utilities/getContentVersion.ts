@@ -7,7 +7,6 @@ import { basename } from 'path'
 import fs from 'fs'
 import { unNestSchemata } from './unNestSchemata'
 import { SchemaResolver } from './SchemaResolver'
-import { SchemaResolver } from './SchemaResolver'
 
 interface ContentVersionOptions {
   contentFolder: string
