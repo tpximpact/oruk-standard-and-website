@@ -68,7 +68,7 @@
       "title": "Taxonomy Terms",
       "description": "A link between a taxonomy and one or more taxonomy terms.",
       "items": {
-        "$ref": "https://openreferraluk.org/specifications/3.0/schemata/taxonomy_term.json"
+        "$ref": "https://openreferraluk.org/specifications/3.0/schema/taxonomy_term.json"
       }
     }
   },

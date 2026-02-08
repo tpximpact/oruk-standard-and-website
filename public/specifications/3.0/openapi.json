@@ -29,13 +29,14 @@
         "description": "Retrieve information about this API and its relationship with HSDS.",
         "summary": "Does the base endpoint return meta information about the API, and does it adhere to the schema",
         "operationId": "getAPIMetaInformation",
+        "tags": ["required"],
         "responses": {
           "200": {
             "description": "A JSON response providing information about this API.",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "https://openreferraluk.org/specifications/3.0/schemata/api_details.json"
+                  "$ref": "https://openreferraluk.org/specifications/3.0/schema/api_details.json"
                 }
               }
             }
@@ -60,13 +61,14 @@
         "description": "Retrieve fully nested service with all related data with id.",
         "summary": "Does the service by id endpoint return a fully nested service in the correct schema",
         "operationId": "getFullyNestedServiceById",
+        "tags": ["required"],
         "responses": {
           "200": {
             "description": "A Service matching the {id}, with all related data according to the HSDS Specification for Service.",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "https://openreferraluk.org/specifications/3.0/schemata/service.json"
+                  "$ref": "https://openreferraluk.org/specifications/3.0/schema/service.json"
                 }
               }
             }
@@ -80,6 +82,7 @@
         "description": "Retrieves paginated listings of services that only have one-to-one fields in them.",
         "summary": "Does the services list endpoint return a paginated list of services in the correct schema",
         "operationId": "getPaginatedListOfServices",
+        "tags": ["required"],
         "parameters": [
           {
             "$ref": "#/components/parameters/search"
@@ -124,7 +127,7 @@
                     "contents": {
                       "type": "array",
                       "items": {
-                        "$ref": "https://openreferraluk.org/specifications/3.0/schemata/service_list.json"
+                        "$ref": "https://openreferraluk.org/specifications/3.0/schema/service_list.json"
                       }
                     }
                   },
@@ -154,18 +157,18 @@
         }
       ],
       "get": {
-        "tags": ["Optional"],
         "name": "Taxonomy by id - API & schema validation",
         "description": "Full information on taxonomy.",
         "summary": "Retrieves full information on a taxonomy by {id}.",
         "operationId": "getTaxonomyById",
+        "tags": ["optional"],
         "responses": {
           "200": {
             "description": "Full information on taxonomy.",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "https://openreferraluk.org/specifications/3.0/schemata/taxonomy.json"
+                  "$ref": "https://openreferraluk.org/specifications/3.0/schema/taxonomy.json"
                 }
               }
             }
@@ -175,11 +178,11 @@
     },
     "/taxonomies": {
       "get": {
-        "tags": ["Optional"],
         "name": "Taxonomies list - API & schema validation",
         "description": "Paginated listing of taxonomies.",
         "summary": "Does the taxonomies list endpoint return a paginated list of taxonomies in the correct schema",
         "operationId": "getPaginatedListOfTaxonomies",
+        "tags": ["optional"],
         "parameters": [
           {
             "$ref": "#/components/parameters/search"
@@ -204,7 +207,7 @@
                     "contents": {
                       "type": "array",
                       "items": {
-                        "$ref": "https://openreferraluk.org/specifications/3.0/schemata/taxonomy_list.json"
+                        "$ref": "https://openreferraluk.org/specifications/3.0/schema/taxonomy_list.json"
                       }
                     }
                   },
@@ -234,18 +237,18 @@
         }
       ],
       "get": {
-        "tags": ["Optional"],
         "name": "Taxonomy term by id - API & schema validation",
         "description": "Full information on a taxonomy term.",
         "summary": "Full information on a taxonomy term.",
         "operationId": "getPaginatedListOfTaxonomyTerms",
+        "tags": ["optional"],
         "responses": {
           "200": {
             "description": "Full information on a taxonomy term.",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "https://openreferraluk.org/specifications/3.0/schemata/taxonomy_term.json"
+                  "$ref": "https://openreferraluk.org/specifications/3.0/schema/taxonomy_term.json"
                 }
               }
             }
@@ -255,11 +258,11 @@
     },
     "/taxonomy_terms": {
       "get": {
-        "tags": ["Optional"],
         "name": "Taxonomy terms list - API & schema validation",
         "description": "Paginated listing of taxonomy terms",
         "summary": "Does the taxonomy terms list endpoint return a paginated list of taxonomy terms in the correct schema",
         "operationId": "getTaxonomyTermById",
+        "tags": ["optional"],
         "parameters": [
           {
             "$ref": "#/components/parameters/search"
@@ -301,7 +304,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "https://openreferraluk.org/specifications/3.0/schemata/taxonomy_term_list.json"
+                  "$ref": "https://openreferraluk.org/specifications/3.0/schema/taxonomy_term_list.json"
                 }
               }
             }
@@ -338,7 +341,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "https://openreferraluk.org/specifications/3.0/schemata/organization.json"
+                  "$ref": "https://openreferraluk.org/specifications/3.0/schema/organization.json"
                 }
               }
             }
@@ -380,7 +383,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "https://openreferraluk.org/specifications/3.0/schemata/organization_list.json"
+                  "$ref": "https://openreferraluk.org/specifications/3.0/schema/organization_list.json"
                 }
               }
             }
@@ -401,18 +404,18 @@
         }
       ],
       "get": {
-        "tags": ["Optional"],
         "name": "Service at location by id - API & schema validation",
         "description": "Retrieve fully nested service_at_location with all related data with specified id.",
         "summary": "Does the service at location by id endpoint return a fully nested service at location in the correct schema",
         "operationId": "getServiceAtLocationWithNestedDataById",
+        "tags": ["optional"],
         "responses": {
           "200": {
             "description": "Retrieve fully nested service_at_location with all related data with specified id.",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "https://openreferraluk.org/specifications/3.0/schemata/service_at_location.json"
+                  "$ref": "https://openreferraluk.org/specifications/3.0/schema/service_at_location.json"
                 }
               }
             }
@@ -422,11 +425,11 @@
     },
     "/service_at_locations": {
       "get": {
-        "tags": ["Optional"],
         "name": "Service at locations list - API & schema validation",
         "description": "Retrieve paginated listings of service_at_location that only have one-to-one fields in them.",
         "summary": "Does the service at locations list endpoint return a paginated list of service at locations in the correct schema",
         "operationId": "getPaginatedListOfServiceAtLocation",
+        "tags": ["optional"],
         "parameters": [
           {
             "$ref": "#/components/parameters/search"
@@ -469,7 +472,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "https://openreferraluk.org/specifications/3.0/schemata/service_at_location_list.json"
+                  "$ref": "https://openreferraluk.org/specifications/3.0/schema/service_at_location_list.json"
                 }
               }
             }
@@ -485,7 +488,7 @@
         "properties": {
           "total_items": {
             "type": "integer",
-            "description": "Count of total results."
+            "description": "The total number of entities (e.g. services, organizations) returned"
           },
           "total_pages": {
             "type": "integer",
@@ -493,25 +496,26 @@
           },
           "page_number": {
             "type": "integer",
-            "description": "Current page number."
+            "description": "The number of the current page"
           },
           "size": {
             "type": "integer",
-            "description": "Size of current page."
+            "description": "The number of entities in the current page."
           },
           "first_page": {
             "type": "boolean",
-            "description": "Is this page the first page."
+            "description": "A Boolean value indicating if this is the first page"
           },
           "last_page": {
             "type": "boolean",
-            "description": "Is this page the last page."
+            "description": "A Boolean value indicating if this is the last page"
           },
           "empty": {
             "type": "boolean",
-            "description": "Is this page empty."
+            "description": "A Boolean value indicating if there is an empty result set"
           }
-        }
+        },
+        "required": ["empty"]
       }
     },
     "parameters": {
@@ -574,7 +578,7 @@
         "name": "taxonomy_term_id",
         "in": "query",
         "required": false,
-        "description": "Search for services with particular taxonomy_term.",
+        "description": "Search for records with particular taxonomy_term.",
         "schema": {
           "type": "string"
         }
@@ -583,7 +587,7 @@
         "name": "taxonomy_id",
         "in": "query",
         "required": false,
-        "description": "Search for services which contain any term with this taxonomy.",
+        "description": "Search for records which contain any term with this taxonomy.",
         "schema": {
           "type": "string"
         }
