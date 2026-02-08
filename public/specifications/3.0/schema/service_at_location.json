@@ -59,16 +59,7 @@
       "name": "location",
       "title": "Location",
       "description": "The details of the locations where organizations operate. Locations may be virtual, and one organization may have many locations.",
-      "$ref": "location.json"
-    },
-    "metadata": {
-      "name": "metadata",
-      "type": "array",
-      "title": "Metadata",
-      "description": "A record of the changes that have been made to the data in order to maintain provenance information.",
-      "items": {
-        "$ref": "metadata.json"
-      }
+      "$ref": "https://openreferraluk.org/specifications/3.0/schemata/location.json"
     }
   },
   "required": ["id"],

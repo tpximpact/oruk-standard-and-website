@@ -1,18 +1,18 @@
 {
-  "openapi": "3.0.0",
+  "openapi": "3.0",
   "info": {
-    "title": "Open Referral UK Profile",
+    "title": "REQUIRED -- TITLE OF YOUR API HERE",
     "version": "HSDS-UK-3.0",
     "summary": "SUMMARY HERE",
-    "description": "Open Referral UK Profile for Version 3",
+    "description": "DESCRIPTION HERE",
     "contact": {
       "name": "YOUR CONTACT NAME HERE",
       "url": "YOUR CONTACT URL HERE",
       "email": "YOUR CONTACT EMAIL HERE"
     },
     "license": {
-      "name": "Creative Commons Attribution Share-Alike 4.0 license",
-      "url": "https://creativecommons.org/licenses/by/4.0/"
+      "name": "REQUIRED -- THE LICENSE OF YOUR API",
+      "url": "Url to the license used; mutually exclusive to the identifier field if used."
     }
   },
   "jsonSchemaDialect": "https://json-schema.org/draft/2020-12/schema",
@@ -29,14 +29,13 @@
         "description": "Retrieve information about this API and its relationship with HSDS.",
         "summary": "Does the base endpoint return meta information about the API, and does it adhere to the schema",
         "operationId": "getAPIMetaInformation",
-        "tags": ["required"],
         "responses": {
           "200": {
             "description": "A JSON response providing information about this API.",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "https://openreferraluk.org/specifications/3.0/schemata/api_details.json"
+                  "$ref": "https://raw.githubusercontent.com/tpximpact/OpenReferralApi/refs/heads/main/OpenReferralApi/Schemas/V3.0-UK/api_details.json"
                 }
               }
             }
@@ -61,14 +60,13 @@
         "description": "Retrieve fully nested service with all related data with id.",
         "summary": "Does the service by id endpoint return a fully nested service in the correct schema",
         "operationId": "getFullyNestedServiceById",
-        "tags": ["required"],
         "responses": {
           "200": {
             "description": "A Service matching the {id}, with all related data according to the HSDS Specification for Service.",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "https://openreferraluk.org/specifications/3.0/schemata/service.json"
+                  "$ref": "https://raw.githubusercontent.com/tpximpact/OpenReferralApi/refs/heads/main/OpenReferralApi/Schemas/V3.0-UK/service.json"
                 }
               }
             }
@@ -82,7 +80,6 @@
         "description": "Retrieves paginated listings of services that only have one-to-one fields in them.",
         "summary": "Does the services list endpoint return a paginated list of services in the correct schema",
         "operationId": "getPaginatedListOfServices",
-        "tags": ["required"],
         "parameters": [
           {
             "$ref": "#/components/parameters/search"
@@ -127,7 +124,7 @@
                     "contents": {
                       "type": "array",
                       "items": {
-                        "$ref": "https://openreferraluk.org/specifications/3.0/schemata/service_list.json"
+                        "$ref": "https://raw.githubusercontent.com/tpximpact/OpenReferralApi/refs/heads/main/OpenReferralApi/Schemas/V3.0-UK/service_list.json"
                       }
                     }
                   },
@@ -162,14 +159,13 @@
         "description": "Full information on taxonomy.",
         "summary": "Retrieves full information on a taxonomy by {id}.",
         "operationId": "getTaxonomyById",
-        "tags": ["optional"],
         "responses": {
           "200": {
             "description": "Full information on taxonomy.",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "https://openreferraluk.org/specifications/3.0/schemata/taxonomy.json"
+                  "$ref": "https://raw.githubusercontent.com/tpximpact/OpenReferralApi/refs/heads/main/OpenReferralApi/Schemas/V3.0-UK/taxonomy.json"
                 }
               }
             }
@@ -184,7 +180,6 @@
         "description": "Paginated listing of taxonomies.",
         "summary": "Does the taxonomies list endpoint return a paginated list of taxonomies in the correct schema",
         "operationId": "getPaginatedListOfTaxonomies",
-        "tags": ["optional"],
         "parameters": [
           {
             "$ref": "#/components/parameters/search"
@@ -209,7 +204,7 @@
                     "contents": {
                       "type": "array",
                       "items": {
-                        "$ref": "https://openreferraluk.org/specifications/3.0/schemata/taxonomy_list.json"
+                        "$ref": "https://raw.githubusercontent.com/tpximpact/OpenReferralApi/refs/heads/main/OpenReferralApi/Schemas/V3.0-UK/taxonomy_list.json"
                       }
                     }
                   },
@@ -244,14 +239,13 @@
         "description": "Full information on a taxonomy term.",
         "summary": "Full information on a taxonomy term.",
         "operationId": "getPaginatedListOfTaxonomyTerms",
-        "tags": ["optional"],
         "responses": {
           "200": {
             "description": "Full information on a taxonomy term.",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "https://openreferraluk.org/specifications/3.0/schemata/taxonomy_term.json"
+                  "$ref": "https://raw.githubusercontent.com/tpximpact/OpenReferralApi/refs/heads/main/OpenReferralApi/Schemas/V3.0-UK/taxonomy_term.json"
                 }
               }
             }
@@ -266,7 +260,6 @@
         "description": "Paginated listing of taxonomy terms",
         "summary": "Does the taxonomy terms list endpoint return a paginated list of taxonomy terms in the correct schema",
         "operationId": "getTaxonomyTermById",
-        "tags": ["optional"],
         "parameters": [
           {
             "$ref": "#/components/parameters/search"
@@ -308,7 +301,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "https://openreferraluk.org/specifications/3.0/schemata/taxonomy_term_list.json"
+                  "$ref": "https://raw.githubusercontent.com/tpximpact/OpenReferralApi/refs/heads/main/OpenReferralApi/Schemas/V3.0-UK/taxonomy_term_list.json"
                 }
               }
             }
@@ -345,7 +338,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "https://openreferraluk.org/specifications/3.0/schemata/organization.json"
+                  "$ref": "https://raw.githubusercontent.com/tpximpact/OpenReferralApi/refs/heads/main/OpenReferralApi/Schemas/V3.0-UK/organization.json"
                 }
               }
             }
@@ -387,7 +380,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "https://openreferraluk.org/specifications/3.0/schemata/organization_list.json"
+                  "$ref": "https://raw.githubusercontent.com/tpximpact/OpenReferralApi/refs/heads/main/OpenReferralApi/Schemas/V3.0-UK/organization_list.json"
                 }
               }
             }
@@ -413,14 +406,13 @@
         "description": "Retrieve fully nested service_at_location with all related data with specified id.",
         "summary": "Does the service at location by id endpoint return a fully nested service at location in the correct schema",
         "operationId": "getServiceAtLocationWithNestedDataById",
-        "tags": ["optional"],
         "responses": {
           "200": {
             "description": "Retrieve fully nested service_at_location with all related data with specified id.",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "https://openreferraluk.org/specifications/3.0/schemata/service_at_location.json"
+                  "$ref": "https://raw.githubusercontent.com/tpximpact/OpenReferralApi/refs/heads/main/OpenReferralApi/Schemas/V3.0-UK/service_at_location.json"
                 }
               }
             }
@@ -435,7 +427,6 @@
         "description": "Retrieve paginated listings of service_at_location that only have one-to-one fields in them.",
         "summary": "Does the service at locations list endpoint return a paginated list of service at locations in the correct schema",
         "operationId": "getPaginatedListOfServiceAtLocation",
-        "tags": ["optional"],
         "parameters": [
           {
             "$ref": "#/components/parameters/search"
@@ -478,7 +469,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "https://openreferraluk.org/specifications/3.0/schemata/service_at_location_list.json"
+                  "$ref": "https://raw.githubusercontent.com/tpximpact/OpenReferralApi/refs/heads/main/OpenReferralApi/Schemas/V3.0-UK/service_at_location_list.json"
                 }
               }
             }
@@ -494,7 +485,7 @@
         "properties": {
           "total_items": {
             "type": "integer",
-            "description": "The total number of entities (e.g. services, organizations) returned"
+            "description": "Count of total results."
           },
           "total_pages": {
             "type": "integer",
@@ -502,26 +493,25 @@
           },
           "page_number": {
             "type": "integer",
-            "description": "The number of the current page"
+            "description": "Current page number."
           },
           "size": {
             "type": "integer",
-            "description": "The number of entities in the current page."
+            "description": "Size of current page."
           },
           "first_page": {
             "type": "boolean",
-            "description": "A Boolean value indicating if this is the first page"
+            "description": "Is this page the first page."
           },
           "last_page": {
             "type": "boolean",
-            "description": "A Boolean value indicating if this is the last page"
+            "description": "Is this page the last page."
           },
           "empty": {
             "type": "boolean",
-            "description": "A Boolean value indicating if there is an empty result set"
+            "description": "Is this page empty."
           }
-        },
-        "required": ["empty"]
+        }
       }
     },
     "parameters": {
@@ -584,7 +574,7 @@
         "name": "taxonomy_term_id",
         "in": "query",
         "required": false,
-        "description": "Search for records with particular taxonomy_term.",
+        "description": "Search for services with particular taxonomy_term.",
         "schema": {
           "type": "string"
         }
@@ -593,7 +583,7 @@
         "name": "taxonomy_id",
         "in": "query",
         "required": false,
-        "description": "Search for records which contain any term with this taxonomy.",
+        "description": "Search for services which contain any term with this taxonomy.",
         "schema": {
           "type": "string"
         }
