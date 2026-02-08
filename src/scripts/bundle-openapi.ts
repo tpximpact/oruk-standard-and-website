@@ -31,8 +31,8 @@ class OpenAPIBundler {
     // - ./schemata/service.json
     // - service.json
 
-    if (refUrl.includes('/schemata/')) {
-      const match = refUrl.match(/\/schemata\/([^/]+\.json)/)
+    if (refUrl.includes('/schema/')) {
+      const match = refUrl.match(/\/schema\/([^/]+\.json)/)
       return match?.[1] ?? null
     }
 
@@ -151,10 +151,10 @@ function findSpecificationVersions(): string[] {
     if (entry.isDirectory()) {
       const versionDir = path.join(specificationsDir, entry.name)
       const openApiPath = path.join(versionDir, 'openapi.json')
-      const schemataDir = path.join(versionDir, 'schemata')
+      const schemaDir = path.join(versionDir, 'schema')
 
       // Check if this version has both openapi.json and schemata/ folder
-      if (fs.existsSync(openApiPath) && fs.existsSync(schemataDir)) {
+      if (fs.existsSync(openApiPath) && fs.existsSync(schemaDir)) {
         versions.push(entry.name)
       }
     }
@@ -170,7 +170,7 @@ function bundleAllVersions() {
 
   if (versions.length === 0) {
     console.error('❌ No valid specification versions found!')
-    console.error('   Each version must have both openapi.json and schemata/ folder')
+    console.error('   Each version must have both openapi.json and schema/ folder')
     process.exit(1)
   }
 
@@ -181,7 +181,7 @@ function bundleAllVersions() {
     console.log('━'.repeat(50))
 
     const versionDir = path.join(process.cwd(), 'public/specifications', version)
-    const schemaDir = path.join(versionDir, 'schemata')
+    const schemaDir = path.join(versionDir, 'schema')
     const openApiPath = path.join(versionDir, 'openapi.json')
     const outputPath = path.join(versionDir, 'openapi.bundled.json')
 

@@ -207,7 +207,7 @@ describe('SchemaResolver', () => {
     const patterns = [
       'https://openreferraluk.org/specifications/3.0/schema/attribute.json',
       'http://localhost:3000/specifications/3.0/schema/attribute.json',
-      './schemata/attribute.json',
+      './schema/attribute.json',
       'attribute.json'
     ]
 
