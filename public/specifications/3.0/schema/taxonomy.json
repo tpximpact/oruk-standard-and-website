@@ -62,25 +62,15 @@
       },
       "example": "version"
     },
-    "metadata": {
-      "name": "metadata",
-      "type": "array",
-      "title": "Metadata",
-      "description": "A record of the changes that have been made to the data in order to maintain provenance information.",
-      "items": {
-        "$ref": "metadata.json"
-      }
-    },
     "taxonomy_terms": {
       "name": "taxonomy_terms",
       "type": "array",
       "title": "Taxonomy Terms",
       "description": "A link between a taxonomy and one or more taxonomy terms.",
       "items": {
-        "$ref": "taxonomy_term.json"
+        "$ref": "https://openreferraluk.org/specifications/3.0/schema/taxonomy_term.json"
       }
     }
   },
-  "required": ["id", "name", "description"],
-  "$id": "http://localhost:3000/specifications/3.0/schema/taxonomy.json"
+  "required": ["id", "name", "description"]
 }

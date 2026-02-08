@@ -44,7 +44,7 @@ export const getContentVersion = ({
     const rootSpecParsed = JSON.parse(rootSpecRaw)
 
     // Resolve all external schema references at runtime
-    const schemaDir = join(process.cwd(), specificationFolderPath, 'schemata')
+    const schemaDir = join(process.cwd(), specificationFolderPath, 'schema')
     const resolver = new SchemaResolver(schemaDir)
     const rootSpecResolved = resolver.resolve(rootSpecParsed)
 
@@ -53,7 +53,7 @@ export const getContentVersion = ({
     schemata = unNestSchemata(schemata) // some schemata - ie v1.0 has nested properties :-(
 
     // load schemata from file system
-    const schemaFolder = join(specificationFolderPath, 'schemata')
+    const schemaFolder = join(specificationFolderPath, 'schema')
     const fullPath = join(process.cwd(), schemaFolder)
     try {
       if (fs.statSync(fullPath).isDirectory()) {

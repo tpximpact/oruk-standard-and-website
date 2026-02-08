@@ -26,8 +26,8 @@ class OpenAPIBundler {
 
   private extractSchemaFileName(refUrl: string): string | null {
     // Handle various URL patterns:
-    // - https://openreferraluk.org/specifications/3.0/schemata/service.json
-    // - http://localhost:3000/specifications/3.0/schemata/service.json
+    // - https://openreferraluk.org/specifications/3.0/schema/service.json
+    // - http://localhost:3000/specifications/3.0/schema/service.json
     // - ./schemata/service.json
     // - service.json
 

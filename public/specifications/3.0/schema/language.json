@@ -44,17 +44,7 @@
         "unique": false
       },
       "example": "1554f2e2-a373-45db-a3fa-9fc48a61c15e"
-    },
-    "metadata": {
-      "name": "metadata",
-      "type": "array",
-      "title": "Metadata",
-      "description": "A record of the changes that have been made to the data in order to maintain provenance information.",
-      "items": {
-        "$ref": "metadata.json"
-      }
     }
   },
-  "required": ["id"],
-  "$id": "http://localhost:3000/specifications/3.0/schema/language.json"
+  "required": ["id"]
 }

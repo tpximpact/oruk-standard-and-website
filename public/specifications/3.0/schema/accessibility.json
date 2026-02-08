@@ -72,16 +72,7 @@
       "title": "Attributes",
       "description": "A link between a service and one or more classifications that describe the nature of the service provided.",
       "items": {
-        "$ref": "attribute.json"
-      }
-    },
-    "metadata": {
-      "name": "metadata",
-      "type": "array",
-      "title": "Metadata",
-      "description": "A record of the changes that have been made to the data in order to maintain provenance information.",
-      "items": {
-        "$ref": "metadata.json"
+        "$ref": "https://openreferraluk.org/specifications/3.0/schema/attribute.json"
       }
     },
     "accessibility": {
@@ -96,6 +87,5 @@
       "core": "Y"
     }
   },
-  "required": ["id"],
-  "$id": "http://localhost:3000/specifications/3.0/schema/accessibility.json"
+  "required": ["id"]
 }
