@@ -36,7 +36,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "https://openreferraluk.org/specifications/3.0/schema/api_details.json"
+                  "$ref": "https://staging.openreferraluk.org/specifications/3.0/schema/api_details.json"
                 }
               }
             }
@@ -68,7 +68,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "https://openreferraluk.org/specifications/3.0/schema/service.json"
+                  "$ref": "https://staging.openreferraluk.org/specifications/3.0/schema/service.json"
                 }
               }
             }
@@ -127,7 +127,7 @@
                     "contents": {
                       "type": "array",
                       "items": {
-                        "$ref": "https://openreferraluk.org/specifications/3.0/schema/service_list.json"
+                        "$ref": "https://staging.openreferraluk.org/specifications/3.0/schema/service_list.json"
                       }
                     }
                   },
@@ -168,7 +168,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "https://openreferraluk.org/specifications/3.0/schema/taxonomy.json"
+                  "$ref": "https://staging.openreferraluk.org/specifications/3.0/schema/taxonomy.json"
                 }
               }
             }
@@ -207,7 +207,7 @@
                     "contents": {
                       "type": "array",
                       "items": {
-                        "$ref": "https://openreferraluk.org/specifications/3.0/schema/taxonomy_list.json"
+                        "$ref": "https://staging.openreferraluk.org/specifications/3.0/schema/taxonomy_list.json"
                       }
                     }
                   },
@@ -248,7 +248,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "https://openreferraluk.org/specifications/3.0/schema/taxonomy_term.json"
+                  "$ref": "https://staging.openreferraluk.org/specifications/3.0/schema/taxonomy_term.json"
                 }
               }
             }
@@ -304,7 +304,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "https://openreferraluk.org/specifications/3.0/schema/taxonomy_term_list.json"
+                  "$ref": "https://staging.openreferraluk.org/specifications/3.0/schema/taxonomy_term_list.json"
                 }
               }
             }
@@ -341,7 +341,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "https://openreferraluk.org/specifications/3.0/schema/organization.json"
+                  "$ref": "https://staging.openreferraluk.org/specifications/3.0/schema/organization.json"
                 }
               }
             }
@@ -383,7 +383,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "https://openreferraluk.org/specifications/3.0/schema/organization_list.json"
+                  "$ref": "https://staging.openreferraluk.org/specifications/3.0/schema/organization_list.json"
                 }
               }
             }
@@ -415,7 +415,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "https://openreferraluk.org/specifications/3.0/schema/service_at_location.json"
+                  "$ref": "https://staging.openreferraluk.org/specifications/3.0/schema/service_at_location.json"
                 }
               }
             }
@@ -472,7 +472,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "https://openreferraluk.org/specifications/3.0/schema/service_at_location_list.json"
+                  "$ref": "https://staging.openreferraluk.org/specifications/3.0/schema/service_at_location_list.json"
                 }
               }
             }

@@ -50,7 +50,7 @@
       "name": "location",
       "title": "Location",
       "description": "The details of the locations where organizations operate. Locations may be virtual, and one organization may have many locations.",
-      "$ref": "https://openreferraluk.org/specifications/3.0/schema/location.json"
+      "$ref": "https://staging.openreferraluk.org/specifications/3.0/schema/location.json"
     }
   },
   "required": ["id"],
