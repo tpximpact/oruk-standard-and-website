@@ -246,9 +246,6 @@ Copy `.env.example` to `.env.local` and configure the following:
 **External Service Endpoints:**
 
 - `OPENAPI_VALIDATOR_ENDPOINT` - OpenAPI validator service endpoint
-- `VALIDATOR_ENDPOINT` - ORUK feed validator service endpoint
-- `REGISTER_ENDPOINT` - Service registration endpoint
-- `DASHBOARD_DETAILS_ENDPOINT` - Dashboard data service endpoint
 
 **GitHub Integration (for service registration):**
 

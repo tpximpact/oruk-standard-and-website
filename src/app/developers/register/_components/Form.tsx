@@ -2,7 +2,7 @@
 
 import styles from './Register.module.css'
 import { useActionState } from 'react'
-import { createMessage } from '@/app/actions'
+import { createMessage } from '@/actions/service-actions'
 import { SubmitButton } from './SubmitButton'
 import { EMPTY_FORM_STATE } from '@/utilities/to-form-state'
 import { useToastMessage } from '@/hooks/use-toast-message'

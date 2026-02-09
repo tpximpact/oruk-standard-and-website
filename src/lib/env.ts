@@ -15,9 +15,6 @@ const envSchema = z.object({
     .string()
     .url('OPENAPI_VALIDATOR_ENDPOINT must be a valid URL')
     .optional(),
-  VALIDATOR_ENDPOINT: z.string().optional(),
-  REGISTER_ENDPOINT: z.string().optional(),
-  DASHBOARD_DETAILS_ENDPOINT: z.string().optional(),
 
   // Feature Flags
   USE_COOKIES: z.string().optional().default('true'),
