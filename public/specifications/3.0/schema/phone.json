@@ -1,0 +1,69 @@
+{
+  "name": "phone",
+  "path": "phones.csv",
+  "description": "The details of the telephone numbers used to contact organizations, services, and locations.",
+  "datapackage_metadata": {
+    "format": "csv",
+    "mediatype": "text/csv",
+    "profile": "tabular-data-resource",
+    "order": 7
+  },
+  "type": "object",
+  "properties": {
+    "id": {
+      "name": "id",
+      "type": "string",
+      "title": "Identifier",
+      "description": "The identifier for the phone number. Each entry must have a unique identifier.",
+      "format": "uuid",
+      "constraints": {
+        "unique": true
+      },
+      "example": "1554f2e2-a373-45db-a3fa-9fc48a61c15e",
+      "core": "Y"
+    },
+    "contact_id": {
+      "name": "contact_id",
+      "type": "string",
+      "title": "Contact Identifier",
+      "description": "The identifier of the contact for which this is the phone number.",
+      "format": "uuid",
+      "constraints": {
+        "unique": false
+      },
+      "example": "1e7efce3-639b-4880-940c-b95cd30cdb50",
+      "core": "Y"
+    },
+    "number": {
+      "name": "number",
+      "type": "string",
+      "title": "Number",
+      "description": "The phone number.",
+      "constraints": {
+        "unique": false
+      },
+      "example": "\"+44 1234 234567\"",
+      "core": "Y"
+    },
+    "description": {
+      "name": "description",
+      "type": "string",
+      "title": "Description",
+      "description": "A free text description providing extra information about the phone service",
+      "constraints": {
+        "unique": false
+      },
+      "example": "Our main reception phone number. The phones will be available from 0800 (8am) until 1800 (6pm) local time. There may be some slight delays in answering your call if we are busy."
+    },
+    "languages": {
+      "name": "languages",
+      "type": "array",
+      "title": "Languages",
+      "description": "The details of the languages that are spoken at locations or services. This does not include languages which can only be used with interpretation.",
+      "items": {
+        "$ref": "https://openreferraluk.org/specifications/3.0/schema/language.json"
+      }
+    }
+  },
+  "required": ["id", "number"]
+}

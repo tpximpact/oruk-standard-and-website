@@ -1,0 +1,58 @@
+{
+  "name": "service_at_location",
+  "path": "service_at_location.csv",
+  "description": "A link between a service and a specific location.",
+  "datapackage_metadata": {
+    "format": "csv",
+    "mediatype": "text/csv",
+    "profile": "tabular-data-resource",
+    "order": 5
+  },
+  "type": "object",
+  "properties": {
+    "id": {
+      "name": "id",
+      "type": "string",
+      "title": "Identifier",
+      "description": "The identifier of the service at location entry. Each entry must have a unique identifier.",
+      "format": "uuid",
+      "constraints": {
+        "unique": true
+      },
+      "example": "e94c9f38-1e8f-4564-91d4-d53501ab1765",
+      "core": "Y"
+    },
+    "service_id": {
+      "name": "service_id",
+      "type": "string",
+      "title": "Service Identifier",
+      "description": "The identifier of the service at a given location.",
+      "format": "uuid",
+      "constraints": {
+        "unique": false
+      },
+      "example": "ac148810-d857-441c-9679-408f346de14b",
+      "core": "Y"
+    },
+    "location_id": {
+      "name": "location_id",
+      "type": "string",
+      "title": "Location Identifier",
+      "description": "The identifier of the location where this service operates.",
+      "format": "uuid",
+      "constraints": {
+        "unique": false
+      },
+      "example": "3a19ff88-4620-4d17-9830-ac1d859eb5d5",
+      "core": "Y"
+    },
+    "location": {
+      "name": "location",
+      "title": "Location",
+      "description": "The details of the locations where organizations operate. Locations may be virtual, and one organization may have many locations.",
+      "$ref": "https://openreferraluk.org/specifications/3.0/schema/location.json"
+    }
+  },
+  "required": ["id"],
+  "tabular_required": ["service_id", "location_id"]
+}

@@ -1,0 +1,130 @@
+{
+  "name": "location",
+  "path": "locations.csv",
+  "description": "The locations where organizations operate. Locations may be virtual, and one organization may have many locations.",
+  "datapackage_metadata": {
+    "format": "csv",
+    "mediatype": "text/csv",
+    "profile": "tabular-data-resource",
+    "order": 6
+  },
+  "type": "object",
+  "properties": {
+    "id": {
+      "name": "id",
+      "type": "string",
+      "title": "Identifier",
+      "description": "The identifier of the location. Each location must have a unique identifier.",
+      "format": "uuid",
+      "constraints": {
+        "unique": true
+      },
+      "example": "3a19ff88-4620-4d17-9830-ac1d859eb5d5",
+      "core": "Y"
+    },
+    "location_type": {
+      "name": "location_type",
+      "type": "string",
+      "title": "Location Type",
+      "description": "The type of location, which may be either physical, postal, or virtual.",
+      "constraints": {
+        "unique": false
+      },
+      "example": "physical",
+      "core": "Y",
+      "enum": ["physical", "postal", "virtual"]
+    },
+    "name": {
+      "name": "name",
+      "type": "string",
+      "title": "Name",
+      "description": "The name of the location.",
+      "constraints": {
+        "unique": false
+      },
+      "example": "MyCity Civic Center",
+      "core": "Y"
+    },
+    "description": {
+      "name": "description",
+      "type": "string",
+      "title": "Description",
+      "description": "A free text description of the location.",
+      "constraints": {
+        "unique": false
+      },
+      "example": "MyCity Civic Center is located on Main Street and contains facilities for a number of civic and community services available.",
+      "core": "Y"
+    },
+    "latitude": {
+      "name": "latitude",
+      "type": "number",
+      "title": "Latitude",
+      "description": "The latitude of the location expressed in decimal degrees in WGS84 datum.",
+      "constraints": {
+        "unique": false
+      },
+      "example": "100",
+      "core": "Y"
+    },
+    "longitude": {
+      "name": "longitude",
+      "type": "number",
+      "title": "Longitude",
+      "description": "The longitude of the location expressed in decimal degrees in WGS84 datum.",
+      "constraints": {
+        "unique": false
+      },
+      "example": "101",
+      "core": "Y"
+    },
+    "external_identifier": {
+      "name": "external_identifier",
+      "type": "string",
+      "title": "External Identifier",
+      "description": "A third party identifier for the location, which can be drawn from other services e.g. UK UPRN.",
+      "constraints": {
+        "unique": false
+      },
+      "example": "10092008082"
+    },
+    "external_identifier_type": {
+      "name": "external_identifier_type",
+      "type": "string",
+      "title": "External Identifier Type",
+      "description": "The scheme used for the location's external_identifier e.g. UK UPRN.",
+      "constraints": {
+        "unique": false
+      },
+      "example": "UPRN"
+    },
+    "addresses": {
+      "name": "addresses",
+      "type": "array",
+      "title": "Addresses",
+      "description": "The addresses of locations where organizations operate.",
+      "items": {
+        "$ref": "https://openreferraluk.org/specifications/3.0/schema/address.json"
+      }
+    },
+    "accessibility": {
+      "name": "accessibility",
+      "type": "array",
+      "title": "Accessibility",
+      "description": "The details of the arrangements for access to locations for people who have disabilities",
+      "items": {
+        "$ref": "https://openreferraluk.org/specifications/3.0/schema/accessibility.json"
+      }
+    },
+    "attributes": {
+      "name": "attributes",
+      "type": "array",
+      "title": "Attributes",
+      "description": "A link between a service and one or more classifications that describe the nature of the service provided.",
+      "items": {
+        "$ref": "https://openreferraluk.org/specifications/3.0/schema/attribute.json"
+      }
+    }
+  },
+  "required": ["id", "location_type"]
+}

@@ -4,14 +4,14 @@ import path from 'path'
 
 describe('SchemaResolver', () => {
   it('should resolve external schema references', () => {
-    const schemaDir = path.join(process.cwd(), 'public/specifications/3.0/schemata')
+    const schemaDir = path.join(process.cwd(), 'public/specifications/3.0/schema')
     const resolver = new SchemaResolver(schemaDir)
 
     const testSchema = {
       type: 'object',
       properties: {
         service: {
-          $ref: 'https://openreferraluk.org/specifications/3.0/schemata/service.json'
+          $ref: 'https://openreferraluk.org/specifications/3.0/schema/service.json'
         }
       }
     }
@@ -27,11 +27,11 @@ describe('SchemaResolver', () => {
   })
 
   it('should handle nested schema references', () => {
-    const schemaDir = path.join(process.cwd(), 'public/specifications/3.0/schemata')
+    const schemaDir = path.join(process.cwd(), 'public/specifications/3.0/schema')
     const resolver = new SchemaResolver(schemaDir)
 
     const testSchema = {
-      $ref: 'https://openreferraluk.org/specifications/3.0/schemata/service.json'
+      $ref: 'https://openreferraluk.org/specifications/3.0/schema/service.json'
     }
 
     const resolved = resolver.resolve(testSchema)
@@ -50,7 +50,7 @@ describe('SchemaResolver', () => {
   })
 
   it('should preserve internal references', () => {
-    const schemaDir = path.join(process.cwd(), 'public/specifications/3.0/schemata')
+    const schemaDir = path.join(process.cwd(), 'public/specifications/3.0/schema')
     const resolver = new SchemaResolver(schemaDir)
 
     const testSchema = {
@@ -60,7 +60,7 @@ describe('SchemaResolver', () => {
           $ref: '#/components/schemas/SomeSchema'
         },
         externalRef: {
-          $ref: 'https://openreferraluk.org/specifications/3.0/schemata/attribute.json'
+          $ref: 'https://openreferraluk.org/specifications/3.0/schema/attribute.json'
         }
       }
     }
@@ -75,7 +75,7 @@ describe('SchemaResolver', () => {
     expect(resolved.properties.externalRef.name).toBe('attribute')
   })
   it('should resolve internal JSON pointer references', () => {
-    const schemaDir = path.join(process.cwd(), 'public/specifications/3.0/schemata')
+    const schemaDir = path.join(process.cwd(), 'public/specifications/3.0/schema')
     const resolver = new SchemaResolver(schemaDir)
 
     const testSchema = {
@@ -129,7 +129,7 @@ describe('SchemaResolver', () => {
   })
 
   it('should resolve mixed internal and external references', () => {
-    const schemaDir = path.join(process.cwd(), 'public/specifications/3.0/schemata')
+    const schemaDir = path.join(process.cwd(), 'public/specifications/3.0/schema')
     const resolver = new SchemaResolver(schemaDir)
 
     const testSchema = {
@@ -139,7 +139,7 @@ describe('SchemaResolver', () => {
             type: 'object',
             properties: {
               attribute: {
-                $ref: 'https://openreferraluk.org/specifications/3.0/schemata/attribute.json'
+                $ref: 'https://openreferraluk.org/specifications/3.0/schema/attribute.json'
               }
             }
           }
@@ -171,7 +171,7 @@ describe('SchemaResolver', () => {
   })
 
   it('should handle circular internal references', () => {
-    const schemaDir = path.join(process.cwd(), 'public/specifications/3.0/schemata')
+    const schemaDir = path.join(process.cwd(), 'public/specifications/3.0/schema')
     const resolver = new SchemaResolver(schemaDir)
 
     const testSchema = {
@@ -201,13 +201,13 @@ describe('SchemaResolver', () => {
     )
   })
   it('should handle multiple URL patterns', () => {
-    const schemaDir = path.join(process.cwd(), 'public/specifications/3.0/schemata')
+    const schemaDir = path.join(process.cwd(), 'public/specifications/3.0/schema')
     const resolver = new SchemaResolver(schemaDir)
 
     const patterns = [
-      'https://openreferraluk.org/specifications/3.0/schemata/attribute.json',
-      'http://localhost:3000/specifications/3.0/schemata/attribute.json',
-      './schemata/attribute.json',
+      'https://openreferraluk.org/specifications/3.0/schema/attribute.json',
+      'http://localhost:3000/specifications/3.0/schema/attribute.json',
+      './schema/attribute.json',
       'attribute.json'
     ]
 

@@ -1,0 +1,70 @@
+{
+  "name": "contact",
+  "path": "contacts.csv",
+  "description": "The details of the named contacts for services and organizations.",
+  "datapackage_metadata": {
+    "format": "csv",
+    "mediatype": "text/csv",
+    "profile": "tabular-data-resource",
+    "order": 8
+  },
+  "type": "object",
+  "properties": {
+    "id": {
+      "name": "id",
+      "type": "string",
+      "title": "Identifier",
+      "description": "The identifier for the contact. Each contact must have a unique identifier.",
+      "format": "uuid",
+      "constraints": {
+        "unique": true
+      },
+      "example": "1e7efce3-639b-4880-940c-b95cd30cdb50",
+      "core": "Y"
+    },
+    "service_id": {
+      "name": "service_id",
+      "type": "string",
+      "title": "Service Identifier",
+      "description": "The identifier of the service for which this is a contact.",
+      "format": "uuid",
+      "constraints": {
+        "unique": false
+      },
+      "example": "ac148810-d857-441c-9679-408f346de14b",
+      "core": "Y"
+    },
+    "name": {
+      "name": "name",
+      "type": "string",
+      "title": "Name",
+      "description": "The name of the contact.",
+      "constraints": {
+        "unique": false
+      },
+      "example": "Ann Persona",
+      "core": "Y"
+    },
+    "title": {
+      "name": "title",
+      "type": "string",
+      "title": "Title",
+      "description": "The job title of the contact.",
+      "constraints": {
+        "unique": false
+      },
+      "example": "Reception Manager",
+      "core": "Y"
+    },
+    "attributes": {
+      "name": "attributes",
+      "type": "array",
+      "title": "Attributes",
+      "description": "A link between a service and one or more classifications that describe the nature of the service provided.",
+      "items": {
+        "$ref": "https://openreferraluk.org/specifications/3.0/schema/attribute.json"
+      }
+    }
+  },
+  "required": ["id"]
+}
