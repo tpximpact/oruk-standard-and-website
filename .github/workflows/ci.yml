@@ -125,8 +125,8 @@ jobs:
       - name: Install dependencies
         run: yarn install --frozen-lockfile
 
-      - name: Install Playwright browsers
-        uses: microsoft/playwright-github-action@v1.5.7 # Official action recommended
+      - name: Install Playwright Browsers
+        run: npx playwright install --with-deps chromium
 
       - name: Run accessibility tests
         run: yarn e2e src/e2e/accessibility.spec.ts
