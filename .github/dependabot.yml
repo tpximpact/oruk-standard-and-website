@@ -1,12 +1,95 @@
 version: 2
+
 updates:
-  - package-ecosystem: npm
+  # ── Yarn / npm (Next.js app) ─────────────────────────────────────────────────
+  - package-ecosystem: 'npm' # Correct for Yarn — updates yarn.lock
+    directory: '/' # Root (package.json + yarn.lock)
+    schedule:
+      interval: 'weekly'
+      day: 'monday'
+      time: '03:00' # Predictable time → fewer rebases
+      timezone: 'Etc/UTC'
+    open-pull-requests-limit: 12 # Slightly higher is fine with groups
+    labels:
+      - 'dependencies'
+      - 'yarn' # Easier filtering than generic "npm"
+    commit-message:
+      prefix: 'chore'
+      prefix-development: 'chore(dev)' # Distinguishes dev vs prod commits
+      include: 'scope'
+    groups:
+      nextjs-and-react-core: # High-risk → review majors manually
+        patterns:
+          - 'next'
+          - 'react'
+          - 'react-dom'
+          - '@types/react'
+          - '@types/react-dom'
+        update-types:
+          - 'patch'
+          - 'minor' # Exclude majors (Next.js breaking changes)
+
+      markdown-and-parsing: # Your markdown → HTML flow
+        patterns:
+          - 'marked'
+          - 'gray-matter'
+          - 'html-react-parser'
+
+      github-integration: # Octokit / Vercel / auth
+        patterns:
+          - '@octokit/*'
+          - 'octokit'
+          - '@vercel/analytics'
+
+      ui-and-utils: # Smaller utils & UI
+        patterns:
+          - 'react-hot-toast'
+          - 'react-icons'
+          - 'react-cookie*'
+          - 'react-cookie-consent'
+          - 'zod'
+          - 'uuid'
+          - '@microlink/react-json-view'
+          - 'color-interpolate'
+
+      dev-and-testing: # Vitest, Playwright, linting
+        dependency-type: 'development'
+        patterns:
+          - 'vitest*'
+          - '@vitest/*'
+          - '@playwright/test'
+          - '@axe-core/playwright'
+          - '@testing-library/*'
+          - 'typescript'
+          - '@types/*'
+          - 'eslint*'
+          - 'eslint-config-next'
+          - 'prettier'
+          - 'husky'
+          - 'lint-staged'
+          - 'jsdom'
+          - 'tsx'
+          - 'ts-node'
+          - 'dotenv'
+
+      other-deps: # Catch-all fallback
+        patterns:
+          - '*'
+
+  # Recommended addition: GitHub Actions (you likely have workflows)
+  - package-ecosystem: 'github-actions'
     directory: '/'
     schedule:
-      interval: weekly
-    open-pull-requests-limit: 10
+      interval: 'weekly'
+      day: 'monday'
+      time: '03:00'
+      timezone: 'Etc/UTC'
+    labels:
+      - 'dependencies'
+      - 'github-actions'
+    commit-message:
+      prefix: 'ci'
     groups:
-      production-dependencies:
-        dependency-type: production
-      development-dependencies:
-        dependency-type: development
+      actions:
+        patterns:
+          - '*' # Usually 1 small PR
