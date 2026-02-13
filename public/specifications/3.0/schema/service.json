@@ -213,9 +213,6 @@
       }
     },
     "organization": {
-      "name": "organization",
-      "title": "Organization",
-      "description": "The details about each organization delivering services. Each service should be linked to the organization responsible for its delivery. One organization may deliver many services.",
       "$ref": "https://openreferraluk.org/specifications/3.0/schema/organization.json"
     },
     "funding": {
