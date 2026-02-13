@@ -126,5 +126,6 @@
       }
     }
   },
-  "required": ["id", "location_type"]
+  "required": ["id", "location_type"],
+  "title": "Location"
 }

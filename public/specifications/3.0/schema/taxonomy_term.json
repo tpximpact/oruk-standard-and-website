@@ -2,6 +2,7 @@
   "name": "taxonomy_term",
   "path": "taxonomy_terms.csv",
   "description": "Each service can be categorized according to one or more taxonomy terms. The taxonomy_term object contains a list of taxonomy terms, their names, and, for hierarchical taxonomies, their structure.",
+  "title": "Taxonomy Term",
   "datapackage_metadata": {
     "format": "csv",
     "mediatype": "text/csv",

@@ -17,13 +17,21 @@
             "name": "id",
             "in": "path",
             "required": true,
-            "schema": { "type": "string" }
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
           "500": {
             "description": "Internal Server Error",
-            "content": { "*/*": { "schema": { "type": "object" } } }
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
           },
           "200": {
             "description": "OK",
@@ -49,19 +57,29 @@
             "name": "id",
             "in": "path",
             "required": true,
-            "schema": { "type": "string" }
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
           "500": {
             "description": "Internal Server Error",
-            "content": { "*/*": { "schema": { "type": "object" } } }
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
           },
           "200": {
             "description": "OK",
             "content": {
               "application/json": {
-                "schema": { "$ref": "#/components/schemas/taxonomy" }
+                "schema": {
+                  "$ref": "#/components/schemas/taxonomy"
+                }
               }
             }
           }
@@ -78,13 +96,21 @@
             "name": "id",
             "in": "path",
             "required": true,
-            "schema": { "type": "string" }
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
           "500": {
             "description": "Internal Server Error",
-            "content": { "*/*": { "schema": { "type": "object" } } }
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
           },
           "200": {
             "description": "OK",
@@ -109,13 +135,21 @@
             "name": "id",
             "in": "path",
             "required": true,
-            "schema": { "type": "string" }
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
           "500": {
             "description": "Internal Server Error",
-            "content": { "*/*": { "schema": { "type": "object" } } }
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
           },
           "200": {
             "description": "OK",
@@ -140,13 +174,21 @@
             "name": "id",
             "in": "path",
             "required": true,
-            "schema": { "type": "string" }
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
           "500": {
             "description": "Internal Server Error",
-            "content": { "*/*": { "schema": { "type": "object" } } }
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
           },
           "200": {
             "description": "OK",
@@ -172,55 +214,87 @@
             "name": "text",
             "in": "query",
             "required": false,
-            "schema": { "type": "string" }
+            "schema": {
+              "type": "string"
+            }
           },
           {
             "name": "parent_id",
             "in": "query",
             "required": false,
-            "schema": { "type": "string" }
+            "schema": {
+              "type": "string"
+            }
           },
           {
             "name": "vocabulary",
             "in": "query",
             "required": false,
-            "schema": { "type": "string" }
+            "schema": {
+              "type": "string"
+            }
           },
           {
             "name": "needs",
             "in": "query",
             "required": false,
-            "schema": { "type": "array", "items": { "type": "string" } }
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
           },
           {
             "name": "circumstances",
             "in": "query",
             "required": false,
-            "schema": { "type": "array", "items": { "type": "string" } }
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
           },
           {
             "name": "root_only",
             "in": "query",
             "required": false,
-            "schema": { "type": "boolean" }
+            "schema": {
+              "type": "boolean"
+            }
           },
           {
             "name": "page",
             "in": "query",
             "required": false,
-            "schema": { "type": "integer", "format": "int32", "default": 1 }
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 1
+            }
           },
           {
             "name": "per_page",
             "in": "query",
             "required": false,
-            "schema": { "type": "integer", "format": "int32", "default": 50 }
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 50
+            }
           }
         ],
         "responses": {
           "500": {
             "description": "Internal Server Error",
-            "content": { "*/*": { "schema": { "type": "object" } } }
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
           },
           "200": {
             "description": "OK",
@@ -273,42 +347,72 @@
             "in": "query",
             "description": "An array of taxonomy identifiers to filter by. If there is more than one of the taxonomy_type, taxonomy_id and vocabulary parameters specified there must be the same number of each.",
             "required": false,
-            "schema": { "type": "array", "items": { "type": "string" } }
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
           },
           {
             "name": "vocabulary",
             "in": "query",
             "description": "An array of vocabulary identifiers to filter by. If there is more than one of the taxonomy_type, taxonomy_id and vocabulary parameters specified there must be the same number of each. This parameter may not be required if all taxonomy identifiers are unique across all vocabularies used, as will be the case where all taxonomy identifiers are prefixed with a CURIE.",
             "required": false,
-            "schema": { "type": "array", "items": { "type": "string" } }
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
           },
           {
             "name": "need",
             "in": "query",
             "description": "An array of identifiers from the Needs taxonomy. The query will return services of all service types that are mapped against any given need. THIS IS AN EXTENSION FOR USERS OF LGA TAXONOMIES ONLY",
             "required": false,
-            "schema": { "type": "array", "items": { "type": "string" } }
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
           },
           {
             "name": "circumstance",
             "in": "query",
             "description": "An array of identifiers from the Circumstances taxonomy. The query will return services of all service types that are mapped against any given circumstance. Using an OR. THIS IS AN EXTENSION FOR USERS OF LGA TAXONOMIES ONLY",
             "required": false,
-            "schema": { "type": "array", "items": { "type": "string" } }
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
           },
           {
             "name": "start_time",
             "in": "query",
             "description": "An array of start times. This will match services that have a start time equal to or more that the specified value, using the OR operator. If there is more than one of the start_time, end_time and day parameters specified there must be the same number of each.",
             "required": false,
-            "schema": { "type": "array", "items": { "type": "string" } }
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
           },
           {
             "name": "end_time",
             "in": "query",
             "description": "An array of end times. This will match services that have a end time equal to or more that the specified value, using the OR operator. If there is more than one of the start_time, end_time and day parameters specified there must be the same number of each.",
             "required": false,
-            "schema": { "type": "array", "items": { "type": "string" } }
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
           },
           {
             "name": "day",
@@ -329,76 +433,115 @@
             "in": "query",
             "description": "The postcode of the person who wishes to use the service. In order to find services that are within a reasonable distance.",
             "required": false,
-            "schema": { "type": "string" }
+            "schema": {
+              "type": "string"
+            }
           },
           {
             "name": "proximity",
             "in": "query",
             "description": "The distance in metres that the person is willing to travel from the target postcode.",
             "required": false,
-            "schema": { "type": "number", "format": "double" }
+            "schema": {
+              "type": "number",
+              "format": "double"
+            }
           },
           {
             "name": "coverage",
             "in": "query",
             "description": "The postcode to use to check that a service applies to the specified area.",
             "required": false,
-            "schema": { "type": "string" }
+            "schema": {
+              "type": "string"
+            }
           },
           {
             "name": "text",
             "in": "query",
             "description": "Use text to perform a keyword search on services. This performs a full text search on the service title and description and ranks the results by relevancy.",
             "required": false,
-            "schema": { "type": "string" }
+            "schema": {
+              "type": "string"
+            }
           },
           {
             "name": "page",
             "in": "query",
             "description": "The page of the results to show. page numbers start at 1.",
             "required": false,
-            "schema": { "type": "integer", "format": "int32", "default": 1 }
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 1
+            }
           },
           {
             "name": "per_page",
             "in": "query",
             "description": "The number of results per page to show.",
             "required": false,
-            "schema": { "type": "integer", "format": "int32", "default": 50 }
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 50
+            }
           },
           {
             "name": "minimum_age",
             "in": "query",
             "description": "Return services with a minimum age of at least the specified value.",
             "required": false,
-            "schema": { "type": "number", "format": "float" }
+            "schema": {
+              "type": "number",
+              "format": "float"
+            }
           },
           {
             "name": "maximum_age",
             "in": "query",
             "description": "Return services with a maximum age of at equal to or below the specified value.",
             "required": false,
-            "schema": { "type": "number", "format": "float" }
+            "schema": {
+              "type": "number",
+              "format": "float"
+            }
           },
           {
             "name": "include",
             "in": "query",
             "description": "Enter the name of a service field and it will be included in the result. e.g. service_at_locations",
             "required": false,
-            "schema": { "type": "array", "items": { "type": "string" } }
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
           },
           {
             "name": "service_type",
             "in": "query",
             "description": "An array of service type identifiers. The query will return all services of ANY given service type. THIS EXTENSION MAY BE REPLACED BY A GENERIC SYNTAX FOR COMBINING TERMS FROM ANY TAXONOMY",
             "required": false,
-            "schema": { "type": "array", "items": { "type": "string" } }
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
           }
         ],
         "responses": {
           "500": {
             "description": "Internal Server Error",
-            "content": { "*/*": { "schema": { "type": "object" } } }
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
           },
           "200": {
             "description": "OK",
@@ -434,7 +577,13 @@
         "responses": {
           "500": {
             "description": "Internal Server Error",
-            "content": { "*/*": { "schema": { "type": "object" } } }
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
           },
           "200": {
             "description": "OK",
@@ -472,19 +621,29 @@
             "name": "taxonomy",
             "in": "query",
             "required": false,
-            "schema": { "type": "string" }
+            "schema": {
+              "type": "string"
+            }
           },
           {
             "name": "scheme",
             "in": "query",
             "required": false,
-            "schema": { "type": "string" }
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
           "500": {
             "description": "Internal Server Error",
-            "content": { "*/*": { "schema": { "type": "object" } } }
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
           },
           "200": {
             "description": "OK",
@@ -520,7 +679,13 @@
         "responses": {
           "500": {
             "description": "Internal Server Error",
-            "content": { "*/*": { "schema": { "type": "object" } } }
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
           },
           "200": {
             "description": "OK",
@@ -555,13 +720,24 @@
         "responses": {
           "500": {
             "description": "Internal Server Error",
-            "content": { "*/*": { "schema": { "type": "object" } } }
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
           },
           "200": {
             "description": "OK",
             "content": {
               "application/json": {
-                "schema": { "type": "array", "items": { "type": "string" } }
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
               }
             }
           }
@@ -574,13 +750,31 @@
       "page": {
         "type": "object",
         "properties": {
-          "totalElements": { "type": "integer", "format": "int64" },
-          "totalPages": { "type": "integer", "format": "int32" },
-          "number": { "type": "integer", "format": "int32" },
-          "size": { "type": "integer", "format": "int32" },
-          "first": { "type": "boolean" },
-          "last": { "type": "boolean" },
-          "empty": { "type": "boolean" }
+          "totalElements": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "totalPages": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "number": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "size": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "first": {
+            "type": "boolean"
+          },
+          "last": {
+            "type": "boolean"
+          },
+          "empty": {
+            "type": "boolean"
+          }
         }
       },
       "service": {
@@ -809,8 +1003,16 @@
         "required": ["id", "name"],
         "type": "object",
         "properties": {
-          "id": { "maxLength": 1536, "minLength": 1, "type": "string" },
-          "name": { "maxLength": 65535, "minLength": 1, "type": "string" },
+          "id": {
+            "maxLength": 1536,
+            "minLength": 1,
+            "type": "string"
+          },
+          "name": {
+            "maxLength": 65535,
+            "minLength": 1,
+            "type": "string"
+          },
           "vocabulary": {
             "maxLength": 65535,
             "minLength": 0,
