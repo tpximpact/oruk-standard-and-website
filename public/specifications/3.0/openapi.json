@@ -123,19 +123,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "properties": {
-                    "contents": {
-                      "type": "array",
-                      "items": {
-                        "$ref": "https://openreferraluk.org/specifications/3.0/schema/service_list.json"
-                      }
-                    }
-                  },
-                  "allOf": [
-                    {
-                      "$ref": "#/components/schemas/Page"
-                    }
-                  ]
+                  "$ref": "https://openreferraluk.org/specifications/3.0/schema/service_list.json"
                 }
               }
             }
@@ -203,19 +191,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "properties": {
-                    "contents": {
-                      "type": "array",
-                      "items": {
-                        "$ref": "https://openreferraluk.org/specifications/3.0/schema/taxonomy_list.json"
-                      }
-                    }
-                  },
-                  "allOf": [
-                    {
-                      "$ref": "#/components/schemas/Page"
-                    }
-                  ]
+                  "$ref": "https://openreferraluk.org/specifications/3.0/schema/taxonomy_list.json"
                 }
               }
             }
