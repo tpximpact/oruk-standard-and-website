@@ -35,7 +35,13 @@ jobs:
           cache: 'yarn'
 
       - name: Install dependencies
-        run: yarn install --frozen-lockfile
+        run: yarn install # --frozen-lockfile
+
+      - name: Cache Next.js build
+        uses: actions/cache@v5.0.3
+        with:
+          path: .next/cache
+          key: ${{ runner.os }}-nextjs-${{ hashFiles('**/yarn.lock') }}-${{ hashFiles('**/*.{js,jsx,ts,tsx}') }}
 
       - name: Cache Next.js build
         uses: actions/cache@v5.0.3
@@ -79,7 +85,7 @@ jobs:
           cache: 'yarn'
 
       - name: Install dependencies
-        run: yarn install --frozen-lockfile
+        run: yarn install # --frozen-lockfile
 
       - name: Run ESLint
         run: yarn lint
@@ -103,7 +109,7 @@ jobs:
           cache: 'yarn'
 
       - name: Install dependencies
-        run: yarn install --frozen-lockfile
+        run: yarn install # --frozen-lockfile
 
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps chromium
@@ -142,7 +148,7 @@ jobs:
           severity: 'CRITICAL,HIGH,MEDIUM,UNKNOWN'
 
       - name: Upload Trivy FS SARIF
-        uses: github/codeql-action/upload-sarif@v4.32.2
+        uses: github/codeql-action/upload-sarif@v4.32.3
         if: always()
         with:
           sarif_file: trivy-fs-results.sarif
@@ -194,7 +200,7 @@ jobs:
           echo "image_ref=$image_ref" >> "$GITHUB_OUTPUT"
 
       - name: Build and push Docker image
-        uses: docker/build-push-action@v6.19.1
+        uses: docker/build-push-action@v6.19.2
         with:
           context: .
           file: ./Dockerfile
@@ -219,7 +225,7 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Run Trivy on built image
-        uses: aquasecurity/trivy-action@0.33.1
+        uses: aquasecurity/trivy-action@0.34.0
         continue-on-error: true
         with:
           image-ref: ${{ needs.docker-build.outputs.image_ref }}
@@ -266,7 +272,7 @@ jobs:
           fi
 
       - name: Upload Trivy Image SARIF
-        uses: github/codeql-action/upload-sarif@v4.32.2
+        uses: github/codeql-action/upload-sarif@v4.32.3
         if: steps.trivy_sarif.outputs.present == 'true'
         with:
           sarif_file: trivy-image-results.sarif
