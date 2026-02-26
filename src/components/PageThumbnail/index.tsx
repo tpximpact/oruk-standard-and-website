@@ -14,7 +14,7 @@ export const PageThumbnail = ({ offsite, ...props }: PageThumbnailProps) => (
   <>{offsite ? <OffsiteThumbnail {...props} /> : <LocalThumbnail {...props} />}</>
 )
 
-interface LocalThumbnailProps extends Omit<PageThumbnailProps, 'offsite'> {}
+type LocalThumbnailProps = Omit<PageThumbnailProps, 'offsite'>
 
 const LocalThumbnail = ({ path, ...props }: LocalThumbnailProps) => (
   <Link href={'/' + path} className={styles.thumbnail}>
@@ -22,7 +22,7 @@ const LocalThumbnail = ({ path, ...props }: LocalThumbnailProps) => (
   </Link>
 )
 
-interface OffsiteThumbnailProps extends Omit<PageThumbnailProps, 'offsite'> {}
+type OffsiteThumbnailProps = Omit<PageThumbnailProps, 'offsite'>
 
 const OffsiteThumbnail = ({ path, suppressDetails, ...props }: OffsiteThumbnailProps) => (
   <a href={path} className={styles.thumbnail} target='_blank'>

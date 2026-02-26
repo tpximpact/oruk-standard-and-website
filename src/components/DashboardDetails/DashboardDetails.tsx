@@ -171,7 +171,7 @@ const FVString = ({ data, url }: FVStringProps) => {
 }
 
 const stringifyDateString = (s: string): string => {
-  let result = Date.parse(s)
+  const result = Date.parse(s)
   const date = new Date(result)
   return date.toLocaleDateString('en-UK') + ', ' + date.toLocaleTimeString('en-UK')
 }

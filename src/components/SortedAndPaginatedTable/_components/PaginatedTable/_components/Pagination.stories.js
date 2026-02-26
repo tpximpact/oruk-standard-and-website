@@ -1,9 +1,9 @@
 import { Pagination } from './Pagination'
 
 const dummyPageChange = (baseUrl, targetPage) => {
+  // eslint-disable-next-line no-undef
   alert('would request page ' + baseUrl + targetPage)
 }
-
 export default {
   title: 'Hub/Pagination',
   component: Pagination

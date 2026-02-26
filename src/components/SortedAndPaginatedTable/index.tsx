@@ -46,7 +46,7 @@ export const SortedAndPaginatedTable = ({
 
   const sort = () => {
     const data = JSON.parse(JSON.stringify(tableData))
-    let newSortedRows = getSortedRows({
+    const newSortedRows = getSortedRows({
       sortColumn: sortBy,
       data: data,
       sortDirection: sortDirection
