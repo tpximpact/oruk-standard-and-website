@@ -47,6 +47,7 @@ export abstract class BaseRepository<
         // In that case we leave the id as the string; tests mock the collection and don't
         // need a real ObjectId instance.
 
+        // eslint-disable-next-line @typescript-eslint/no-require-imports
         const { ObjectId: ObjId } = require('mongodb') as any
         _id = new ObjId(id)
       } catch {
@@ -94,6 +95,7 @@ export abstract class BaseRepository<
     let _id: string | ObjectId
     if (typeof id === 'string') {
       try {
+        // eslint-disable-next-line @typescript-eslint/no-require-imports
         const { ObjectId: ObjId } = require('mongodb') as any
         _id = new ObjId(id)
       } catch {
@@ -130,6 +132,7 @@ export abstract class BaseRepository<
     let _id: string | ObjectId
     if (typeof id === 'string') {
       try {
+        // eslint-disable-next-line @typescript-eslint/no-require-imports
         const { ObjectId: ObjId } = require('mongodb') as any
         _id = new ObjId(id)
       } catch {

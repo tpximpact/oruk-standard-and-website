@@ -59,6 +59,7 @@ vi.mock('@/models/service', () => ({
     parse: (data: any) => {
       // Simple validation for test
       if (!data.name || !data.publisher || !data.contactEmail) {
+        // eslint-disable-next-line @typescript-eslint/no-require-imports
         const { z } = require('zod')
         const err = new z.ZodError([
           {
