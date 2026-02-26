@@ -5,7 +5,9 @@
  * Usage: node src/scripts/create-github-issue.js [serviceId]
  */
 
+// eslint-disable-next-line @typescript-eslint/no-require-imports
 const { GitHubService } = require('../lib/github-service')
+// eslint-disable-next-line @typescript-eslint/no-require-imports
 const { ServiceRepository } = require('../repositories/service-repository')
 
 async function main() {

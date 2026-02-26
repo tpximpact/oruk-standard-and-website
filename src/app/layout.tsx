@@ -2,15 +2,14 @@ import { Inter } from 'next/font/google'
 import { ReactNode } from 'react'
 import type { Metadata } from 'next'
 
-// @ts-ignore
+// @ts-ignore CSS import required for styling
 import '@/styles/reset.css'
-// @ts-ignore
+// @ts-ignore CSS import required for styling
 import '@/styles/tokens.css'
-// @ts-ignore
+// @ts-ignore CSS import required for styling
 import '@/styles/global.css'
-// @ts-ignore
+// @ts-ignore CSS import required for styling
 import '@/styles/no-js.css'
-
 import { NoWarranty } from './_components/NoWarranty'
 import { Header } from './_components/Header'
 import { LandmarkMain } from './_components/LandmarkMain'

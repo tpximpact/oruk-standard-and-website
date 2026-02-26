@@ -104,7 +104,7 @@ const getFormat = ({
         const model = propertyNameToModel(data.name)
         let linked
         if (model && allSchemas.includes(model)) {
-          let modelData: any = {}
+          const modelData: any = {}
           modelData['$ref'] = model
           linked = (
             <>

@@ -1,6 +1,5 @@
-// @ts-nocheck
 'use client'
-
+// @ts-nocheck Form validation requires dynamic field handling
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import styles from './ValidatorForm.module.css'

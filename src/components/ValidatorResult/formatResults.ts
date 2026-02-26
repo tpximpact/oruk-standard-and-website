@@ -78,7 +78,7 @@ const deDuplicateMessages = (input: any) => {
 }
 
 const deduplicate = (arr: any[]): any[] => {
-  let uniques: any[] = []
+  const uniques: any[] = []
   arr.forEach(item => {
     if (!isIn(item, uniques)) {
       uniques.push(item)
