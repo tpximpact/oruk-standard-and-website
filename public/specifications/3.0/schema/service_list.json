@@ -94,7 +94,12 @@
             },
             "example": "active",
             "core": "Y",
-            "enum": ["active", "inactive", "defunct", "temporarily closed"]
+            "enum": [
+              "active",
+              "inactive",
+              "defunct",
+              "temporarily closed"
+            ]
           },
           "fees": {
             "name": "fees",
@@ -283,12 +288,22 @@
                 "example": "cd09a387-91f4-4555-94ec-e799c35344cd"
               }
             },
-            "required": ["id", "name", "description"],
+            "required": [
+              "id",
+              "name",
+              "description"
+            ],
             "title": "Organization"
           }
         },
-        "required": ["id", "name", "status"],
-        "tabular_required": ["organization_id"]
+        "required": [
+          "id",
+          "name",
+          "status"
+        ],
+        "tabular_required": [
+          "organization_id"
+        ]
       }
     }
   },

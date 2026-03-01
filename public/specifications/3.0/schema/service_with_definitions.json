@@ -90,7 +90,12 @@
       },
       "example": "active",
       "core": "Y",
-      "enum": ["active", "inactive", "defunct", "temporarily closed"]
+      "enum": [
+        "active",
+        "inactive",
+        "defunct",
+        "temporarily closed"
+      ]
     },
     "fees": {
       "name": "fees",
@@ -255,8 +260,14 @@
       }
     }
   },
-  "required": ["id", "name", "status"],
-  "tabular_required": ["organization_id"],
+  "required": [
+    "id",
+    "name",
+    "status"
+  ],
+  "tabular_required": [
+    "organization_id"
+  ],
   "definitions": {
     "organization": {
       "name": "organization",
@@ -379,7 +390,11 @@
           }
         }
       },
-      "required": ["id", "name", "description"]
+      "required": [
+        "id",
+        "name",
+        "description"
+      ]
     },
     "attribute": {
       "name": "attribute",
@@ -447,8 +462,14 @@
           "$ref": "#/definitions/taxonomy_term"
         }
       },
-      "required": ["id"],
-      "tabular_required": ["link_id", "taxonomy_term_id", "link_entity"]
+      "required": [
+        "id"
+      ],
+      "tabular_required": [
+        "link_id",
+        "taxonomy_term_id",
+        "link_entity"
+      ]
     },
     "service_at_location": {
       "name": "service_at_location",
@@ -505,8 +526,13 @@
           "$ref": "#/definitions/location"
         }
       },
-      "required": ["id"],
-      "tabular_required": ["service_id", "location_id"]
+      "required": [
+        "id"
+      ],
+      "tabular_required": [
+        "service_id",
+        "location_id"
+      ]
     },
     "location": {
       "name": "location",
@@ -542,7 +568,11 @@
           },
           "example": "physical",
           "core": "Y",
-          "enum": ["physical", "postal", "virtual"]
+          "enum": [
+            "physical",
+            "postal",
+            "virtual"
+          ]
         },
         "name": {
           "name": "name",
@@ -636,7 +666,10 @@
           }
         }
       },
-      "required": ["id", "location_type"]
+      "required": [
+        "id",
+        "location_type"
+      ]
     },
     "phone": {
       "name": "phone",
@@ -705,7 +738,10 @@
           }
         }
       },
-      "required": ["id", "number"]
+      "required": [
+        "id",
+        "number"
+      ]
     },
     "contact": {
       "name": "contact",
@@ -775,7 +811,9 @@
           }
         }
       },
-      "required": ["id"]
+      "required": [
+        "id"
+      ]
     },
     "address": {
       "name": "address",
@@ -900,7 +938,11 @@
           },
           "example": "postal",
           "core": "Y",
-          "enum": ["physical", "postal", "virtual"]
+          "enum": [
+            "physical",
+            "postal",
+            "virtual"
+          ]
         },
         "attributes": {
           "name": "attributes",
@@ -1016,7 +1058,10 @@
           },
           "example": "WEEKLY",
           "core": "Y",
-          "enum": ["WEEKLY", "MONTHLY"]
+          "enum": [
+            "WEEKLY",
+            "MONTHLY"
+          ]
         },
         "interval": {
           "name": "interval",
@@ -1118,7 +1163,9 @@
           "example": "Some of our staff will be unavailable during their lunch break which may be any 30 minute period between 1200 and 1400"
         }
       },
-      "required": ["id"]
+      "required": [
+        "id"
+      ]
     },
     "funding": {
       "name": "funding",
@@ -1165,7 +1212,9 @@
           "example": "This service is funded partially by the MyCity local government and via grants made by charity funding bodies. We also operate a for-profit department which is used to partially cover the expense of the public service"
         }
       },
-      "required": ["id"]
+      "required": [
+        "id"
+      ]
     },
     "service_area": {
       "name": "service_area",
@@ -1256,7 +1305,9 @@
           "core": "Y"
         }
       },
-      "required": ["id"]
+      "required": [
+        "id"
+      ]
     },
     "language": {
       "name": "language",
@@ -1306,7 +1357,9 @@
           "example": "1554f2e2-a373-45db-a3fa-9fc48a61c15e"
         }
       },
-      "required": ["id"]
+      "required": [
+        "id"
+      ]
     },
     "accessibility": {
       "name": "accessibility",
@@ -1397,7 +1450,9 @@
           "core": "Y"
         }
       },
-      "required": ["id"]
+      "required": [
+        "id"
+      ]
     },
     "taxonomy_term": {
       "name": "taxonomy_term",
@@ -1501,7 +1556,11 @@
           "core": "Y"
         }
       },
-      "required": ["id", "name", "description"]
+      "required": [
+        "id",
+        "name",
+        "description"
+      ]
     },
     "cost_option": {
       "name": "cost_option",
@@ -1590,8 +1649,12 @@
           "example": "per 1 hour session"
         }
       },
-      "required": ["id"],
-      "tabular_required": ["service_id"]
+      "required": [
+        "id"
+      ],
+      "tabular_required": [
+        "service_id"
+      ]
     },
     "organization_identifier": {
       "name": "organization_identifier",
@@ -1667,8 +1730,14 @@
           }
         }
       },
-      "required": ["id", "identifier_type", "identifier"],
-      "tabular_required": ["organization_id"]
+      "required": [
+        "id",
+        "identifier_type",
+        "identifier"
+      ],
+      "tabular_required": [
+        "organization_id"
+      ]
     },
     "taxonomy": {
       "name": "taxonomy",
@@ -1744,7 +1813,11 @@
           }
         }
       },
-      "required": ["id", "name", "description"]
+      "required": [
+        "id",
+        "name",
+        "description"
+      ]
     }
   }
 }

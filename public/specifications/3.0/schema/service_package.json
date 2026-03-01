@@ -92,7 +92,12 @@
         },
         "example": "active",
         "core": "Y",
-        "enum": ["active", "inactive", "defunct", "temporarily closed"]
+        "enum": [
+          "active",
+          "inactive",
+          "defunct",
+          "temporarily closed"
+        ]
       },
       "fees": {
         "name": "fees",
@@ -277,7 +282,10 @@
               },
               "example": "WEEKLY",
               "core": "Y",
-              "enum": ["WEEKLY", "MONTHLY"]
+              "enum": [
+                "WEEKLY",
+                "MONTHLY"
+              ]
             },
             "interval": {
               "name": "interval",
@@ -379,7 +387,9 @@
               "example": "Some of our staff will be unavailable during their lunch break which may be any 30 minute period between 1200 and 1400"
             }
           },
-          "required": ["id"]
+          "required": [
+            "id"
+          ]
         }
       },
       "service_areas": {
@@ -476,7 +486,9 @@
               "core": "Y"
             }
           },
-          "required": ["id"]
+          "required": [
+            "id"
+          ]
         }
       },
       "service_at_locations": {
@@ -566,7 +578,11 @@
                   },
                   "example": "physical",
                   "core": "Y",
-                  "enum": ["physical", "postal", "virtual"]
+                  "enum": [
+                    "physical",
+                    "postal",
+                    "virtual"
+                  ]
                 },
                 "name": {
                   "name": "name",
@@ -760,7 +776,11 @@
                         },
                         "example": "postal",
                         "core": "Y",
-                        "enum": ["physical", "postal", "virtual"]
+                        "enum": [
+                          "physical",
+                          "postal",
+                          "virtual"
+                        ]
                       },
                       "attributes": {
                         "name": "attributes",
@@ -928,12 +948,22 @@
                                   "core": "Y"
                                 }
                               },
-                              "required": ["id", "name", "description"],
+                              "required": [
+                                "id",
+                                "name",
+                                "description"
+                              ],
                               "title": "Taxonomy Term"
                             }
                           },
-                          "required": ["id"],
-                          "tabular_required": ["link_id", "taxonomy_term_id", "link_entity"]
+                          "required": [
+                            "id"
+                          ],
+                          "tabular_required": [
+                            "link_id",
+                            "taxonomy_term_id",
+                            "link_entity"
+                          ]
                         }
                       }
                     },
@@ -1187,12 +1217,22 @@
                                   "core": "Y"
                                 }
                               },
-                              "required": ["id", "name", "description"],
+                              "required": [
+                                "id",
+                                "name",
+                                "description"
+                              ],
                               "title": "Taxonomy Term"
                             }
                           },
-                          "required": ["id"],
-                          "tabular_required": ["link_id", "taxonomy_term_id", "link_entity"]
+                          "required": [
+                            "id"
+                          ],
+                          "tabular_required": [
+                            "link_id",
+                            "taxonomy_term_id",
+                            "link_entity"
+                          ]
                         }
                       },
                       "accessibility": {
@@ -1207,7 +1247,9 @@
                         "core": "Y"
                       }
                     },
-                    "required": ["id"]
+                    "required": [
+                      "id"
+                    ]
                   }
                 },
                 "attributes": {
@@ -1376,21 +1418,39 @@
                             "core": "Y"
                           }
                         },
-                        "required": ["id", "name", "description"],
+                        "required": [
+                          "id",
+                          "name",
+                          "description"
+                        ],
                         "title": "Taxonomy Term"
                       }
                     },
-                    "required": ["id"],
-                    "tabular_required": ["link_id", "taxonomy_term_id", "link_entity"]
+                    "required": [
+                      "id"
+                    ],
+                    "tabular_required": [
+                      "link_id",
+                      "taxonomy_term_id",
+                      "link_entity"
+                    ]
                   }
                 }
               },
-              "required": ["id", "location_type"],
+              "required": [
+                "id",
+                "location_type"
+              ],
               "title": "Location"
             }
           },
-          "required": ["id"],
-          "tabular_required": ["service_id", "location_id"]
+          "required": [
+            "id"
+          ],
+          "tabular_required": [
+            "service_id",
+            "location_id"
+          ]
         }
       },
       "languages": {
@@ -1446,7 +1506,9 @@
               "example": "1554f2e2-a373-45db-a3fa-9fc48a61c15e"
             }
           },
-          "required": ["id"]
+          "required": [
+            "id"
+          ]
         }
       },
       "organization": {
@@ -1786,17 +1848,33 @@
                             "core": "Y"
                           }
                         },
-                        "required": ["id", "name", "description"],
+                        "required": [
+                          "id",
+                          "name",
+                          "description"
+                        ],
                         "title": "Taxonomy Term"
                       }
                     },
-                    "required": ["id"],
-                    "tabular_required": ["link_id", "taxonomy_term_id", "link_entity"]
+                    "required": [
+                      "id"
+                    ],
+                    "tabular_required": [
+                      "link_id",
+                      "taxonomy_term_id",
+                      "link_entity"
+                    ]
                   }
                 }
               },
-              "required": ["id", "identifier_type", "identifier"],
-              "tabular_required": ["organization_id"]
+              "required": [
+                "id",
+                "identifier_type",
+                "identifier"
+              ],
+              "tabular_required": [
+                "organization_id"
+              ]
             }
           },
           "attributes": {
@@ -1965,16 +2043,30 @@
                       "core": "Y"
                     }
                   },
-                  "required": ["id", "name", "description"],
+                  "required": [
+                    "id",
+                    "name",
+                    "description"
+                  ],
                   "title": "Taxonomy Term"
                 }
               },
-              "required": ["id"],
-              "tabular_required": ["link_id", "taxonomy_term_id", "link_entity"]
+              "required": [
+                "id"
+              ],
+              "tabular_required": [
+                "link_id",
+                "taxonomy_term_id",
+                "link_entity"
+              ]
             }
           }
         },
-        "required": ["id", "name", "description"],
+        "required": [
+          "id",
+          "name",
+          "description"
+        ],
         "title": "Organization"
       },
       "funding": {
@@ -2027,7 +2119,9 @@
               "example": "This service is funded partially by the MyCity local government and via grants made by charity funding bodies. We also operate a for-profit department which is used to partially cover the expense of the public service"
             }
           },
-          "required": ["id"]
+          "required": [
+            "id"
+          ]
         }
       },
       "cost_options": {
@@ -2122,8 +2216,12 @@
               "example": "per 1 hour session"
             }
           },
-          "required": ["id"],
-          "tabular_required": ["service_id"]
+          "required": [
+            "id"
+          ],
+          "tabular_required": [
+            "service_id"
+          ]
         }
       },
       "contacts": {
@@ -2355,16 +2453,28 @@
                         "core": "Y"
                       }
                     },
-                    "required": ["id", "name", "description"],
+                    "required": [
+                      "id",
+                      "name",
+                      "description"
+                    ],
                     "title": "Taxonomy Term"
                   }
                 },
-                "required": ["id"],
-                "tabular_required": ["link_id", "taxonomy_term_id", "link_entity"]
+                "required": [
+                  "id"
+                ],
+                "tabular_required": [
+                  "link_id",
+                  "taxonomy_term_id",
+                  "link_entity"
+                ]
               }
             }
           },
-          "required": ["id"]
+          "required": [
+            "id"
+          ]
         }
       },
       "attributes": {
@@ -2533,16 +2643,32 @@
                   "core": "Y"
                 }
               },
-              "required": ["id", "name", "description"],
+              "required": [
+                "id",
+                "name",
+                "description"
+              ],
               "title": "Taxonomy Term"
             }
           },
-          "required": ["id"],
-          "tabular_required": ["link_id", "taxonomy_term_id", "link_entity"]
+          "required": [
+            "id"
+          ],
+          "tabular_required": [
+            "link_id",
+            "taxonomy_term_id",
+            "link_entity"
+          ]
         }
       }
     },
-    "required": ["id", "name", "status"],
-    "tabular_required": ["organization_id"]
+    "required": [
+      "id",
+      "name",
+      "status"
+    ],
+    "tabular_required": [
+      "organization_id"
+    ]
   }
 }

@@ -21,5 +21,9 @@
       "description": "URL of the openapi JSON file which defines this API."
     }
   },
-  "required": ["version", "profile", "openapi_url"]
+  "required": [
+    "version",
+    "profile",
+    "openapi_url"
+  ]
 }

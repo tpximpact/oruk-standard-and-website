@@ -154,7 +154,9 @@
         }
       ],
       "get": {
-        "tags": ["Optional"],
+        "tags": [
+          "Optional"
+        ],
         "name": "Taxonomy by id - API & schema validation",
         "description": "Full information on taxonomy.",
         "summary": "Retrieves full information on a taxonomy by {id}.",
@@ -175,7 +177,9 @@
     },
     "/taxonomies": {
       "get": {
-        "tags": ["Optional"],
+        "tags": [
+          "Optional"
+        ],
         "name": "Taxonomies list - API & schema validation",
         "description": "Paginated listing of taxonomies.",
         "summary": "Does the taxonomies list endpoint return a paginated list of taxonomies in the correct schema",
@@ -234,7 +238,9 @@
         }
       ],
       "get": {
-        "tags": ["Optional"],
+        "tags": [
+          "Optional"
+        ],
         "name": "Taxonomy term by id - API & schema validation",
         "description": "Full information on a taxonomy term.",
         "summary": "Full information on a taxonomy term.",
@@ -255,7 +261,9 @@
     },
     "/taxonomy_terms": {
       "get": {
-        "tags": ["Optional"],
+        "tags": [
+          "Optional"
+        ],
         "name": "Taxonomy terms list - API & schema validation",
         "description": "Paginated listing of taxonomy terms",
         "summary": "Does the taxonomy terms list endpoint return a paginated list of taxonomy terms in the correct schema",
@@ -322,7 +330,9 @@
         }
       ],
       "get": {
-        "tags": ["Optional"],
+        "tags": [
+          "Optional"
+        ],
         "name": "Organization by id - API & schema validation",
         "description": "Fully nested organization with service array that contains simple information which could only contain the service.id.",
         "summary": "Fully nested organization with service array that contains simple information which could only contain the service.id.",
@@ -348,7 +358,9 @@
     },
     "/organizations": {
       "get": {
-        "tags": ["Optional"],
+        "tags": [
+          "Optional"
+        ],
         "name": "Organizations list - API & schema validation",
         "description": "Paginated list of basic Organization information.",
         "summary": "Paginated list of basic Organization information",
@@ -401,7 +413,9 @@
         }
       ],
       "get": {
-        "tags": ["Optional"],
+        "tags": [
+          "Optional"
+        ],
         "name": "Service at location by id - API & schema validation",
         "description": "Retrieve fully nested service_at_location with all related data with specified id.",
         "summary": "Does the service at location by id endpoint return a fully nested service at location in the correct schema",
@@ -422,7 +436,9 @@
     },
     "/service_at_locations": {
       "get": {
-        "tags": ["Optional"],
+        "tags": [
+          "Optional"
+        ],
         "name": "Service at locations list - API & schema validation",
         "description": "Retrieve paginated listings of service_at_location that only have one-to-one fields in them.",
         "summary": "Does the service at locations list endpoint return a paginated list of service at locations in the correct schema",

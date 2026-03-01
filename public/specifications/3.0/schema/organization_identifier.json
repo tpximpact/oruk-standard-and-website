@@ -72,6 +72,12 @@
       }
     }
   },
-  "required": ["id", "identifier_type", "identifier"],
-  "tabular_required": ["organization_id"]
+  "required": [
+    "id",
+    "identifier_type",
+    "identifier"
+  ],
+  "tabular_required": [
+    "organization_id"
+  ]
 }

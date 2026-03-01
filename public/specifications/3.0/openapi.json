@@ -29,7 +29,9 @@
         "description": "Retrieve information about this API and its relationship with HSDS.",
         "summary": "Does the base endpoint return meta information about the API, and does it adhere to the schema",
         "operationId": "getAPIMetaInformation",
-        "tags": ["required"],
+        "tags": [
+          "required"
+        ],
         "responses": {
           "200": {
             "description": "A JSON response providing information about this API.",
@@ -61,7 +63,9 @@
         "description": "Retrieve fully nested service with all related data with id.",
         "summary": "Does the service by id endpoint return a fully nested service in the correct schema",
         "operationId": "getFullyNestedServiceById",
-        "tags": ["required"],
+        "tags": [
+          "required"
+        ],
         "responses": {
           "200": {
             "description": "A Service matching the {id}, with all related data according to the HSDS Specification for Service.",
@@ -82,7 +86,9 @@
         "description": "Retrieves paginated listings of services that only have one-to-one fields in them.",
         "summary": "Does the services list endpoint return a paginated list of services in the correct schema",
         "operationId": "getPaginatedListOfServices",
-        "tags": ["required"],
+        "tags": [
+          "required"
+        ],
         "parameters": [
           {
             "$ref": "#/components/parameters/search"
@@ -149,7 +155,9 @@
         "description": "Full information on taxonomy.",
         "summary": "Retrieves full information on a taxonomy by {id}.",
         "operationId": "getTaxonomyById",
-        "tags": ["optional"],
+        "tags": [
+          "optional"
+        ],
         "responses": {
           "200": {
             "description": "Full information on taxonomy.",
@@ -170,7 +178,9 @@
         "description": "Paginated listing of taxonomies.",
         "summary": "Does the taxonomies list endpoint return a paginated list of taxonomies in the correct schema",
         "operationId": "getPaginatedListOfTaxonomies",
-        "tags": ["optional"],
+        "tags": [
+          "optional"
+        ],
         "parameters": [
           {
             "$ref": "#/components/parameters/search"
@@ -217,7 +227,9 @@
         "description": "Full information on a taxonomy term.",
         "summary": "Full information on a taxonomy term.",
         "operationId": "getPaginatedListOfTaxonomyTerms",
-        "tags": ["optional"],
+        "tags": [
+          "optional"
+        ],
         "responses": {
           "200": {
             "description": "Full information on a taxonomy term.",
@@ -238,7 +250,9 @@
         "description": "Paginated listing of taxonomy terms",
         "summary": "Does the taxonomy terms list endpoint return a paginated list of taxonomy terms in the correct schema",
         "operationId": "getTaxonomyTermById",
-        "tags": ["optional"],
+        "tags": [
+          "optional"
+        ],
         "parameters": [
           {
             "$ref": "#/components/parameters/search"
@@ -301,7 +315,9 @@
         }
       ],
       "get": {
-        "tags": ["Optional"],
+        "tags": [
+          "Optional"
+        ],
         "name": "Organization by id - API & schema validation",
         "description": "Fully nested organization with service array that contains simple information which could only contain the service.id.",
         "summary": "Fully nested organization with service array that contains simple information which could only contain the service.id.",
@@ -327,7 +343,9 @@
     },
     "/organizations": {
       "get": {
-        "tags": ["Optional"],
+        "tags": [
+          "Optional"
+        ],
         "name": "Organizations list - API & schema validation",
         "description": "Paginated list of basic Organization information.",
         "summary": "Paginated list of basic Organization information",
@@ -384,7 +402,9 @@
         "description": "Retrieve fully nested service_at_location with all related data with specified id.",
         "summary": "Does the service at location by id endpoint return a fully nested service at location in the correct schema",
         "operationId": "getServiceAtLocationWithNestedDataById",
-        "tags": ["optional"],
+        "tags": [
+          "optional"
+        ],
         "responses": {
           "200": {
             "description": "Retrieve fully nested service_at_location with all related data with specified id.",
@@ -405,7 +425,9 @@
         "description": "Retrieve paginated listings of service_at_location that only have one-to-one fields in them.",
         "summary": "Does the service at locations list endpoint return a paginated list of service at locations in the correct schema",
         "operationId": "getPaginatedListOfServiceAtLocation",
-        "tags": ["optional"],
+        "tags": [
+          "optional"
+        ],
         "parameters": [
           {
             "$ref": "#/components/parameters/search"
@@ -491,7 +513,9 @@
             "description": "A Boolean value indicating if there is an empty result set"
           }
         },
-        "required": ["empty"]
+        "required": [
+          "empty"
+        ]
       }
     },
     "parameters": {

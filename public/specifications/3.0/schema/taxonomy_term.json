@@ -101,5 +101,9 @@
       "core": "Y"
     }
   },
-  "required": ["id", "name", "description"]
+  "required": [
+    "id",
+    "name",
+    "description"
+  ]
 }

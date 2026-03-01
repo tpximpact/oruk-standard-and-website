@@ -85,6 +85,10 @@
       "example": "per 1 hour session"
     }
   },
-  "required": ["id"],
-  "tabular_required": ["service_id"]
+  "required": [
+    "id"
+  ],
+  "tabular_required": [
+    "service_id"
+  ]
 }
