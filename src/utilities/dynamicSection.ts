@@ -10,7 +10,7 @@ const CONTENT_ROOT = join(process.cwd(), PATHS.contentRoot)
 
 interface DynamicPageContent {
   date: string
-  metadata: Record<string, any>
+  metadata: Record<string, unknown>
   html: string
   next: LinkedItem | null
   previous: LinkedItem | null
@@ -66,7 +66,7 @@ export const getAllFiles = (contentFolder: string): string[] => {
     .filter(f => f !== '.DS_Store')
 }
 
-const getDate = (metadata: Record<string, any>, contentPath: string): string => {
+const getDate = (metadata: Record<string, unknown>, contentPath: string): string => {
   const raw = metadata.modified || fileLastModified(contentPath)
   const date = new Date(raw)
   return date.toLocaleDateString('en-GB')

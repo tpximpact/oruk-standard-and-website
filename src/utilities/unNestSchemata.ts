@@ -2,7 +2,7 @@ import { pluralToSingular } from './pluralToSingular'
 
 interface Schema {
   properties: Record<string, Property>
-  [key: string]: any
+  [key: string]: unknown
 }
 
 interface Property {
@@ -11,9 +11,9 @@ interface Property {
   items?: {
     type?: string
     $ref?: string
-    [key: string]: any
+    [key: string]: unknown
   }
-  [key: string]: any
+  [key: string]: unknown
 }
 
 export const unNestSchemata = (schemata: Record<string, Schema>): Record<string, Schema> => {
@@ -36,7 +36,7 @@ export const unNestSchemata = (schemata: Record<string, Schema>): Record<string,
 
         if (property.items && property.items.type === 'object') {
           schemata[singularPropertyName] = { properties: {}, ...Object.assign({}, property.items) }
-          property['items'].$ref = singularPropertyName
+          property.items.$ref = singularPropertyName
         }
       }
     })

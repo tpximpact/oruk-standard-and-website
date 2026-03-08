@@ -1,4 +1,11 @@
-export default function ValidationResult({ result }: { result: any }) {
+interface ValidationResultData {
+  isValid: boolean
+  message?: string
+  errors?: string[]
+  warnings?: string[]
+}
+
+export default function ValidationResult({ result }: { result: ValidationResultData }) {
   return (
     <div
       className={`p-4 border rounded-lg ${

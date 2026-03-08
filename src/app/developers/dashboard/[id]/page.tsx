@@ -15,27 +15,34 @@ export async function generateMetadata() {
 }
 
 // Transform ServiceResponse (flat) or nested DB doc to the format expected by DashboardDetails
-function transformServiceForDashboard(service: any) {
-  const extractValue = (field: any): any => {
+function transformServiceForDashboard(service: Record<string, unknown>) {
+  const extractValue = (field: unknown): unknown => {
     if (field === null || field === undefined) return ''
-    if (typeof field === 'object' && field.value !== undefined) return field.value
+    if (typeof field === 'object' && field !== null && 'value' in field)
+      return (field as { value?: unknown }).value
     return field
   }
 
-  const extractUrl = (obj: any, fallback?: string): string => {
+  const extractUrl = (obj: unknown, fallback?: string): string => {
     if (!obj) return fallback ?? ''
-    if (typeof obj === 'object' && obj.url !== undefined) return obj.url
+    if (typeof obj === 'object' && obj !== null && 'url' in obj) {
+      const url = (obj as { url?: unknown }).url
+      return typeof url === 'string' ? url : (fallback ?? '')
+    }
     return fallback ?? ''
   }
 
   // Support both the repository's flat ServiceResponse and the nested DB document
   const title = extractValue(service.name ?? service.title)
   const publisherValue = extractValue(service.publisher)
-  const publisherUrl = service.publisherUrl ?? extractUrl(service.publisher)
+  const publisherUrl =
+    typeof service.publisherUrl === 'string' ? service.publisherUrl : extractUrl(service.publisher)
   const developerValue = extractValue(service.developer)
-  const developerUrl = service.developerUrl ?? extractUrl(service.developer)
+  const developerUrl =
+    typeof service.developerUrl === 'string' ? service.developerUrl : extractUrl(service.developer)
   const serviceValue = extractValue(service.service ?? service.name)
-  const serviceUrl = service.serviceUrl ?? extractUrl(service.service)
+  const serviceUrl =
+    typeof service.serviceUrl === 'string' ? service.serviceUrl : extractUrl(service.service)
   const isValid =
     service.statusIsValid && typeof service.statusIsValid === 'boolean'
       ? service.statusIsValid

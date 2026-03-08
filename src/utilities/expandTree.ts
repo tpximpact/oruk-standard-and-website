@@ -4,7 +4,7 @@ interface TreeNode {
   offsite?: boolean
   childNodes?: TreeNode[]
   parentNodeName?: string
-  [key: string]: any
+  [key: string]: unknown
 }
 
 export const expandTree = (structure: TreeNode[], parentNode?: TreeNode): TreeNode[] => {

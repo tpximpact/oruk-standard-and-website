@@ -7,6 +7,8 @@ interface ContentVersionOptions {
   specificationFolder: string
 }
 
+type ContentVersion = ReturnType<typeof getContentVersion>
+
 export const getAllContentVersions = ({
   contentFolder,
   specificationFolder
@@ -21,6 +23,6 @@ export const getAllContentVersions = ({
         specificationFolderPath: versionPath
       })
     }),
-    {} as Record<string, any>
+    {} as Record<string, ContentVersion>
   )
 }

@@ -10,8 +10,8 @@ import Link from 'next/link'
 interface MenuItem {
   label: string
   urlPath?: string
-  childNodes?: any[]
-  dynamicChildNodes?: any[]
+  childNodes?: unknown[]
+  dynamicChildNodes?: unknown[]
   dynamicOverflow?: string
 }
 

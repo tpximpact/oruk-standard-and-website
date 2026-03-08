@@ -2,6 +2,11 @@ import { describe, it, expect, vi } from 'vitest'
 import { renderHook, act } from '@testing-library/react'
 import { useFormReset } from '../use-form-reset'
 
+type HookFormState = {
+  status: string
+  timestamp: number
+}
+
 describe('useFormReset', () => {
   it('should return a ref object', () => {
     const formState = { status: 'UNSET', timestamp: Date.now() }
@@ -20,7 +25,7 @@ describe('useFormReset', () => {
     document.body.appendChild(formElement)
 
     const initialTimestamp = Date.now()
-    const { result, rerender } = renderHook((formState: any) => useFormReset(formState), {
+    const { result, rerender } = renderHook((formState: HookFormState) => useFormReset(formState), {
       initialProps: { status: 'UNSET', timestamp: initialTimestamp }
     })
 
@@ -48,7 +53,7 @@ describe('useFormReset', () => {
     document.body.appendChild(formElement)
 
     const timestamp = Date.now()
-    const { result, rerender } = renderHook((formState: any) => useFormReset(formState), {
+    const { result, rerender } = renderHook((formState: HookFormState) => useFormReset(formState), {
       initialProps: { status: 'ERROR', timestamp }
     })
 
@@ -72,7 +77,7 @@ describe('useFormReset', () => {
     const timestamp = Date.now()
     document.body.appendChild(formElement)
 
-    const { result, rerender } = renderHook((formState: any) => useFormReset(formState), {
+    const { result, rerender } = renderHook((formState: HookFormState) => useFormReset(formState), {
       initialProps: { status: 'UNSET', timestamp }
     })
 
@@ -93,7 +98,7 @@ describe('useFormReset', () => {
 
   it('should handle null ref gracefully', () => {
     const timestamp = Date.now()
-    const { rerender } = renderHook((formState: any) => useFormReset(formState), {
+    const { rerender } = renderHook((formState: HookFormState) => useFormReset(formState), {
       initialProps: { status: 'UNSET', timestamp }
     })
 
@@ -107,7 +112,7 @@ describe('useFormReset', () => {
 
   it('should track timestamp changes correctly', () => {
     const initialTimestamp = Date.now()
-    const { result, rerender } = renderHook((formState: any) => useFormReset(formState), {
+    const { result, rerender } = renderHook((formState: HookFormState) => useFormReset(formState), {
       initialProps: { status: 'SUCCESS', timestamp: initialTimestamp }
     })
 

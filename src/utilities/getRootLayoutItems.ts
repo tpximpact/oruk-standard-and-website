@@ -9,8 +9,8 @@ interface MenuItem {
   dynamic?: boolean
   urlPath?: string
   dynamicOverflow?: number
-  dynamicChildNodes?: any[]
-  [key: string]: any
+  dynamicChildNodes?: unknown[]
+  [key: string]: unknown
 }
 
 export const getRootLayoutItems = (): MenuItem[] => {

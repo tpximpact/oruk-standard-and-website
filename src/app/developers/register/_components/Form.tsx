@@ -12,9 +12,9 @@ import { useFormReset } from '@/hooks/use-form-reset'
 interface FormState {
   status?: string
   updateLink?: string
-  formData?: Record<string, any>
+  formData?: Record<string, unknown>
   fieldErrors?: Record<string, string[] | undefined>
-  [key: string]: any
+  [key: string]: unknown
 }
 
 interface TextFieldProps {
