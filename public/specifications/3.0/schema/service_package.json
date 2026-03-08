@@ -1,6 +1,0 @@
-{
-  "type": "array",
-  "items": {
-    "$ref": "https://openreferraluk.org/specifications/3.0/schema/service.json"
-  }
-}
