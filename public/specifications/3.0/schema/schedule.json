@@ -11,38 +11,35 @@
   "type": "object",
   "properties": {
     "id": {
-      "name": "id",
-      "type": "string",
+      "allOf": [
+        {
+          "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#/$defs/uuid_id"
+        }
+      ],
       "title": "Identifier",
       "description": "The identifier for the schedule. Each entry must have a unique identifier.",
-      "format": "uuid",
-      "constraints": {
-        "unique": true
-      },
       "example": "48102e86-bb50-41c4-8f1e-e269368c41d1",
       "core": "Y"
     },
     "service_id": {
-      "name": "service_id",
-      "type": "string",
+      "allOf": [
+        {
+          "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#/$defs/uuid_reference"
+        }
+      ],
       "title": "Service Identifier",
       "description": "The identifier of the service for which this is the regular schedule",
-      "format": "uuid",
-      "constraints": {
-        "unique": false
-      },
       "example": "ac148810-d857-441c-9679-408f346de14b",
       "core": "Y"
     },
     "service_at_location_id": {
-      "name": "service_at_location_id",
-      "type": "string",
+      "allOf": [
+        {
+          "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#/$defs/uuid_reference"
+        }
+      ],
       "title": "Service At Location Identifier",
-      "description": "The identifier of the \u2018service at location\u2019 table entry, when this schedule is specific to a service in a particular location.",
-      "format": "uuid",
-      "constraints": {
-        "unique": false
-      },
+      "description": "The identifier of the 'service at location' table entry, when this schedule is specific to a service in a particular location.",
       "example": "e94c9f38-1e8f-4564-91d4-d53501ab1765",
       "core": "Y"
     },

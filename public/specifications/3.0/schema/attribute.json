@@ -11,38 +11,35 @@
   "type": "object",
   "properties": {
     "id": {
-      "name": "id",
-      "type": "string",
+      "allOf": [
+        {
+          "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#/$defs/uuid_id"
+        }
+      ],
       "title": "Identifier",
       "description": "The identifier of the attribute entry. Each attribute entry should have a unique identifier.",
-      "format": "uuid",
-      "constraints": {
-        "unique": true
-      },
       "example": "ae58cc39-8b70-4ab1-8aea-786882e5ac8e",
       "core": "Y"
     },
     "link_id": {
-      "name": "link_id",
-      "type": "string",
+      "allOf": [
+        {
+          "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#/$defs/uuid_reference"
+        }
+      ],
       "title": "Link Identifier",
       "description": "The identifier of the entity to which this taxonomy term applies.",
-      "format": "uuid",
-      "constraints": {
-        "unique": false
-      },
       "example": "f28dd44b-0c4d-479f-8e90-4c52219a8b3c",
       "core": "Y"
     },
     "taxonomy_term_id": {
-      "name": "taxonomy_term_id",
-      "type": "string",
+      "allOf": [
+        {
+          "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#/$defs/uuid_reference"
+        }
+      ],
       "title": "Taxonomy Term Identifier",
       "description": "The identifier of this taxonomy term from the taxonomy table.",
-      "format": "uuid",
-      "constraints": {
-        "unique": false
-      },
       "example": "3f7b145d-84af-42d7-8fae-eaca714b02b2",
       "core": "Y"
     },

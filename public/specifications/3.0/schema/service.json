@@ -11,48 +11,44 @@
   "type": "object",
   "properties": {
     "id": {
-      "name": "id",
-      "type": "string",
+      "allOf": [
+        {
+          "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#/$defs/uuid_id"
+        }
+      ],
       "title": "Identifier",
       "description": "The identifier for the service. Each service must have a unique identifier.",
-      "format": "uuid",
-      "constraints": {
-        "unique": true
-      },
       "example": "ac148810-d857-441c-9679-408f346de14b",
       "core": "Y"
     },
     "organization_id": {
-      "name": "organization_id",
-      "type": "string",
+      "allOf": [
+        {
+          "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#/$defs/uuid_reference"
+        }
+      ],
       "title": "Organization Identifier",
       "description": "The identifier of the organization that provides this service.",
-      "format": "uuid",
-      "constraints": {
-        "unique": false
-      },
       "example": "d9d5e0f5-d3ce-4f73-9a2f-4dd0ecc6c610",
       "core": "Y"
     },
     "name": {
-      "name": "name",
-      "type": "string",
-      "title": "Name",
+      "allOf": [
+        {
+          "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#/$defs/name"
+        }
+      ],
       "description": "The official or public name of the service.",
-      "constraints": {
-        "unique": false
-      },
       "example": "Community Counselling",
       "core": "Y"
     },
     "description": {
-      "name": "description",
-      "type": "string",
-      "title": "Description",
+      "allOf": [
+        {
+          "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#/$defs/description"
+        }
+      ],
       "description": "A free text description of the service.",
-      "constraints": {
-        "unique": false
-      },
       "example": "Counselling Services provided by trained professionals. Suitable for people with mental health conditions such as anxiety, depression, or eating disorders as well as people experiencing difficult life events and circumstances. ",
       "core": "Y"
     },
@@ -69,33 +65,24 @@
       "core": "Y"
     },
     "email": {
-      "name": "email",
-      "type": "string",
+      "allOf": [
+        {
+          "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#/$defs/email"
+        }
+      ],
       "title": "Email",
       "description": "An email address which can be used to contact the service provider.",
-      "format": "email",
-      "constraints": {
-        "unique": false
-      },
       "example": "email@example.com",
       "core": "Y"
     },
     "status": {
-      "name": "status",
-      "type": "string",
-      "title": "Status",
-      "description": "The current status of the service which can be active, inactive, defunct, or temporarily closed.",
-      "constraints": {
-        "unique": false
-      },
+      "allOf": [
+        {
+          "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#/$defs/service_status"
+        }
+      ],
       "example": "active",
-      "core": "Y",
-      "enum": [
-        "active",
-        "inactive",
-        "defunct",
-        "temporarily closed"
-      ]
+      "core": "Y"
     },
     "fees": {
       "name": "fees",

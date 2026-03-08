@@ -11,26 +11,24 @@
   "type": "object",
   "properties": {
     "id": {
-      "name": "id",
-      "type": "string",
+      "allOf": [
+        {
+          "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#/$defs/uuid_id"
+        }
+      ],
       "title": "Identifier",
       "description": "The identifier of the postal address. Each postal address must have a unique identifier.",
-      "format": "uuid",
-      "constraints": {
-        "unique": true
-      },
       "example": "74706e55-df26-4b84-80fe-ecc30b5befb4",
       "core": "Y"
     },
     "location_id": {
-      "name": "location_id",
-      "type": "string",
+      "allOf": [
+        {
+          "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#/$defs/uuid_reference"
+        }
+      ],
       "title": "Location Identifier",
       "description": "The identifier of the location for this postal address.",
-      "format": "uuid",
-      "constraints": {
-        "unique": false
-      },
       "example": "3a19ff88-4620-4d17-9830-ac1d859eb5d5",
       "core": "Y"
     },

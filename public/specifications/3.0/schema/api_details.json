@@ -9,16 +9,22 @@
       "example": "HSDS 3.0"
     },
     "profile": {
-      "type": "string",
-      "format": "uri",
-      "example": "https://github.com/OpenReferralUK/uk-profile/blob/main/docs/index.md",
-      "description": "URL of the information on the HSDS profile of this API."
+      "allOf": [
+        {
+          "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#/$defs/uri"
+        }
+      ],
+      "description": "URL of the information on the HSDS profile of this API.",
+      "example": "https://github.com/OpenReferralUK/uk-profile/blob/main/docs/index.md"
     },
     "openapi_url": {
-      "type": "string",
-      "format": "uri",
-      "example": "https://docs.openreferraluk.org/en/latest/openapi30.json",
-      "description": "URL of the openapi JSON file which defines this API."
+      "allOf": [
+        {
+          "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#/$defs/uri"
+        }
+      ],
+      "description": "URL of the openapi JSON file which defines this API.",
+      "example": "https://docs.openreferraluk.org/en/latest/openapi30.json"
     }
   },
   "required": [

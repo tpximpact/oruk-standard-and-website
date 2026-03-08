@@ -11,37 +11,34 @@
   "type": "object",
   "properties": {
     "id": {
-      "name": "id",
-      "type": "string",
+      "allOf": [
+        {
+          "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#/$defs/uuid_id"
+        }
+      ],
       "title": "Identifier",
       "description": "The identifier for the service area. Each service area must have a unique identifier.",
-      "format": "uuid",
-      "constraints": {
-        "unique": true
-      },
       "example": "381c64f1-a724-4884-9c21-ac96c21cca3e",
       "core": "Y"
     },
     "service_id": {
-      "name": "service_id",
-      "type": "string",
+      "allOf": [
+        {
+          "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#/$defs/uuid_reference"
+        }
+      ],
       "title": "Service Identifier",
       "description": "The identifier of the service for which this entry describes the service area",
-      "format": "uuid",
-      "constraints": {
-        "unique": false
-      },
       "example": "ac148810-d857-441c-9679-408f346de14b",
       "core": "Y"
     },
     "name": {
-      "name": "name",
-      "type": "string",
-      "title": "Name",
+      "allOf": [
+        {
+          "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#/$defs/name"
+        }
+      ],
       "description": "A free text geographic area where a service is available.",
-      "constraints": {
-        "unique": false
-      },
       "example": "The service is available to all residents of the MyCity area. We provide the service in our offices or via video conferencing to any who can provide evidence of their residency.",
       "core": "Y"
     },
@@ -66,13 +63,13 @@
       "example": "geojson"
     },
     "uri": {
-      "name": "uri",
-      "type": "string",
+      "allOf": [
+        {
+          "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#/$defs/uri"
+        }
+      ],
       "title": "URI",
       "description": "A URI which acts as a persistent identifier to identify an area.",
-      "constraints": {
-        "unique": false
-      },
       "example": "http://example.com"
     },
     "service_area": {

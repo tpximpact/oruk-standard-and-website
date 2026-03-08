@@ -11,14 +11,13 @@
   "type": "object",
   "properties": {
     "id": {
-      "name": "id",
-      "type": "string",
+      "allOf": [
+        {
+          "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#/$defs/uuid_id"
+        }
+      ],
       "title": "Identifier",
       "description": "The identifier of the location. Each location must have a unique identifier.",
-      "format": "uuid",
-      "constraints": {
-        "unique": true
-      },
       "example": "3a19ff88-4620-4d17-9830-ac1d859eb5d5",
       "core": "Y"
     },
@@ -39,24 +38,22 @@
       ]
     },
     "name": {
-      "name": "name",
-      "type": "string",
-      "title": "Name",
+      "allOf": [
+        {
+          "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#/$defs/name"
+        }
+      ],
       "description": "The name of the location.",
-      "constraints": {
-        "unique": false
-      },
       "example": "MyCity Civic Center",
       "core": "Y"
     },
     "description": {
-      "name": "description",
-      "type": "string",
-      "title": "Description",
+      "allOf": [
+        {
+          "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#/$defs/description"
+        }
+      ],
       "description": "A free text description of the location.",
-      "constraints": {
-        "unique": false
-      },
       "example": "MyCity Civic Center is located on Main Street and contains facilities for a number of civic and community services available.",
       "core": "Y"
     },

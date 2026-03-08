@@ -11,37 +11,34 @@
   "type": "object",
   "properties": {
     "id": {
-      "name": "id",
-      "type": "string",
+      "allOf": [
+        {
+          "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#/$defs/uuid_id"
+        }
+      ],
       "title": "Identifier",
       "description": "The identifier for the contact. Each contact must have a unique identifier.",
-      "format": "uuid",
-      "constraints": {
-        "unique": true
-      },
       "example": "1e7efce3-639b-4880-940c-b95cd30cdb50",
       "core": "Y"
     },
     "service_id": {
-      "name": "service_id",
-      "type": "string",
+      "allOf": [
+        {
+          "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#/$defs/uuid_reference"
+        }
+      ],
       "title": "Service Identifier",
       "description": "The identifier of the service for which this is a contact.",
-      "format": "uuid",
-      "constraints": {
-        "unique": false
-      },
       "example": "ac148810-d857-441c-9679-408f346de14b",
       "core": "Y"
     },
     "name": {
-      "name": "name",
-      "type": "string",
-      "title": "Name",
+      "allOf": [
+        {
+          "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#/$defs/name"
+        }
+      ],
       "description": "The name of the contact.",
-      "constraints": {
-        "unique": false
-      },
       "example": "Ann Persona",
       "core": "Y"
     },

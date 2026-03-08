@@ -11,25 +11,22 @@
   "type": "object",
   "properties": {
     "id": {
-      "name": "id",
-      "type": "string",
+      "allOf": [
+        {
+          "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#/$defs/uuid_id"
+        }
+      ],
       "title": "Identifier",
-      "description": "The identifier for this organization identifier entry. Each entry must have a unique identifier.",
-      "format": "uuid",
-      "constraints": {
-        "unique": true
-      },
-      "example": "d4dbcebc-0802-47cb-8651-b937ac4f2f3e"
+      "description": "The identifier for this organization identifier entry. Each entry must have a unique identifier."
     },
     "organization_id": {
-      "name": "organization_id",
-      "type": "string",
+      "allOf": [
+        {
+          "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#/$defs/uuid_reference"
+        }
+      ],
       "title": "Organization Identifier",
       "description": "The identifier of the organization. This should match the uuid of an organization object.",
-      "format": "uuid",
-      "constraints": {
-        "unique": false
-      },
       "example": "d9d5e0f5-d3ce-4f73-9a2f-4dd0ecc6c610"
     },
     "identifier_scheme": {

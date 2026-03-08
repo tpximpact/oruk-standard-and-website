@@ -11,25 +11,22 @@
   "type": "object",
   "properties": {
     "id": {
-      "name": "id",
-      "type": "string",
+      "allOf": [
+        {
+          "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#/$defs/uuid_id"
+        }
+      ],
       "title": "Identifier",
-      "description": "The identifier for the funding. Each entry must have a unique identifier.",
-      "format": "uuid",
-      "constraints": {
-        "unique": true
-      },
-      "example": "1f2df32c-bf08-4b8e-bd6f-e834014b19bc"
+      "description": "The identifier for the funding. Each entry must have a unique identifier."
     },
     "service_id": {
-      "name": "service_id",
-      "type": "string",
+      "allOf": [
+        {
+          "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#/$defs/uuid_reference"
+        }
+      ],
       "title": "Service Identifier",
-      "format": "uuid",
       "description": "The identifier of the service in receipt of this funding.",
-      "constraints": {
-        "unique": false
-      },
       "example": "ac148810-d857-441c-9679-408f346de14b"
     },
     "source": {

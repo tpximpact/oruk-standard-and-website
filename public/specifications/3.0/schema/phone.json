@@ -11,26 +11,24 @@
   "type": "object",
   "properties": {
     "id": {
-      "name": "id",
-      "type": "string",
+      "allOf": [
+        {
+          "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#/$defs/uuid_id"
+        }
+      ],
       "title": "Identifier",
       "description": "The identifier for the phone number. Each entry must have a unique identifier.",
-      "format": "uuid",
-      "constraints": {
-        "unique": true
-      },
       "example": "1554f2e2-a373-45db-a3fa-9fc48a61c15e",
       "core": "Y"
     },
     "contact_id": {
-      "name": "contact_id",
-      "type": "string",
+      "allOf": [
+        {
+          "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#/$defs/uuid_reference"
+        }
+      ],
       "title": "Contact Identifier",
       "description": "The identifier of the contact for which this is the phone number.",
-      "format": "uuid",
-      "constraints": {
-        "unique": false
-      },
       "example": "1e7efce3-639b-4880-940c-b95cd30cdb50",
       "core": "Y"
     },
@@ -46,13 +44,12 @@
       "core": "Y"
     },
     "description": {
-      "name": "description",
-      "type": "string",
-      "title": "Description",
+      "allOf": [
+        {
+          "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#/$defs/description"
+        }
+      ],
       "description": "A free text description providing extra information about the phone service",
-      "constraints": {
-        "unique": false
-      },
       "example": "Our main reception phone number. The phones will be available from 0800 (8am) until 1800 (6pm) local time. There may be some slight delays in answering your call if we are busy."
     },
     "languages": {

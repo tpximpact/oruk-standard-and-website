@@ -11,45 +11,40 @@
   "type": "object",
   "properties": {
     "id": {
-      "name": "id",
-      "type": "string",
+      "allOf": [
+        {
+          "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#/$defs/uuid_id"
+        }
+      ],
       "title": "Identifier",
-      "description": "The identifier of the taxonomy. Each entry must have a unique identifier",
-      "format": "uuid",
-      "constraints": {
-        "unique": true
-      },
-      "example": "5c4d79d7-cc55-470e-9f1f-8cad074e4892"
+      "description": "The identifier of the taxonomy. Each entry must have a unique identifier"
     },
     "name": {
-      "name": "name",
-      "type": "string",
-      "title": "Name",
+      "allOf": [
+        {
+          "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#/$defs/name"
+        }
+      ],
       "description": "The name of the taxonomy from which terms are sourced.",
-      "constraints": {
-        "unique": false
-      },
       "example": "name"
     },
     "description": {
-      "name": "description",
-      "type": "string",
-      "title": "Description",
+      "allOf": [
+        {
+          "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#/$defs/description"
+        }
+      ],
       "description": "A free text description of the taxonomy.",
-      "constraints": {
-        "unique": false
-      },
       "example": "description"
     },
     "uri": {
-      "name": "uri",
-      "type": "string",
+      "allOf": [
+        {
+          "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#/$defs/uri"
+        }
+      ],
       "title": "URI",
       "description": "The URI of the taxonomy.",
-      "format": "uri",
-      "constraints": {
-        "unique": false
-      },
       "example": "http://example.com"
     },
     "version": {

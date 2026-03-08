@@ -11,38 +11,35 @@
   "type": "object",
   "properties": {
     "id": {
-      "name": "id",
-      "type": "string",
+      "allOf": [
+        {
+          "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#/$defs/uuid_id"
+        }
+      ],
       "title": "Identifier",
       "description": "The identifier for the language. Each entry must have a unique identifier.",
-      "format": "uuid",
-      "constraints": {
-        "unique": true
-      },
       "example": "2989d3ed-c547-48f8-8f9d-432d81c7892e",
       "core": "Y"
     },
     "service_id": {
-      "name": "service_id",
-      "type": "string",
+      "allOf": [
+        {
+          "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#/$defs/uuid_reference"
+        }
+      ],
       "title": "Service Identifier",
       "description": "The identifier of the service for which the entry describes the languages in which services are delivered.",
-      "format": "uuid",
-      "constraints": {
-        "unique": false
-      },
       "example": "ac148810-d857-441c-9679-408f346de14b",
       "core": "Y"
     },
     "phone_id": {
-      "name": "phone_id",
-      "type": "string",
+      "allOf": [
+        {
+          "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#/$defs/uuid_reference"
+        }
+      ],
       "title": "Phone Identifier",
-      "format": "uuid",
       "description": "The identifier of the phone for which the entry describes the languages in which services delivered.",
-      "constraints": {
-        "unique": false
-      },
       "example": "1554f2e2-a373-45db-a3fa-9fc48a61c15e"
     }
   },

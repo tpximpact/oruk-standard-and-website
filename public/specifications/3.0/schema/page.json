@@ -1,0 +1,39 @@
+{
+  "name": "page",
+  "description": "Pagination metadata for list responses.",
+  "type": "object",
+  "properties": {
+    "total_items": {
+      "type": "integer",
+      "description": "The total number of entities (e.g. services, organizations) returned"
+    },
+    "total_pages": {
+      "type": "integer",
+      "description": "Count of total pages."
+    },
+    "page_number": {
+      "type": "integer",
+      "description": "The number of the current page"
+    },
+    "size": {
+      "type": "integer",
+      "description": "The number of entities in the current page."
+    },
+    "first_page": {
+      "type": "boolean",
+      "description": "A Boolean value indicating if this is the first page"
+    },
+    "last_page": {
+      "type": "boolean",
+      "description": "A Boolean value indicating if this is the last page"
+    },
+    "empty": {
+      "type": "boolean",
+      "description": "A Boolean value indicating if there is an empty result set"
+    }
+  },
+  "required": [
+    "empty"
+  ],
+  "title": "Page"
+}

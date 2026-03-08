@@ -11,48 +11,44 @@
   "type": "object",
   "properties": {
     "id": {
-      "name": "id",
-      "type": "string",
+      "allOf": [
+        {
+          "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#/$defs/uuid_id"
+        }
+      ],
       "title": "Identifier",
       "description": "The identifier for the organization. Each organization must have a unique identifier.",
-      "format": "uuid",
-      "constraints": {
-        "unique": true
-      },
       "example": "d9d5e0f5-d3ce-4f73-9a2f-4dd0ecc6c610",
       "core": "Y"
     },
     "name": {
-      "name": "name",
-      "type": "string",
-      "title": "Name",
+      "allOf": [
+        {
+          "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#/$defs/name"
+        }
+      ],
       "description": "The official or public name of the organization.",
-      "constraints": {
-        "unique": false
-      },
       "example": "Example Organization Inc.",
       "core": "Y"
     },
     "description": {
-      "name": "description",
-      "type": "string",
-      "title": "Description",
+      "allOf": [
+        {
+          "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#/$defs/description"
+        }
+      ],
       "description": "A free text description containing a brief summary about the organization. It can contain markup such as HTML or Markdown.",
-      "constraints": {
-        "unique": false
-      },
       "example": "Example Org is a non-profit organization dedicated to providing services to qualified beneficiaries",
       "core": "Y"
     },
     "email": {
-      "name": "email",
-      "type": "string",
+      "allOf": [
+        {
+          "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#/$defs/email"
+        }
+      ],
       "title": "Email",
       "description": "The contact e-mail address for the organization.",
-      "format": "email",
-      "constraints": {
-        "unique": false
-      },
       "example": "email@example.com",
       "core": "Y"
     },
@@ -79,14 +75,13 @@
       "example": "https://openreferral.org/wp-content/uploads/2018/02/OpenReferral_Logo_Green-4-1.png"
     },
     "uri": {
-      "name": "uri",
-      "type": "string",
+      "allOf": [
+        {
+          "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#/$defs/uri"
+        }
+      ],
       "title": "URI",
       "description": "A persistent identifier to uniquely identify the organization such as those provided by Open Corporates or some other relevant URI provider. This is not for listing the website of the organization: that can be done through the website field of the Organization.",
-      "format": "uri",
-      "constraints": {
-        "unique": false
-      },
       "example": "http://example.com"
     },
     "parent_organization_id": {
