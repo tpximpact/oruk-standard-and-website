@@ -39,7 +39,7 @@ This is a test.`
       isEmpty: false
     }
 
-    vi.mocked(matter).mockReturnValue(mockParsed as any)
+    vi.mocked(matter).mockReturnValue(mockParsed as unknown as ReturnType<typeof matter>)
     vi.mocked(marked.parse).mockReturnValue('<h1>Hello World</h1>\n<p>This is a test.</p>')
 
     const result = parseMarkdown(markdown)
@@ -66,7 +66,7 @@ This is a test.`
       isEmpty: false
     }
 
-    vi.mocked(matter).mockReturnValue(mockParsed as any)
+    vi.mocked(matter).mockReturnValue(mockParsed as unknown as ReturnType<typeof matter>)
     vi.mocked(marked.parse).mockReturnValue('<h1>Content Only</h1>\n<p>No frontmatter here.</p>')
 
     const result = parseMarkdown(markdown)
@@ -87,7 +87,7 @@ This is a test.`
       isEmpty: true
     }
 
-    vi.mocked(matter).mockReturnValue(mockParsed as any)
+    vi.mocked(matter).mockReturnValue(mockParsed as unknown as ReturnType<typeof matter>)
 
     const result = parseMarkdown(markdown)
 
@@ -106,7 +106,7 @@ This is a test.`
       isEmpty: false
     }
 
-    vi.mocked(matter).mockReturnValue(mockParsed as any)
+    vi.mocked(matter).mockReturnValue(mockParsed as unknown as ReturnType<typeof matter>)
     vi.mocked(marked.parse).mockReturnValue('<p><a href="https://example.com">Link text</a></p>')
 
     const result = parseMarkdown(markdown)
@@ -127,7 +127,7 @@ This is a test.`
       isEmpty: false
     }
 
-    vi.mocked(matter).mockReturnValue(mockParsed as any)
+    vi.mocked(matter).mockReturnValue(mockParsed as unknown as ReturnType<typeof matter>)
     vi.mocked(marked.parse).mockReturnValue(
       '<pre><code class="language-javascript">const x = 1;\n</code></pre>'
     )
@@ -150,7 +150,7 @@ This is a test.`
       isEmpty: false
     }
 
-    vi.mocked(matter).mockReturnValue(mockParsed as any)
+    vi.mocked(matter).mockReturnValue(mockParsed as unknown as ReturnType<typeof matter>)
     vi.mocked(marked.parse).mockReturnValue('<p><strong>Bold</strong> and <em>italic</em></p>')
 
     const result = parseMarkdown(markdown)
@@ -185,7 +185,7 @@ Content here`
       isEmpty: false
     }
 
-    vi.mocked(matter).mockReturnValue(mockParsed as any)
+    vi.mocked(matter).mockReturnValue(mockParsed as unknown as ReturnType<typeof matter>)
     vi.mocked(marked.parse).mockReturnValue('<p>Content here</p>')
 
     const result = parseMarkdown(markdown)

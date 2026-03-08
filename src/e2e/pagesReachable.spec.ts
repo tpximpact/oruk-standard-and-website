@@ -4,6 +4,11 @@ import fs from 'fs'
 import { join } from 'path'
 import { test, expect, Page } from '@playwright/test'
 
+interface ReachablePage {
+  path: string
+  lookFor?: string
+}
+
 const getAllFiles = (contentFolder: string) => {
   const dir = join(process.cwd(), '/content', contentFolder)
   const dirents = fs.readdirSync(dir, { withFileTypes: true })
@@ -14,14 +19,15 @@ const getAllFiles = (contentFolder: string) => {
 }
 
 const site = flattenSite().filter(p => !p.offsite)
-const nonDynamicPages = site
+const nonDynamicPages: ReachablePage[] = site
   .filter(p => p.urlPath && p.name && !String(p.urlPath).includes('undefined'))
   .map(page => ({
     path: '/' + page.urlPath,
-    lookFor: page.e2eTestLookFor
+    lookFor:
+      typeof page.e2eTestLookFor === 'string' ? page.e2eTestLookFor : String(page.e2eTestLookFor)
   }))
 
-const dynamicPages = site
+const dynamicPages: ReachablePage[] = site
   .filter(p => p.dynamic && p.contentPath && p.name)
   .flatMap(root => {
     const dirPath = join(process.cwd(), '/content', root.contentPath!)
@@ -32,7 +38,7 @@ const dynamicPages = site
       .map(s => ({ path: `${root.contentPath}/${s}`, lookFor: 'open' }))
   })
 
-const data = nonDynamicPages
+const data: ReachablePage[] = nonDynamicPages
   .concat(dynamicPages)
   .filter((value, index, self) => self.findIndex(v => v.path === value.path) === index)
 

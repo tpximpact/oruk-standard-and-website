@@ -7,9 +7,11 @@ const versionedContentVersionFromFilename = (filename: string): string => {
   return name.replace('_', '.')
 }
 
-export const loadVersionedJsonFiles = (contentFolder: string): [string[], Record<string, any>] => {
+export const loadVersionedJsonFiles = (
+  contentFolder: string
+): [string[], Record<string, unknown>] => {
   const files = getAllFilesInFolder(contentFolder).filter(f => f.split('.')[1] === 'json')
-  const contentData: Record<string, any> = {}
+  const contentData: Record<string, unknown> = {}
   files.forEach(file => {
     const version = versionedContentVersionFromFilename(file)
     const filePath = join(contentFolder, file)

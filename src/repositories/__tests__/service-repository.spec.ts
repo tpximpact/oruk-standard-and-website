@@ -1,7 +1,7 @@
 import { describe, it, expect, vi, beforeEach, type Mock } from 'vitest'
 import type { ObjectId } from 'mongodb'
 import { ServiceRepository } from '../service-repository'
-import { ServiceDocument } from '@/models/service'
+import { ServiceDocument, type ServiceInput } from '@/models/service'
 import { ValidationError } from '@/lib/mongodb-errors'
 
 let mockCollection: {
@@ -19,7 +19,7 @@ vi.mock('@/lib/mongodb', () => {
       db: () => ({
         collection: () => mockCollection
       })
-    } as any)
+    } as unknown)
   )
 
   const getCollection = vi.fn((_name: string) => Promise.resolve(mockCollection))
@@ -56,7 +56,7 @@ describe('ServiceRepository', () => {
       updateOne: vi.fn(),
       deleteOne: vi.fn(),
       findOneAndUpdate: vi.fn()
-    } as any
+    }
     repository = new ServiceRepository()
     vi.clearAllMocks()
   })
@@ -94,7 +94,7 @@ describe('ServiceRepository', () => {
       const invalidData = {
         name: '',
         publisher: 'Test'
-      } as any
+      } as ServiceInput
 
       const createPromise = repository.create(invalidData)
       await expect(createPromise).rejects.toThrow(ValidationError)
@@ -106,7 +106,7 @@ describe('ServiceRepository', () => {
       const mockCursor = {
         toArray: vi.fn().mockResolvedValue([testService] as never)
       }
-      mockCollection.find.mockReturnValueOnce(mockCursor as any)
+      mockCollection.find.mockReturnValueOnce(mockCursor as unknown)
 
       const results = await repository.findByPublisher('Test Publisher')
 
@@ -126,7 +126,7 @@ describe('ServiceRepository', () => {
       const mockCursor = {
         toArray: vi.fn().mockResolvedValue([testService] as never)
       }
-      mockCollection.find.mockReturnValueOnce(mockCursor as any)
+      mockCollection.find.mockReturnValueOnce(mockCursor as unknown)
 
       const results = await repository.findByEmail('test@example.com')
 
@@ -181,7 +181,7 @@ describe('ServiceRepository', () => {
       const mockCursor = {
         toArray: vi.fn().mockResolvedValue([testService] as never)
       }
-      mockCollection.find.mockReturnValueOnce(mockCursor as any)
+      mockCollection.find.mockReturnValueOnce(mockCursor as unknown)
 
       const results = await repository.search('Test')
 

@@ -6,7 +6,7 @@ interface ColumnsProps {
   layout?: string | number
   debug?: boolean
   supressTrailingSpace?: boolean
-  [key: string]: any
+  [key: string]: unknown
 }
 
 declare const Columns: React.FC<ColumnsProps>

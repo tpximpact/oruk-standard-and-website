@@ -2,11 +2,14 @@ import { Sitemap } from '@/components/Sitemap'
 import { getRawPageTree } from '@/utilities/getRawPageTree'
 import { siteStructureWithFullPaths } from '@/utilities/menuing'
 import { Metadata } from 'next'
+import type { ComponentProps } from 'react'
 
 export default function Page() {
-  return (
-    <Sitemap showHeading={true} data={siteStructureWithFullPaths(getRawPageTree() as any) as any} />
-  )
+  const sitemapData = siteStructureWithFullPaths(getRawPageTree()) as unknown as ComponentProps<
+    typeof Sitemap
+  >['data']
+
+  return <Sitemap showHeading={true} data={sitemapData} />
 }
 
 export const metadata: Metadata = {

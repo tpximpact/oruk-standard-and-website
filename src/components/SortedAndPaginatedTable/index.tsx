@@ -6,8 +6,12 @@ import {
   TableSorting,
   getSortingOptions,
   getSortedRows,
-  DIRECTION
+  DIRECTION,
+  type Column
 } from './_components/TableSorting'
+import { type Header } from './_components/PaginatedTable/DataTable'
+
+export type { Column }
 
 interface View {
   sortBy: string[]
@@ -15,14 +19,14 @@ interface View {
   defaultSortDirection: 'asc' | 'desc'
   rowsPerPage: number
   columns: string[]
-  [key: string]: any
+  [key: string]: unknown
 }
 
 interface TableData {
   definitions: {
-    columns: Record<string, any>
+    columns: Record<string, Column>
   }
-  data: any[]
+  data: Array<Record<string, unknown>>
 }
 
 interface SortedAndPaginatedTableProps {
@@ -80,7 +84,7 @@ export const SortedAndPaginatedTable = ({
       <PaginatedTable
         rowsPerPage={view.rowsPerPage}
         columns={view.columns}
-        headers={headers}
+        headers={headers as Record<string, Header>}
         rows={sortedRows}
         currentPage={currentPage}
       />

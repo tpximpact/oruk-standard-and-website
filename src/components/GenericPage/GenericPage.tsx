@@ -8,13 +8,31 @@ import { Metadata } from 'next'
 
 export const metadata = (name: string): Metadata => {
   const pageData = getNamedSiteItem(name)
+  const title =
+    pageData && typeof pageData.label === 'string'
+      ? pageData.label
+      : String(pageData?.label ?? 'Open Referral UK')
   return {
-    title: pageData && pageData.label ? pageData.label : 'Open Referral UK'
+    title
   }
 }
 
 interface GenericPageProps {
   name: string
+}
+
+interface PageMenuNode {
+  label: string
+  urlPath: string
+  offsite?: boolean
+  teaser?: string
+  [key: string]: unknown
+}
+
+const isPageMenuNode = (value: unknown): value is PageMenuNode => {
+  if (!value || typeof value !== 'object') return false
+  const node = value as Record<string, unknown>
+  return typeof node.label === 'string' && typeof node.urlPath === 'string'
 }
 
 export const GenericPage = ({ name }: GenericPageProps) => {
@@ -25,8 +43,8 @@ export const GenericPage = ({ name }: GenericPageProps) => {
   if (childNodes) {
     const siteItems = childNodes
       .map(node => (typeof node === 'string' ? getNamedSiteItem(node) : node))
-      .filter((node): node is NonNullable<typeof node> => node !== undefined)
-    menuNodes = formatNodesForPageMenu(siteItems as any)
+      .filter((item): item is PageMenuNode => isPageMenuNode(item))
+    menuNodes = formatNodesForPageMenu(siteItems)
   }
 
   return (

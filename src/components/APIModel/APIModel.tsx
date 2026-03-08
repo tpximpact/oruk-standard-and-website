@@ -2,9 +2,24 @@ import styles from './APIModel.module.css'
 import { Path } from './Path'
 import { DocumentationPage } from '@/components/Documentation'
 
+interface ParsedSpec {
+  paths: Record<string, Record<string, unknown>>
+  components: {
+    parameters: Record<string, unknown>
+  }
+}
+
+interface APIModelData {
+  rootSpec: {
+    parsed: ParsedSpec
+  }
+  htmlContent: string
+  [key: string]: unknown
+}
+
 interface APIModelProps {
-  allVersionsContent: any
-  data: any
+  allVersionsContent: string
+  data: APIModelData
 }
 
 export const APIModel = ({ allVersionsContent, data }: APIModelProps) => {
@@ -26,17 +41,20 @@ export const APIModel = ({ allVersionsContent, data }: APIModelProps) => {
       menuTitle='Paths'
     >
       <div className={styles.APIModel}>
-        {Object.keys(endpoints).map(key => (
-          <Path
-            key={key}
-            path={key}
-            allData={data}
-            parametersReferences={parametersReferences}
-            data={endpoints[key]}
-            twirledOpen={undefined}
-            hidePathTitle={undefined}
-          />
-        ))}
+        {Object.keys(endpoints).map(key => {
+          const endpointData = endpoints[key] as Record<string, unknown>
+          return (
+            <Path
+              key={key}
+              path={key}
+              allData={data}
+              parametersReferences={parametersReferences}
+              data={endpointData}
+              twirledOpen={undefined}
+              hidePathTitle={undefined}
+            />
+          )
+        })}
       </div>
     </DocumentationPage>
   )

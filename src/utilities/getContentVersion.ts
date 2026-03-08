@@ -13,6 +13,8 @@ interface ContentVersionOptions {
   specificationFolderPath: string
 }
 
+type SchemataMap = Parameters<typeof unNestSchemata>[0]
+
 export const getContentVersion = ({
   contentFolder,
   specificationFolderPath
@@ -46,10 +48,15 @@ export const getContentVersion = ({
     // Resolve all external schema references at runtime
     const schemaDir = join(process.cwd(), specificationFolderPath, 'schema')
     const resolver = new SchemaResolver(schemaDir)
-    const rootSpecResolved = resolver.resolve(rootSpecParsed)
+    const rootSpecResolved = resolver.resolve(rootSpecParsed) as {
+      components?: {
+        schemas?: SchemataMap
+      }
+      [key: string]: unknown
+    }
 
     // load schemata from root
-    let schemata = rootSpecResolved.components?.schemas || {}
+    let schemata: SchemataMap = rootSpecResolved.components?.schemas || {}
     schemata = unNestSchemata(schemata) // some schemata - ie v1.0 has nested properties :-(
 
     // load schemata from file system
@@ -61,7 +68,7 @@ export const getContentVersion = ({
         schemaFiles.forEach(schemaFile => {
           const rawJson = fs.readFileSync(join(fullPath, schemaFile), 'utf8')
           const k = filenameToName(schemaFile)
-          schemata[k!] = JSON.parse(rawJson)
+          schemata[k!] = JSON.parse(rawJson) as SchemataMap[string]
         })
       }
     } catch {

@@ -1,5 +1,5 @@
 import { Inter } from 'next/font/google'
-import { ReactNode } from 'react'
+import { ReactNode, type ComponentProps } from 'react'
 import type { Metadata } from 'next'
 
 // @ts-ignore CSS import required for styling
@@ -75,13 +75,17 @@ export default async function RootLayout({ children }: RootLayoutProps) {
   // console.log ("--> " + pathname)
 
   const items = getRootLayoutItems()
+  const headerItems = items as unknown as ComponentProps<typeof Header>['items']
+  const infoItems = (getInfoMenuItems() || []) as unknown as ComponentProps<
+    typeof LandmarkContentInfo
+  >['infoItems']
   return (
     <Wrap>
       <CookieProvider>
         <div style={{ maxWidth: '100vw' }}>
           {configValueToBoolean(process.env.USE_COOKIES) ? <Cookies /> : null}
           <NoJsBanner />
-          <Header items={items as any} enableMenu={configValueToBoolean(process.env.USE_NAV)} />
+          <Header items={headerItems} enableMenu={configValueToBoolean(process.env.USE_NAV)} />
           <LandmarkMain>
             {configValueToBoolean(process.env.USE_NOWARRANTY) ? <NoWarranty /> : null}
             {configValueToBoolean(process.env.USE_NAV) ? (
@@ -94,7 +98,7 @@ export default async function RootLayout({ children }: RootLayoutProps) {
           </LandmarkMain>
         </div>
         <LandmarkContentInfo
-          infoItems={(getInfoMenuItems() || []) as any}
+          infoItems={infoItems}
           showNav={configValueToBoolean(process.env.USE_NAV)}
         />
         <NoJsFallback />

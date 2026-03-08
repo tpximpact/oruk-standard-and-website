@@ -5,21 +5,15 @@ import { resultToStatus } from '@/utilities/resultToStatus'
 import { getColourForStatus } from '@/utilities/getColourForStatus'
 import { getIconForStatus } from '@/utilities/getIconForStatus'
 import styles from './ValidatorResult.module.css'
+import type { ValidationResultData } from './types'
 
 interface TitleProps {
-  result: {
-    service: {
-      url: string
-      isValid: boolean
-      profile: string
-    }
-    [key: string]: any
-  }
+  result: ValidationResultData
 }
 
 export const Title = ({ result }: TitleProps) => {
   const status = resultToStatus(result)
-  const colour = (getColourForStatus as any)(status, true)
+  const colour = getColourForStatus(status)
   return (
     <header className={styles.header}>
       <h2 className={styles.title}>
@@ -33,12 +27,7 @@ export const Title = ({ result }: TitleProps) => {
           <span className={styles.fieldLabel}>Overall result:</span>{' '}
           <span id='overallResult'>{result.service.isValid ? 'Pass' : 'Fail'}</span>
           <span className={styles.overallIcon}>
-            <Icon
-              colour={colour}
-              weight={6}
-              icon={(getIconForStatus as any)(status, true)}
-              size={48}
-            />
+            <Icon colour={colour} weight={6} icon={getIconForStatus(status)} size={48} />
           </span>
         </div>
         <div className={styles.field}>

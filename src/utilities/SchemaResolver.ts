@@ -2,7 +2,7 @@ import fs from 'fs'
 import path from 'path'
 
 interface JsonSchema {
-  [key: string]: any
+  [key: string]: unknown
 }
 
 interface RefCache {
@@ -63,7 +63,7 @@ export class SchemaResolver {
     // Remove leading '#/' and split path
     const path = pointer.replace(/^#\//, '').split('/')
 
-    let current: any = this.rootDocument
+    let current: unknown = this.rootDocument
     for (const segment of path) {
       // Decode URI-encoded segments
       const decodedSegment = decodeURIComponent(segment)
@@ -72,20 +72,20 @@ export class SchemaResolver {
         return null
       }
 
-      current = current[decodedSegment]
+      current = (current as Record<string, unknown>)[decodedSegment]
     }
 
-    return current
+    return current && typeof current === 'object' ? (current as JsonSchema) : null
   }
 
-  private hasSelfReference(schema: any, refPointer: string): boolean {
+  private hasSelfReference(schema: unknown, refPointer: string): boolean {
     // Check if this specific schema directly references itself
     if (!schema || typeof schema !== 'object') {
       return false
     }
 
     // Check if this object has a $ref that matches refPointer
-    if (schema.$ref === refPointer) {
+    if ((schema as JsonSchema).$ref === refPointer) {
       return true
     }
 
@@ -140,14 +140,18 @@ export class SchemaResolver {
 
     // Recursively resolve any nested references
     const fullyResolved = this.resolveAllRefs(resolved, visitedRefs)
+    const normalizedResolved =
+      fullyResolved && typeof fullyResolved === 'object'
+        ? (fullyResolved as JsonSchema)
+        : ({ $ref: refPointer } as JsonSchema)
 
     // Cache the fully resolved schema
-    this.refCache[refPointer] = fullyResolved
+    this.refCache[refPointer] = normalizedResolved
 
     // Remove from visited - we're done with this resolution path
     visitedRefs.delete(refPointer)
 
-    return fullyResolved
+    return normalizedResolved
   }
 
   private resolveRef(refUrl: string, visitedRefs: Set<string>): JsonSchema {
@@ -181,10 +185,13 @@ export class SchemaResolver {
 
       // Recursively resolve all $ref in this schema
       const resolved = this.resolveAllRefs(schema, visitedRefs)
-      this.refCache[refUrl] = resolved
+      this.refCache[refUrl] =
+        resolved && typeof resolved === 'object'
+          ? (resolved as JsonSchema)
+          : ({ $ref: refUrl } as JsonSchema)
 
       visitedRefs.delete(refUrl)
-      return resolved
+      return this.refCache[refUrl]
     } catch (error) {
       console.error(`Error loading schema ${fileName}:`, error)
       visitedRefs.delete(refUrl)
@@ -192,7 +199,7 @@ export class SchemaResolver {
     }
   }
 
-  private resolveAllRefs(obj: any, visitedRefs: Set<string>): any {
+  private resolveAllRefs(obj: unknown, visitedRefs: Set<string>): unknown {
     if (obj === null || typeof obj !== 'object') {
       return obj
     }
@@ -202,24 +209,29 @@ export class SchemaResolver {
     }
 
     // If this object has a $ref, resolve it
-    if (obj.$ref && typeof obj.$ref === 'string') {
+    const schemaObject = obj as JsonSchema
+    if (schemaObject.$ref && typeof schemaObject.$ref === 'string') {
       let resolved: JsonSchema
 
-      if (this.isExternalSchemaRef(obj.$ref)) {
+      if (this.isExternalSchemaRef(schemaObject.$ref)) {
         // Resolve external file reference
-        resolved = this.resolveRef(obj.$ref, visitedRefs)
-      } else if (this.isInternalRef(obj.$ref)) {
+        resolved = this.resolveRef(schemaObject.$ref, visitedRefs)
+      } else if (this.isInternalRef(schemaObject.$ref)) {
         // Resolve internal JSON pointer reference
-        resolved = this.resolveInternalRef(obj.$ref, visitedRefs)
+        resolved = this.resolveInternalRef(schemaObject.$ref, visitedRefs)
       } else {
         // Keep the reference as-is if we can't identify it
         return obj
       }
 
       // Merge other properties if they exist (besides $ref)
-      const { $ref, ...rest } = obj
+      const { $ref: _ref, ...rest } = schemaObject
+      const resolvedRest = this.resolveAllRefs(rest, visitedRefs)
       return Object.keys(rest).length > 0
-        ? { ...resolved, ...this.resolveAllRefs(rest, visitedRefs) }
+        ? {
+            ...resolved,
+            ...(resolvedRest && typeof resolvedRest === 'object' ? resolvedRest : {})
+          }
         : resolved
     }
 
@@ -236,6 +248,7 @@ export class SchemaResolver {
     this.refCache = {}
     this.rootDocument = schema
     // Pass a new Set to track the current resolution path
-    return this.resolveAllRefs(schema, new Set<string>())
+    const resolved = this.resolveAllRefs(schema, new Set<string>())
+    return resolved && typeof resolved === 'object' ? (resolved as JsonSchema) : {}
   }
 }

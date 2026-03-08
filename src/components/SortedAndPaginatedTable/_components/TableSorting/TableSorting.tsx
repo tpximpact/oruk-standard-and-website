@@ -1,7 +1,7 @@
 import sort from './TableSorting.module.css'
 import { HTMLAttributes } from 'react'
 
-interface Column {
+export interface Column {
   label: string
 }
 
@@ -24,7 +24,7 @@ interface DataRow {
 
 interface TableData {
   definitions: DataDefinitions
-  data: DataRow[]
+  data: DataRow[] | Array<Record<string, unknown>>
 }
 
 export const getSortingOptions = (view: View, data: TableData): [string, string][] =>
@@ -43,14 +43,22 @@ interface GetSortedRowsParams {
   sortDirection: Direction
 }
 
-export const getSortedRows = ({
-  sortColumn,
-  data,
-  sortDirection
-}: GetSortedRowsParams): DataRow[] => {
-  const compareRows = (a: DataRow, b: DataRow) => {
-    const valA = String(a[sortColumn]?.value || '').toUpperCase()
-    const valB = String(b[sortColumn]?.value || '').toUpperCase()
+export const getSortedRows = ({ sortColumn, data, sortDirection }: GetSortedRowsParams) => {
+  const getValue = (row: DataRow | Record<string, unknown>, col: string): string => {
+    const cell = row as Record<string, unknown>
+    const value = cell[col]
+    if (value && typeof value === 'object' && 'value' in value) {
+      return String((value as Record<string, unknown>).value || '')
+    }
+    return String(value || '')
+  }
+
+  const compareRows = (
+    a: DataRow | Record<string, unknown>,
+    b: DataRow | Record<string, unknown>
+  ) => {
+    const valA = getValue(a, sortColumn).toUpperCase()
+    const valB = getValue(b, sortColumn).toUpperCase()
     if (valA < valB) {
       return -1
     }
@@ -61,7 +69,11 @@ export const getSortedRows = ({
     //return 0;
 
     // these columns are the same so sort on name instead
-    if (a.name.value < b.name.value) {
+    const aName = a as Record<string, unknown>
+    const bName = b as Record<string, unknown>
+    const nameA = (aName.name as Record<string, unknown>)?.value || aName.name || ''
+    const nameB = (bName.name as Record<string, unknown>)?.value || bName.name || ''
+    if (String(nameA) < String(nameB)) {
       return -1
     } else {
       return 1
@@ -74,7 +86,7 @@ export const getSortedRows = ({
     newSortedRows = newSortedRows.reverse()
   }
 
-  return newSortedRows
+  return newSortedRows as Array<DataRow | Record<string, unknown>>
 }
 
 interface TableSortingProps extends HTMLAttributes<HTMLSelectElement> {

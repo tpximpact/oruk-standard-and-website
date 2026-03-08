@@ -24,7 +24,7 @@ zoom: false
 
 // import styles from "./RenderAPI.module.css"
 
-export const RenderDB = ({ data }: { data: any }) => (
+export const RenderDB = ({ data }: { data: unknown }) => (
   <div>
     RenderDB:
     {JSON.stringify(data)}

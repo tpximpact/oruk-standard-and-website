@@ -1,4 +1,4 @@
-import { describe, it, expect, vi, beforeEach } from 'vitest'
+import { describe, it, expect, vi, beforeEach, type Mock } from 'vitest'
 import { ValidationError } from '@/lib/mongodb-errors'
 
 // Set required environment variables
@@ -34,7 +34,7 @@ vi.mock('@/utilities/to-form-state', () => ({
     fieldErrors: {},
     timestamp: Date.now()
   }),
-  fromErrorToFormState: (error: unknown, values?: any) => {
+  fromErrorToFormState: (error: unknown, values?: Record<string, unknown>) => {
     if (error instanceof ValidationError) {
       return {
         status: 'ERROR',
@@ -56,7 +56,7 @@ vi.mock('@/utilities/to-form-state', () => ({
 
 vi.mock('@/models/service', () => ({
   serviceInputSchema: {
-    parse: (data: any) => {
+    parse: (data: Record<string, unknown>) => {
       // Simple validation for test
       if (!data.name || !data.publisher || !data.contactEmail) {
         // eslint-disable-next-line @typescript-eslint/no-require-imports
@@ -83,12 +83,19 @@ import { createVerificationIssue } from '@/lib/github-service'
 import { revalidatePath } from 'next/cache'
 
 describe('service-actions', () => {
+  const mockedCreateVerificationIssue = createVerificationIssue as unknown as Mock
+  const mockedRevalidatePath = revalidatePath as unknown as Mock
+
   beforeEach(() => {
     vi.clearAllMocks()
   })
 
-  const setupMockRepository = (mockCreate: any) => {
-    ;(ServiceRepository as any).mockImplementation(function () {
+  const setupMockRepository = (mockCreate: ReturnType<typeof vi.fn>) => {
+    ;(
+      ServiceRepository as unknown as {
+        mockImplementation: (fn: () => { create: ReturnType<typeof vi.fn> }) => void
+      }
+    ).mockImplementation(function () {
       return {
         create: mockCreate
       }
@@ -121,8 +128,8 @@ describe('service-actions', () => {
 
       const mockCreate = vi.fn().mockResolvedValue(mockService)
       setupMockRepository(mockCreate)
-      ;(createVerificationIssue as any).mockResolvedValue(mockIssue)
-      ;(revalidatePath as any).mockResolvedValue(undefined)
+      mockedCreateVerificationIssue.mockResolvedValue(mockIssue)
+      mockedRevalidatePath.mockImplementation(() => undefined)
 
       const result = await createMessage({}, formData)
 
@@ -152,8 +159,8 @@ describe('service-actions', () => {
 
       const mockCreate = vi.fn().mockResolvedValue(mockService)
       setupMockRepository(mockCreate)
-      ;(createVerificationIssue as any).mockRejectedValue(new Error('GitHub API error'))
-      ;(revalidatePath as any).mockResolvedValue(undefined)
+      mockedCreateVerificationIssue.mockRejectedValue(new Error('GitHub API error'))
+      mockedRevalidatePath.mockImplementation(() => undefined)
 
       const result = await createMessage({}, formData)
 

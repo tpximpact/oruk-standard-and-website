@@ -1,21 +1,16 @@
 import { STATUS, StatusType } from '@/utilities/status'
 import { groupBy } from '@/utilities/groupBy'
 import { isDeepEqual } from '@/utilities/isDeepEqual'
+import type {
+  FormattedEndpoints,
+  ValidationMessage,
+  ValidationResultData,
+  ValidationTest,
+  ValidationSuite
+} from './types'
 
-interface Test {
-  endpoint: string
-  success: boolean
-  parent?: string
-  status?: StatusType
-  messages: any[]
-  [key: string]: any
-}
-
-interface TestSuite {
-  name: string
-  required: boolean
-  tests: Test[]
-}
+type Test = ValidationTest & { parent?: string; status?: StatusType }
+type TestSuite = ValidationSuite
 
 const normaliseEndpointName = (endpointName: string): string =>
   endpointName !== '/' && endpointName.slice(-1) === '/' ? `${endpointName}{id}` : endpointName
@@ -28,25 +23,32 @@ const processTest = (suite: TestSuite, test: Test): Test => {
 
 const stripSharedPath = (str: string, sharedPath: string): string => str.replace(sharedPath, '')
 
-const addTestToResult = (result: any, test: Test, sharedPath: string) => {
+const addTestToResult = (result: FormattedEndpoints, test: Test, sharedPath: string) => {
   const endpointRaw = stripSharedPath(test.endpoint, sharedPath)
   const endpointName = normaliseEndpointName(endpointRaw)
   if (!result[endpointName]) {
-    result[endpointName] = { tests: [] }
+    result[endpointName] = { tests: [], groups: {} }
   }
-  result[endpointName].tests.push(test)
+  result[endpointName].groups = result[endpointName].groups || {}
+  const tests = (result[endpointName] as { tests?: Test[] }).tests || []
+  tests.push(test)
+  ;(result[endpointName] as { tests: Test[] }).tests = tests
 }
 
-const groupTestsByParent = (result: any) => {
+const groupTestsByParent = (result: FormattedEndpoints) => {
   Object.keys(result).forEach(key => {
-    const groupedTests = groupBy(result[key].tests, 'parent')
-    result[key].groups = groupedTests
-    delete result[key].tests
+    const endpoint = result[key] as { tests?: Test[]; groups?: Record<string, Test[]> } | undefined
+    if (!endpoint) {
+      return
+    }
+    const groupedTests = groupBy(endpoint.tests || [], 'parent')
+    endpoint.groups = groupedTests
+    delete endpoint.tests
   })
 }
 
-export const formatResults = (input: any) => {
-  let result = {}
+export const formatResults = (input: ValidationResultData): FormattedEndpoints => {
+  let result: FormattedEndpoints = {}
 
   const sharedPath = input.service.url
   input.testSuites.forEach((suite: TestSuite) => {
@@ -62,14 +64,20 @@ export const formatResults = (input: any) => {
   return result
 }
 
-const deDuplicateMessages = (input: any) => {
-  const result = JSON.parse(JSON.stringify(input))
+const deDuplicateMessages = (input: FormattedEndpoints): FormattedEndpoints => {
+  const result = JSON.parse(JSON.stringify(input)) as FormattedEndpoints
   Object.keys(result).forEach(endpointKey => {
     const endpoint = result[endpointKey]
+    if (!endpoint) {
+      return
+    }
 
     Object.keys(endpoint.groups).forEach(groupKey => {
       const group = endpoint.groups[groupKey]
-      group.forEach((test: Test) => {
+      if (!group) {
+        return
+      }
+      group.forEach(test => {
         test.messages = deduplicate(test.messages)
       })
     })
@@ -77,8 +85,8 @@ const deDuplicateMessages = (input: any) => {
   return result
 }
 
-const deduplicate = (arr: any[]): any[] => {
-  const uniques: any[] = []
+const deduplicate = (arr: ValidationMessage[]): ValidationMessage[] => {
+  const uniques: ValidationMessage[] = []
   arr.forEach(item => {
     if (!isIn(item, uniques)) {
       uniques.push(item)
@@ -91,5 +99,5 @@ const deduplicate = (arr: any[]): any[] => {
   return uniques
 }
 
-const isIn = (needle: any, haystack: any[]): boolean =>
+const isIn = (needle: ValidationMessage, haystack: ValidationMessage[]): boolean =>
   haystack.some(item => isDeepEqual(item, needle))

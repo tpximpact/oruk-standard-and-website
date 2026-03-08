@@ -1,13 +1,24 @@
 import styles from './RenderAPI.module.css'
 
-const Item = ({ name, content }: { name: string; content: any }) => (
+type JsonLeaf = string | number | boolean | null
+type JsonObject = Record<string, unknown>
+
+const Item = ({ name, content }: { name: string; content: React.ReactNode }) => (
   <div className={styles.property}>
     <dt>{name}</dt>
     <dd>{content}</dd>
   </div>
 )
 
-const Property = ({ name, data, references }: { name: string; data: any; references: any }) => {
+const Property = ({
+  name,
+  data,
+  references
+}: {
+  name: string
+  data: unknown
+  references: JsonObject
+}) => {
   if (typeof data === 'string') {
     return <Item name={name} content={data} />
   }
@@ -17,7 +28,7 @@ const Property = ({ name, data, references }: { name: string; data: any; referen
   }
 
   // Render array or object
-  let content
+  let content: React.ReactNode
   if (Array.isArray(data)) {
     if (typeof data[0] === 'object') {
       content = (
@@ -30,33 +41,33 @@ const Property = ({ name, data, references }: { name: string; data: any; referen
     } else {
       content = data.join(', ')
     }
-  } else if (typeof data === 'object') {
+  } else if (typeof data === 'object' && data !== null) {
     content = <List data={data} references={references} />
   } else {
-    content = data
+    content = String(data as JsonLeaf)
   }
 
   return <Item name={name} content={content} />
 }
 
 // Render a reference
-const Reference = ({ data, references }: { data: string; references: any }) => {
+const Reference = ({ data, references }: { data: string; references: JsonObject }) => {
   const referent = data.split('/').slice(-1)[0] || ''
   return <Property name={referent} data={'(instance)'} references={references} />
 }
 
 // Render a list
-const List = ({ data, references }: { data: any; references: any }) => (
+const List = ({ data, references }: { data: unknown; references: JsonObject }) => (
   <dl>
     {typeof data === 'string'
       ? data
-      : Object.keys(data)
+      : Object.keys(data as JsonObject)
           .sort()
           .map((k, i) =>
             k === '$ref' ? (
-              <Reference key={i} data={data[k]} references={references} />
+              <Reference key={i} data={String((data as JsonObject)[k])} references={references} />
             ) : (
-              <Property key={i} name={k} data={data[k]} references={references} />
+              <Property key={i} name={k} data={(data as JsonObject)[k]} references={references} />
             )
           )}
   </dl>
@@ -69,8 +80,8 @@ const Method = ({
   references
 }: {
   methodName: string
-  data: any
-  references: any
+  data: JsonObject
+  references: JsonObject
 }) => (
   <div className={styles.method}>
     <h3>{methodName}</h3>
@@ -79,26 +90,43 @@ const Method = ({
 )
 
 // Render a path
-const Path = ({ pathName, data, references }: { pathName: string; data: any; references: any }) => (
+const Path = ({
+  pathName,
+  data,
+  references
+}: {
+  pathName: string
+  data: JsonObject
+  references: JsonObject
+}) => (
   <div className={styles.path}>
     <h2>{pathName}</h2>
     {Object.keys(data)
       .sort()
       .map(k => (
-        <Method key={k} methodName={k} data={data[k]} references={references} />
+        <Method key={k} methodName={k} data={data[k] as JsonObject} references={references} />
       ))}
   </div>
 )
 
 // Main RenderAPI component
-export const RenderAPI = ({ data }: { data: any }) => {
+export const RenderAPI = ({
+  data
+}: {
+  data: { paths: JsonObject; components: { schemas: JsonObject } }
+}) => {
   const paths = data.paths
   return (
     <div>
       {Object.keys(paths)
         .sort()
         .map(k => (
-          <Path key={k} pathName={k} data={paths[k]} references={data.components.schemas} />
+          <Path
+            key={k}
+            pathName={k}
+            data={paths[k] as JsonObject}
+            references={data.components.schemas}
+          />
         ))}
     </div>
   )
