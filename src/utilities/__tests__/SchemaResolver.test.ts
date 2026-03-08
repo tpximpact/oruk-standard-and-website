@@ -46,11 +46,13 @@ describe('SchemaResolver', () => {
     expect(resolved.properties).toBeDefined()
 
     // Should have also resolved nested references like organization
-    expect(resolved.properties.organization).toBeDefined()
+    const resolvedProps = asRecord(resolved.properties)
+    expect(resolvedProps.organization).toBeDefined()
     // The nested organization should be fully resolved, not a $ref
-    if (resolved.properties.organization.$ref) {
+    const organization = asRecord(resolvedProps.organization)
+    if (organization.$ref) {
       // If it still has a $ref, it means there was an issue
-      expect(resolved.properties.organization.$ref).toBeUndefined()
+      expect(organization.$ref).toBeUndefined()
     }
   })
 
@@ -73,11 +75,14 @@ describe('SchemaResolver', () => {
     const resolved = resolver.resolve(testSchema)
 
     // Internal references should be preserved
-    expect(resolved.properties.internalRef.$ref).toBe('#/components/schemas/SomeSchema')
+    const resolvedProps = asRecord(resolved.properties)
+    const internalRef = asRecord(resolvedProps.internalRef)
+    expect(internalRef.$ref).toBe('#/components/schemas/SomeSchema')
 
     // External references should be resolved
-    expect(resolved.properties.externalRef.$ref).toBeUndefined()
-    expect(resolved.properties.externalRef.name).toBe('attribute')
+    const externalRef = asRecord(resolvedProps.externalRef)
+    expect(externalRef.$ref).toBeUndefined()
+    expect(externalRef.name).toBe('attribute')
   })
   it('should resolve internal JSON pointer references', () => {
     const schemaDir = path.join(process.cwd(), 'public/specifications/3.0/schema')
@@ -125,12 +130,23 @@ describe('SchemaResolver', () => {
     const resolved = resolver.resolve(testSchema)
 
     // Internal references should be resolved
-    const employeeSchema =
-      resolved.paths['/employees'].get.responses['200'].content['application/json'].schema
+    const resolvedPaths = asRecord(resolved.paths)
+    const employeesPath = asRecord(resolvedPaths['/employees'])
+    const getOp = asRecord(employeesPath.get)
+    const responses = asRecord(getOp.responses)
+    const response200 = asRecord(responses['200'])
+    const content = asRecord(response200.content)
+    const jsonContent = asRecord(content['application/json'])
+    const employeeSchema = asRecord(jsonContent.schema)
+
     expect(employeeSchema.$ref).toBeUndefined()
-    expect(employeeSchema.properties.person.$ref).toBeUndefined()
-    expect(employeeSchema.properties.person.type).toBe('object')
-    expect(employeeSchema.properties.person.properties.name.type).toBe('string')
+    const employeeProps = asRecord(employeeSchema.properties)
+    const person = asRecord(employeeProps.person)
+    expect(person.$ref).toBeUndefined()
+    expect(person.type).toBe('object')
+    const personProps = asRecord(person.properties)
+    const name = asRecord(personProps.name)
+    expect(name.type).toBe('string')
   })
 
   it('should resolve mixed internal and external references', () => {
@@ -168,11 +184,19 @@ describe('SchemaResolver', () => {
     const resolved = resolver.resolve(testSchema)
 
     // Both internal and external references should be resolved
-    const serviceSchema = resolved.paths['/services'].get.responses['200'].schema
+    const resolvedPaths = asRecord(resolved.paths)
+    const servicesPath = asRecord(resolvedPaths['/services'])
+    const getOp = asRecord(servicesPath.get)
+    const responses = asRecord(getOp.responses)
+    const response200 = asRecord(responses['200'])
+    const serviceSchema = asRecord(response200.schema)
+
     expect(serviceSchema.$ref).toBeUndefined()
     expect(serviceSchema.type).toBe('object')
-    expect(serviceSchema.properties.attribute.name).toBe('attribute')
-    expect(serviceSchema.properties.attribute.$ref).toBeUndefined()
+    const serviceProps = asRecord(serviceSchema.properties)
+    const attribute = asRecord(serviceProps.attribute)
+    expect(attribute.name).toBe('attribute')
+    expect(attribute.$ref).toBeUndefined()
   })
 
   it('should handle circular internal references', () => {
@@ -201,9 +225,13 @@ describe('SchemaResolver', () => {
     const resolved = resolver.resolve(testSchema)
 
     // Circular reference should be preserved to prevent infinite recursion
-    expect(resolved.components.schemas.Node.properties.children.items.$ref).toBe(
-      '#/components/schemas/Node'
-    )
+    const resolvedComponents = asRecord(resolved.components)
+    const schemas = asRecord(resolvedComponents.schemas)
+    const node = asRecord(schemas.Node)
+    const nodeProps = asRecord(node.properties)
+    const children = asRecord(nodeProps.children)
+    const items = asRecord(children.items)
+    expect(items.$ref).toBe('#/components/schemas/Node')
   })
   it('should handle multiple URL patterns', () => {
     const schemaDir = path.join(process.cwd(), 'public/specifications/3.0/schema')

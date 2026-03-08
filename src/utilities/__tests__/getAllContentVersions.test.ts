@@ -164,8 +164,8 @@ describe('getAllContentVersions', () => {
     })
 
     expect(result['v2.0']).toEqual(mockVersionData)
-    expect(result['v2.0'].schemata).toHaveProperty('Service')
-    expect(result['v2.0'].schemata).toHaveProperty('Location')
+    expect(result['v2.0']?.schemata).toHaveProperty('Service')
+    expect(result['v2.0']?.schemata).toHaveProperty('Location')
   })
 
   it('should pass correct parameters to dependencies', () => {
