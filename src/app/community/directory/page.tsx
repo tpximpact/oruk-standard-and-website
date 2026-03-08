@@ -24,62 +24,37 @@ export default async function Page(props: PageProps) {
   const repo = new ServiceRepository()
   const activeServices = await repo.find({ active: true })
 
+  const extractValue = (field: unknown): string => {
+    if (typeof field === 'string') return field
+    if (typeof field === 'object' && field !== null && 'value' in field) {
+      return String((field as { value?: unknown }).value ?? 'N/A')
+    }
+    return field ? String(field) : 'N/A'
+  }
+
+  const extractUrl = (field: unknown, fallback: unknown): string => {
+    if (typeof field === 'string') return field
+    if (typeof field === 'object' && field !== null && 'url' in field) {
+      return String((field as { url?: unknown }).url ?? 'No URL provided')
+    }
+    return fallback ? String(fallback) : 'No URL provided'
+  }
+
   // Map services into the shape expected by ServicesTable
   const serviceData = activeServices.map(s => {
-    // Safely extract string values, handling potential nested objects
-    const getName = () => {
-      if (typeof s.name === 'string') return s.name
-      if (s.name && typeof s.name === 'object' && 'value' in s.name)
-        return String((s.name as any).value)
-      return s.name ? String(s.name) : 'N/A'
-    }
-
-    const getPublisher = () => {
-      if (typeof s.publisher === 'string') return s.publisher
-      if (s.publisher && typeof s.publisher === 'object' && 'value' in s.publisher)
-        return String((s.publisher as any).value)
-      return s.publisher ? String(s.publisher) : 'N/A'
-    }
-
-    const getPublisherUrl = () => {
-      if (typeof s.publisherUrl === 'string') return s.publisherUrl
-      if (s.publisher && typeof s.publisher === 'object' && 'url' in s.publisher)
-        return String((s.publisher as any).url)
-      return s.publisherUrl ? String(s.publisherUrl) : 'No URL provided'
-    }
-
-    const getDescription = () => {
-      if (typeof s.description === 'string') return s.description
-      if (s.description && typeof s.description === 'object' && 'value' in s.description)
-        return String((s.description as any).value)
-      return s.description ? String(s.description) : 'N/A'
-    }
-
-    const getDeveloper = () => {
-      if (typeof s.developer === 'string') return s.developer
-      if (s.developer && typeof s.developer === 'object' && 'value' in s.developer)
-        return String((s.developer as any).value)
-      return s.developer ? String(s.developer) : 'N/A'
-    }
-
-    const getDeveloperUrl = () => {
-      if (typeof s.developerUrl === 'string') return s.developerUrl
-      if (s.developer && typeof s.developer === 'object' && 'url' in s.developer)
-        return String((s.developer as any).url)
-      return s.developerUrl ? String(s.developerUrl) : 'No URL provided'
-    }
-    const getServiceUrl = () => {
-      if (typeof s.serviceUrl === 'string') return s.serviceUrl
-      if (s.service && typeof s.service === 'object' && 'url' in s.service)
-        return String((s.service as any).url)
-      return s.serviceUrl ? String(s.serviceUrl) : 'No URL provided'
-    }
+    const name = extractValue(s.name)
+    const publisher = extractValue(s.publisher)
+    const publisherUrl = extractUrl(s.publisher, s.publisherUrl)
+    const description = extractValue(s.description)
+    const developer = extractValue(s.developer)
+    const developerUrl = extractUrl(s.developer, s.developerUrl)
+    const serviceUrl = extractUrl(s.service, s.serviceUrl)
 
     return {
-      name: { value: getName(), url: getServiceUrl() },
-      publisher: { value: getPublisher(), url: getPublisherUrl() },
-      comment: { value: getDescription() },
-      developer: { value: getDeveloper(), url: getDeveloperUrl() },
+      name: { value: name, url: serviceUrl },
+      publisher: { value: publisher, url: publisherUrl },
+      comment: { value: description },
+      developer: { value: developer, url: developerUrl },
       lastTested: { value: s.lastTested, url: `/developers/dashboard/${s.id}` }
     }
   })

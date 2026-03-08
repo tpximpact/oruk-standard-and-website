@@ -4,12 +4,12 @@ import { Responses } from './Responses'
 import { DocumentationFeature } from '@/components/Documentation'
 
 interface PathProps {
-  twirledOpen: any
-  hidePathTitle: any
-  data: any
-  path: any
-  parametersReferences: any
-  allData: any
+  twirledOpen?: boolean
+  hidePathTitle?: boolean
+  data: Record<string, unknown>
+  path: string
+  parametersReferences: Record<string, unknown>
+  allData: Record<string, unknown>
 }
 
 export const Path = ({
@@ -20,24 +20,32 @@ export const Path = ({
   parametersReferences,
   allData
 }: PathProps) => {
+  let displayData = { ...data }
+
   // for oruk we have only GET calls, so we can make this simplifying assumption
-  if (data.get) {
+  if (data.get && typeof data.get === 'object') {
     const paramaters = data.parameters
-    data = Object.assign({}, data.get)
+    displayData = Object.assign({}, data.get as Record<string, unknown>)
     if (paramaters) {
-      data.parameters = paramaters
+      displayData.parameters = paramaters
     }
   }
   return (
     <DocumentationFeature
       twirledOpen={twirledOpen}
       name={hidePathTitle ? null : path}
-      description={data.summary}
+      description={displayData.summary as string | undefined}
     >
-      {data.parameters && (
-        <Parameters parametersReferences={parametersReferences} data={data.parameters} />
+      {displayData.parameters && (
+        <Parameters
+          parametersReferences={parametersReferences}
+          data={displayData.parameters as Array<Record<string, unknown>>}
+        />
       )}
-      <Responses allData={allData} data={data.responses} />
+      <Responses
+        allData={allData as { schemata: Record<string, unknown> }}
+        data={displayData.responses as Record<string, unknown>}
+      />
     </DocumentationFeature>
   )
 }

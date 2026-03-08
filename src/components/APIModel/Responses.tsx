@@ -2,16 +2,37 @@ import { getAllSchemas, SchemaProperty } from '@/components/DataModel'
 import { DocumentationFeatureSection } from '@/components/Documentation'
 import { filenameToName } from '@/utilities/filenameToName'
 
+interface SchemaNode {
+  $ref?: string
+  properties?: Record<string, unknown>
+}
+
+interface ApiResponse {
+  description?: string
+  content?: {
+    'application/json'?: {
+      schema: SchemaNode
+    }
+  }
+}
+
 interface ResponsesProps {
-  data: any
-  allData: any
+  data: Record<string, ApiResponse>
+  allData: {
+    schemata: Record<string, SchemaNode>
+  }
 }
 
 export const Responses = ({ data, allData }: ResponsesProps) => {
   const allSchemas = getAllSchemas(allData.schemata)
-  data = data['200']
-  let schema = data.content['application/json'].schema
-  let description = data.description
+  const response200 = data['200']
+
+  if (!response200?.content?.['application/json']?.schema) {
+    return <DocumentationFeatureSection title='Response' />
+  }
+
+  let schema = response200.content['application/json'].schema
+  let description = response200.description
   if (schema.$ref) {
     const modelFile = schema.$ref.split('/').pop()
     const model = filenameToName(modelFile)

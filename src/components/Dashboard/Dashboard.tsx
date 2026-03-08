@@ -1,8 +1,18 @@
 import { SortedAndPaginatedTable } from '@/components/SortedAndPaginatedTable'
 
+interface DashboardResult {
+  result: {
+    definitions: {
+      views: {
+        dashboard: unknown
+      }
+    }
+  }
+}
+
 interface DashboardProps {
-  result: any
-  currentPage: any
+  result: DashboardResult
+  currentPage: number
 }
 
 export const Dashboard = ({

@@ -10,7 +10,16 @@ import { fetchValidationResults } from './actions'
 
 interface ValidationResultsProps {
   url: string
-  apiData: any
+  apiData: unknown
+}
+
+interface ValidatorTest {
+  endpoint: string
+}
+
+interface ValidatorTestSuite {
+  required?: boolean
+  tests: ValidatorTest[]
 }
 
 interface ValidatorApiResult {
@@ -20,8 +29,8 @@ interface ValidatorApiResult {
     profile: string
     profileReason?: string
   }
-  metadata: any[]
-  testSuites: any[]
+  metadata: unknown[]
+  testSuites: ValidatorTestSuite[]
 }
 
 export default function ValidationResults({ url, apiData }: ValidationResultsProps) {
@@ -78,7 +87,7 @@ export default function ValidationResults({ url, apiData }: ValidationResultsPro
   // Extract required endpoints from the validation results
   const requiredEndpoints = result.testSuites
     .filter(suite => suite.required)
-    .flatMap(suite => suite.tests.map((test: any) => test.endpoint))
+    .flatMap(suite => suite.tests.map(test => test.endpoint))
     .filter((endpoint, index, self) => self.indexOf(endpoint) === index) // Remove duplicates
     .sort()
 

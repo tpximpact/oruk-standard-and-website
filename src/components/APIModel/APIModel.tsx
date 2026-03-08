@@ -2,9 +2,24 @@ import styles from './APIModel.module.css'
 import { Path } from './Path'
 import { DocumentationPage } from '@/components/Documentation'
 
+interface ParsedSpec {
+  paths: Record<string, Record<string, unknown>>
+  components: {
+    parameters: Record<string, unknown>
+  }
+}
+
+interface APIModelData {
+  rootSpec: {
+    parsed: ParsedSpec
+  }
+  htmlContent: unknown
+  [key: string]: unknown
+}
+
 interface APIModelProps {
-  allVersionsContent: any
-  data: any
+  allVersionsContent: unknown
+  data: APIModelData
 }
 
 export const APIModel = ({ allVersionsContent, data }: APIModelProps) => {
