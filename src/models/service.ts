@@ -47,7 +47,9 @@ export const serviceDocumentSchema = insertServiceSchema.extend({
   // Avoid importing mongodb runtime in tests (which is ESM). Validate by shape instead.
   _id: z.custom<ObjectId>(
     (v): v is ObjectId =>
-      typeof v === 'object' && v !== null && typeof (v as any).toHexString === 'function'
+      typeof v === 'object' &&
+      v !== null &&
+      typeof (v as { toHexString?: unknown }).toHexString === 'function'
   )
 })
 

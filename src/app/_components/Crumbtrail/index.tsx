@@ -18,10 +18,15 @@ export const generateCrumbs = (path: string): Crumb[] => {
     .map((_element, index) => {
       const rebuiltPath = fragments.slice(0, index + 1).join('/')
       const match = getPageByPath(rebuiltPath)
-      const label = match ? match.label : ''
+      const label =
+        match && typeof match.label === 'string'
+          ? match.label
+          : match?.label
+            ? String(match.label)
+            : ''
 
       return {
-        label: label,
+        label,
         urlPath: rebuiltPath
       }
     })

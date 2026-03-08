@@ -1,8 +1,28 @@
 import { SortedAndPaginatedTable } from '@/components/SortedAndPaginatedTable'
 
+interface DashboardView {
+  sortBy: string[]
+  defaultSortBy: string
+  defaultSortDirection: 'asc' | 'desc'
+  rowsPerPage: number
+  columns: string[]
+}
+
+interface DashboardResult {
+  result: {
+    definitions: {
+      columns: Record<string, unknown>
+      views: {
+        dashboard: DashboardView
+      }
+    }
+    data: unknown[]
+  }
+}
+
 interface DashboardProps {
-  result: any
-  currentPage: any
+  result: DashboardResult
+  currentPage: number
 }
 
 export const Dashboard = ({

@@ -1,4 +1,5 @@
 import { describe, it, expect, vi, beforeEach, afterAll } from 'vitest'
+import type { ServiceResponse } from '@/models/service'
 
 vi.mock('@/lib/github', () => ({
   octokit: {
@@ -32,24 +33,28 @@ describe('createVerificationIssue', () => {
     const { octokit } = await import('@/lib/github')
     const { createVerificationIssue } = await import('@/lib/github-service')
 
-    const serviceData: any = {
+    const serviceData: ServiceResponse = {
       id: 'svc-1',
       name: 'Test Service',
       publisher: 'Publisher Ltd',
-      developer: 'Dev Co',
-      createdAt: new Date('2020-01-02'),
       publisherUrl: 'https://publisher.example',
+      description: 'A test service',
+      developer: 'Dev Co',
       developerUrl: 'https://developer.example',
+      service: 'Test Service',
       serviceUrl: 'https://service.example',
       contactEmail: 'test@example.com',
-      description: 'A test service',
+      status: 'pending',
+      createdAt: new Date('2020-01-02'),
+      updatedAt: new Date('2020-01-02'),
       updateLink: '/services/svc-1'
     }
 
     const result = await createVerificationIssue(serviceData)
 
     expect(octokit.rest.issues.create).toHaveBeenCalledTimes(1)
-    const callArg = (octokit.rest.issues.create as any).mock.calls[0][0]
+    const callArg = vi.mocked(octokit.rest.issues.create).mock.calls[0]?.[0]
+    expect(callArg).toBeDefined()
     expect(callArg.owner).toBe('owner')
     expect(callArg.repo).toBe('repo')
     expect(callArg.title).toContain(serviceData.name)

@@ -1,4 +1,4 @@
-export const groupBy = <T extends Record<string, any>>(
+export const groupBy = <T extends Record<string, unknown>>(
   array: T[],
   property: keyof T
 ): Record<string, T[]> => {

@@ -1,10 +1,17 @@
 import { test } from '@playwright/test'
 import AxeBuilder from '@axe-core/playwright'
+import type { Result, NodeResult } from 'axe-core'
 import * as fs from 'fs'
 import * as path from 'path'
 
 // Store all violations for the final report
-const allViolations: any[] = []
+type PageReport = {
+  page: string
+  url: string
+  violations: Result[]
+}
+
+const allViolations: PageReport[] = []
 
 test.describe('Accessibility Tests', () => {
   test.afterAll(async () => {
@@ -38,7 +45,7 @@ test.describe('Accessibility Tests', () => {
       markdown += `**Violations Found:** ${pageReport.violations.length}\n\n`
 
       if (pageReport.violations.length > 0) {
-        pageReport.violations.forEach((violation: any, idx: number) => {
+        pageReport.violations.forEach((violation: Result, idx: number) => {
           markdown += `### ${idx + 1}. ${violation.id}\n\n`
           markdown += `**Impact:** ${violation.impact?.toUpperCase() || 'UNKNOWN'}\n\n`
           markdown += `**Description:** ${escapeHtmlInText(violation.description)}\n\n`
@@ -46,7 +53,7 @@ test.describe('Accessibility Tests', () => {
           markdown += `**Help URL:** ${violation.helpUrl}\n\n`
           markdown += `**Affected Elements:** ${violation.nodes.length}\n\n`
 
-          violation.nodes.forEach((node: any, nodeIdx: number) => {
+          violation.nodes.forEach((node: NodeResult, nodeIdx: number) => {
             markdown += `#### Element ${nodeIdx + 1}\n\n`
             markdown += '```html\n'
             markdown += `${node.html}\n`

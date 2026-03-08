@@ -8,8 +8,12 @@ import { Metadata } from 'next'
 
 export const metadata = (name: string): Metadata => {
   const pageData = getNamedSiteItem(name)
+  const title =
+    pageData && typeof pageData.label === 'string'
+      ? pageData.label
+      : String(pageData?.label ?? 'Open Referral UK')
   return {
-    title: pageData && pageData.label ? pageData.label : 'Open Referral UK'
+    title
   }
 }
 

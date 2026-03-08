@@ -7,8 +7,8 @@ interface ValidatorResult {
     profile: string
     profileReason?: string
   }
-  metadata: any[]
-  testSuites: any[]
+  metadata: unknown[]
+  testSuites: unknown[]
 }
 
 export interface ValidationState {
@@ -48,7 +48,7 @@ export async function validateFeed(
       }
     }
 
-    const data = await response.json()
+    const data = (await response.json()) as ValidatorResult
 
     return {
       result: data,
@@ -88,7 +88,7 @@ export async function fetchValidationResults(url: string): Promise<ValidationSta
       }
     }
 
-    const data = await response.json()
+    const data = (await response.json()) as ValidatorResult
 
     return {
       result: data,

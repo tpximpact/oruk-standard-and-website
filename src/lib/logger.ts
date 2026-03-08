@@ -23,31 +23,31 @@ class Logger {
     return LOG_LEVELS[level] <= LOG_LEVELS[this.level]
   }
 
-  private formatMessage(level: LogLevel, message: string, meta?: Record<string, any>): string {
+  private formatMessage(level: LogLevel, message: string, meta?: Record<string, unknown>): string {
     const timestamp = new Date().toISOString()
     const metaString = meta ? ` ${JSON.stringify(meta)}` : ''
     return `[${timestamp}] ${level.toUpperCase()}: ${message}${metaString}`
   }
 
-  error(message: string, meta?: Record<string, any>): void {
+  error(message: string, meta?: Record<string, unknown>): void {
     if (this.shouldLog('error')) {
       console.error(this.formatMessage('error', message, meta))
     }
   }
 
-  warn(message: string, meta?: Record<string, any>): void {
+  warn(message: string, meta?: Record<string, unknown>): void {
     if (this.shouldLog('warn')) {
       console.warn(this.formatMessage('warn', message, meta))
     }
   }
 
-  info(message: string, meta?: Record<string, any>): void {
+  info(message: string, meta?: Record<string, unknown>): void {
     if (this.shouldLog('info')) {
       console.info(this.formatMessage('info', message, meta))
     }
   }
 
-  debug(message: string, meta?: Record<string, any>): void {
+  debug(message: string, meta?: Record<string, unknown>): void {
     if (this.shouldLog('debug')) {
       console.debug(this.formatMessage('debug', message, meta))
     }

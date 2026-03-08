@@ -5,12 +5,17 @@ import { NamedMarkdownPage } from '@/components/NamedMarkdownPage'
 import { Banner } from '@/components/Banner'
 import { PageMargin } from '@/components/PageMargin'
 import { Metadata } from 'next'
+import type { ComponentProps } from 'react'
 
 export const metadata: Metadata = {
   title: 'Open Referral UK'
 }
 
 export default function Page() {
+  const sitemapData = siteStructureWithFullPaths(getRawPageTree()) as unknown as ComponentProps<
+    typeof Sitemap
+  >['data']
+
   return (
     <>
       <NamedMarkdownPage name='not-found' />
@@ -27,10 +32,7 @@ export default function Page() {
           </span>
         </Banner>
       </PageMargin>
-      <Sitemap
-        showHeading={false}
-        data={siteStructureWithFullPaths(getRawPageTree() as any) as any}
-      />
+      <Sitemap showHeading={false} data={sitemapData} />
     </>
   )
 }

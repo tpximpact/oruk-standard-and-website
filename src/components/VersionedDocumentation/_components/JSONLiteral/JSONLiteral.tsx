@@ -4,36 +4,41 @@ import ReactJsonView from '@microlink/react-json-view'
 import styles from './JSONLiteral.module.css'
 
 interface JSONLiteralProps {
-  data: any
+  data: unknown
 }
 
-export const JSONLiteral = ({ data }: JSONLiteralProps) => (
-  <div className={styles.jsonContainer}>
-    <ReactJsonView
-      name={null}
-      collapsed={2}
-      collapseStringsAfterLength={48}
-      enableClipboard={false}
-      displayDataTypes={false}
-      theme={{
-        base00: '#000',
-        base01: '#fff',
-        base02: '#555', // indent brackets - doesnt need contrast
-        base03: '#fff',
-        base04: '#999', // counts
-        base05: '#fff',
-        base06: '#fff',
-        base07: '#8bb4f7', // keys
-        base08: '#fff',
-        base09: '#fff',
-        base0A: '#fff',
-        base0B: '#fff',
-        base0C: '#fff',
-        base0D: '#fff', // twirlies
-        base0E: '#fff',
-        base0F: '#fff'
-      }}
-      src={data}
-    />
-  </div>
-)
+export const JSONLiteral = ({ data }: JSONLiteralProps) => {
+  const src =
+    typeof data === 'object' && data !== null ? (data as object) : { value: String(data ?? '') }
+
+  return (
+    <div className={styles.jsonContainer}>
+      <ReactJsonView
+        name={null}
+        collapsed={2}
+        collapseStringsAfterLength={48}
+        enableClipboard={false}
+        displayDataTypes={false}
+        theme={{
+          base00: '#000',
+          base01: '#fff',
+          base02: '#555', // indent brackets - doesnt need contrast
+          base03: '#fff',
+          base04: '#999', // counts
+          base05: '#fff',
+          base06: '#fff',
+          base07: '#8bb4f7', // keys
+          base08: '#fff',
+          base09: '#fff',
+          base0A: '#fff',
+          base0B: '#fff',
+          base0C: '#fff',
+          base0D: '#fff', // twirlies
+          base0E: '#fff',
+          base0F: '#fff'
+        }}
+        src={src}
+      />
+    </div>
+  )
+}

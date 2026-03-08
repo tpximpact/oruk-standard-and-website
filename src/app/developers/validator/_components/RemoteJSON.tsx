@@ -19,7 +19,7 @@ interface FetchSuccess {
   ok: true
   endpoint: string
   queryParams?: Record<string, string>
-  result: any
+  result: unknown
 }
 
 interface FetchError {
@@ -30,9 +30,9 @@ interface FetchError {
 type FetchResult = FetchSuccess | FetchError
 
 interface ResultLoaderProps {
-  ResultRenderComponent: React.ComponentType<{ result: FetchSuccess; [key: string]: any }>
+  ResultRenderComponent: React.ComponentType<{ result: FetchSuccess } & Record<string, unknown>>
   args: FetchArgs
-  [key: string]: any
+  [key: string]: unknown
 }
 
 const ResultLoader = async ({ ResultRenderComponent, args, ...props }: ResultLoaderProps) => {
@@ -61,9 +61,9 @@ const Error = ({ data }: ErrorProps) => {
 interface ResultWithSuspenseProps {
   result?: FetchResult
   RetryComponent?: React.ComponentType
-  ResultRenderComponent: React.ComponentType<{ result: FetchSuccess; [key: string]: any }>
+  ResultRenderComponent: React.ComponentType<{ result: FetchSuccess } & Record<string, unknown>>
   args: FetchArgs
-  [key: string]: any
+  [key: string]: unknown
 }
 
 const ResultWithSuspense = ({
@@ -125,9 +125,9 @@ interface RemoteJSONProps {
   endpoint: string
   method: MethodType
   queryParams?: Record<string, string>
-  ResultRenderComponent: React.ComponentType<{ result: FetchSuccess; [key: string]: any }>
+  ResultRenderComponent: React.ComponentType<{ result: FetchSuccess } & Record<string, unknown>>
   RetryComponent?: React.ComponentType
-  [key: string]: any
+  [key: string]: unknown
 }
 
 export const RemoteJSON = async (props: RemoteJSONProps) => {
