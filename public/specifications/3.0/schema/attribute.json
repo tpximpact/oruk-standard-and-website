@@ -61,6 +61,12 @@
       "$ref": "https://openreferraluk.org/specifications/3.0/schema/taxonomy_term.json"
     }
   },
-  "required": ["id"],
-  "tabular_required": ["link_id", "taxonomy_term_id", "link_entity"]
+  "required": [
+    "id"
+  ],
+  "tabular_required": [
+    "link_id",
+    "taxonomy_term_id",
+    "link_entity"
+  ]
 }

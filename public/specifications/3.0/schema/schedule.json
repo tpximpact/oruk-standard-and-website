@@ -92,7 +92,10 @@
       },
       "example": "WEEKLY",
       "core": "Y",
-      "enum": ["WEEKLY", "MONTHLY"]
+      "enum": [
+        "WEEKLY",
+        "MONTHLY"
+      ]
     },
     "interval": {
       "name": "interval",
@@ -194,5 +197,7 @@
       "example": "Some of our staff will be unavailable during their lunch break which may be any 30 minute period between 1200 and 1400"
     }
   },
-  "required": ["id"]
+  "required": [
+    "id"
+  ]
 }

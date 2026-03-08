@@ -50,6 +50,11 @@
       "$ref": "https://openreferraluk.org/specifications/3.0/schema/location.json"
     }
   },
-  "required": ["id"],
-  "tabular_required": ["service_id", "location_id"]
+  "required": [
+    "id"
+  ],
+  "tabular_required": [
+    "service_id",
+    "location_id"
+  ]
 }

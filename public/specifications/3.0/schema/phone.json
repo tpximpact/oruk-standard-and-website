@@ -65,5 +65,8 @@
       }
     }
   },
-  "required": ["id", "number"]
+  "required": [
+    "id",
+    "number"
+  ]
 }

@@ -121,7 +121,11 @@
       },
       "example": "postal",
       "core": "Y",
-      "enum": ["physical", "postal", "virtual"]
+      "enum": [
+        "physical",
+        "postal",
+        "virtual"
+      ]
     },
     "attributes": {
       "name": "attributes",

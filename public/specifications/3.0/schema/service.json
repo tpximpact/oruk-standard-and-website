@@ -90,7 +90,12 @@
       },
       "example": "active",
       "core": "Y",
-      "enum": ["active", "inactive", "defunct", "temporarily closed"]
+      "enum": [
+        "active",
+        "inactive",
+        "defunct",
+        "temporarily closed"
+      ]
     },
     "fees": {
       "name": "fees",
@@ -252,6 +257,12 @@
       }
     }
   },
-  "required": ["id", "name", "status"],
-  "tabular_required": ["organization_id"]
+  "required": [
+    "id",
+    "name",
+    "status"
+  ],
+  "tabular_required": [
+    "organization_id"
+  ]
 }

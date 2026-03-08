@@ -46,5 +46,7 @@
       "example": "1554f2e2-a373-45db-a3fa-9fc48a61c15e"
     }
   },
-  "required": ["id"]
+  "required": [
+    "id"
+  ]
 }

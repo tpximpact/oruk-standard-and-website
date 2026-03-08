@@ -90,7 +90,12 @@
       },
       "example": "active",
       "core": "Y",
-      "enum": ["active", "inactive", "defunct", "temporarily closed"]
+      "enum": [
+        "active",
+        "inactive",
+        "defunct",
+        "temporarily closed"
+      ]
     },
     "fees": {
       "name": "fees",
@@ -180,6 +185,12 @@
       "$ref": "https://openreferraluk.org/specifications/3.0/schema/organization.json"
     }
   },
-  "required": ["id", "name", "status"],
-  "tabular_required": ["organization_id"]
+  "required": [
+    "id",
+    "name",
+    "status"
+  ],
+  "tabular_required": [
+    "organization_id"
+  ]
 }

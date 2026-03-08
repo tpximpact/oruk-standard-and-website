@@ -32,7 +32,11 @@
       },
       "example": "physical",
       "core": "Y",
-      "enum": ["physical", "postal", "virtual"]
+      "enum": [
+        "physical",
+        "postal",
+        "virtual"
+      ]
     },
     "name": {
       "name": "name",
@@ -126,6 +130,9 @@
       }
     }
   },
-  "required": ["id", "location_type"],
+  "required": [
+    "id",
+    "location_type"
+  ],
   "title": "Location"
 }
