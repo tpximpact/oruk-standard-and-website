@@ -1,7 +1,4 @@
-interface SchemaData {
-  name?: string
-  [key: string]: unknown
-}
+import { type SchemaData } from './Schema'
 
 export const getAllSchemas = (data: Record<string, SchemaData> | null | undefined): string[] => {
   if (!data) return []

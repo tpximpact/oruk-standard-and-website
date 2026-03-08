@@ -70,13 +70,13 @@ export const MarkdownContentWithMenu = async ({ html, afterLinks }: ContentProps
   const menu: string[] = []
   const arrayChildren = Children.toArray(nodes)
   const modifiedNodes = Children.map(arrayChildren, child => {
-    if (isValidElement<{ children?: unknown }>(child) && child.type === 'h2') {
+    if (isValidElement<{ children?: unknown; id?: string }>(child) && child.type === 'h2') {
       const childText = child.props.children
       const text = typeof childText === 'string' ? childText : String(childText ?? '')
       menu.push(text)
       return cloneElement(child, {
         id: linkify(text)
-      })
+      } as Record<string, unknown>)
     }
     return child
   })

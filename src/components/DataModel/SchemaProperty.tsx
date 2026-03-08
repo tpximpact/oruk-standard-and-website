@@ -113,7 +113,10 @@ const getFormat = ({
       format = (
         <>
           <OfCopula useInstances={true} />{' '}
-          <LinkedReference data={data.items} useFullPath={useFullPath} />
+          <LinkedReference
+            data={(data.items || {}) as SchemaPropertyData}
+            useFullPath={useFullPath}
+          />
         </>
       )
       break
@@ -122,7 +125,7 @@ const getFormat = ({
       break
     case 'string':
       if (data.format === 'uuid') {
-        const model = propertyNameToModel(data.name)
+        const model = propertyNameToModel(data.name || '')
         let linked
         if (model && allSchemas.includes(model)) {
           const modelData: SchemaPropertyData = { $ref: model }
@@ -155,7 +158,7 @@ const Datatype = ({
   useFullPath?: boolean
 }) => {
   const type = getType(data)
-  const format = getFormat({ type, data, allSchemas, useFullPath })
+  const format = getFormat({ type: type || '', data, allSchemas, useFullPath })
 
   return (
     <div className={styles.type}>

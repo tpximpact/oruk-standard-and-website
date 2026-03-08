@@ -5,6 +5,7 @@ import { MarkdownContent } from './MarkdownContent'
 import { useState, useEffect } from 'react'
 import { useCookies } from 'react-cookie'
 import { DataModel } from '@/components/DataModel'
+import { type SchemaData } from '@/components/DataModel/Schema'
 import { APIModel } from '@/components/APIModel'
 import { OpenAPIModel } from './_components/OpenAPIModel'
 import type { ComponentType } from 'react'
@@ -74,7 +75,7 @@ export const VersionedDocumentation = ({
       return (
         <DataModel
           allVersionsContent={allVersionsContent}
-          data={data as { schemata: Record<string, unknown>; htmlContent: string }}
+          data={data as { schemata: Record<string, SchemaData>; htmlContent: string }}
         />
       )
     }

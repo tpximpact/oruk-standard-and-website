@@ -7,7 +7,7 @@ import { formatDate } from './formatDate'
 import styles from './DataTable.module.css'
 import { HTMLAttributes, ReactNode } from 'react'
 
-interface Header {
+export interface Header {
   label: string
   dataType: string
 }

@@ -4,11 +4,11 @@ import { DocumentationFeature } from '@/components/Documentation'
 //import styles from './Schema.module.css'
 import { SchemaProperty } from './SchemaProperty'
 
-interface SchemaPropertyData {
+export interface SchemaPropertyData {
   [key: string]: unknown
 }
 
-interface SchemaData {
+export interface SchemaData {
   name?: string
   description?: string
   properties?: Record<string, SchemaPropertyData>
@@ -41,7 +41,7 @@ export const SchemaProperties = ({ data, allSchemas }: SchemaPropertiesProps) =>
         <SchemaProperty
           key={i}
           parentKeyName={pk}
-          data={data.properties[pk]}
+          data={data.properties![pk]!}
           allSchemas={allSchemas}
           required={isRequiredBySchema(pk, data)}
         />

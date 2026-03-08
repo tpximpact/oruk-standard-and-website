@@ -26,6 +26,7 @@ interface PageMenuNode {
   urlPath: string
   offsite?: boolean
   teaser?: string
+  [key: string]: unknown
 }
 
 const isPageMenuNode = (value: unknown): value is PageMenuNode => {
@@ -42,7 +43,7 @@ export const GenericPage = ({ name }: GenericPageProps) => {
   if (childNodes) {
     const siteItems = childNodes
       .map(node => (typeof node === 'string' ? getNamedSiteItem(node) : node))
-      .filter(isPageMenuNode)
+      .filter((item): item is PageMenuNode => isPageMenuNode(item))
     menuNodes = formatNodesForPageMenu(siteItems)
   }
 

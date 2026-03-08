@@ -2,14 +2,14 @@
 
 import { useState, useEffect } from 'react'
 import { Pagination } from './_components'
-import { DataTable } from './DataTable'
+import { DataTable, type Header } from './DataTable'
 
 interface PaginatedTableProps {
   currentPage: number
   rows: Array<Record<string, unknown>>
   rowsPerPage: number
   columns: string[]
-  headers: Record<string, unknown>
+  headers: Record<string, Header>
 }
 
 interface ViewProps extends PaginatedTableProps {

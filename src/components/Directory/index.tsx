@@ -1,4 +1,4 @@
-import { SortedAndPaginatedTable } from '@/components/SortedAndPaginatedTable'
+import { SortedAndPaginatedTable, type Column } from '@/components/SortedAndPaginatedTable'
 
 // import { generate } from '@/components/Dashboard'
 
@@ -11,7 +11,7 @@ import { SortedAndPaginatedTable } from '@/components/SortedAndPaginatedTable'
 interface DirectoryResult {
   result: {
     definitions: {
-      columns: Record<string, unknown>
+      columns: Record<string, Column>
       views: {
         directory: {
           sortBy: string[]
@@ -22,7 +22,7 @@ interface DirectoryResult {
         }
       }
     }
-    data: unknown[]
+    data: Array<Record<string, unknown>>
   }
 }
 
