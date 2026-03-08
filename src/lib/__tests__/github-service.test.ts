@@ -45,6 +45,10 @@ describe('createVerificationIssue', () => {
       serviceUrl: 'https://service.example',
       contactEmail: 'test@example.com',
       status: 'pending',
+      active: true,
+      statusIsUp: true,
+      statusIsValid: true,
+      statusOverall: 'pending',
       createdAt: new Date('2020-01-02'),
       updatedAt: new Date('2020-01-02'),
       updateLink: '/services/svc-1'
@@ -55,6 +59,9 @@ describe('createVerificationIssue', () => {
     expect(octokit.rest.issues.create).toHaveBeenCalledTimes(1)
     const callArg = vi.mocked(octokit.rest.issues.create).mock.calls[0]?.[0]
     expect(callArg).toBeDefined()
+    if (!callArg) {
+      throw new Error('Expected octokit issues.create call argument')
+    }
     expect(callArg.owner).toBe('owner')
     expect(callArg.repo).toBe('repo')
     expect(callArg.title).toContain(serviceData.name)
