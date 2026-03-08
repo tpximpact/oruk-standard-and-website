@@ -6,7 +6,7 @@ import { parseMarkdown } from '@/utilities/parseMarkdown'
 import { PATHS } from './PATHS'
 import { notFound } from 'next/navigation'
 
-const CONTENT_ROOT = join(process.cwd(), PATHS.contentRoot)
+const CONTENT_ROOT = PATHS.contentRoot
 
 interface DynamicPageContent {
   date: string
