@@ -3,10 +3,19 @@ import { DocumentationPage } from '@/components/Documentation'
 import { Schema } from './Schema'
 import { getAllSchemas } from './getAllSchemas'
 
+interface SchemaData {
+  name?: string
+  description?: string
+  properties?: Record<string, unknown>
+  required?: string[]
+  tabular_required?: string[]
+  [key: string]: unknown
+}
+
 interface DataModelProps {
-  allVersionsContent: any
+  allVersionsContent: string
   data: {
-    schemata: Record<string, any>
+    schemata: Record<string, SchemaData>
     htmlContent: string
   }
 }

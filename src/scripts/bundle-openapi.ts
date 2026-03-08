@@ -2,7 +2,7 @@ import fs from 'fs'
 import path from 'path'
 
 interface JsonSchema {
-  [key: string]: any
+  [key: string]: unknown
 }
 
 interface RefCache {
@@ -80,10 +80,12 @@ class OpenAPIBundler {
 
       // Recursively resolve all $ref in this schema
       const resolved = this.resolveAllRefs(schema)
-      this.refCache[refUrl] = resolved
+      this.refCache[refUrl] = (
+        resolved && typeof resolved === 'object' ? resolved : { $ref: refUrl }
+      ) as JsonSchema
 
       this.visitedRefs.delete(refUrl)
-      return resolved
+      return this.refCache[refUrl]
     } catch (error) {
       console.error(`  ❌ Error loading schema ${fileName}:`, error)
       this.visitedRefs.delete(refUrl)
@@ -91,7 +93,7 @@ class OpenAPIBundler {
     }
   }
 
-  private resolveAllRefs(obj: any): any {
+  private resolveAllRefs(obj: unknown): unknown {
     if (obj === null || typeof obj !== 'object') {
       return obj
     }
@@ -100,17 +102,21 @@ class OpenAPIBundler {
       return obj.map(item => this.resolveAllRefs(item))
     }
 
+    const recordObj = obj as JsonSchema
+
     // If this object has a $ref, resolve it if it's an external schema
-    if (obj.$ref && typeof obj.$ref === 'string' && this.isExternalSchemaRef(obj.$ref)) {
-      const resolved = this.resolveRef(obj.$ref)
+    if (typeof recordObj.$ref === 'string' && this.isExternalSchemaRef(recordObj.$ref)) {
+      const resolved = this.resolveRef(recordObj.$ref)
       // Merge other properties if they exist (besides $ref)
-      const { $ref, ...rest } = obj
-      return Object.keys(rest).length > 0 ? { ...resolved, ...this.resolveAllRefs(rest) } : resolved
+      const { $ref: _ref, ...rest } = recordObj
+      return Object.keys(rest).length > 0
+        ? { ...resolved, ...(this.resolveAllRefs(rest) as JsonSchema) }
+        : resolved
     }
 
     // Otherwise, recursively resolve all properties
     const result: JsonSchema = {}
-    for (const [key, value] of Object.entries(obj)) {
+    for (const [key, value] of Object.entries(recordObj)) {
       result[key] = this.resolveAllRefs(value)
     }
     return result
@@ -127,7 +133,7 @@ class OpenAPIBundler {
     const bundled = this.resolveAllRefs(openApi)
 
     console.log('  💾 Writing bundled OpenAPI specification...')
-    fs.writeFileSync(outputPath, JSON.stringify(bundled, null, 2))
+    fs.writeFileSync(outputPath, JSON.stringify(bundled as JsonSchema, null, 2))
 
     console.log(
       `  ✅ Bundled OpenAPI saved to: ${path.basename(path.dirname(outputPath))}/${path.basename(outputPath)}`

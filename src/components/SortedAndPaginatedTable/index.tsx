@@ -15,14 +15,14 @@ interface View {
   defaultSortDirection: 'asc' | 'desc'
   rowsPerPage: number
   columns: string[]
-  [key: string]: any
+  [key: string]: unknown
 }
 
 interface TableData {
   definitions: {
-    columns: Record<string, any>
+    columns: Record<string, unknown>
   }
-  data: any[]
+  data: Array<Record<string, unknown>>
 }
 
 interface SortedAndPaginatedTableProps {

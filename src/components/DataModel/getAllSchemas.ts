@@ -1,6 +1,6 @@
 interface SchemaData {
   name?: string
-  [key: string]: any
+  [key: string]: unknown
 }
 
 export const getAllSchemas = (data: Record<string, SchemaData> | null | undefined): string[] => {

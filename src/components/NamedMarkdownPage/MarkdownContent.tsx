@@ -1,5 +1,5 @@
 'use server'
-import { Children, cloneElement } from 'react'
+import { Children, cloneElement, isValidElement } from 'react'
 
 import parse from 'html-react-parser'
 import Columns from '@/components/Columns'
@@ -16,7 +16,7 @@ interface MarkdownContentProps {
 interface MarkdownComponentProps {
   html: string
   className?: string
-  [key: string]: any
+  [key: string]: unknown
 }
 
 interface ContentProps {
@@ -70,10 +70,11 @@ export const MarkdownContentWithMenu = async ({ html, afterLinks }: ContentProps
   const menu: string[] = []
   const arrayChildren = Children.toArray(nodes)
   const modifiedNodes = Children.map(arrayChildren, child => {
-    if ((child as any).type === 'h2') {
-      const text = (child as any).props.children
+    if (isValidElement<{ children?: unknown }>(child) && child.type === 'h2') {
+      const childText = child.props.children
+      const text = typeof childText === 'string' ? childText : String(childText ?? '')
       menu.push(text)
-      return cloneElement(child as any, {
+      return cloneElement(child, {
         id: linkify(text)
       })
     }

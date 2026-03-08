@@ -5,7 +5,7 @@ import { getColourForStatus } from '@/utilities/getColourForStatus'
 import { getIconForStatus } from '@/utilities/getIconForStatus'
 import { formatDate } from './formatDate'
 import styles from './DataTable.module.css'
-import { ReactNode } from 'react'
+import { HTMLAttributes, ReactNode } from 'react'
 
 interface Header {
   label: string
@@ -15,18 +15,18 @@ interface Header {
 interface DataTableProps {
   columns: string[]
   headers: Record<string, Header>
-  rows: any[]
+  rows: Array<Record<string, unknown>>
 }
 
 interface CellPayload {
-  value?: any
+  value?: unknown
   url?: string
 }
 
 interface CellContentProps {
   dataType?: string
   label?: string
-  payload: CellPayload | any
+  payload: unknown
 }
 
 export const DataTable = ({ columns, headers, rows }: DataTableProps) => (
@@ -75,8 +75,7 @@ const Table = ({
 }: {
   children: ReactNode
   className?: string
-  [key: string]: any
-}) => (
+} & HTMLAttributes<HTMLDivElement>) => (
   <div role='table' className={`${styles.table} ${className}`} {...props}>
     {children}
   </div>
@@ -88,8 +87,7 @@ const Thead = ({
 }: {
   children: ReactNode
   className?: string
-  [key: string]: any
-}) => (
+} & HTMLAttributes<HTMLDivElement>) => (
   <div role='rowgroup' className={`${styles.thead} ${className}`} {...props}>
     {children}
   </div>
@@ -101,8 +99,7 @@ const Tbody = ({
 }: {
   children: ReactNode
   className?: string
-  [key: string]: any
-}) => (
+} & HTMLAttributes<HTMLDivElement>) => (
   <div role='rowgroup' className={`${styles.tbody} ${className}`} {...props}>
     {children}
   </div>
@@ -114,8 +111,7 @@ const Tr = ({
 }: {
   children: ReactNode
   className?: string
-  [key: string]: any
-}) => (
+} & HTMLAttributes<HTMLDivElement>) => (
   <div role='row' className={`${styles.tr} ${className}`} {...props}>
     {children}
   </div>
@@ -129,8 +125,7 @@ const Th = ({
   children: ReactNode
   className?: string
   column?: string
-  [key: string]: any
-}) => (
+} & HTMLAttributes<HTMLDivElement>) => (
   <div
     role={column ? 'columnheader' : 'rowheader'}
     className={`${styles.th} ${className}`}
@@ -146,8 +141,7 @@ const Td = ({
 }: {
   children: ReactNode
   className?: string
-  [key: string]: any
-}) => (
+} & HTMLAttributes<HTMLDivElement>) => (
   <div role='cell' className={`${styles.td} ${className}`} {...props}>
     {children}
   </div>
@@ -194,8 +188,9 @@ const CellContent = ({ dataType, label, payload }: CellContentProps) => {
     )
   }
 
-  let val = payload.value
-  const target = payload.url
+  const typedPayload = payload as CellPayload
+  let val = typedPayload.value
+  const target = typedPayload.url
 
   // if the payload doesnt have a value
   // but does have a url, use that as the value
@@ -219,10 +214,10 @@ const CellContent = ({ dataType, label, payload }: CellContentProps) => {
       result = String(val || '')
       break
     case 'oruk:dataType.success':
-      result = <StatusReadout pass={val} />
+      result = <StatusReadout pass={Boolean(val)} />
       break
     case 'oruk:dataType.dateTime':
-      result = <DisplayDate d={val} />
+      result = <DisplayDate d={String(val || '')} />
       break
     default:
       result = String(val || '')

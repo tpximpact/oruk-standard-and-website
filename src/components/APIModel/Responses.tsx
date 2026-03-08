@@ -4,7 +4,12 @@ import { filenameToName } from '@/utilities/filenameToName'
 
 interface SchemaNode {
   $ref?: string
+  name?: string
   properties?: Record<string, unknown>
+  description?: string
+  required?: string[]
+  tabular_required?: string[]
+  [key: string]: unknown
 }
 
 interface ApiResponse {

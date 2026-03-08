@@ -3,9 +3,30 @@ import { DocumentationLineItem } from '@/components/Documentation'
 import { BadgeUnique, BadgeRequired } from '@/components/Badge'
 import { filenameToName } from '@/utilities/filenameToName'
 
+interface SchemaConstraints {
+  unique?: boolean
+}
+
+interface SchemaPropertyData {
+  name?: string
+  title?: string
+  description?: string
+  type?: string
+  format?: string
+  enum?: string[]
+  example?: string | number | boolean
+  pattern?: string
+  minLength?: number
+  maxLength?: number
+  constraints?: SchemaConstraints
+  items?: SchemaPropertyData
+  $ref?: string
+  [key: string]: unknown
+}
+
 interface SchemaPropertyProps {
   parentKeyName: string
-  data: any
+  data: SchemaPropertyData
   required?: boolean
   allSchemas: string[]
   useFullPath?: boolean
@@ -31,7 +52,7 @@ export const SchemaProperty = ({
   </DocumentationLineItem>
 )
 
-const Pattern = ({ data }: { data: any }) => {
+const Pattern = ({ data }: { data: SchemaPropertyData }) => {
   if (data.pattern) {
     return (
       <div className={styles.pattern}>
@@ -42,7 +63,7 @@ const Pattern = ({ data }: { data: any }) => {
   return null
 }
 
-const Length = ({ data }: { data: any }) => {
+const Length = ({ data }: { data: SchemaPropertyData }) => {
   if (data.maxLength || data.minLength) {
     return (
       <div>
@@ -54,7 +75,7 @@ const Length = ({ data }: { data: any }) => {
   return null
 }
 
-const Badges = ({ data, required }: { data: any; required?: boolean }) => (
+const Badges = ({ data, required }: { data: SchemaPropertyData; required?: boolean }) => (
   <div className={styles.badges}>
     {required ? <BadgeRequired /> : null}
 
@@ -62,13 +83,13 @@ const Badges = ({ data, required }: { data: any; required?: boolean }) => (
   </div>
 )
 
-const isUnique = (data: any) => data.constraints && data.constraints.unique
+const isUnique = (data: SchemaPropertyData) => data.constraints?.unique
 
 const OfCopula = ({ useInstances }: { useInstances?: boolean }) => (
   <span className={styles.of}>{useInstances && ' of instances '}of</span>
 )
 
-const getType = (data: any) => {
+const getType = (data: SchemaPropertyData) => {
   if (data.type === 'array' || data.items) return 'array'
   if (data.$ref) return 'object' // FIXME is this behaviour correct? Should it be an array?
   return data.type
@@ -81,7 +102,7 @@ const getFormat = ({
   useFullPath
 }: {
   type: string
-  data: any
+  data: SchemaPropertyData
   allSchemas: string[]
   useFullPath?: boolean
 }) => {
@@ -104,8 +125,7 @@ const getFormat = ({
         const model = propertyNameToModel(data.name)
         let linked
         if (model && allSchemas.includes(model)) {
-          const modelData: any = {}
-          modelData['$ref'] = model
+          const modelData: SchemaPropertyData = { $ref: model }
           linked = (
             <>
               <OfCopula /> <LinkedReference data={modelData} useFullPath={useFullPath} />
@@ -130,7 +150,7 @@ const Datatype = ({
   allSchemas,
   useFullPath
 }: {
-  data: any
+  data: SchemaPropertyData
   allSchemas: string[]
   useFullPath?: boolean
 }) => {
@@ -150,14 +170,22 @@ const Datatype = ({
   )
 }
 
-const LinkedReference = ({ data, useFullPath }: { data: any; useFullPath?: boolean }) => {
-  let target = `#${toAnchorName(data['$ref'])}`
+const LinkedReference = ({
+  data,
+  useFullPath
+}: {
+  data: SchemaPropertyData
+  useFullPath?: boolean
+}) => {
+  const reference = typeof data.$ref === 'string' ? data.$ref : ''
+  const anchorName = toAnchorName(reference)
+  let target = `#${anchorName}`
   if (useFullPath) {
     target = '/developers/schemata' + target
   }
   return (
     <a href={target} className={styles.modelLink}>
-      {toAnchorName(data['$ref'])}
+      {anchorName}
     </a>
   )
 }

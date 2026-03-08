@@ -8,7 +8,7 @@ interface NamedMarkdownPageProps {
   name: string
   noMargin?: boolean
   markdownRaw?: string | null
-  [key: string]: any
+  [key: string]: unknown
 }
 
 export const NamedMarkdownPage = ({

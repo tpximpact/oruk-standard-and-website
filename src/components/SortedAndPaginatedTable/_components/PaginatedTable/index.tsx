@@ -6,15 +6,14 @@ import { DataTable } from './DataTable'
 
 interface PaginatedTableProps {
   currentPage: number
-  rows: any[]
+  rows: Array<Record<string, unknown>>
   rowsPerPage: number
   columns: string[]
-  headers: Record<string, any>
-  [key: string]: any
+  headers: Record<string, unknown>
 }
 
 interface ViewProps extends PaginatedTableProps {
-  pageChangeFunction: (event: any, page: number) => void
+  pageChangeFunction: (event: unknown, page: number) => void
 }
 
 export const PaginatedTable = (props: PaginatedTableProps) => {
@@ -39,7 +38,7 @@ const NoJSView = ({ currentPage, ...props }: PaginatedTableProps) => (
 const InteractiveView = ({ currentPage, ...props }: PaginatedTableProps) => {
   const [activePage, setActivePage] = useState(currentPage)
 
-  const selectPage = (_: any, n: number) => setActivePage(n)
+  const selectPage = (_: unknown, n: number) => setActivePage(n)
 
   return (
     <View
@@ -65,9 +64,9 @@ const paginateRows = ({
   rowsPerPage
 }: {
   currentPage: number
-  rows: any[]
+  rows: Array<Record<string, unknown>>
   rowsPerPage: number
-}): any[] => {
+}): Array<Record<string, unknown>> => {
   const offset = (currentPage - 1) * rowsPerPage
   return rows.slice(offset, offset + rowsPerPage)
 }
