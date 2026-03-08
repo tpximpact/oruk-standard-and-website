@@ -2,6 +2,9 @@ import { describe, it, expect } from 'vitest'
 import { SchemaResolver } from '../SchemaResolver'
 import path from 'path'
 
+const asRecord = (value: unknown): Record<string, unknown> =>
+  (value && typeof value === 'object' ? value : {}) as Record<string, unknown>
+
 describe('SchemaResolver', () => {
   it('should resolve external schema references', () => {
     const schemaDir = path.join(process.cwd(), 'public/specifications/3.0/schema')
@@ -19,11 +22,13 @@ describe('SchemaResolver', () => {
     const resolved = resolver.resolve(testSchema)
 
     // The resolved schema should have the service definition inline
-    expect(resolved.properties.service).toBeDefined()
-    expect(resolved.properties.service.name).toBe('service')
-    expect(resolved.properties.service.type).toBe('object')
+    const resolvedProperties = asRecord(asRecord(resolved).properties)
+    const service = asRecord(resolvedProperties.service)
+    expect(service).toBeDefined()
+    expect(service.name).toBe('service')
+    expect(service.type).toBe('object')
     // Should not have $ref anymore (it's been resolved)
-    expect(resolved.properties.service.$ref).toBeUndefined()
+    expect(service.$ref).toBeUndefined()
   })
 
   it('should handle nested schema references', () => {

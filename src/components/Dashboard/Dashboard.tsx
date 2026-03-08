@@ -1,4 +1,4 @@
-import { SortedAndPaginatedTable } from '@/components/SortedAndPaginatedTable'
+import { SortedAndPaginatedTable, type Column } from '@/components/SortedAndPaginatedTable'
 
 interface DashboardView {
   sortBy: string[]
@@ -6,17 +6,18 @@ interface DashboardView {
   defaultSortDirection: 'asc' | 'desc'
   rowsPerPage: number
   columns: string[]
+  [key: string]: unknown
 }
 
 interface DashboardResult {
   result: {
     definitions: {
-      columns: Record<string, unknown>
+      columns: Record<string, Column>
       views: {
         dashboard: DashboardView
       }
     }
-    data: unknown[]
+    data: Array<Record<string, unknown>>
   }
 }
 

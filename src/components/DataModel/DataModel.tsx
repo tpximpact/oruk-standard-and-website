@@ -1,12 +1,12 @@
 import styles from './DataModel.module.css'
 import { DocumentationPage } from '@/components/Documentation'
-import { Schema } from './Schema'
+import { Schema, type SchemaData } from './Schema'
 import { getAllSchemas } from './getAllSchemas'
 
 interface DataModelProps {
-  allVersionsContent: any
+  allVersionsContent: string
   data: {
-    schemata: Record<string, any>
+    schemata: Record<string, SchemaData>
     htmlContent: string
   }
 }
@@ -28,7 +28,12 @@ export const DataModel = ({ allVersionsContent, data }: DataModelProps) => {
     >
       <div className={styles.DataModel}>
         {keys.map(key => (
-          <Schema key={key} parentKeyName={key} data={data.schemata[key]} allSchemas={allSchemas} />
+          <Schema
+            key={key}
+            parentKeyName={key}
+            data={data.schemata[key]!}
+            allSchemas={allSchemas}
+          />
         ))}
       </div>
     </DocumentationPage>

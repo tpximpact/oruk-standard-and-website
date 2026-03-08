@@ -4,9 +4,22 @@ import { DocumentationFeature } from '@/components/Documentation'
 //import styles from './Schema.module.css'
 import { SchemaProperty } from './SchemaProperty'
 
+export interface SchemaPropertyData {
+  [key: string]: unknown
+}
+
+export interface SchemaData {
+  name?: string
+  description?: string
+  properties?: Record<string, SchemaPropertyData>
+  required?: string[]
+  tabular_required?: string[]
+  [key: string]: unknown
+}
+
 interface SchemaProps {
   parentKeyName: string
-  data: any
+  data: SchemaData
   allSchemas: string[]
 }
 
@@ -17,7 +30,7 @@ export const Schema = ({ parentKeyName, data, allSchemas }: SchemaProps) => (
 )
 
 interface SchemaPropertiesProps {
-  data: any
+  data: SchemaData
   allSchemas: string[]
 }
 
@@ -28,7 +41,7 @@ export const SchemaProperties = ({ data, allSchemas }: SchemaPropertiesProps) =>
         <SchemaProperty
           key={i}
           parentKeyName={pk}
-          data={data.properties[pk]}
+          data={data.properties![pk]!}
           allSchemas={allSchemas}
           required={isRequiredBySchema(pk, data)}
         />
@@ -36,6 +49,6 @@ export const SchemaProperties = ({ data, allSchemas }: SchemaPropertiesProps) =>
   </DocumentationFeatureSection>
 )
 
-const isRequiredBySchema = (key: string, schema: any) => {
+const isRequiredBySchema = (key: string, schema: SchemaData) => {
   return schema.required?.includes(key) || schema.tabular_required?.includes(key)
 }

@@ -1,13 +1,13 @@
 import { getAllSchemas, SchemaProperty } from '@/components/DataModel'
 import { DocumentationFeatureSection } from '@/components/Documentation'
 import { filenameToName } from '@/utilities/filenameToName'
+import { type SchemaData } from '@/components/DataModel/Schema'
 
-interface SchemaNode {
+export interface SchemaNode extends SchemaData {
   $ref?: string
-  properties?: Record<string, unknown>
 }
 
-interface ApiResponse {
+export interface ApiResponse {
   description?: string
   content?: {
     'application/json'?: {
@@ -16,7 +16,7 @@ interface ApiResponse {
   }
 }
 
-interface ResponsesProps {
+export interface ResponsesProps {
   data: Record<string, ApiResponse>
   allData: {
     schemata: Record<string, SchemaNode>
@@ -54,7 +54,7 @@ export const Responses = ({ data, allData }: ResponsesProps) => {
           <SchemaProperty
             key={i}
             parentKeyName={pk}
-            data={properties[pk]}
+            data={properties[pk] as SchemaNode}
             allSchemas={allSchemas}
             required={false}
             useFullPath={true}

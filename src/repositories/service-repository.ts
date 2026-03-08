@@ -12,6 +12,15 @@ import {
   ServiceInput
 } from '@/models/service'
 
+const isServiceInput = (data: unknown): data is ServiceInput => {
+  return Boolean(
+    data &&
+    typeof data === 'object' &&
+    'name' in data &&
+    typeof (data as { name?: unknown }).name === 'string'
+  )
+}
+
 export class ServiceRepository extends BaseRepository<
   ServiceDocument,
   ServiceResponse,
@@ -30,12 +39,12 @@ export class ServiceRepository extends BaseRepository<
     const now = new Date()
 
     // If caller passed an already-formed InsertService (nested), forward directly
-    if (typeof (data as any).name !== 'string') {
+    if (!isServiceInput(data)) {
       return super.create(data as OptionalUnlessRequiredId<InsertService>)
     }
 
     // Otherwise map the flat ServiceInput into the nested DB shape expected by insertServiceSchema
-    const flat = data as ServiceInput
+    const flat = data
     const insertData: InsertService = {
       name: { value: flat.name },
       comment: flat.comment ? { value: flat.comment } : undefined,
@@ -67,11 +76,11 @@ export class ServiceRepository extends BaseRepository<
 
   // Custom methods for Registration entity
   async findByPublisher(publisher: string): Promise<ServiceResponse[]> {
-    return this.find({ publisher: { value: publisher } } as any)
+    return this.find({ publisher: { value: publisher } } as Partial<ServiceDocument>)
   }
 
   async findByEmail(email: string): Promise<ServiceResponse[]> {
-    return this.find({ email: { value: email } } as any)
+    return this.find({ email: { value: email } } as Partial<ServiceDocument>)
   }
 
   async updateStatus(
@@ -88,13 +97,13 @@ export class ServiceRepository extends BaseRepository<
 
   // Example of using query builder
   async search(query: string): Promise<ServiceResponse[]> {
-    const filter: any = {
+    const filter: Record<string, unknown> = {
       $or: [
         { 'name.value': { $regex: query, $options: 'i' } },
         { 'description.value': { $regex: query, $options: 'i' } },
         { 'publisher.value': { $regex: query, $options: 'i' } }
       ]
     }
-    return this.find(filter)
+    return this.find(filter as Partial<ServiceDocument>)
   }
 }

@@ -1,6 +1,6 @@
 //import styles from './Path.module.css'
 import { Parameters } from './Parameters'
-import { Responses } from './Responses'
+import { Responses, type SchemaNode, type ApiResponse } from './Responses'
 import { DocumentationFeature } from '@/components/Documentation'
 
 interface ParameterData {
@@ -11,20 +11,6 @@ interface ParameterData {
   description?: string
   schema?: {
     type?: string
-  }
-}
-
-interface SchemaNode {
-  $ref?: string
-  properties?: Record<string, unknown>
-}
-
-interface ApiResponse {
-  description?: string
-  content?: {
-    'application/json'?: {
-      schema: SchemaNode
-    }
   }
 }
 
