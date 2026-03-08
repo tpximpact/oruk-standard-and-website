@@ -54,13 +54,13 @@
     },
     "website": {
       "name": "website",
-      "type": "string",
+      "allOf": [
+        {
+          "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#/$defs/uri"
+        }
+      ],
       "title": "Website",
       "description": "The URL (website address) of the organization.",
-      "format": "uri",
-      "constraints": {
-        "unique": false
-      },
       "example": "http://example.com",
       "core": "Y"
     },

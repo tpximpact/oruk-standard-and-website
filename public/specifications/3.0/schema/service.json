@@ -54,13 +54,13 @@
     },
     "url": {
       "name": "url",
-      "type": "string",
+      "allOf": [
+        {
+          "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#/$defs/uri"
+        }
+      ],
       "title": "URL",
       "description": "URL of the service",
-      "format": "uri",
-      "constraints": {
-        "unique": false
-      },
       "example": "http://example.com/counselling",
       "core": "Y"
     },

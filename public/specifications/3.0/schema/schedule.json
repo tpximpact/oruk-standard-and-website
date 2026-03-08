@@ -164,13 +164,13 @@
     },
     "schedule_link": {
       "name": "schedule_link",
-      "type": "string",
+      "allOf": [
+        {
+          "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#/$defs/uri"
+        }
+      ],
       "title": "Schedule Link",
       "description": "URL of a link for the schedule which may show each individual session and may provide a booking facility.",
-      "format": "uri",
-      "constraints": {
-        "unique": false
-      },
       "example": "http://example.com"
     },
     "attending_type": {

@@ -2,10 +2,9 @@
   "allOf": [
     {
       "$ref": "https://openreferraluk.org/specifications/3.0/schema/organization.json"
+    },
+    {
+      "$ref": "https://openreferraluk.org/specifications/3.0/schema/list_overrides.json#/$defs/organization_list"
     }
-  ],
-  "properties": {
-    "organization_identifiers": false,
-    "attributes": false
-  }
+  ]
 }
