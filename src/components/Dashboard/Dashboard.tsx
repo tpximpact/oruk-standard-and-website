@@ -1,12 +1,22 @@
 import { SortedAndPaginatedTable } from '@/components/SortedAndPaginatedTable'
 
+interface DashboardView {
+  sortBy: string[]
+  defaultSortBy: string
+  defaultSortDirection: 'asc' | 'desc'
+  rowsPerPage: number
+  columns: string[]
+}
+
 interface DashboardResult {
   result: {
     definitions: {
+      columns: Record<string, unknown>
       views: {
-        dashboard: unknown
+        dashboard: DashboardView
       }
     }
+    data: unknown[]
   }
 }
 

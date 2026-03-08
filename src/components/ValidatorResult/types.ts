@@ -43,6 +43,7 @@ export interface ValidationResultData {
 
 export interface EndpointData {
   groups: Record<string, ValidationTest[]>
+  tests?: ValidationTest[]
 }
 
 export type FormattedEndpoints = Record<string, EndpointData>

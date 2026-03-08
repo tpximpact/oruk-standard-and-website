@@ -7,34 +7,15 @@ import Columns from '@/components/Columns'
 import LoadingOverlay from './LoadingOverlay'
 import styles from './ValidationResults.module.css'
 import { fetchValidationResults } from './actions'
+import type { ValidationResultData } from '@/components/ValidatorResult/types'
 
 interface ValidationResultsProps {
   url: string
   apiData: unknown
 }
 
-interface ValidatorTest {
-  endpoint: string
-}
-
-interface ValidatorTestSuite {
-  required?: boolean
-  tests: ValidatorTest[]
-}
-
-interface ValidatorApiResult {
-  service: {
-    url: string
-    isValid: boolean
-    profile: string
-    profileReason?: string
-  }
-  metadata: unknown[]
-  testSuites: ValidatorTestSuite[]
-}
-
 export default function ValidationResults({ url, apiData }: ValidationResultsProps) {
-  const [result, setResult] = useState<ValidatorApiResult | null>(null)
+  const [result, setResult] = useState<ValidationResultData | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
 
@@ -52,7 +33,7 @@ export default function ValidationResults({ url, apiData }: ValidationResultsPro
         }
 
         if (response.result) {
-          setResult(response.result)
+          setResult(response.result as unknown as ValidationResultData)
         }
       } catch (err) {
         setError(err instanceof Error ? err.message : 'An error occurred during validation')
@@ -109,7 +90,15 @@ export default function ValidationResults({ url, apiData }: ValidationResultsPro
         </p>
         <p className={styles.infoSubtext}>You can bookmark this page to return to these results</p>
       </div>
-      <ValidatorResult result={{ result }} apiData={apiData} />
+      <ValidatorResult
+        result={{ result }}
+        apiData={
+          apiData as unknown as Record<
+            string,
+            import('@/components/ValidatorResult/types').ApiDocsData
+          >
+        }
+      />
 
       <Columns layout='42'>
         <div>

@@ -3,6 +3,31 @@ import { Parameters } from './Parameters'
 import { Responses } from './Responses'
 import { DocumentationFeature } from '@/components/Documentation'
 
+interface ParameterData {
+  $ref?: string
+  in?: string
+  required?: boolean
+  name?: string
+  description?: string
+  schema?: {
+    type?: string
+  }
+}
+
+interface SchemaNode {
+  $ref?: string
+  properties?: Record<string, unknown>
+}
+
+interface ApiResponse {
+  description?: string
+  content?: {
+    'application/json'?: {
+      schema: SchemaNode
+    }
+  }
+}
+
 interface PathProps {
   twirledOpen?: boolean
   hidePathTitle?: boolean
@@ -30,21 +55,26 @@ export const Path = ({
       displayData.parameters = paramaters
     }
   }
+
+  const parameters = Array.isArray(displayData.parameters)
+    ? (displayData.parameters as ParameterData[])
+    : undefined
+
   return (
     <DocumentationFeature
       twirledOpen={twirledOpen}
-      name={hidePathTitle ? null : path}
+      name={hidePathTitle ? '' : path}
       description={displayData.summary as string | undefined}
     >
-      {displayData.parameters && (
+      {parameters && (
         <Parameters
-          parametersReferences={parametersReferences}
-          data={displayData.parameters as Array<Record<string, unknown>>}
+          parametersReferences={parametersReferences as Record<string, ParameterData>}
+          data={parameters}
         />
       )}
       <Responses
-        allData={allData as { schemata: Record<string, unknown> }}
-        data={displayData.responses as Record<string, unknown>}
+        allData={allData as { schemata: Record<string, SchemaNode> }}
+        data={displayData.responses as Record<string, ApiResponse>}
       />
     </DocumentationFeature>
   )

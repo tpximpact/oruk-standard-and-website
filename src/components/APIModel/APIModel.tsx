@@ -13,12 +13,12 @@ interface APIModelData {
   rootSpec: {
     parsed: ParsedSpec
   }
-  htmlContent: unknown
+  htmlContent: string
   [key: string]: unknown
 }
 
 interface APIModelProps {
-  allVersionsContent: unknown
+  allVersionsContent: string
   data: APIModelData
 }
 
@@ -41,17 +41,20 @@ export const APIModel = ({ allVersionsContent, data }: APIModelProps) => {
       menuTitle='Paths'
     >
       <div className={styles.APIModel}>
-        {Object.keys(endpoints).map(key => (
-          <Path
-            key={key}
-            path={key}
-            allData={data}
-            parametersReferences={parametersReferences}
-            data={endpoints[key]}
-            twirledOpen={undefined}
-            hidePathTitle={undefined}
-          />
-        ))}
+        {Object.keys(endpoints).map(key => {
+          const endpointData = endpoints[key] as Record<string, unknown>
+          return (
+            <Path
+              key={key}
+              path={key}
+              allData={data}
+              parametersReferences={parametersReferences}
+              data={endpointData}
+              twirledOpen={undefined}
+              hidePathTitle={undefined}
+            />
+          )
+        })}
       </div>
     </DocumentationPage>
   )

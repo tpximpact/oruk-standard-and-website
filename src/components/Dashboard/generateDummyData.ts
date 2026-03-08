@@ -33,10 +33,13 @@ export const generate = ({ numRows, rowsPerPage, failEveryNRows }: GenerateParam
 
 export const generateDefinitions = ({ rowsPerPage }: { rowsPerPage: number }) => {
   const definitions = Object.assign({}, sharedDefinitions) as {
-    views: Record<string, { rowsPerPage: number }>
+    views: Record<string, { rowsPerPage?: number }>
   }
-  Object.keys(definitions.views).map((viewKey: string) => {
-    definitions.views[viewKey].rowsPerPage = rowsPerPage
+  Object.keys(definitions.views).forEach((viewKey: string) => {
+    const view = definitions.views[viewKey]
+    if (view) {
+      view.rowsPerPage = rowsPerPage
+    }
   })
   return definitions
 }

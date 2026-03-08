@@ -57,7 +57,9 @@ export const createMessage = async (
     } catch (githubError) {
       // Log the error but don't fail the entire operation
       // The service was successfully created, GitHub issue creation is supplementary
-      logger.error('Failed to create GitHub issue for service verification:', githubError as Error)
+      logger.error('Failed to create GitHub issue for service verification:', {
+        error: githubError instanceof Error ? githubError.message : String(githubError)
+      })
     }
   } catch (error) {
     logger.error('Error creating service:', { error })

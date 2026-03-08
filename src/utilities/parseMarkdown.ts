@@ -8,7 +8,10 @@ interface ParsedMarkdown {
 
 export const parseMarkdown = (fileContents: string): ParsedMarkdown | null => {
   const parsed = matter(fileContents)
-  if (parsed && !parsed.isEmpty) {
+  const hasContent = parsed.content.trim().length > 0
+  const hasFrontmatter = Object.keys(parsed.data).length > 0
+
+  if (hasContent || hasFrontmatter) {
     const content = marked.parse(parsed.content) as string
     const frontmatter = parsed.data
     return {

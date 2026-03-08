@@ -10,7 +10,12 @@ import { OpenAPIModel } from './_components/OpenAPIModel'
 import type { ComponentType } from 'react'
 
 interface VersionedDocData {
-  textContent: string
+  textContent?: string
+  htmlContent?: string
+  rootSpec?: {
+    parsed: Record<string, unknown>
+  }
+  schemata?: Record<string, unknown>
   [key: string]: unknown
 }
 
@@ -35,13 +40,58 @@ export const VersionedDocumentation = ({
   let DisplayComponent: ComponentType<DisplayComponentProps> | undefined
   // work around - cant pass a componet on server unless it is marked use server and async :(
   if (displayComponentName === 'APIModel') {
-    DisplayComponent = APIModel
+    DisplayComponent = ({ allVersionsContent, data }) => {
+      if (!data.rootSpec || typeof data.htmlContent !== 'string') {
+        return null
+      }
+
+      return (
+        <APIModel
+          allVersionsContent={allVersionsContent}
+          data={
+            data as {
+              rootSpec: {
+                parsed: {
+                  paths: Record<string, Record<string, unknown>>
+                  components: {
+                    parameters: Record<string, unknown>
+                  }
+                }
+              }
+              htmlContent: string
+            }
+          }
+        />
+      )
+    }
   }
   if (displayComponentName === 'DataModel') {
-    DisplayComponent = DataModel
+    DisplayComponent = ({ allVersionsContent, data }) => {
+      if (!data.schemata || typeof data.htmlContent !== 'string') {
+        return null
+      }
+
+      return (
+        <DataModel
+          allVersionsContent={allVersionsContent}
+          data={data as { schemata: Record<string, unknown>; htmlContent: string }}
+        />
+      )
+    }
   }
   if (displayComponentName === 'OpenAPIModel') {
-    DisplayComponent = OpenAPIModel
+    DisplayComponent = ({ allVersionsContent, data }) => {
+      if (!data.rootSpec || typeof data.htmlContent !== 'string') {
+        return null
+      }
+
+      return (
+        <OpenAPIModel
+          allVersionsContent={allVersionsContent}
+          data={data as { htmlContent: string; rootSpec: { parsed: Record<string, unknown> } }}
+        />
+      )
+    }
   }
 
   const cookieName = 'docVersion'
@@ -63,6 +113,8 @@ export const VersionedDocumentation = ({
   const insertVersionIntoSharedContent = (shared: string) =>
     shared.replace('$version', '(v' + version + ')')
 
+  const selectedVersionData = data[version]
+
   return (
     <>
       {isClient && (
@@ -72,11 +124,13 @@ export const VersionedDocumentation = ({
             setVersion={versionChoiceMade}
             version={version}
           />
-          <ContentView
-            allVersionsContent={insertVersionIntoSharedContent(allVersionsContent)}
-            DisplayComponent={DisplayComponent}
-            data={data[version]}
-          />
+          {selectedVersionData && (
+            <ContentView
+              allVersionsContent={insertVersionIntoSharedContent(allVersionsContent)}
+              DisplayComponent={DisplayComponent}
+              data={selectedVersionData}
+            />
+          )}
         </>
       )}
     </>
@@ -93,7 +147,7 @@ const ContentView = ({
   DisplayComponent?: ComponentType<DisplayComponentProps>
 }) => (
   <>
-    <MarkdownContent html={data.textContent} />
+    <MarkdownContent html={data.textContent ?? ''} />
     {DisplayComponent && <DisplayComponent allVersionsContent={allVersionsContent} data={data} />}
   </>
 )

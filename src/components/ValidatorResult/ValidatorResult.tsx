@@ -33,16 +33,23 @@ export const ValidatorResult = ({ result, apiData }: ValidatorResultProps) => {
       <div className={styles.result}>
         <Title result={validationResult} />
 
-        {Object.keys(endpoints).map((k, i) => (
-          <Endpoint
-            profile={validationResult.service.profile}
-            rootPath={validationResult.service.url}
-            key={i}
-            path={k}
-            data={endpoints[k]}
-            apiData={apiData}
-          />
-        ))}
+        {Object.keys(endpoints).map((k, i) => {
+          const endpointData = endpoints[k]
+          if (!endpointData) {
+            return null
+          }
+
+          return (
+            <Endpoint
+              profile={validationResult.service.profile}
+              rootPath={validationResult.service.url}
+              key={i}
+              path={k}
+              data={endpointData}
+              apiData={apiData}
+            />
+          )
+        })}
       </div>
 
       {/*       {result && (

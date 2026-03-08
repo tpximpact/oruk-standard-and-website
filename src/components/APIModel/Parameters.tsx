@@ -66,7 +66,7 @@ const Parameter = ({ data, parametersReferences }: ParameterProps) => {
   }
 
   return (
-    <DocumentationLineItem title={resolvedData.name}>
+    <DocumentationLineItem title={resolvedData.name ?? ''}>
       <Badges data={resolvedData} />
       {resolvedData.description && (
         <div className={styles.description}>{resolvedData.description}</div>

@@ -53,6 +53,11 @@ const DocsTab = ({ apiData, path }: { apiData?: ApiDocsData; path: string }) => 
 
   const endpoints = apiData.rootSpec.parsed.paths
   const parametersReferences = apiData.rootSpec.parsed.components.parameters
+  const endpointData = endpoints[path]
+
+  if (!endpointData) {
+    return null
+  }
 
   return (
     <Path
@@ -61,7 +66,7 @@ const DocsTab = ({ apiData, path }: { apiData?: ApiDocsData; path: string }) => 
       path={path}
       allData={apiData}
       parametersReferences={parametersReferences}
-      data={endpoints[path]}
+      data={endpointData}
     />
   )
 }
@@ -71,7 +76,7 @@ const profileNameToVersionNumber = (name: string) => {
   return atoms.reverse().shift()
 }
 
-const getExampleId = (data: EndpointData): string | number | undefined => {
+const getExampleId = (data: EndpointData): string | undefined => {
   let id: string | number | undefined
   const firstKey = Object.keys(data.groups)[0]
   const defaultGroup = firstKey ? data.groups[firstKey] : undefined
@@ -82,7 +87,7 @@ const getExampleId = (data: EndpointData): string | number | undefined => {
       id = defaultItem.id
     }
   }
-  return id
+  return id === undefined ? undefined : String(id)
 }
 
 export const Endpoint = ({

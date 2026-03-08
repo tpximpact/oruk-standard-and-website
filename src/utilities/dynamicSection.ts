@@ -67,7 +67,11 @@ export const getAllFiles = (contentFolder: string): string[] => {
 }
 
 const getDate = (metadata: Record<string, unknown>, contentPath: string): string => {
-  const raw = metadata.modified || fileLastModified(contentPath)
+  const modified = metadata.modified
+  const raw =
+    modified instanceof Date || typeof modified === 'string' || typeof modified === 'number'
+      ? modified
+      : fileLastModified(contentPath)
   const date = new Date(raw)
   return date.toLocaleDateString('en-GB')
 }

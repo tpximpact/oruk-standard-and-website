@@ -64,7 +64,7 @@ export const APIRequest = ({ src, exampleId, apiPath }: APIRequestProps) => {
 
 const Result = ({ status, response }: { status: string; response: unknown }) => (
   <div>
-    {status === RESPONSE_STATUS.ERROR && <ErrorMessage message={response} />}
+    {status === RESPONSE_STATUS.ERROR && <ErrorMessage message={String(response ?? '')} />}
     {status === RESPONSE_STATUS.PENDING && <Spinner />}
     {/*status === RESPONSE_STATUS.SUCCESS && (
 			<div style={{ marginTop: '1rem' }}>

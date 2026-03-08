@@ -16,11 +16,39 @@ export async function generateMetadata() {
 
 // Transform ServiceResponse (flat) or nested DB doc to the format expected by DashboardDetails
 function transformServiceForDashboard(service: Record<string, unknown>) {
-  const extractValue = (field: unknown): unknown => {
+  const extractValue = (field: unknown): string => {
     if (field === null || field === undefined) return ''
-    if (typeof field === 'object' && field !== null && 'value' in field)
-      return (field as { value?: unknown }).value
-    return field
+    if (typeof field === 'object' && field !== null && 'value' in field) {
+      const value = (field as { value?: unknown }).value
+      return value === null || value === undefined ? '' : String(value)
+    }
+    return String(field)
+  }
+
+  const extractBoolean = (field: unknown): boolean => {
+    if (typeof field === 'boolean') return field
+    if (typeof field === 'object' && field !== null && 'value' in field) {
+      return Boolean((field as { value?: unknown }).value)
+    }
+    return false
+  }
+
+  const extractDate = (field: unknown): Date | undefined => {
+    if (field instanceof Date) return field
+    if (typeof field === 'object' && field !== null && 'value' in field) {
+      const value = (field as { value?: unknown }).value
+      if (value instanceof Date) return value
+      if (typeof value === 'string' || typeof value === 'number') {
+        const parsed = new Date(value)
+        return Number.isNaN(parsed.getTime()) ? undefined : parsed
+      }
+      return undefined
+    }
+    if (typeof field === 'string' || typeof field === 'number') {
+      const parsed = new Date(field)
+      return Number.isNaN(parsed.getTime()) ? undefined : parsed
+    }
+    return undefined
   }
 
   const extractUrl = (obj: unknown, fallback?: string): string => {
@@ -43,10 +71,7 @@ function transformServiceForDashboard(service: Record<string, unknown>) {
   const serviceValue = extractValue(service.service ?? service.name)
   const serviceUrl =
     typeof service.serviceUrl === 'string' ? service.serviceUrl : extractUrl(service.service)
-  const isValid =
-    service.statusIsValid && typeof service.statusIsValid === 'boolean'
-      ? service.statusIsValid
-      : extractValue(service.statusIsValid)
+  const isValid = extractBoolean(service.statusIsValid)
 
   return {
     result: {
@@ -55,7 +80,7 @@ function transformServiceForDashboard(service: Record<string, unknown>) {
       developer: { value: developerValue, url: developerUrl },
       service: { value: serviceValue, url: serviceUrl },
       isValid: Boolean(isValid),
-      lastTested: { value: service.lastTested },
+      lastTested: { value: extractDate(service.lastTested) },
       payload: [
         {
           label: 'Service Details',
@@ -85,7 +110,7 @@ function transformServiceForDashboard(service: Record<string, unknown>) {
             },
             {
               label: 'Schema Version',
-              value: extractValue(service.schemaVersion) || service.schemaVersion,
+              value: extractValue(service.schemaVersion),
               dataType: 'oruk:dataType:string'
             }
           ]

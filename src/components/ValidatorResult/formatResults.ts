@@ -27,7 +27,7 @@ const addTestToResult = (result: FormattedEndpoints, test: Test, sharedPath: str
   const endpointRaw = stripSharedPath(test.endpoint, sharedPath)
   const endpointName = normaliseEndpointName(endpointRaw)
   if (!result[endpointName]) {
-    result[endpointName] = { tests: [] }
+    result[endpointName] = { tests: [], groups: {} }
   }
   result[endpointName].groups = result[endpointName].groups || {}
   const tests = (result[endpointName] as { tests?: Test[] }).tests || []
@@ -37,9 +37,12 @@ const addTestToResult = (result: FormattedEndpoints, test: Test, sharedPath: str
 
 const groupTestsByParent = (result: FormattedEndpoints) => {
   Object.keys(result).forEach(key => {
-    const endpoint = result[key] as { tests?: Test[]; groups?: Record<string, Test[]> }
+    const endpoint = result[key] as { tests?: Test[]; groups?: Record<string, Test[]> } | undefined
+    if (!endpoint) {
+      return
+    }
     const groupedTests = groupBy(endpoint.tests || [], 'parent')
-    result[key].groups = groupedTests
+    endpoint.groups = groupedTests
     delete endpoint.tests
   })
 }
@@ -65,9 +68,15 @@ const deDuplicateMessages = (input: FormattedEndpoints): FormattedEndpoints => {
   const result = JSON.parse(JSON.stringify(input)) as FormattedEndpoints
   Object.keys(result).forEach(endpointKey => {
     const endpoint = result[endpointKey]
+    if (!endpoint) {
+      return
+    }
 
     Object.keys(endpoint.groups).forEach(groupKey => {
       const group = endpoint.groups[groupKey]
+      if (!group) {
+        return
+      }
       group.forEach(test => {
         test.messages = deduplicate(test.messages)
       })

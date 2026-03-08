@@ -28,7 +28,7 @@ export const Responses = ({ data, allData }: ResponsesProps) => {
   const response200 = data['200']
 
   if (!response200?.content?.['application/json']?.schema) {
-    return <DocumentationFeatureSection title='Response' />
+    return <DocumentationFeatureSection title='Response'>{null}</DocumentationFeatureSection>
   }
 
   let schema = response200.content['application/json'].schema
@@ -36,25 +36,25 @@ export const Responses = ({ data, allData }: ResponsesProps) => {
   if (schema.$ref) {
     const modelFile = schema.$ref.split('/').pop()
     const model = filenameToName(modelFile)
-    description = (
-      <>
-        {`${description} An instance of the class `}
-        <a href={'/developers/schemata#' + model}>{model}</a>
-      </>
-    )
+    description = `${description} An instance of the class ${model}.`
     if (allSchemas && model && allSchemas.includes(model)) {
-      schema = allData.schemata[model]
+      const resolvedSchema = allData.schemata[model]
+      if (resolvedSchema) {
+        schema = resolvedSchema
+      }
     }
   }
 
+  const properties = schema.properties
+
   return (
     <DocumentationFeatureSection title='Response' description={description}>
-      {schema.properties &&
-        Object.keys(schema.properties).map((pk, i) => (
+      {properties &&
+        Object.keys(properties).map((pk, i) => (
           <SchemaProperty
             key={i}
             parentKeyName={pk}
-            data={schema.properties[pk]}
+            data={properties[pk]}
             allSchemas={allSchemas}
             required={false}
             useFullPath={true}

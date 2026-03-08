@@ -9,40 +9,46 @@ interface MessageProps {
   data: ValidationMessage
 }
 
-export const Message = ({ data }: MessageProps) => (
-  <div className={styles.message}>
-    <p>
-      {data.name}: <strong>{data.description}</strong>
-    </p>
-    <p>
-      {data.message} {data.count && data.count > 1 ? `(x${data.count} occurences)` : null}{' '}
-      <Icon
-        colour={getColourForStatus(STATUS.FAIL)}
-        weight={4}
-        icon={getIconForStatus(STATUS.FAIL)}
-        size={18}
-      />
-    </p>
+export const Message = ({ data }: MessageProps) => {
+  const hasParameters = data.parameters !== undefined && data.parameters !== null
+  const errorIn = typeof data.errorIn === 'string' ? data.errorIn : undefined
+  const errorAt = typeof data.errorAt === 'string' ? data.errorAt : undefined
 
-    {data.parameters && (
+  return (
+    <div className={styles.message}>
       <p>
-        {' '}
-        When called with parameters
-        <code>{JSON.stringify(data.parameters)}</code>
+        {data.name}: <strong>{data.description}</strong>
       </p>
-    )}
+      <p>
+        {data.message} {data.count && data.count > 1 ? `(x${data.count} occurences)` : null}{' '}
+        <Icon
+          colour={getColourForStatus(STATUS.FAIL)}
+          weight={4}
+          icon={getIconForStatus(STATUS.FAIL)}
+          size={18}
+        />
+      </p>
 
-    {data.errorIn && (
-      <p>
-        Error in:
-        <code> {data.errorIn}</code>
-      </p>
-    )}
-    {data.errorAt && (
-      <p>
-        Error at:
-        <code> {data.errorAt}</code>
-      </p>
-    )}
-  </div>
-)
+      {hasParameters && (
+        <p>
+          {' '}
+          When called with parameters
+          <code>{JSON.stringify(data.parameters)}</code>
+        </p>
+      )}
+
+      {errorIn && (
+        <p>
+          Error in:
+          <code> {errorIn}</code>
+        </p>
+      )}
+      {errorAt && (
+        <p>
+          Error at:
+          <code> {errorAt}</code>
+        </p>
+      )}
+    </div>
+  )
+}
