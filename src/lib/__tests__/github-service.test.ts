@@ -48,7 +48,7 @@ describe('createVerificationIssue', () => {
       active: true,
       statusIsUp: true,
       statusIsValid: true,
-      statusOverall: 'pending',
+      statusOverall: false,
       createdAt: new Date('2020-01-02'),
       updatedAt: new Date('2020-01-02'),
       updateLink: '/services/svc-1'

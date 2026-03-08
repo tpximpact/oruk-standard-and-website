@@ -1,7 +1,7 @@
 import { describe, it, expect, vi, beforeEach, type Mock } from 'vitest'
 import type { ObjectId } from 'mongodb'
 import { ServiceRepository } from '../service-repository'
-import { ServiceDocument } from '@/models/service'
+import { ServiceDocument, type ServiceInput } from '@/models/service'
 import { ValidationError } from '@/lib/mongodb-errors'
 
 let mockCollection: {
@@ -94,7 +94,7 @@ describe('ServiceRepository', () => {
       const invalidData = {
         name: '',
         publisher: 'Test'
-      } as unknown
+      } as ServiceInput
 
       const createPromise = repository.create(invalidData)
       await expect(createPromise).rejects.toThrow(ValidationError)
