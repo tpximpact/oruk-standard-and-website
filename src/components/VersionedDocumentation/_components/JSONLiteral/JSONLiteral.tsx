@@ -4,7 +4,7 @@ import ReactJsonView from '@microlink/react-json-view'
 import styles from './JSONLiteral.module.css'
 
 interface JSONLiteralProps {
-  data: any
+  data: unknown
 }
 
 export const JSONLiteral = ({ data }: JSONLiteralProps) => (

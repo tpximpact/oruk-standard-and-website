@@ -7,10 +7,21 @@ import { useCookies } from 'react-cookie'
 import { DataModel } from '@/components/DataModel'
 import { APIModel } from '@/components/APIModel'
 import { OpenAPIModel } from './_components/OpenAPIModel'
+import type { ComponentType } from 'react'
+
+interface VersionedDocData {
+  textContent: string
+  [key: string]: unknown
+}
+
+interface DisplayComponentProps {
+  allVersionsContent: string
+  data: VersionedDocData
+}
 
 interface VersionedDocumentationProps {
   allVersionsContent: string
-  data: Record<string, any>
+  data: Record<string, VersionedDocData>
   displayComponentName: string
 }
 
@@ -21,7 +32,7 @@ export const VersionedDocumentation = ({
 }: VersionedDocumentationProps) => {
   const allVersions = Object.keys(data).sort().reverse()
 
-  let DisplayComponent
+  let DisplayComponent: ComponentType<DisplayComponentProps> | undefined
   // work around - cant pass a componet on server unless it is marked use server and async :(
   if (displayComponentName === 'APIModel') {
     DisplayComponent = APIModel
@@ -77,9 +88,9 @@ const ContentView = ({
   data,
   DisplayComponent
 }: {
-  allVersionsContent: any
-  data: any
-  DisplayComponent: any
+  allVersionsContent: string
+  data: VersionedDocData
+  DisplayComponent?: ComponentType<DisplayComponentProps>
 }) => (
   <>
     <MarkdownContent html={data.textContent} />
