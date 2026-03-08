@@ -21,7 +21,7 @@ interface APIRequestProps {
 
 export const APIRequest = ({ src, exampleId, apiPath }: APIRequestProps) => {
   const [status, setStatus] = useState(RESPONSE_STATUS.INITIAL)
-  const [response, setResponse] = useState<any>(null)
+  const [response, setResponse] = useState<unknown>(null)
 
   const setStatusPending = () => setStatus(RESPONSE_STATUS.PENDING)
   const setStatusSuccess = () => setStatus(RESPONSE_STATUS.SUCCESS)
@@ -44,7 +44,7 @@ export const APIRequest = ({ src, exampleId, apiPath }: APIRequestProps) => {
       setResponse(data)
     } catch (error) {
       setStatusError()
-      setResponse('Failed to fetch data:' + error)
+      setResponse(`Failed to fetch data: ${error instanceof Error ? error.message : String(error)}`)
     }
   }
 
@@ -62,7 +62,7 @@ export const APIRequest = ({ src, exampleId, apiPath }: APIRequestProps) => {
   )
 }
 
-const Result = ({ status, response }: { status: string; response: any }) => (
+const Result = ({ status, response }: { status: string; response: unknown }) => (
   <div>
     {status === RESPONSE_STATUS.ERROR && <ErrorMessage message={response} />}
     {status === RESPONSE_STATUS.PENDING && <Spinner />}
@@ -99,7 +99,15 @@ const buildIDQueryString = ({
 const buildRootQueryString = ({ baseURL, path }: { baseURL: string; path: string }) =>
   `${baseURL}${path}`
 
-const ParametersWidget = (props: any) => {
+interface ParametersWidgetProps {
+  baseURL: string
+  path: string
+  status: string
+  dispatchRequest: (q: string) => void
+  initialIDValue?: string
+}
+
+const ParametersWidget = (props: ParametersWidgetProps) => {
   let C = ParametersWidgetPaged
 
   if (props.initialIDValue) {

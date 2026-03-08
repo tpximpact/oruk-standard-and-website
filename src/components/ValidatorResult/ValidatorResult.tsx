@@ -7,18 +7,22 @@ import { Endpoint } from './Endpoint'
 import styles from './ValidatorResult.module.css'
 
 import { formatResults } from './formatResults'
+import type { ApiDocsData, FormattedEndpoints, ValidationResultData } from './types'
 
 //import exampleData from './example.json'
 
 interface ValidatorResultProps {
-  result: any
-  apiData: any
+  result: { result: ValidationResultData }
+  apiData: Record<string, ApiDocsData>
 }
 
 export const ValidatorResult = ({ result, apiData }: ValidatorResultProps) => {
-  result = result.result
+  const validationResult = result.result
 
-  const endpoints: Record<string, any> = useMemo(() => formatResults(result), [result])
+  const endpoints: FormattedEndpoints = useMemo(
+    () => formatResults(validationResult),
+    [validationResult]
+  )
 
   useEffect(() => {
     window.scrollTo(0, 0)
@@ -27,12 +31,12 @@ export const ValidatorResult = ({ result, apiData }: ValidatorResultProps) => {
   return (
     <>
       <div className={styles.result}>
-        <Title result={result} />
+        <Title result={validationResult} />
 
         {Object.keys(endpoints).map((k, i) => (
           <Endpoint
-            profile={result.service.profile}
-            rootPath={result.service.url}
+            profile={validationResult.service.profile}
+            rootPath={validationResult.service.url}
             key={i}
             path={k}
             data={endpoints[k]}

@@ -3,19 +3,10 @@ import Icon from '@/components/Icon'
 import { STATUS } from '@/utilities/status'
 import { getColourForStatus } from '@/utilities/getColourForStatus'
 import { getIconForStatus } from '@/utilities/getIconForStatus'
-
-interface MessageData {
-  name: string
-  description: string
-  message: string
-  count?: number
-  parameters?: any
-  errorIn?: string
-  errorAt?: string
-}
+import type { ValidationMessage } from './types'
 
 interface MessageProps {
-  data: MessageData
+  data: ValidationMessage
 }
 
 export const Message = ({ data }: MessageProps) => (
