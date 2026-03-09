@@ -13,7 +13,7 @@
     "id": {
       "allOf": [
         {
-          "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#/$defs/uuid_id"
+          "$ref": "./definitions.json#/$defs/uuid_id"
         }
       ],
       "title": "Identifier",
@@ -24,7 +24,7 @@
     "organization_id": {
       "allOf": [
         {
-          "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#/$defs/uuid_reference"
+          "$ref": "./definitions.json#/$defs/uuid_reference"
         }
       ],
       "title": "Organization Identifier",
@@ -35,7 +35,7 @@
     "name": {
       "allOf": [
         {
-          "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#/$defs/name"
+          "$ref": "./definitions.json#/$defs/name"
         }
       ],
       "description": "The official or public name of the service.",
@@ -45,7 +45,7 @@
     "description": {
       "allOf": [
         {
-          "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#/$defs/description"
+          "$ref": "./definitions.json#/$defs/description"
         }
       ],
       "description": "A free text description of the service.",
@@ -56,7 +56,7 @@
       "name": "url",
       "allOf": [
         {
-          "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#/$defs/uri"
+          "$ref": "./definitions.json#/$defs/uri"
         }
       ],
       "title": "URL",
@@ -67,7 +67,7 @@
     "email": {
       "allOf": [
         {
-          "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#/$defs/email"
+          "$ref": "./definitions.json#/$defs/email"
         }
       ],
       "title": "Email",
@@ -78,7 +78,7 @@
     "status": {
       "allOf": [
         {
-          "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#/$defs/service_status"
+          "$ref": "./definitions.json#/$defs/service_status"
         }
       ],
       "example": "active",
@@ -174,7 +174,7 @@
       "title": "Schedules",
       "description": "The details of when a service or location is open. Entries are RFC 5545 RRULES.",
       "items": {
-        "$ref": "https://openreferraluk.org/specifications/3.0/schema/schedule.json"
+        "$ref": "./schedule.json"
       }
     },
     "service_areas": {
@@ -183,7 +183,7 @@
       "title": "Service Areas",
       "description": "The details of the geographic area for which a service is available.",
       "items": {
-        "$ref": "https://openreferraluk.org/specifications/3.0/schema/service_area.json"
+        "$ref": "./service_area.json"
       }
     },
     "service_at_locations": {
@@ -192,7 +192,7 @@
       "title": "Service At Locations",
       "description": "A link between a service and a specific location.",
       "items": {
-        "$ref": "https://openreferraluk.org/specifications/3.0/schema/service_at_location.json"
+        "$ref": "./service_at_location.json"
       }
     },
     "languages": {
@@ -201,11 +201,11 @@
       "title": "Languages",
       "description": "The details of the languages that are spoken at locations or services. This does not include languages which can only be used with interpretation.",
       "items": {
-        "$ref": "https://openreferraluk.org/specifications/3.0/schema/language.json"
+        "$ref": "./language.json"
       }
     },
     "organization": {
-      "$ref": "https://openreferraluk.org/specifications/3.0/schema/organization.json"
+      "$ref": "./organization.json"
     },
     "funding": {
       "name": "funding",
@@ -213,7 +213,7 @@
       "title": "Funding",
       "description": "The sources of funding for a service or organization.",
       "items": {
-        "$ref": "https://openreferraluk.org/specifications/3.0/schema/funding.json"
+        "$ref": "./funding.json"
       }
     },
     "cost_options": {
@@ -222,7 +222,7 @@
       "title": "Cost Options",
       "description": "The costs of a service at certain points in time. This is an LGA Extension table. This table provides a structured version of the text information contained in the 'fees' field of the 'service' table.",
       "items": {
-        "$ref": "https://openreferraluk.org/specifications/3.0/schema/cost_option.json"
+        "$ref": "./cost_option.json"
       }
     },
     "contacts": {
@@ -231,7 +231,7 @@
       "title": "Contacts",
       "description": "The details of the named contacts for services and organizations.",
       "items": {
-        "$ref": "https://openreferraluk.org/specifications/3.0/schema/contact.json"
+        "$ref": "./contact.json"
       }
     },
     "attributes": {
@@ -240,7 +240,7 @@
       "title": "Attributes",
       "description": "A link between a service and one or more classifications that describe the nature of the service provided.",
       "items": {
-        "$ref": "https://openreferraluk.org/specifications/3.0/schema/attribute.json"
+        "$ref": "./attribute.json"
       }
     }
   },

@@ -11,7 +11,7 @@
     "profile": {
       "allOf": [
         {
-          "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#/$defs/uri"
+          "$ref": "./definitions.json#/$defs/uri"
         }
       ],
       "description": "URL of the information on the HSDS profile of this API.",
@@ -20,7 +20,7 @@
     "openapi_url": {
       "allOf": [
         {
-          "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#/$defs/uri"
+          "$ref": "./definitions.json#/$defs/uri"
         }
       ],
       "description": "URL of the openapi JSON file which defines this API.",

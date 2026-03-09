@@ -13,7 +13,7 @@
     "id": {
       "allOf": [
         {
-          "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#/$defs/uuid_id"
+          "$ref": "./definitions.json#/$defs/uuid_id"
         }
       ],
       "title": "Identifier",
@@ -24,7 +24,7 @@
     "service_id": {
       "allOf": [
         {
-          "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#/$defs/uuid_reference"
+          "$ref": "./definitions.json#/$defs/uuid_reference"
         }
       ],
       "title": "Service Identifier",
@@ -35,7 +35,7 @@
     "name": {
       "allOf": [
         {
-          "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#/$defs/name"
+          "$ref": "./definitions.json#/$defs/name"
         }
       ],
       "description": "A free text geographic area where a service is available.",
@@ -65,7 +65,7 @@
     "uri": {
       "allOf": [
         {
-          "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#/$defs/uri"
+          "$ref": "./definitions.json#/$defs/uri"
         }
       ],
       "title": "URI",

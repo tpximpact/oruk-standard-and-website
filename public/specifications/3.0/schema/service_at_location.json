@@ -13,7 +13,7 @@
     "id": {
       "allOf": [
         {
-          "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#/$defs/uuid_id"
+          "$ref": "./definitions.json#/$defs/uuid_id"
         }
       ],
       "title": "Identifier",
@@ -24,7 +24,7 @@
     "service_id": {
       "allOf": [
         {
-          "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#/$defs/uuid_reference"
+          "$ref": "./definitions.json#/$defs/uuid_reference"
         }
       ],
       "title": "Service Identifier",
@@ -35,7 +35,7 @@
     "location_id": {
       "allOf": [
         {
-          "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#/$defs/uuid_reference"
+          "$ref": "./definitions.json#/$defs/uuid_reference"
         }
       ],
       "title": "Location Identifier",
@@ -44,7 +44,7 @@
       "core": "Y"
     },
     "location": {
-      "$ref": "https://openreferraluk.org/specifications/3.0/schema/location.json"
+      "$ref": "./location.json"
     }
   },
   "required": [

@@ -24,7 +24,7 @@
     "service_at_location_list": {
       "properties": {
         "service": {
-          "$ref": "https://openreferraluk.org/specifications/3.0/schema/service_list.json"
+          "$ref": "./service_list.json"
         }
       }
     }

@@ -1,10 +1,10 @@
 {
   "allOf": [
     {
-      "$ref": "https://openreferraluk.org/specifications/3.0/schema/service_at_location.json"
+      "$ref": "./service_at_location.json"
     },
     {
-      "$ref": "https://openreferraluk.org/specifications/3.0/schema/list_overrides.json#/$defs/service_at_location_list"
+      "$ref": "./list_overrides.json#/$defs/service_at_location_list"
     }
   ]
 }

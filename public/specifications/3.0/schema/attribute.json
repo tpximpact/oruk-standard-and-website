@@ -13,7 +13,7 @@
     "id": {
       "allOf": [
         {
-          "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#/$defs/uuid_id"
+          "$ref": "./definitions.json#/$defs/uuid_id"
         }
       ],
       "title": "Identifier",
@@ -24,7 +24,7 @@
     "link_id": {
       "allOf": [
         {
-          "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#/$defs/uuid_reference"
+          "$ref": "./definitions.json#/$defs/uuid_reference"
         }
       ],
       "title": "Link Identifier",
@@ -35,7 +35,7 @@
     "taxonomy_term_id": {
       "allOf": [
         {
-          "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#/$defs/uuid_reference"
+          "$ref": "./definitions.json#/$defs/uuid_reference"
         }
       ],
       "title": "Taxonomy Term Identifier",
@@ -55,7 +55,7 @@
       "core": "Y"
     },
     "taxonomy_term": {
-      "$ref": "https://openreferraluk.org/specifications/3.0/schema/taxonomy_term.json"
+      "$ref": "./taxonomy_term.json"
     }
   },
   "required": [

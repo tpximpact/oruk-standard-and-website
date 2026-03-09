@@ -13,7 +13,7 @@
     "id": {
       "allOf": [
         {
-          "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#/$defs/uuid_id"
+          "$ref": "./definitions.json#/$defs/uuid_id"
         }
       ],
       "title": "Identifier",
@@ -40,7 +40,7 @@
     "name": {
       "allOf": [
         {
-          "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#/$defs/name"
+          "$ref": "./definitions.json#/$defs/name"
         }
       ],
       "description": "The name of the location.",
@@ -50,7 +50,7 @@
     "description": {
       "allOf": [
         {
-          "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#/$defs/description"
+          "$ref": "./definitions.json#/$defs/description"
         }
       ],
       "description": "A free text description of the location.",
@@ -105,7 +105,7 @@
       "title": "Addresses",
       "description": "The addresses of locations where organizations operate.",
       "items": {
-        "$ref": "https://openreferraluk.org/specifications/3.0/schema/address.json"
+        "$ref": "./address.json"
       }
     },
     "accessibility": {
@@ -114,7 +114,7 @@
       "title": "Accessibility",
       "description": "The details of the arrangements for access to locations for people who have disabilities",
       "items": {
-        "$ref": "https://openreferraluk.org/specifications/3.0/schema/accessibility.json"
+        "$ref": "./accessibility.json"
       }
     },
     "attributes": {
@@ -123,7 +123,7 @@
       "title": "Attributes",
       "description": "A link between a service and one or more classifications that describe the nature of the service provided.",
       "items": {
-        "$ref": "https://openreferraluk.org/specifications/3.0/schema/attribute.json"
+        "$ref": "./attribute.json"
       }
     }
   },

@@ -13,7 +13,7 @@
     "id": {
       "allOf": [
         {
-          "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#/$defs/uuid_id"
+          "$ref": "./definitions.json#/$defs/uuid_id"
         }
       ],
       "title": "Identifier",
@@ -24,7 +24,7 @@
     "contact_id": {
       "allOf": [
         {
-          "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#/$defs/uuid_reference"
+          "$ref": "./definitions.json#/$defs/uuid_reference"
         }
       ],
       "title": "Contact Identifier",
@@ -46,7 +46,7 @@
     "description": {
       "allOf": [
         {
-          "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#/$defs/description"
+          "$ref": "./definitions.json#/$defs/description"
         }
       ],
       "description": "A free text description providing extra information about the phone service",
@@ -58,7 +58,7 @@
       "title": "Languages",
       "description": "The details of the languages that are spoken at locations or services. This does not include languages which can only be used with interpretation.",
       "items": {
-        "$ref": "https://openreferraluk.org/specifications/3.0/schema/language.json"
+        "$ref": "./language.json"
       }
     }
   },

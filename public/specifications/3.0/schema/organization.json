@@ -13,7 +13,7 @@
     "id": {
       "allOf": [
         {
-          "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#/$defs/uuid_id"
+          "$ref": "./definitions.json#/$defs/uuid_id"
         }
       ],
       "title": "Identifier",
@@ -24,7 +24,7 @@
     "name": {
       "allOf": [
         {
-          "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#/$defs/name"
+          "$ref": "./definitions.json#/$defs/name"
         }
       ],
       "description": "The official or public name of the organization.",
@@ -34,7 +34,7 @@
     "description": {
       "allOf": [
         {
-          "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#/$defs/description"
+          "$ref": "./definitions.json#/$defs/description"
         }
       ],
       "description": "A free text description containing a brief summary about the organization. It can contain markup such as HTML or Markdown.",
@@ -44,7 +44,7 @@
     "email": {
       "allOf": [
         {
-          "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#/$defs/email"
+          "$ref": "./definitions.json#/$defs/email"
         }
       ],
       "title": "Email",
@@ -56,7 +56,7 @@
       "name": "website",
       "allOf": [
         {
-          "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#/$defs/uri"
+          "$ref": "./definitions.json#/$defs/uri"
         }
       ],
       "title": "Website",
@@ -77,7 +77,7 @@
     "uri": {
       "allOf": [
         {
-          "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#/$defs/uri"
+          "$ref": "./definitions.json#/$defs/uri"
         }
       ],
       "title": "URI",
@@ -101,7 +101,7 @@
       "title": "Organization Identifiers",
       "description": "The details of the third party identifiers for organizations, such as: company registration number, charity number, tax registration number.",
       "items": {
-        "$ref": "https://openreferraluk.org/specifications/3.0/schema/organization_identifier.json"
+        "$ref": "./organization_identifier.json"
       }
     },
     "attributes": {
@@ -110,7 +110,7 @@
       "title": "Attributes",
       "description": "A link between a service and one or more classifications that describe the nature of the service provided.",
       "items": {
-        "$ref": "https://openreferraluk.org/specifications/3.0/schema/attribute.json"
+        "$ref": "./attribute.json"
       }
     }
   },
