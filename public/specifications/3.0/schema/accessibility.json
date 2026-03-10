@@ -15,17 +15,17 @@
     "id": {
       "description": "The identifier for this accessibility information. Each entry must have a unique identifier.",
       "example": "afcf296e-1cb2-4139-9c88-33d587d1a50b",
-      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions/id_property.json"
+      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#id_property.json"
     },
     "location_id": {
       "description": "The identifier for the location of the accessibility provision.",
       "example": "3a19ff88-4620-4d17-9830-ac1d859eb5d5",
-      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions/location_id_property.json"
+      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#location_id_property.json"
     },
     "description": {
       "description": "A free text description of the assistance or infrastructure that facilitates access to clients with disabilities.",
       "example": "The building is equipped with induction loops for hearing aids. Wheelchair access is possible on all levels.",
-      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions/description_property.json"
+      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#description_property.json"
     },
     "details": {
       "type": "string",
@@ -39,7 +39,7 @@
     "url": {
       "description": "The URL of a page giving more information about the accessibility of the location.",
       "example": "http://example.com",
-      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions/url_property.json"
+      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#url_property.json"
     },
     "attributes": {
       "type": "array",

@@ -15,36 +15,36 @@
     "id": {
       "description": "The identifier for the service. Each service must have a unique identifier.",
       "example": "ac148810-d857-441c-9679-408f346de14b",
-      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions/id_property.json"
+      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#id_property.json"
     },
     "organization_id": {
       "description": "The identifier of the organization that provides this service.",
       "example": "d9d5e0f5-d3ce-4f73-9a2f-4dd0ecc6c610",
-      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions/organization_id_property.json"
+      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#organization_id_property.json"
     },
     "name": {
       "description": "The official or public name of the service.",
       "example": "Community Counselling",
-      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions/name_property.json"
+      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#name_property.json"
     },
     "description": {
       "description": "A free text description of the service.",
       "example": "Counselling Services provided by trained professionals. Suitable for people with mental health conditions such as anxiety, depression, or eating disorders as well as people experiencing difficult life events and circumstances. ",
-      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions/description_property.json"
+      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#description_property.json"
     },
     "url": {
       "description": "URL of the service",
       "example": "http://example.com/counselling",
-      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions/url_property.json"
+      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#url_property.json"
     },
     "email": {
       "description": "An email address which can be used to contact the service provider.",
       "example": "email@example.com",
-      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions/email_property.json"
+      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#email_property.json"
     },
     "status": {
       "example": "active",
-      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions/service_status.json"
+      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#service_status.json"
     },
     "fees": {
       "type": "string",
@@ -86,7 +86,7 @@
       "title": "Assured Date",
       "description": "The date that the information about the service was last checked.",
       "example": "2005-01-01",
-      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions/date_string.json"
+      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#date_string.json"
     },
     "assurer_email": {
       "type": "string",
@@ -111,7 +111,7 @@
       "title": "Last Modified",
       "description": "The datetime when the service, or any related information about the service, has changed. Should have millisecond accuracy.",
       "example": "2023-03-15T10:30:45.123Z",
-      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions/datetime_string.json"
+      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#datetime_string.json"
     },
     "schedules": {
       "type": "array",

@@ -13,23 +13,23 @@
     "id": {
       "title": "Identifier",
       "description": "The identifier of the taxonomy. Each entry must have a unique identifier",
-      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions/uuid_id.json"
+      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#uuid_id.json"
     },
     "name": {
       "description": "The name of the taxonomy from which terms are sourced.",
       "example": "name",
-      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions/name.json"
+      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#name.json"
     },
     "description": {
       "description": "A free text description of the taxonomy.",
       "example": "description",
-      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions/description.json"
+      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#description.json"
     },
     "uri": {
       "title": "URI",
       "description": "The URI of the taxonomy.",
       "example": "http://example.com",
-      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions/uri.json"
+      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#uri.json"
     },
     "version": {
       "name": "version",

@@ -1,0 +1,175 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://openreferraluk.org/specifications/3.0/schema/definitions.json",
+  "title": "Open Referral UK Common Definitions",
+  "description": "A combined collection of common property definitions for the HSDS profile.",
+  "$defs": {
+    "url_property": {
+      "$id": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#url_property.json",
+      "title": "URL",
+      "core": "Y",
+      "$ref": "#url-field"
+    },
+    "url": {
+      "$id": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#url.json",
+      "$anchor": "url-field",
+      "type": "string",
+      "format": "uri",
+      "title": "URL",
+      "constraints": {
+        "unique": false
+      }
+    },
+    "uuid_id": {
+      "$id": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#uuid_id.json",
+      "$anchor": "uuid-id",
+      "type": "string",
+      "format": "uuid",
+      "title": "Identifier",
+      "constraints": {
+        "unique": true
+      }
+    },
+    "uuid_reference": {
+      "$id": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#uuid_reference.json",
+      "$anchor": "uuid-reference",
+      "type": "string",
+      "format": "uuid",
+      "constraints": {
+        "unique": false
+      }
+    },
+    "location_id_property": {
+      "title": "Location Identifier",
+      "core": "Y",
+      "$ref": "#uuid-reference"
+    },
+    "location_type": {
+      "$anchor": "location-type",
+      "type": "string",
+      "title": "Location Type",
+      "description": "The type of location: physical, postal, or virtual.",
+      "enum": [
+        "physical",
+        "postal",
+        "virtual"
+      ]
+    },
+    "longitude": {
+      "$anchor": "longitude-field",
+      "type": "number",
+      "title": "Longitude",
+      "description": "The longitude expressed in decimal degrees in WGS84 datum.",
+      "constraints": {
+        "unique": false
+      }
+    },
+    "name_property": {
+      "core": "Y",
+      "$ref": "#name-field"
+    },
+    "name": {
+      "$anchor": "name-field",
+      "type": "string",
+      "title": "Name",
+      "constraints": {
+        "unique": false
+      }
+    },
+    "organization_id_property": {
+      "title": "Organization Identifier",
+      "core": "Y",
+      "$ref": "#uuid-reference"
+    },
+    "service_id_property": {
+      "title": "Service Identifier",
+      "core": "Y",
+      "$ref": "#uuid-reference"
+    },
+    "service_status": {
+      "$anchor": "service-status",
+      "type": "string",
+      "title": "Status",
+      "description": "The current status of the service.",
+      "enum": [
+        "active",
+        "inactive",
+        "defunct",
+        "temporarily closed"
+      ]
+    },
+    "uri_property": {
+      "title": "URI",
+      "core": "Y",
+      "$ref": "#uri-field"
+    },
+    "uri": {
+      "$anchor": "uri-field",
+      "type": "string",
+      "format": "uri",
+      "constraints": {
+        "unique": false
+      }
+    },
+    "contact_id_property": {
+      "title": "Contact Identifier",
+      "core": "Y",
+      "$ref": "#uuid-reference"
+    },
+    "date_string": {
+      "$anchor": "date-field",
+      "type": "string",
+      "format": "date",
+      "constraints": {
+        "unique": false
+      }
+    },
+    "datetime_string": {
+      "$anchor": "datetime-field",
+      "type": "string",
+      "format": "date-time",
+      "constraints": {
+        "unique": false
+      }
+    },
+    "description_property": {
+      "core": "Y",
+      "$ref": "#description-field"
+    },
+    "description": {
+      "$anchor": "description-field",
+      "type": "string",
+      "title": "Description",
+      "constraints": {
+        "unique": false
+      }
+    },
+    "email_property": {
+      "title": "Email",
+      "core": "Y",
+      "$ref": "#email-field"
+    },
+    "email": {
+      "$anchor": "email-field",
+      "type": "string",
+      "format": "email",
+      "constraints": {
+        "unique": false
+      }
+    },
+    "id_property": {
+      "title": "Identifier",
+      "core": "Y",
+      "$ref": "#uuid-id"
+    },
+    "latitude": {
+      "$anchor": "latitude-field",
+      "type": "number",
+      "title": "Latitude",
+      "description": "The latitude expressed in decimal degrees in WGS84 datum.",
+      "constraints": {
+        "unique": false
+      }
+    }
+  }
+}

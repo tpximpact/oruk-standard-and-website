@@ -15,19 +15,19 @@
     "id": {
       "description": "The identifier of the attribute entry. Each attribute entry should have a unique identifier.",
       "example": "ae58cc39-8b70-4ab1-8aea-786882e5ac8e",
-      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions/id_property.json"
+      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#id_property.json"
     },
     "link_id": {
       "title": "Link Identifier",
       "description": "The identifier of the entity to which this taxonomy term applies.",
       "example": "f28dd44b-0c4d-479f-8e90-4c52219a8b3c",
-      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions/uuid_reference.json"
+      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#uuid_reference.json"
     },
     "taxonomy_term_id": {
       "title": "Taxonomy Term Identifier",
       "description": "The identifier of this taxonomy term from the taxonomy table.",
       "example": "3f7b145d-84af-42d7-8fae-eaca714b02b2",
-      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions/uuid_reference.json"
+      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#uuid_reference.json"
     },
     "link_type": {
       "type": "string",

@@ -15,27 +15,27 @@
     "id": {
       "description": "The identifier for the organization. Each organization must have a unique identifier.",
       "example": "d9d5e0f5-d3ce-4f73-9a2f-4dd0ecc6c610",
-      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions/id_property.json"
+      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#id_property.json"
     },
     "name": {
       "description": "The official or public name of the organization.",
       "example": "Example Organization Inc.",
-      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions/name_property.json"
+      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#name_property.json"
     },
     "description": {
       "description": "A free text description containing a brief summary about the organization. It can contain markup such as HTML or Markdown.",
       "example": "Example Org is a non-profit organization dedicated to providing services to qualified beneficiaries",
-      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions/description_property.json"
+      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#description_property.json"
     },
     "email": {
       "description": "The contact e-mail address for the organization.",
       "example": "email@example.com",
-      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions/email_property.json"
+      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#email_property.json"
     },
     "website": {
       "description": "The URL (website address) of the organization.",
       "example": "http://example.com",
-      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions/url_property.json"
+      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#url_property.json"
     },
     "logo": {
       "type": "string",
@@ -50,10 +50,10 @@
     "uri": {
       "description": "A persistent identifier to uniquely identify the organization such as those provided by Open Corporates or some other relevant URI provider. This is not for listing the website of the organization: that can be done through the website field of the Organization.",
       "example": "http://example.com",
-      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions/uri_property.json"
+      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#uri_property.json"
     },
     "parent_organization_id": {
-      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions/uuid_reference.json",
+      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#uuid_reference.json",
       "title": "Parent Organization Identifier",
       "description": "The identifier of the organization's parent organization.",
       "example": "cd09a387-91f4-4555-94ec-e799c35344cd"

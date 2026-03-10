@@ -15,17 +15,17 @@
     "id": {
       "description": "The identifier for the contact. Each contact must have a unique identifier.",
       "example": "1e7efce3-639b-4880-940c-b95cd30cdb50",
-      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions/id_property.json"
+      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#id_property.json"
     },
     "service_id": {
       "description": "The identifier of the service for which this is a contact.",
       "example": "ac148810-d857-441c-9679-408f346de14b",
-      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions/service_id_property.json"
+      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#service_id_property.json"
     },
     "name": {
       "description": "The name of the contact.",
       "example": "Ann Persona",
-      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions/name_property.json"
+      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#name_property.json"
     },
     "title": {
       "type": "string",

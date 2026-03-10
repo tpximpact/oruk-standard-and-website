@@ -13,13 +13,13 @@
     "id": {
       "title": "Identifier",
       "description": "The identifier for this organization identifier entry. Each entry must have a unique identifier.",
-      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions/uuid_id.json"
+      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#uuid_id.json"
     },
     "organization_id": {
       "title": "Organization Identifier",
       "description": "The identifier of the organization. This should match the uuid of an organization object.",
       "example": "d9d5e0f5-d3ce-4f73-9a2f-4dd0ecc6c610",
-      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions/uuid_reference.json"
+      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#uuid_reference.json"
     },
     "identifier_scheme": {
       "name": "identifier_scheme",

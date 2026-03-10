@@ -15,29 +15,29 @@
     "id": {
       "description": "The identifier of the location. Each location must have a unique identifier.",
       "example": "3a19ff88-4620-4d17-9830-ac1d859eb5d5",
-      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions/id_property.json"
+      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#id_property.json"
     },
     "location_type": {
       "example": "physical",
-      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions/location_type.json"
+      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#location_type.json"
     },
     "name": {
       "description": "The name of the location.",
       "example": "MyCity Civic Center",
-      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions/name_property.json"
+      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#name_property.json"
     },
     "description": {
       "description": "A free text description of the location.",
       "example": "MyCity Civic Center is located on Main Street and contains facilities for a number of civic and community services available.",
-      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions/description_property.json"
+      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#description_property.json"
     },
     "latitude": {
       "example": 100,
-      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions/latitude.json"
+      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#latitude.json"
     },
     "longitude": {
       "example": 101,
-      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions/longitude.json"
+      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#longitude.json"
     },
     "external_identifier": {
       "type": "string",

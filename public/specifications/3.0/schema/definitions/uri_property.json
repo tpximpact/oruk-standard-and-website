@@ -1,7 +1,0 @@
-{
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://openreferraluk.org/specifications/3.0/schema/definitions/uri_property.json",
-  "title": "URI",
-  "core": "Y",
-  "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions/uri.json"
-}

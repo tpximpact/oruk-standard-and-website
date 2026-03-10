@@ -15,21 +15,21 @@
       "description": "The identifier for the schedule. Each entry must have a unique identifier.",
       "example": "48102e86-bb50-41c4-8f1e-e269368c41d1",
       "core": "Y",
-      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions/uuid_id.json"
+      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#uuid_id.json"
     },
     "service_id": {
       "title": "Service Identifier",
       "description": "The identifier of the service for which this is the regular schedule",
       "example": "ac148810-d857-441c-9679-408f346de14b",
       "core": "Y",
-      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions/uuid_reference.json"
+      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#uuid_reference.json"
     },
     "service_at_location_id": {
       "title": "Service At Location Identifier",
       "description": "The identifier of the 'service at location' table entry, when this schedule is specific to a service in a particular location.",
       "example": "e94c9f38-1e8f-4564-91d4-d53501ab1765",
       "core": "Y",
-      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions/uuid_reference.json"
+      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#uuid_reference.json"
     },
     "valid_from": {
       "name": "valid_from",
@@ -155,7 +155,7 @@
       "title": "Schedule Link",
       "description": "URL of a link for the schedule which may show each individual session and may provide a booking facility.",
       "example": "http://example.com",
-      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions/uri.json"
+      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#uri.json"
     },
     "attending_type": {
       "name": "attending_type",

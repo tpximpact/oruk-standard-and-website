@@ -13,13 +13,13 @@
     "id": {
       "title": "Identifier",
       "description": "The identifier for the cost option. Each entry must have a unique identifier",
-      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions/uuid_id.json"
+      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#uuid_id.json"
     },
     "service_id": {
       "title": "Service Identifier",
       "description": "The identifier of the services for which the entry describes the cost.",
       "example": "ac148810-d857-441c-9679-408f346de14b",
-      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions/uuid_reference.json"
+      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#uuid_reference.json"
     },
     "valid_from": {
       "name": "valid_from",
