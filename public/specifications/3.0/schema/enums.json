@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://openreferraluk.org/specifications/3.0/schema/enums.json",
+  "title": "Enumeration Values",
+  "description": "Centralized collection of enumeration values used across the schema",
+  "$defs": {
+    "location_type": {
+      "$anchor": "location-type",
+      "type": "string",
+      "title": "Location Type",
+      "description": "The type of location: physical, postal, or virtual.",
+      "enum": [
+        "physical",
+        "postal",
+        "virtual"
+      ]
+    },
+    "service_status": {
+      "$anchor": "service-status",
+      "type": "string",
+      "title": "Service Status",
+      "description": "The current status of the service.",
+      "enum": [
+        "active",
+        "inactive",
+        "defunct",
+        "temporarily closed"
+      ]
+    },
+    "frequency": {
+      "$anchor": "frequency",
+      "type": "string",
+      "title": "Frequency",
+      "description": "iCal (RFC 5545) - How often the frequency repeats.",
+      "enum": [
+        "WEEKLY",
+        "MONTHLY"
+      ]
+    },
+    "byday": {
+      "$anchor": "byday",
+      "type": "string",
+      "title": "By Day",
+      "description": "iCal (RFC 5545) - Comma separated days of the week using ISO 8601 abbreviations. When freq is MONTHLY each part can be preceded by a positive or negative integer to represent occurrence in month (e.g. 2MO = second Monday, -1FR = last Friday).",
+      "pattern": "^([+-]?\\d?)?(MO|TU|WE|TH|FR|SA|SU)(,([+-]?\\d?)?(MO|TU|WE|TH|FR|SA|SU))*$",
+      "example": "MO,WE,FR"
+    },
+    "format": {
+      "$anchor": "format",
+      "type": "string",
+      "title": "Response Format",
+      "description": "The format for API response data.",
+      "enum": [
+        "json",
+        "ndjson"
+      ]
+    }
+  }
+}

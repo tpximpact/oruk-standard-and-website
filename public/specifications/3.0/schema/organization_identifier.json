@@ -13,22 +13,19 @@
     "id": {
       "title": "Identifier",
       "description": "The identifier for this organization identifier entry. Each entry must have a unique identifier.",
-      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#uuid_id.json"
+      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#uuid-id"
     },
     "organization_id": {
       "title": "Organization Identifier",
       "description": "The identifier of the organization. This should match the uuid of an organization object.",
       "example": "d9d5e0f5-d3ce-4f73-9a2f-4dd0ecc6c610",
-      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#uuid_reference.json"
+      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#uuid-reference"
     },
     "identifier_scheme": {
       "name": "identifier_scheme",
       "type": "string",
       "title": "Identifier Scheme",
       "description": "The scheme of the third party identifier, according to http://org-id.guide/.",
-      "constraints": {
-        "unique": false
-      },
       "example": "GB-COH"
     },
     "identifier_type": {
@@ -36,9 +33,6 @@
       "type": "string",
       "title": "Identifier Type",
       "description": "A human-readable equivalent of the identifier_scheme. This may be used in cases where org-id.guide does not list an appropriate identifier scheme.",
-      "constraints": {
-        "unique": false
-      },
       "example": "Company number"
     },
     "identifier": {
@@ -46,9 +40,6 @@
       "type": "string",
       "title": "Third Party Identifier",
       "description": "The third-party identifier value.",
-      "constraints": {
-        "unique": false
-      },
       "example": "1234567"
     },
     "attributes": {

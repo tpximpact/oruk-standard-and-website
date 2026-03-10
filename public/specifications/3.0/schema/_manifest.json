@@ -1,0 +1,352 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://openreferraluk.org/specifications/3.0/schema/_manifest.json",
+  "title": "Open Referral UK Schema Manifest",
+  "description": "Complete metadata and organizational information for all HSDS-UK-3.0 schemas",
+  "version": "3.0",
+  "lastUpdated": "2026-03-10",
+  "schemas": {
+    "infrastructure": [
+      {
+        "file": "definitions.json",
+        "category": "definitions",
+        "description": "A combined collection of common property definitions for the HSDS profile. Provides reusable property schemas and enum references.",
+        "purpose": "Centralized definitions and anchors for schema composition",
+        "references": [
+          "All entity schemas reference definitions for properties"
+        ]
+      },
+      {
+        "file": "enums.json",
+        "category": "enumerations",
+        "description": "Centralized collection of enumeration values used across the schema",
+        "purpose": "Single source of truth for valid enum values",
+        "includes": [
+          "location-type",
+          "service-status",
+          "frequency",
+          "byday",
+          "format"
+        ]
+      },
+      {
+        "file": "base-entity.json",
+        "category": "patterns",
+        "description": "Common properties and structure for all entity schemas in HSDS-UK",
+        "purpose": "Reusable base pattern for entity composition using allOf",
+        "properties": [
+          "id",
+          "name",
+          "description"
+        ],
+        "implementedBy": [
+          "organization.json",
+          "service.json",
+          "location.json",
+          "contact.json",
+          "taxonomy.json",
+          "taxonomy_term.json"
+        ]
+      },
+      {
+        "file": "openapi.json",
+        "category": "api-specification",
+        "description": "OpenAPI 3.0.0 specification for the Open Referral UK API",
+        "purpose": "Defines REST API endpoints, request/response schemas, and documentation",
+        "version": "HSDS-UK-3.0"
+      },
+      {
+        "file": "api_details.json",
+        "category": "metadata",
+        "description": "Information about this API and its relationship with HSDS",
+        "purpose": "Provides API metadata and conformance information"
+      },
+      {
+        "file": "page.json",
+        "name": "page",
+        "category": "infrastructure",
+        "description": "Pagination metadata for list responses.",
+        "purpose": "Defines pagination structure across all list endpoints"
+      }
+    ],
+    "entities": [
+      {
+        "order": 1,
+        "file": "organization.json",
+        "name": "organization",
+        "csvPath": "organizations.csv",
+        "pattern": "base-entity.json",
+        "description": "The details about each organization delivering services. Each service should be linked to the organization responsible for its delivery. One organization may deliver many services.",
+        "relatedEntities": [
+          "service",
+          "contact",
+          "phone",
+          "address",
+          "funding",
+          "organization_identifier"
+        ]
+      },
+      {
+        "order": 3,
+        "file": "service.json",
+        "name": "service",
+        "csvPath": "services.csv",
+        "pattern": "base-entity.json",
+        "description": "The details of the services provided by organizations to a range of different groups.",
+        "relatedEntities": [
+          "organization",
+          "service_at_location",
+          "service_area",
+          "schedule",
+          "contact",
+          "phone",
+          "language",
+          "funding",
+          "cost_option",
+          "attribute",
+          "taxonomy_term"
+        ]
+      },
+      {
+        "order": 4,
+        "file": "attribute.json",
+        "name": "attribute",
+        "csvPath": "attribute.csv",
+        "description": "The other_attributes table creates a link between entities other than service and one or more classifications that describe the entity.",
+        "relatedEntities": [
+          "taxonomy_term"
+        ]
+      },
+      {
+        "order": 5,
+        "file": "service_at_location.json",
+        "name": "service_at_location",
+        "csvPath": "service_at_location.csv",
+        "description": "A link between a service and a specific location.",
+        "relatedEntities": [
+          "service",
+          "location",
+          "contact",
+          "phone"
+        ]
+      },
+      {
+        "order": 6,
+        "file": "location.json",
+        "name": "location",
+        "csvPath": "locations.csv",
+        "pattern": "base-entity.json",
+        "description": "The locations where organizations operate. Locations may be virtual, and one organization may have many locations.",
+        "relatedEntities": [
+          "organization",
+          "address",
+          "phone",
+          "contact",
+          "schedule",
+          "language",
+          "accessibility",
+          "service_at_location"
+        ]
+      },
+      {
+        "order": 7,
+        "file": "phone.json",
+        "name": "phone",
+        "csvPath": "phones.csv",
+        "description": "The details of the telephone numbers used to contact organizations, services, and locations.",
+        "relatedEntities": [
+          "organization",
+          "service",
+          "location",
+          "contact",
+          "service_at_location"
+        ]
+      },
+      {
+        "order": 8,
+        "file": "contact.json",
+        "name": "contact",
+        "csvPath": "contacts.csv",
+        "pattern": "base-entity.json",
+        "description": "The details of the named contacts for services and organizations.",
+        "relatedEntities": [
+          "organization",
+          "service",
+          "phone",
+          "location",
+          "service_at_location"
+        ]
+      },
+      {
+        "order": 9,
+        "file": "address.json",
+        "name": "address",
+        "csvPath": "address.csv",
+        "description": "The addresses table contains the physical addresses for locations",
+        "relatedEntities": [
+          "location"
+        ]
+      },
+      {
+        "order": 10,
+        "file": "schedule.json",
+        "name": "schedule",
+        "csvPath": "schedule.csv",
+        "description": "The details of when a service or location is open. Entries are RFC 5545 RRULES.",
+        "relatedEntities": [
+          "service",
+          "location"
+        ]
+      },
+      {
+        "order": 11,
+        "file": "funding.json",
+        "name": "funding",
+        "csvPath": "funding.csv",
+        "description": "The sources of funding for a service or organization.",
+        "relatedEntities": [
+          "service",
+          "organization"
+        ]
+      },
+      {
+        "order": 12,
+        "file": "service_area.json",
+        "name": "service_area",
+        "csvPath": "service_areas.csv",
+        "description": "The details of the geographic area for which a service is available.",
+        "relatedEntities": [
+          "service"
+        ]
+      },
+      {
+        "order": 14,
+        "file": "language.json",
+        "name": "language",
+        "csvPath": "languages.csv",
+        "description": "The languages that are spoken at locations or services. This does not include languages which can only be used with interpretation.",
+        "relatedEntities": [
+          "location",
+          "service"
+        ]
+      },
+      {
+        "order": 15,
+        "file": "accessibility.json",
+        "name": "accessibility",
+        "csvPath": "accessibility.csv",
+        "description": "The details of the arrangements for access to locations for people who have disabilities.",
+        "relatedEntities": [
+          "location"
+        ]
+      },
+      {
+        "order": 16,
+        "file": "taxonomy_term.json",
+        "name": "taxonomy_term",
+        "csvPath": "taxonomy_terms.csv",
+        "pattern": "base-entity.json",
+        "description": "Each service can be categorized according to one or more taxonomy terms. The taxonomy_term object contains a list of taxonomy terms, their names, and, for hierarchical taxonomies, their structure.",
+        "relatedEntities": [
+          "service",
+          "taxonomy",
+          "attribute"
+        ]
+      },
+      {
+        "order": 19,
+        "file": "cost_option.json",
+        "name": "cost_option",
+        "csvPath": "cost_options.csv",
+        "description": "The costs of a service at certain points in time. This is an LGA Extension. This object provides a structured version of the text information contained in the 'fees' field of the 'service' object.",
+        "relatedEntities": [
+          "service"
+        ],
+        "extension": "LGA"
+      },
+      {
+        "order": 20,
+        "file": "organization_identifier.json",
+        "name": "organization_identifier",
+        "csvPath": "organization_identifiers.csv",
+        "description": "The details of the third party identifiers for organizations, such as: company registration number, charity number, tax registration number.",
+        "relatedEntities": [
+          "organization"
+        ]
+      },
+      {
+        "order": 21,
+        "file": "taxonomy.json",
+        "name": "taxonomy",
+        "csvPath": "taxonomies.csv",
+        "pattern": "base-entity.json",
+        "description": "The taxonomies from which taxonomy terms are taken.",
+        "relatedEntities": [
+          "taxonomy_term"
+        ]
+      }
+    ],
+    "lists": [
+      {
+        "file": "organization_list.json",
+        "name": "organization_list",
+        "baseEntity": "organization",
+        "description": "Flattened organization response for list endpoints. Excludes nested arrays.",
+        "excludeProperties": [
+          "organization_identifiers",
+          "attributes"
+        ]
+      },
+      {
+        "file": "service_list.json",
+        "name": "service_list",
+        "baseEntity": "service",
+        "description": "Flattened service response for list endpoints. Excludes nested arrays.",
+        "excludeProperties": [
+          "schedules",
+          "service_areas",
+          "service_at_locations",
+          "languages",
+          "funding",
+          "cost_options",
+          "contacts",
+          "attributes"
+        ]
+      },
+      {
+        "file": "service_at_location_list.json",
+        "name": "service_at_location_list",
+        "baseEntity": "service_at_location",
+        "description": "Service at location response for list endpoints."
+      },
+      {
+        "file": "taxonomy_list.json",
+        "name": "taxonomy_list",
+        "baseEntity": "taxonomy",
+        "description": "Taxonomy results for list endpoints."
+      },
+      {
+        "file": "taxonomy_term_list.json",
+        "name": "taxonomy_term_list",
+        "baseEntity": "taxonomy_term",
+        "description": "Taxonomy term results for list endpoints."
+      }
+    ]
+  },
+  "categories": {
+    "infrastructure": "Core definitions, patterns, and API specifications",
+    "entities": "Primary data entity schemas (organizations, services, locations, etc)",
+    "lists": "Flattened entity schemas for API list responses"
+  },
+  "statistics": {
+    "totalSchemas": 30,
+    "entitySchemas": 17,
+    "listSchemas": 5,
+    "infrastructureSchemas": 6,
+    "coreEntities": 14,
+    "extensions": [
+      "LGA"
+    ],
+    "version": "HSDS-UK-3.0"
+  }
+}

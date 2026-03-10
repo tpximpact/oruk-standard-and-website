@@ -23,34 +23,25 @@
     },
     "valid_from": {
       "name": "valid_from",
-      "type": "string",
       "title": "Valid From",
       "description": "The date when this price is valid from.",
-      "constraints": {
-        "unique": false
-      },
       "example": "2020-01-01",
-      "datapackage_type": "date"
+      "datapackage_type": "date",
+      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#date-field"
     },
     "valid_to": {
       "name": "valid_to",
-      "type": "string",
       "title": "Valid To",
       "description": "The date when this price is valid to.",
-      "constraints": {
-        "unique": false
-      },
       "example": "2022-12-31",
-      "datapackage_type": "date"
+      "datapackage_type": "date",
+      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#date-field"
     },
     "option": {
       "name": "option",
       "type": "string",
       "title": "Option",
       "description": "Conditions associated with the cost option.",
-      "constraints": {
-        "unique": false
-      },
       "example": "Under 18s and Over 60s"
     },
     "amount": {
@@ -58,9 +49,6 @@
       "type": "number",
       "title": "Amount",
       "description": "The cost of the option, expressed as an amount.",
-      "constraints": {
-        "unique": false
-      },
       "example": "35"
     },
     "amount_description": {
@@ -68,9 +56,6 @@
       "type": "string",
       "title": "Amount Description",
       "description": "Specific details qualifying the cost amount.",
-      "constraints": {
-        "unique": false
-      },
       "example": "per 1 hour session"
     }
   },

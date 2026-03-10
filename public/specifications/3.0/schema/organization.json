@@ -10,71 +10,60 @@
     "profile": "tabular-data-resource",
     "order": 1
   },
-  "type": "object",
-  "properties": {
-    "id": {
-      "description": "The identifier for the organization. Each organization must have a unique identifier.",
-      "example": "d9d5e0f5-d3ce-4f73-9a2f-4dd0ecc6c610",
-      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#id_property.json"
+  "allOf": [
+    {
+      "$ref": "https://openreferraluk.org/specifications/3.0/schema/base-entity.json"
     },
-    "name": {
-      "description": "The official or public name of the organization.",
-      "example": "Example Organization Inc.",
-      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#name_property.json"
-    },
-    "description": {
-      "description": "A free text description containing a brief summary about the organization. It can contain markup such as HTML or Markdown.",
-      "example": "Example Org is a non-profit organization dedicated to providing services to qualified beneficiaries",
-      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#description_property.json"
-    },
-    "email": {
-      "description": "The contact e-mail address for the organization.",
-      "example": "email@example.com",
-      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#email_property.json"
-    },
-    "website": {
-      "description": "The URL (website address) of the organization.",
-      "example": "http://example.com",
-      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#url_property.json"
-    },
-    "logo": {
-      "type": "string",
-      "title": "Logo",
-      "description": "A URL to an image associated with the organization which can be presented alongside its name.",
-      "format": "uri",
-      "constraints": {
-        "unique": false
-      },
-      "example": "https://openreferral.org/wp-content/uploads/2018/02/OpenReferral_Logo_Green-4-1.png"
-    },
-    "uri": {
-      "description": "A persistent identifier to uniquely identify the organization such as those provided by Open Corporates or some other relevant URI provider. This is not for listing the website of the organization: that can be done through the website field of the Organization.",
-      "example": "http://example.com",
-      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#uri_property.json"
-    },
-    "parent_organization_id": {
-      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#uuid_reference.json",
-      "title": "Parent Organization Identifier",
-      "description": "The identifier of the organization's parent organization.",
-      "example": "cd09a387-91f4-4555-94ec-e799c35344cd"
-    },
-    "organization_identifiers": {
-      "type": "array",
-      "title": "Organization Identifiers",
-      "description": "The details of the third party identifiers for organizations, such as: company registration number, charity number, tax registration number.",
-      "items": {
-        "$ref": "https://openreferraluk.org/specifications/3.0/schema/organization_identifier.json"
-      }
-    },
-    "attributes": {
-      "type": "array",
-      "title": "Attributes",
-      "description": "A link between a service and one or more classifications that describe the nature of the service provided.",
-      "items": {
-        "$ref": "https://openreferraluk.org/specifications/3.0/schema/attribute.json"
+    {
+      "type": "object",
+      "properties": {
+        "email": {
+          "description": "The contact e-mail address for the organization.",
+          "example": "email@example.com",
+          "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#email-field"
+        },
+        "website": {
+          "description": "The URL (website address) of the organization.",
+          "example": "http://example.com",
+          "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#url-field"
+        },
+        "logo": {
+          "type": "string",
+          "title": "Logo",
+          "description": "A URL to an image associated with the organization which can be presented alongside its name.",
+          "format": "uri",
+          "example": "https://openreferral.org/wp-content/uploads/2018/02/OpenReferral_Logo_Green-4-1.png"
+        },
+        "uri": {
+          "description": "A persistent identifier to uniquely identify the organization such as those provided by Open Corporates or some other relevant URI provider. This is not for listing the website of the organization: that can be done through the website field of the Organization.",
+          "example": "http://example.com",
+          "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#uri-field"
+        },
+        "parent_organization_id": {
+          "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#uuid_reference.json",
+          "title": "Parent Organization Identifier",
+          "description": "The identifier of the organization's parent organization.",
+          "example": "cd09a387-91f4-4555-94ec-e799c35344cd"
+        },
+        "organization_identifiers": {
+          "type": "array",
+          "title": "Organization Identifiers",
+          "description": "The details of the third party identifiers for organizations, such as: company registration number, charity number, tax registration number.",
+          "items": {
+            "$ref": "https://openreferraluk.org/specifications/3.0/schema/organization_identifier.json"
+          }
+        },
+        "attributes": {
+          "type": "array",
+          "title": "Attributes",
+          "description": "A link between a service and one or more classifications that describe the nature of the service provided.",
+          "items": {
+            "$ref": "https://openreferraluk.org/specifications/3.0/schema/attribute.json"
+          }
+        }
       }
     }
-  },
+  ],
   "required": [
     "id",
     "name",

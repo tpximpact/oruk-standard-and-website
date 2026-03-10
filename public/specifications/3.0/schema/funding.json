@@ -26,9 +26,6 @@
       "type": "string",
       "title": "Source",
       "description": "A free text description of the source of funds for this organization or service.",
-      "constraints": {
-        "unique": false
-      },
       "example": "This service is funded partially by the MyCity local government and via grants made by charity funding bodies. We also operate a for-profit department which is used to partially cover the expense of the public service"
     }
   },

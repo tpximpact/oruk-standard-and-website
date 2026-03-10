@@ -8,49 +8,38 @@
     "profile": "tabular-data-resource",
     "order": 21
   },
-  "type": "object",
-  "properties": {
-    "id": {
-      "title": "Identifier",
-      "description": "The identifier of the taxonomy. Each entry must have a unique identifier",
-      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#uuid_id.json"
+  "allOf": [
+    {
+      "$ref": "https://openreferraluk.org/specifications/3.0/schema/base-entity.json"
     },
-    "name": {
-      "description": "The name of the taxonomy from which terms are sourced.",
-      "example": "name",
-      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#name.json"
-    },
-    "description": {
-      "description": "A free text description of the taxonomy.",
-      "example": "description",
-      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#description.json"
-    },
-    "uri": {
-      "title": "URI",
-      "description": "The URI of the taxonomy.",
-      "example": "http://example.com",
-      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#uri.json"
-    },
-    "version": {
-      "name": "version",
-      "type": "string",
-      "title": "Version",
-      "description": "The version of the taxonomy.",
-      "constraints": {
-        "unique": false
-      },
-      "example": "version"
-    },
-    "taxonomy_terms": {
-      "name": "taxonomy_terms",
-      "type": "array",
-      "title": "Taxonomy Terms",
-      "description": "A link between a taxonomy and one or more taxonomy terms.",
-      "items": {
-        "$ref": "https://openreferraluk.org/specifications/3.0/schema/taxonomy_term.json"
+    {
+      "type": "object",
+      "properties": {
+        "uri": {
+          "title": "URI",
+          "description": "The URI of the taxonomy.",
+          "example": "http://example.com",
+          "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#uri-field"
+        },
+        "version": {
+          "name": "version",
+          "type": "string",
+          "title": "Version",
+          "description": "The version of the taxonomy.",
+          "example": "version"
+        },
+        "taxonomy_terms": {
+          "name": "taxonomy_terms",
+          "type": "array",
+          "title": "Taxonomy Terms",
+          "description": "A link between a taxonomy and one or more taxonomy terms.",
+          "items": {
+            "$ref": "https://openreferraluk.org/specifications/3.0/schema/taxonomy_term.json"
+          }
+        }
       }
     }
-  },
+  ],
   "required": [
     "id",
     "name",

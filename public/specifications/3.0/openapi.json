@@ -771,11 +771,7 @@
         "required": false,
         "description": "Return results in the specified format. Default is `json`. Could be `ndjson` which should stream all the results without pagination.",
         "schema": {
-          "type": "string",
-          "enum": [
-            "json",
-            "ndjson"
-          ],
+          "$ref": "../../../specifications/3.0/schema/enums.json#format",
           "default": "json"
         }
       }

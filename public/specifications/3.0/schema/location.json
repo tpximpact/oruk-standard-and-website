@@ -10,78 +10,64 @@
     "profile": "tabular-data-resource",
     "order": 6
   },
-  "type": "object",
-  "properties": {
-    "id": {
-      "description": "The identifier of the location. Each location must have a unique identifier.",
-      "example": "3a19ff88-4620-4d17-9830-ac1d859eb5d5",
-      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#id_property.json"
+  "allOf": [
+    {
+      "$ref": "https://openreferraluk.org/specifications/3.0/schema/base-entity.json"
     },
-    "location_type": {
-      "example": "physical",
-      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#location_type.json"
-    },
-    "name": {
-      "description": "The name of the location.",
-      "example": "MyCity Civic Center",
-      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#name_property.json"
-    },
-    "description": {
-      "description": "A free text description of the location.",
-      "example": "MyCity Civic Center is located on Main Street and contains facilities for a number of civic and community services available.",
-      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#description_property.json"
-    },
-    "latitude": {
-      "example": 100,
-      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#latitude.json"
-    },
-    "longitude": {
-      "example": 101,
-      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#longitude.json"
-    },
-    "external_identifier": {
-      "type": "string",
-      "title": "External Identifier",
-      "description": "A third party identifier for the location, which can be drawn from other services e.g. UK UPRN.",
-      "constraints": {
-        "unique": false
-      },
-      "example": "10092008082"
-    },
-    "external_identifier_type": {
-      "type": "string",
-      "title": "External Identifier Type",
-      "description": "The scheme used for the location's external_identifier e.g. UK UPRN.",
-      "constraints": {
-        "unique": false
-      },
-      "example": "UPRN"
-    },
-    "addresses": {
-      "type": "array",
-      "title": "Addresses",
-      "description": "The addresses of locations where organizations operate.",
-      "items": {
-        "$ref": "https://openreferraluk.org/specifications/3.0/schema/address.json"
-      }
-    },
-    "accessibility": {
-      "type": "array",
-      "title": "Accessibility",
-      "description": "The details of the arrangements for access to locations for people who have disabilities",
-      "items": {
-        "$ref": "https://openreferraluk.org/specifications/3.0/schema/accessibility.json"
-      }
-    },
-    "attributes": {
-      "type": "array",
-      "title": "Attributes",
-      "description": "A link between a service and one or more classifications that describe the nature of the service provided.",
-      "items": {
-        "$ref": "https://openreferraluk.org/specifications/3.0/schema/attribute.json"
+    {
+      "type": "object",
+      "properties": {
+        "location_type": {
+          "example": "physical",
+          "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#location-type"
+        },
+        "latitude": {
+          "example": 100,
+          "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#latitude-field"
+        },
+        "longitude": {
+          "example": 101,
+          "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#longitude-field"
+        },
+        "external_identifier": {
+          "type": "string",
+          "title": "External Identifier",
+          "description": "A third party identifier for the location, which can be drawn from other services e.g. UK UPRN.",
+          "example": "10092008082"
+        },
+        "external_identifier_type": {
+          "type": "string",
+          "title": "External Identifier Type",
+          "description": "The scheme used for the location's external_identifier e.g. UK UPRN.",
+          "example": "UPRN"
+        },
+        "addresses": {
+          "type": "array",
+          "title": "Addresses",
+          "description": "The addresses of locations where organizations operate.",
+          "items": {
+            "$ref": "https://openreferraluk.org/specifications/3.0/schema/address.json"
+          }
+        },
+        "accessibility": {
+          "type": "array",
+          "title": "Accessibility",
+          "description": "The details of the arrangements for access to locations for people who have disabilities",
+          "items": {
+            "$ref": "https://openreferraluk.org/specifications/3.0/schema/accessibility.json"
+          }
+        },
+        "attributes": {
+          "type": "array",
+          "title": "Attributes",
+          "description": "A link between a service and one or more classifications that describe the nature of the service provided.",
+          "items": {
+            "$ref": "https://openreferraluk.org/specifications/3.0/schema/attribute.json"
+          }
+        }
       }
     }
-  },
+  ],
   "required": [
     "id",
     "location_type"

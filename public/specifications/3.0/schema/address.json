@@ -15,89 +15,57 @@
     "id": {
       "description": "The identifier of the postal address. Each postal address must have a unique identifier.",
       "example": "74706e55-df26-4b84-80fe-ecc30b5befb4",
-      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#id_property.json"
+      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#uuid-id"
     },
     "location_id": {
       "description": "The identifier of the location for this postal address.",
       "example": "3a19ff88-4620-4d17-9830-ac1d859eb5d5",
-      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#location_id_property.json"
+      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#uuid-reference"
     },
     "attention": {
       "type": "string",
       "title": "Attention",
       "description": "The name of the person or entity whose attention should be sought at the location. These are often included as a \"care of\" component of an address.",
-      "constraints": {
-        "unique": false
-      },
       "example": "A. Persona"
     },
     "address_1": {
       "type": "string",
       "title": "Address line 1",
       "description": "The first line(s) of the address, including office, building number and street.",
-      "constraints": {
-        "unique": false
-      },
       "example": "1-30 Main Street"
     },
     "city": {
       "type": "string",
       "title": "City",
       "description": "The city in which the address is located.",
-      "constraints": {
-        "unique": false
-      },
       "example": "MyCity"
     },
     "region": {
       "type": "string",
       "title": "Region",
       "description": "The region in which the address is located (optional).",
-      "constraints": {
-        "unique": false
-      },
       "example": "MyRegion"
     },
     "state_province": {
       "type": "string",
       "title": "State Or Province",
       "description": "The state or province in which the address is located.",
-      "constraints": {
-        "unique": false
-      },
       "example": "MyState"
     },
     "postal_code": {
       "type": "string",
       "title": "Postal Code",
       "description": "The postal code for the address.",
-      "constraints": {
-        "unique": false
-      },
       "example": "ABC 1234"
     },
     "country": {
       "type": "string",
       "title": "Country",
       "description": "The country in which the address is located. This should be given as an ISO 3361-1 country code (two letter abbreviation).",
-      "constraints": {
-        "unique": false
-      },
       "example": "US"
     },
     "address_type": {
-      "type": "string",
-      "title": "Address Type",
-      "description": "The type of address which may be physical, postal, or virtual.",
-      "enum": [
-        "physical",
-        "postal",
-        "virtual"
-      ],
-      "constraints": {
-        "unique": false
-      },
-      "example": "postal"
+      "$ref": "enums.json#location-type"
     },
     "attributes": {
       "type": "array",
