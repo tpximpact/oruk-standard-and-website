@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://openreferraluk.org/specifications/3.0/schema/definitions/datapackage_metadata.json",
+  "type": "object",
+  "properties": {
+    "format": {
+      "const": "csv"
+    },
+    "mediatype": {
+      "const": "text/csv"
+    },
+    "profile": {
+      "const": "tabular-data-resource"
+    },
+    "order": {
+      "type": "integer"
+    }
+  }
+}

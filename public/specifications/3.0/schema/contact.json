@@ -1,4 +1,6 @@
 {
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://openreferraluk.org/specifications/3.0/schema/contact.json",
   "name": "contact",
   "path": "contacts.csv",
   "description": "The details of the named contacts for services and organizations.",
@@ -11,55 +13,35 @@
   "type": "object",
   "properties": {
     "id": {
-      "allOf": [
-        {
-          "$ref": "./definitions.json#/$defs/uuid_id"
-        }
-      ],
-      "title": "Identifier",
       "description": "The identifier for the contact. Each contact must have a unique identifier.",
       "example": "1e7efce3-639b-4880-940c-b95cd30cdb50",
-      "core": "Y"
+      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions/id_property.json"
     },
     "service_id": {
-      "allOf": [
-        {
-          "$ref": "./definitions.json#/$defs/uuid_reference"
-        }
-      ],
-      "title": "Service Identifier",
       "description": "The identifier of the service for which this is a contact.",
       "example": "ac148810-d857-441c-9679-408f346de14b",
-      "core": "Y"
+      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions/service_id_property.json"
     },
     "name": {
-      "allOf": [
-        {
-          "$ref": "./definitions.json#/$defs/name"
-        }
-      ],
       "description": "The name of the contact.",
       "example": "Ann Persona",
-      "core": "Y"
+      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions/name_property.json"
     },
     "title": {
-      "name": "title",
       "type": "string",
       "title": "Title",
       "description": "The job title of the contact.",
       "constraints": {
         "unique": false
       },
-      "example": "Reception Manager",
-      "core": "Y"
+      "example": "Reception Manager"
     },
     "attributes": {
-      "name": "attributes",
       "type": "array",
       "title": "Attributes",
       "description": "A link between a service and one or more classifications that describe the nature of the service provided.",
       "items": {
-        "$ref": "./attribute.json"
+        "$ref": "https://openreferraluk.org/specifications/3.0/schema/attribute.json"
       }
     }
   },

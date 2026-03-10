@@ -1,4 +1,6 @@
 {
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://openreferraluk.org/specifications/3.0/schema/organization.json",
   "name": "organization",
   "path": "organizations.csv",
   "description": "The details about each organization delivering services. Each service should be linked to the organization responsible for its delivery. One organization may deliver many services.",
@@ -11,106 +13,65 @@
   "type": "object",
   "properties": {
     "id": {
-      "allOf": [
-        {
-          "$ref": "./definitions.json#/$defs/uuid_id"
-        }
-      ],
-      "title": "Identifier",
       "description": "The identifier for the organization. Each organization must have a unique identifier.",
       "example": "d9d5e0f5-d3ce-4f73-9a2f-4dd0ecc6c610",
-      "core": "Y"
+      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions/id_property.json"
     },
     "name": {
-      "allOf": [
-        {
-          "$ref": "./definitions.json#/$defs/name"
-        }
-      ],
       "description": "The official or public name of the organization.",
       "example": "Example Organization Inc.",
-      "core": "Y"
+      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions/name_property.json"
     },
     "description": {
-      "allOf": [
-        {
-          "$ref": "./definitions.json#/$defs/description"
-        }
-      ],
       "description": "A free text description containing a brief summary about the organization. It can contain markup such as HTML or Markdown.",
       "example": "Example Org is a non-profit organization dedicated to providing services to qualified beneficiaries",
-      "core": "Y"
+      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions/description_property.json"
     },
     "email": {
-      "allOf": [
-        {
-          "$ref": "./definitions.json#/$defs/email"
-        }
-      ],
-      "title": "Email",
       "description": "The contact e-mail address for the organization.",
       "example": "email@example.com",
-      "core": "Y"
+      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions/email_property.json"
     },
     "website": {
-      "name": "website",
-      "allOf": [
-        {
-          "$ref": "./definitions.json#/$defs/uri"
-        }
-      ],
-      "title": "Website",
       "description": "The URL (website address) of the organization.",
       "example": "http://example.com",
-      "core": "Y"
+      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions/url_property.json"
     },
     "logo": {
-      "name": "logo",
       "type": "string",
       "title": "Logo",
       "description": "A URL to an image associated with the organization which can be presented alongside its name.",
+      "format": "uri",
       "constraints": {
         "unique": false
       },
       "example": "https://openreferral.org/wp-content/uploads/2018/02/OpenReferral_Logo_Green-4-1.png"
     },
     "uri": {
-      "allOf": [
-        {
-          "$ref": "./definitions.json#/$defs/uri"
-        }
-      ],
-      "title": "URI",
       "description": "A persistent identifier to uniquely identify the organization such as those provided by Open Corporates or some other relevant URI provider. This is not for listing the website of the organization: that can be done through the website field of the Organization.",
-      "example": "http://example.com"
+      "example": "http://example.com",
+      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions/uri_property.json"
     },
     "parent_organization_id": {
-      "name": "parent_organization_id",
-      "type": "string",
+      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions/uuid_reference.json",
       "title": "Parent Organization Identifier",
       "description": "The identifier of the organization's parent organization.",
-      "format": "uuid",
-      "constraints": {
-        "unique": false
-      },
       "example": "cd09a387-91f4-4555-94ec-e799c35344cd"
     },
     "organization_identifiers": {
-      "name": "organization_identifiers",
       "type": "array",
       "title": "Organization Identifiers",
       "description": "The details of the third party identifiers for organizations, such as: company registration number, charity number, tax registration number.",
       "items": {
-        "$ref": "./organization_identifier.json"
+        "$ref": "https://openreferraluk.org/specifications/3.0/schema/organization_identifier.json"
       }
     },
     "attributes": {
-      "name": "attributes",
       "type": "array",
       "title": "Attributes",
       "description": "A link between a service and one or more classifications that describe the nature of the service provided.",
       "items": {
-        "$ref": "./attribute.json"
+        "$ref": "https://openreferraluk.org/specifications/3.0/schema/attribute.json"
       }
     }
   },

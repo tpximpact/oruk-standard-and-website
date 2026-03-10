@@ -11,41 +11,25 @@
   "type": "object",
   "properties": {
     "id": {
-      "allOf": [
-        {
-          "$ref": "./definitions.json#/$defs/uuid_id"
-        }
-      ],
       "title": "Identifier",
-      "description": "The identifier of the taxonomy. Each entry must have a unique identifier"
+      "description": "The identifier of the taxonomy. Each entry must have a unique identifier",
+      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions/uuid_id.json"
     },
     "name": {
-      "allOf": [
-        {
-          "$ref": "./definitions.json#/$defs/name"
-        }
-      ],
       "description": "The name of the taxonomy from which terms are sourced.",
-      "example": "name"
+      "example": "name",
+      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions/name.json"
     },
     "description": {
-      "allOf": [
-        {
-          "$ref": "./definitions.json#/$defs/description"
-        }
-      ],
       "description": "A free text description of the taxonomy.",
-      "example": "description"
+      "example": "description",
+      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions/description.json"
     },
     "uri": {
-      "allOf": [
-        {
-          "$ref": "./definitions.json#/$defs/uri"
-        }
-      ],
       "title": "URI",
       "description": "The URI of the taxonomy.",
-      "example": "http://example.com"
+      "example": "http://example.com",
+      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions/uri.json"
     },
     "version": {
       "name": "version",
@@ -63,7 +47,7 @@
       "title": "Taxonomy Terms",
       "description": "A link between a taxonomy and one or more taxonomy terms.",
       "items": {
-        "$ref": "./taxonomy_term.json"
+        "$ref": "https://openreferraluk.org/specifications/3.0/schema/taxonomy_term.json"
       }
     }
   },

@@ -1,0 +1,11 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://openreferraluk.org/specifications/3.0/schema/definitions/uuid_id.json",
+  "$anchor": "uuid-id",
+  "type": "string",
+  "format": "uuid",
+  "title": "Identifier",
+  "constraints": {
+    "unique": true
+  }
+}

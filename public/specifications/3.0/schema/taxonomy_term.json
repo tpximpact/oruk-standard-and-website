@@ -12,45 +12,29 @@
   "type": "object",
   "properties": {
     "id": {
-      "allOf": [
-        {
-          "$ref": "./definitions.json#/$defs/uuid_id"
-        }
-      ],
       "title": "Identifier",
       "description": "The identifier for this taxonomy term. Each taxonomy term must have a unique identifier, within the scope of the dataset.",
       "example": "3f7b145d-84af-42d7-8fae-eaca714b02b2",
-      "core": "Y"
+      "core": "Y",
+      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions/uuid_id.json"
     },
     "name": {
-      "allOf": [
-        {
-          "$ref": "./definitions.json#/$defs/name"
-        }
-      ],
       "description": "The taxonomy term itself.",
       "example": "name",
-      "core": "Y"
+      "core": "Y",
+      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions/name.json"
     },
     "description": {
-      "allOf": [
-        {
-          "$ref": "./definitions.json#/$defs/description"
-        }
-      ],
       "description": "A free text description of the term.",
-      "example": "description"
+      "example": "description",
+      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions/description.json"
     },
     "parent_id": {
-      "allOf": [
-        {
-          "$ref": "./definitions.json#/$defs/uuid_reference"
-        }
-      ],
       "title": "Parent Identifier",
       "description": "If this is a child term in a hierarchical taxonomy, give the identifier of the parent category. For top-level categories, this is not required.",
       "example": "0bc248fa-dc27-4650-9ba4-8f1a24ef16a2",
-      "core": "Y"
+      "core": "Y",
+      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions/uuid_reference.json"
     },
     "taxonomy": {
       "name": "taxonomy",
@@ -64,24 +48,16 @@
       "core": "Y"
     },
     "taxonomy_id": {
-      "allOf": [
-        {
-          "$ref": "./definitions.json#/$defs/uuid_reference"
-        }
-      ],
       "title": "Taxonomy Identifier",
       "description": "The identifier of the taxonomy containing the term.",
-      "example": "07ff6aee-a219-438c-b694-d2fcb6c5373b"
+      "example": "07ff6aee-a219-438c-b694-d2fcb6c5373b",
+      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions/uuid_reference.json"
     },
     "term_uri": {
-      "allOf": [
-        {
-          "$ref": "./definitions.json#/$defs/uri"
-        }
-      ],
       "title": "Term URI",
       "description": "URI of the term.",
-      "example": "http://example.com"
+      "example": "http://example.com",
+      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions/uri.json"
     },
     "term": {
       "name": "term",

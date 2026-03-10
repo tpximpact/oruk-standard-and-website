@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://openreferraluk.org/specifications/3.0/schema/definitions/location_type.json",
+  "$anchor": "location-type",
+  "type": "string",
+  "title": "Location Type",
+  "description": "The type of location: physical, postal, or virtual.",
+  "enum": [
+    "physical",
+    "postal",
+    "virtual"
+  ]
+}

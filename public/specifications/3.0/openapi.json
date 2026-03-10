@@ -26,6 +26,10 @@
       "description": "Optional endpoints that may not be implemented by all services"
     }
   ],
+  "externalDocs": {
+    "description": "Open Referral UK Schema Documentation",
+    "url": "https://openreferraluk.org/specifications/3.0/"
+  },
   "paths": {
     "/": {
       "get": {
@@ -56,7 +60,7 @@
     "/organizations": {
       "get": {
         "tags": [
-          "Optional"
+          "optional"
         ],
         "name": "Organizations list - API & schema validation",
         "description": "Paginated list of basic Organization information.",
@@ -91,7 +95,7 @@
                 "schema": {
                   "allOf": [
                     {
-                      "$ref": "#/components/schemas/Page"
+                      "$ref": "https://openreferraluk.org/specifications/3.0/schema/page.json"
                     },
                     {
                       "type": "object",
@@ -132,7 +136,7 @@
       ],
       "get": {
         "tags": [
-          "Optional"
+          "optional"
         ],
         "name": "Organization by id - API & schema validation",
         "description": "Fully nested organization with service array that contains simple information which could only contain the service.id.",
@@ -216,7 +220,7 @@
                 "schema": {
                   "allOf": [
                     {
-                      "$ref": "#/components/schemas/Page"
+                      "$ref": "https://openreferraluk.org/specifications/3.0/schema/page.json"
                     },
                     {
                       "type": "object",
@@ -334,7 +338,7 @@
                 "schema": {
                   "allOf": [
                     {
-                      "$ref": "#/components/schemas/Page"
+                      "$ref": "https://openreferraluk.org/specifications/3.0/schema/page.json"
                     },
                     {
                       "type": "object",
@@ -431,7 +435,7 @@
               "application/json": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/Page"
+                    "$ref": "https://openreferraluk.org/specifications/3.0/schema/page.json"
                   },
                   {
                     "type": "object",
@@ -550,7 +554,7 @@
                 "schema": {
                   "allOf": [
                     {
-                      "$ref": "#/components/schemas/Page"
+                      "$ref": "https://openreferraluk.org/specifications/3.0/schema/page.json"
                     },
                     {
                       "type": "object",
@@ -621,47 +625,23 @@
   },
   "components": {
     "schemas": {
-      "Accessibility": {
-        "$ref": "https://openreferraluk.org/specifications/3.0/schema/accessibility.json"
-      },
-      "Address": {
-        "$ref": "https://openreferraluk.org/specifications/3.0/schema/address.json"
-      },
-      "Attribute": {
-        "$ref": "https://openreferraluk.org/specifications/3.0/schema/attribute.json"
-      },
-      "Contact": {
-        "$ref": "https://openreferraluk.org/specifications/3.0/schema/contact.json"
-      },
-      "CostOption": {
-        "$ref": "https://openreferraluk.org/specifications/3.0/schema/cost_option.json"
-      },
-      "Definitions": {
-        "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json"
-      },
-      "Funding": {
-        "$ref": "https://openreferraluk.org/specifications/3.0/schema/funding.json"
-      },
-      "Language": {
-        "$ref": "https://openreferraluk.org/specifications/3.0/schema/language.json"
-      },
-      "Location": {
-        "$ref": "https://openreferraluk.org/specifications/3.0/schema/location.json"
-      },
-      "OrganizationIdentifier": {
-        "$ref": "https://openreferraluk.org/specifications/3.0/schema/organization_identifier.json"
-      },
-      "Page": {
-        "$ref": "https://openreferraluk.org/specifications/3.0/schema/page.json"
-      },
-      "Phone": {
-        "$ref": "https://openreferraluk.org/specifications/3.0/schema/phone.json"
-      },
-      "Schedule": {
-        "$ref": "https://openreferraluk.org/specifications/3.0/schema/schedule.json"
-      },
-      "ServiceArea": {
-        "$ref": "https://openreferraluk.org/specifications/3.0/schema/service_area.json"
+      "ErrorResponse": {
+        "type": "object",
+        "description": "Standard error response structure",
+        "properties": {
+          "error": {
+            "type": "string",
+            "description": "Error type or code"
+          },
+          "message": {
+            "type": "string",
+            "description": "Human-readable error message"
+          }
+        },
+        "required": [
+          "error",
+          "message"
+        ]
       }
     },
     "parameters": {
@@ -672,7 +652,8 @@
         "description": "Full text search.",
         "schema": {
           "type": "string"
-        }
+        },
+        "example": "mental health support"
       },
       "page": {
         "name": "page",
@@ -680,7 +661,9 @@
         "required": false,
         "description": "Page number of paginated result.",
         "schema": {
-          "type": "integer"
+          "type": "integer",
+          "default": 1,
+          "minimum": 1
         }
       },
       "per_page": {
@@ -689,7 +672,10 @@
         "required": false,
         "description": "Number of results requested in a single page.",
         "schema": {
-          "type": "integer"
+          "type": "integer",
+          "default": 20,
+          "minimum": 1,
+          "maximum": 100
         }
       },
       "minimal": {
@@ -698,7 +684,8 @@
         "required": false,
         "description": "Return array of just service 'id' and 'modified_date'.  When using this parameter aim to return all services within one call.",
         "schema": {
-          "type": "boolean"
+          "type": "boolean",
+          "default": false
         }
       },
       "full": {
@@ -707,7 +694,8 @@
         "required": false,
         "description": "Return a fully nested service, service_at_location, or organization based on the request.",
         "schema": {
-          "type": "boolean"
+          "type": "boolean",
+          "default": false
         }
       },
       "modified_after": {
@@ -753,7 +741,8 @@
         "required": false,
         "description": "Fully nested organization with service array that contains full service information.",
         "schema": {
-          "type": "boolean"
+          "type": "boolean",
+          "default": false
         }
       },
       "postcode": {
@@ -763,7 +752,8 @@
         "description": "The postcode or zip code of a point used to check service coverage. If `service_area` is available, only return results where the postcode exists within the `service_area`.  If `proximity` is provided, only show results within the proximity from the centroid of the postcode.",
         "schema": {
           "type": "string"
-        }
+        },
+        "example": "SW1A 1AA"
       },
       "proximity": {
         "name": "proximity",
@@ -771,7 +761,8 @@
         "required": false,
         "description": "Return services that exist within meters from the centroid of the provided postcode",
         "schema": {
-          "type": "string"
+          "type": "integer",
+          "minimum": 0
         }
       },
       "format": {
@@ -780,7 +771,12 @@
         "required": false,
         "description": "Return results in the specified format. Default is `json`. Could be `ndjson` which should stream all the results without pagination.",
         "schema": {
-          "type": "string"
+          "type": "string",
+          "enum": [
+            "json",
+            "ndjson"
+          ],
+          "default": "json"
         }
       }
     },
@@ -790,15 +786,7 @@
         "content": {
           "application/json": {
             "schema": {
-              "type": "object",
-              "properties": {
-                "error": {
-                  "type": "string"
-                },
-                "message": {
-                  "type": "string"
-                }
-              }
+              "$ref": "#/components/schemas/ErrorResponse"
             }
           }
         }
@@ -808,15 +796,7 @@
         "content": {
           "application/json": {
             "schema": {
-              "type": "object",
-              "properties": {
-                "error": {
-                  "type": "string"
-                },
-                "message": {
-                  "type": "string"
-                }
-              }
+              "$ref": "#/components/schemas/ErrorResponse"
             }
           }
         }
@@ -826,15 +806,7 @@
         "content": {
           "application/json": {
             "schema": {
-              "type": "object",
-              "properties": {
-                "error": {
-                  "type": "string"
-                },
-                "message": {
-                  "type": "string"
-                }
-              }
+              "$ref": "#/components/schemas/ErrorResponse"
             }
           }
         }

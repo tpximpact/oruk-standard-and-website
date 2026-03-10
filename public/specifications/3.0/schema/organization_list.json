@@ -1,10 +1,13 @@
 {
   "allOf": [
     {
-      "$ref": "./organization.json"
+      "$ref": "https://openreferraluk.org/specifications/3.0/schema/organization.json"
     },
     {
-      "$ref": "./list_overrides.json#/$defs/organization_list"
+      "properties": {
+        "organization_identifiers": false,
+        "attributes": false
+      }
     }
   ]
 }

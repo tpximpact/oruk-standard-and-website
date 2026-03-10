@@ -11,37 +11,25 @@
   "type": "object",
   "properties": {
     "id": {
-      "allOf": [
-        {
-          "$ref": "./definitions.json#/$defs/uuid_id"
-        }
-      ],
       "title": "Identifier",
       "description": "The identifier for the schedule. Each entry must have a unique identifier.",
       "example": "48102e86-bb50-41c4-8f1e-e269368c41d1",
-      "core": "Y"
+      "core": "Y",
+      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions/uuid_id.json"
     },
     "service_id": {
-      "allOf": [
-        {
-          "$ref": "./definitions.json#/$defs/uuid_reference"
-        }
-      ],
       "title": "Service Identifier",
       "description": "The identifier of the service for which this is the regular schedule",
       "example": "ac148810-d857-441c-9679-408f346de14b",
-      "core": "Y"
+      "core": "Y",
+      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions/uuid_reference.json"
     },
     "service_at_location_id": {
-      "allOf": [
-        {
-          "$ref": "./definitions.json#/$defs/uuid_reference"
-        }
-      ],
       "title": "Service At Location Identifier",
       "description": "The identifier of the 'service at location' table entry, when this schedule is specific to a service in a particular location.",
       "example": "e94c9f38-1e8f-4564-91d4-d53501ab1765",
-      "core": "Y"
+      "core": "Y",
+      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions/uuid_reference.json"
     },
     "valid_from": {
       "name": "valid_from",
@@ -71,7 +59,7 @@
       "name": "dtstart",
       "type": "string",
       "title": "Date Start",
-      "description": "iCal - The date of the first event is the schedule. Necessary when using the \u2018interval\u2019 feature, optional otherwise.",
+      "description": "iCal - The date of the first event is the schedule. Necessary when using the ‘interval’ feature, optional otherwise.",
       "constraints": {
         "unique": false
       },
@@ -142,7 +130,7 @@
       "name": "opens_at",
       "type": "string",
       "title": "Opens At",
-      "description": "The time when a service or location opens. This should use HH:MM format and should include timezone information, either adding the suffix \u2018Z\u2019 when the date is in UTC, or including an offset from UTC (e.g. 09:00-05:00 for 9am EST.)",
+      "description": "The time when a service or location opens. This should use HH:MM format and should include timezone information, either adding the suffix ‘Z’ when the date is in UTC, or including an offset from UTC (e.g. 09:00-05:00 for 9am EST.)",
       "constraints": {
         "unique": false
       },
@@ -154,7 +142,7 @@
       "name": "closes_at",
       "type": "string",
       "title": "Closes At",
-      "description": "The time when a service or location closes. This should use HH:MM format and should include timezone information, either adding the suffix \u2018Z\u2019 when the date is in UTC, or including an offset from UTC (e.g. 09:00-05:00 for 9am EST.).",
+      "description": "The time when a service or location closes. This should use HH:MM format and should include timezone information, either adding the suffix ‘Z’ when the date is in UTC, or including an offset from UTC (e.g. 09:00-05:00 for 9am EST.).",
       "constraints": {
         "unique": false
       },
@@ -164,14 +152,10 @@
     },
     "schedule_link": {
       "name": "schedule_link",
-      "allOf": [
-        {
-          "$ref": "./definitions.json#/$defs/uri"
-        }
-      ],
       "title": "Schedule Link",
       "description": "URL of a link for the schedule which may show each individual session and may provide a booking facility.",
-      "example": "http://example.com"
+      "example": "http://example.com",
+      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions/uri.json"
     },
     "attending_type": {
       "name": "attending_type",

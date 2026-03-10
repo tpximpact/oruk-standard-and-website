@@ -1,4 +1,6 @@
 {
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://openreferraluk.org/specifications/3.0/schema/service.json",
   "name": "service",
   "path": "services.csv",
   "description": "The details of the services provided by organizations to a range of different groups.",
@@ -11,81 +13,40 @@
   "type": "object",
   "properties": {
     "id": {
-      "allOf": [
-        {
-          "$ref": "./definitions.json#/$defs/uuid_id"
-        }
-      ],
-      "title": "Identifier",
       "description": "The identifier for the service. Each service must have a unique identifier.",
       "example": "ac148810-d857-441c-9679-408f346de14b",
-      "core": "Y"
+      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions/id_property.json"
     },
     "organization_id": {
-      "allOf": [
-        {
-          "$ref": "./definitions.json#/$defs/uuid_reference"
-        }
-      ],
-      "title": "Organization Identifier",
       "description": "The identifier of the organization that provides this service.",
       "example": "d9d5e0f5-d3ce-4f73-9a2f-4dd0ecc6c610",
-      "core": "Y"
+      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions/organization_id_property.json"
     },
     "name": {
-      "allOf": [
-        {
-          "$ref": "./definitions.json#/$defs/name"
-        }
-      ],
       "description": "The official or public name of the service.",
       "example": "Community Counselling",
-      "core": "Y"
+      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions/name_property.json"
     },
     "description": {
-      "allOf": [
-        {
-          "$ref": "./definitions.json#/$defs/description"
-        }
-      ],
       "description": "A free text description of the service.",
       "example": "Counselling Services provided by trained professionals. Suitable for people with mental health conditions such as anxiety, depression, or eating disorders as well as people experiencing difficult life events and circumstances. ",
-      "core": "Y"
+      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions/description_property.json"
     },
     "url": {
-      "name": "url",
-      "allOf": [
-        {
-          "$ref": "./definitions.json#/$defs/uri"
-        }
-      ],
-      "title": "URL",
       "description": "URL of the service",
       "example": "http://example.com/counselling",
-      "core": "Y"
+      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions/url_property.json"
     },
     "email": {
-      "allOf": [
-        {
-          "$ref": "./definitions.json#/$defs/email"
-        }
-      ],
-      "title": "Email",
       "description": "An email address which can be used to contact the service provider.",
       "example": "email@example.com",
-      "core": "Y"
+      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions/email_property.json"
     },
     "status": {
-      "allOf": [
-        {
-          "$ref": "./definitions.json#/$defs/service_status"
-        }
-      ],
       "example": "active",
-      "core": "Y"
+      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions/service_status.json"
     },
     "fees": {
-      "name": "fees",
       "type": "string",
       "title": "Fees",
       "description": "DEPRECATED: Details of any charges for service users to access this service.",
@@ -95,7 +56,6 @@
       "example": "fees_description"
     },
     "accreditations": {
-      "name": "accreditations",
       "type": "string",
       "title": "Accreditations",
       "description": "A free text description of any accreditations. Accreditation is the formal evaluation of an organization or program against best practice standards set by an accrediting organization.",
@@ -105,38 +65,30 @@
       "example": "All of our practitioners are accredited by the BASC, UKCP, and the Professional Standards Body"
     },
     "minimum_age": {
-      "name": "minimum_age",
       "type": "number",
       "title": "Minimum Age",
       "description": "The minimum age of a person required to meet this eligibility requirement.",
       "constraints": {
         "unique": false
       },
-      "example": "12"
+      "example": 12
     },
     "maximum_age": {
-      "name": "maximum_age",
       "type": "number",
       "title": "Maximum Age",
       "description": "The maximum age of a person required to meet this eligibility requirement.",
       "constraints": {
         "unique": false
       },
-      "example": "100"
+      "example": 100
     },
     "assured_date": {
-      "name": "assured_date",
-      "type": "string",
       "title": "Assured Date",
       "description": "The date that the information about the service was last checked.",
-      "constraints": {
-        "unique": false
-      },
       "example": "2005-01-01",
-      "datapackage_type": "date"
+      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions/date_string.json"
     },
     "assurer_email": {
-      "name": "assurer_email",
       "type": "string",
       "title": "Assurer Email",
       "description": "The contact e-mail address for the person or organization which last assured the service.",
@@ -147,7 +99,6 @@
       "example": "email@example.com"
     },
     "alert": {
-      "name": "alert",
       "type": "string",
       "title": "Alert",
       "description": "A description of any short term alerts concerning the service.",
@@ -157,90 +108,76 @@
       "example": "Following COVID-19 we have moved most of our counselling sessions online. Please contact the reception if you require further information."
     },
     "last_modified": {
-      "name": "last_modified",
-      "type": "string",
-      "format": "date-time",
-      "datapackage_type": "datetime",
       "title": "Last Modified",
       "description": "The datetime when the service, or any related information about the service, has changed. Should have millisecond accuracy.",
-      "constraints": {
-        "unique": false
-      },
-      "example": "2023-03-15T10:30:45.123Z"
+      "example": "2023-03-15T10:30:45.123Z",
+      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions/datetime_string.json"
     },
     "schedules": {
-      "name": "schedules",
       "type": "array",
       "title": "Schedules",
       "description": "The details of when a service or location is open. Entries are RFC 5545 RRULES.",
       "items": {
-        "$ref": "./schedule.json"
+        "$ref": "https://openreferraluk.org/specifications/3.0/schema/schedule.json"
       }
     },
     "service_areas": {
-      "name": "service_areas",
       "type": "array",
       "title": "Service Areas",
       "description": "The details of the geographic area for which a service is available.",
       "items": {
-        "$ref": "./service_area.json"
+        "$ref": "https://openreferraluk.org/specifications/3.0/schema/service_area.json"
       }
     },
     "service_at_locations": {
-      "name": "service_at_locations",
       "type": "array",
       "title": "Service At Locations",
       "description": "A link between a service and a specific location.",
       "items": {
-        "$ref": "./service_at_location.json"
+        "$ref": "https://openreferraluk.org/specifications/3.0/schema/service_at_location.json"
       }
     },
     "languages": {
-      "name": "languages",
       "type": "array",
       "title": "Languages",
       "description": "The details of the languages that are spoken at locations or services. This does not include languages which can only be used with interpretation.",
       "items": {
-        "$ref": "./language.json"
+        "$ref": "https://openreferraluk.org/specifications/3.0/schema/language.json"
       }
     },
     "organization": {
-      "$ref": "./organization.json"
+      "$ref": "https://openreferraluk.org/specifications/3.0/schema/organization.json"
     },
     "funding": {
-      "name": "funding",
       "type": "array",
       "title": "Funding",
       "description": "The sources of funding for a service or organization.",
       "items": {
-        "$ref": "./funding.json"
+        "$ref": "https://openreferraluk.org/specifications/3.0/schema/funding.json"
       }
     },
     "cost_options": {
-      "name": "cost_options",
       "type": "array",
       "title": "Cost Options",
       "description": "The costs of a service at certain points in time. This is an LGA Extension table. This table provides a structured version of the text information contained in the 'fees' field of the 'service' table.",
       "items": {
-        "$ref": "./cost_option.json"
+        "$ref": "https://openreferraluk.org/specifications/3.0/schema/cost_option.json"
       }
     },
     "contacts": {
-      "name": "contacts",
       "type": "array",
       "title": "Contacts",
       "description": "The details of the named contacts for services and organizations.",
       "items": {
-        "$ref": "./contact.json"
+        "$ref": "https://openreferraluk.org/specifications/3.0/schema/contact.json"
       }
     },
     "attributes": {
-      "name": "attributes",
       "type": "array",
       "title": "Attributes",
       "description": "A link between a service and one or more classifications that describe the nature of the service provided.",
       "items": {
-        "$ref": "./attribute.json"
+        "$ref": "https://openreferraluk.org/specifications/3.0/schema/attribute.json"
       }
     }
   },

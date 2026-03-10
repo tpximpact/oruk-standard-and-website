@@ -1,10 +1,19 @@
 {
   "allOf": [
     {
-      "$ref": "./service.json"
+      "$ref": "https://openreferraluk.org/specifications/3.0/schema/service.json"
     },
     {
-      "$ref": "./list_overrides.json#/$defs/service_list"
+      "properties": {
+        "schedules": false,
+        "service_areas": false,
+        "service_at_locations": false,
+        "languages": false,
+        "funding": false,
+        "cost_options": false,
+        "contacts": false,
+        "attributes": false
+      }
     }
   ]
 }

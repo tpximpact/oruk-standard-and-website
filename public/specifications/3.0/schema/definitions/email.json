@@ -1,0 +1,10 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://openreferraluk.org/specifications/3.0/schema/definitions/email.json",
+  "$anchor": "email-field",
+  "type": "string",
+  "format": "email",
+  "constraints": {
+    "unique": false
+  }
+}

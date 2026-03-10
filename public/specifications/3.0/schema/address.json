@@ -1,4 +1,6 @@
 {
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://openreferraluk.org/specifications/3.0/schema/address.json",
   "name": "address",
   "path": "address.csv",
   "description": "The addresses table contains the physical addresses for locations",
@@ -11,127 +13,98 @@
   "type": "object",
   "properties": {
     "id": {
-      "allOf": [
-        {
-          "$ref": "./definitions.json#/$defs/uuid_id"
-        }
-      ],
-      "title": "Identifier",
       "description": "The identifier of the postal address. Each postal address must have a unique identifier.",
       "example": "74706e55-df26-4b84-80fe-ecc30b5befb4",
-      "core": "Y"
+      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions/id_property.json"
     },
     "location_id": {
-      "allOf": [
-        {
-          "$ref": "./definitions.json#/$defs/uuid_reference"
-        }
-      ],
-      "title": "Location Identifier",
       "description": "The identifier of the location for this postal address.",
       "example": "3a19ff88-4620-4d17-9830-ac1d859eb5d5",
-      "core": "Y"
+      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions/location_id_property.json"
     },
     "attention": {
-      "name": "attention",
       "type": "string",
       "title": "Attention",
       "description": "The name of the person or entity whose attention should be sought at the location. These are often included as a \"care of\" component of an address.",
       "constraints": {
         "unique": false
       },
-      "example": "A. Persona",
-      "core": "Y"
+      "example": "A. Persona"
     },
     "address_1": {
-      "name": "address_1",
       "type": "string",
       "title": "Address line 1",
       "description": "The first line(s) of the address, including office, building number and street.",
       "constraints": {
         "unique": false
       },
-      "example": "1-30 Main Street",
-      "core": "Y"
+      "example": "1-30 Main Street"
     },
     "city": {
-      "name": "city",
       "type": "string",
       "title": "City",
       "description": "The city in which the address is located.",
       "constraints": {
         "unique": false
       },
-      "example": "MyCity",
-      "core": "Y"
+      "example": "MyCity"
     },
     "region": {
-      "name": "region",
       "type": "string",
       "title": "Region",
       "description": "The region in which the address is located (optional).",
       "constraints": {
         "unique": false
       },
-      "example": "MyRegion",
-      "core": "Y"
+      "example": "MyRegion"
     },
     "state_province": {
-      "name": "state_province",
       "type": "string",
       "title": "State Or Province",
       "description": "The state or province in which the address is located.",
       "constraints": {
         "unique": false
       },
-      "example": "MyState",
-      "core": "Y"
+      "example": "MyState"
     },
     "postal_code": {
-      "name": "postal_code",
       "type": "string",
       "title": "Postal Code",
       "description": "The postal code for the address.",
       "constraints": {
         "unique": false
       },
-      "example": "ABC 1234",
-      "core": "Y"
+      "example": "ABC 1234"
     },
     "country": {
-      "name": "country",
       "type": "string",
       "title": "Country",
       "description": "The country in which the address is located. This should be given as an ISO 3361-1 country code (two letter abbreviation).",
       "constraints": {
         "unique": false
       },
-      "example": "US",
-      "core": "Y"
+      "example": "US"
     },
     "address_type": {
-      "name": "address_type",
       "type": "string",
       "title": "Address Type",
       "description": "The type of address which may be physical, postal, or virtual.",
-      "constraints": {
-        "unique": false
-      },
-      "example": "postal",
-      "core": "Y",
       "enum": [
         "physical",
         "postal",
         "virtual"
-      ]
+      ],
+      "constraints": {
+        "unique": false
+      },
+      "example": "postal"
     },
     "attributes": {
-      "name": "attributes",
       "type": "array",
       "title": "Attributes",
       "description": "A link between a service and one or more classifications that describe the nature of the service provided.",
       "items": {
-        "$ref": "./attribute.json"
+        "$ref": "https://openreferraluk.org/specifications/3.0/schema/attribute.json"
       }
     }
   },

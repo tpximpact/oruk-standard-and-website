@@ -1,4 +1,6 @@
 {
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://openreferraluk.org/specifications/3.0/schema/accessibility.json",
   "name": "accessibility",
   "path": "accessibility.csv",
   "description": "The details of the arrangements for access to locations for people who have disabilities.",
@@ -11,39 +13,21 @@
   "type": "object",
   "properties": {
     "id": {
-      "allOf": [
-        {
-          "$ref": "./definitions.json#/$defs/uuid_id"
-        }
-      ],
-      "title": "Identifier",
       "description": "The identifier for this accessibility information. Each entry must have a unique identifier.",
       "example": "afcf296e-1cb2-4139-9c88-33d587d1a50b",
-      "core": "Y"
+      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions/id_property.json"
     },
     "location_id": {
-      "allOf": [
-        {
-          "$ref": "./definitions.json#/$defs/uuid_reference"
-        }
-      ],
-      "title": "Location Identifier",
       "description": "The identifier for the location of the accessibility provision.",
       "example": "3a19ff88-4620-4d17-9830-ac1d859eb5d5",
-      "core": "Y"
+      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions/location_id_property.json"
     },
     "description": {
-      "allOf": [
-        {
-          "$ref": "./definitions.json#/$defs/description"
-        }
-      ],
       "description": "A free text description of the assistance or infrastructure that facilitates access to clients with disabilities.",
       "example": "The building is equipped with induction loops for hearing aids. Wheelchair access is possible on all levels.",
-      "core": "Y"
+      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions/description_property.json"
     },
     "details": {
-      "name": "details",
       "type": "string",
       "title": "Details",
       "description": "Any further details relating to the relevant accessibility arrangements at this location.",
@@ -53,35 +37,26 @@
       "example": "Switch hearing aid to T-coil to access the induction loop facility."
     },
     "url": {
-      "name": "url",
-      "allOf": [
-        {
-          "$ref": "./definitions.json#/$defs/uri"
-        }
-      ],
-      "title": "URL",
       "description": "The URL of a page giving more information about the accessibility of the location.",
-      "example": "http://example.com"
+      "example": "http://example.com",
+      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions/url_property.json"
     },
     "attributes": {
-      "name": "attributes",
       "type": "array",
       "title": "Attributes",
       "description": "A link between a service and one or more classifications that describe the nature of the service provided.",
       "items": {
-        "$ref": "./attribute.json"
+        "$ref": "https://openreferraluk.org/specifications/3.0/schema/attribute.json"
       }
     },
     "accessibility": {
-      "name": "accessibility",
       "type": "string",
       "title": "Accessibility",
       "description": "Description of assistance or infrastructure that facilitate access to clients with disabilities.",
       "constraints": {
         "unique": false
       },
-      "example": "The building is equipped with induction loops for hearing aids. Wheelchair access is possible on all levels.",
-      "core": "Y"
+      "example": "The building is equipped with induction loops for hearing aids. Wheelchair access is possible on all levels."
     }
   },
   "required": [

@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://openreferraluk.org/specifications/3.0/schema/definitions/service_status.json",
+  "$anchor": "service-status",
+  "type": "string",
+  "title": "Status",
+  "description": "The current status of the service.",
+  "enum": [
+    "active",
+    "inactive",
+    "defunct",
+    "temporarily closed"
+  ]
+}

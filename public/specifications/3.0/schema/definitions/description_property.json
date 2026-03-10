@@ -1,0 +1,6 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://openreferraluk.org/specifications/3.0/schema/definitions/description_property.json",
+  "core": "Y",
+  "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions/description.json"
+}
