@@ -1,91 +1,85 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://openreferraluk.org/specifications/3.0/schema/definitions.json",
+  "$id": "http://localhost:3000/specifications/3.0/schema/definitions.json",
   "title": "Open Referral UK Common Definitions",
   "description": "A combined collection of common property definitions for the HSDS profile.",
   "$defs": {
+    "date_string": {
+      "$anchor": "date-field",
+      "title": "Date",
+      "type": "string",
+      "format": "date"
+    },
+    "datetime_string": {
+      "$anchor": "datetime-field",
+      "title": "DateTime",
+      "type": "string",
+      "format": "date-time"
+    },
+    "description": {
+      "$anchor": "description-field",
+      "title": "Description",
+      "type": "string"
+    },
+    "email": {
+      "$anchor": "email-field",
+      "title": "Email",
+      "type": "string",
+      "format": "email"
+    },
+    "latitude": {
+      "$anchor": "latitude-field",
+      "title": "Latitude",
+      "description": "The latitude expressed in decimal degrees in WGS84 datum.",
+      "type": "number"
+    },
+    "longitude": {
+      "$anchor": "longitude-field",
+      "title": "Longitude",
+      "description": "The longitude expressed in decimal degrees in WGS84 datum.",
+      "type": "number"
+    },
+    "maximum_age": {
+      "$anchor": "maximum-age-field",
+      "title": "Maximum Age",
+      "type": "number"
+    },
+    "minimum_age": {
+      "$anchor": "minimum-age-field",
+      "title": "Minimum Age",
+      "type": "number"
+    },
+    "name": {
+      "$anchor": "name-field",
+      "title": "Name",
+      "type": "string"
+    },
+    "uri": {
+      "$anchor": "uri-field",
+      "title": "URI",
+      "type": "string",
+      "format": "uri"
+    },
+    "url": {
+      "$anchor": "url-field",
+      "title": "URL",
+      "type": "string",
+      "format": "uri"
+    },
     "uuid_id": {
       "$anchor": "uuid-id",
+      "title": "Identifier",
       "type": "string",
       "format": "uuid",
-      "title": "Identifier",
       "constraints": {
         "unique": true
       }
     },
     "uuid_reference": {
       "$anchor": "uuid-reference",
+      "title": "Identifier Reference",
       "type": "string",
-      "format": "uuid",
-      "title": "Identifier Reference"
-    },
-    "url": {
-      "$anchor": "url-field",
-      "type": "string",
-      "format": "uri",
-      "title": "URL"
-    },
-    "uri": {
-      "$anchor": "uri-field",
-      "type": "string",
-      "format": "uri",
-      "title": "URI"
-    },
-    "name": {
-      "$anchor": "name-field",
-      "type": "string",
-      "title": "Name"
-    },
-    "description": {
-      "$anchor": "description-field",
-      "type": "string",
-      "title": "Description"
-    },
-    "email": {
-      "$anchor": "email-field",
-      "type": "string",
-      "format": "email",
-      "title": "Email"
-    },
-    "date_string": {
-      "$anchor": "date-field",
-      "type": "string",
-      "format": "date",
-      "title": "Date"
-    },
-    "datetime_string": {
-      "$anchor": "datetime-field",
-      "type": "string",
-      "format": "date-time",
-      "title": "DateTime"
-    },
-    "latitude": {
-      "$anchor": "latitude-field",
-      "type": "number",
-      "title": "Latitude",
-      "description": "The latitude expressed in decimal degrees in WGS84 datum."
-    },
-    "longitude": {
-      "$anchor": "longitude-field",
-      "type": "number",
-      "title": "Longitude",
-      "description": "The longitude expressed in decimal degrees in WGS84 datum."
-    },
-    "minimum_age": {
-      "$anchor": "minimum-age-field",
-      "type": "number",
-      "title": "Minimum Age"
-    },
-    "maximum_age": {
-      "$anchor": "maximum-age-field",
-      "type": "number",
-      "title": "Maximum Age"
-    },
-    "location_type": {
-      "$ref": "enums.json#location-type"
-    },
-    "service_status": {
-      "$ref": "enums.json#service-status"
+      "format": "uuid"
     }
   }
 }

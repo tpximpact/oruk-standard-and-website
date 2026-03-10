@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://openreferraluk.org/specifications/3.0/schema/phone.json",
+  "$id": "http://localhost:3000/specifications/3.0/schema/phone.json",
   "name": "phone",
   "path": "phones.csv",
   "description": "The details of the telephone numbers used to contact organizations, services, and locations.",
@@ -15,12 +15,12 @@
     "id": {
       "description": "The identifier for the phone number. Each entry must have a unique identifier.",
       "example": "1554f2e2-a373-45db-a3fa-9fc48a61c15e",
-      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#uuid-id"
+      "$ref": "http://localhost:3000/specifications/3.0/schema/definitions.json#uuid-id"
     },
     "contact_id": {
       "description": "The identifier of the contact for which this is the phone number.",
       "example": "1e7efce3-639b-4880-940c-b95cd30cdb50",
-      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#uuid-reference"
+      "$ref": "http://localhost:3000/specifications/3.0/schema/definitions.json#uuid-reference"
     },
     "number": {
       "type": "string",
@@ -31,14 +31,14 @@
     "description": {
       "description": "A free text description providing extra information about the phone service",
       "example": "Our main reception phone number. The phones will be available from 0800 (8am) until 1800 (6pm) local time. There may be some slight delays in answering your call if we are busy.",
-      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#description-field"
+      "$ref": "http://localhost:3000/specifications/3.0/schema/definitions.json#description-field"
     },
     "languages": {
       "type": "array",
       "title": "Languages",
       "description": "The details of the languages that are spoken at locations or services. This does not include languages which can only be used with interpretation.",
       "items": {
-        "$ref": "https://openreferraluk.org/specifications/3.0/schema/language.json"
+        "$ref": "http://localhost:3000/specifications/3.0/schema/language.json"
       }
     }
   },

@@ -9,6 +9,11 @@ interface RefCache {
   [url: string]: JsonSchema
 }
 
+interface ExternalRefParts {
+  fileName: string
+  fragment: string | null
+}
+
 export class SchemaResolver {
   private refCache: RefCache = {}
   private schemaDir: string
@@ -24,25 +29,171 @@ export class SchemaResolver {
     return JSON.parse(content)
   }
 
-  private extractSchemaFileName(refUrl: string): string | null {
+  private extractExternalRefParts(refUrl: string): ExternalRefParts | null {
     // Handle various URL patterns:
     // - https://openreferraluk.org/specifications/3.0/schema/service.json
     // - http://localhost:3000/specifications/3.0/schema/service.json
     // - ./schemata/service.json
     // - service.json
 
-    const [beforeHash = ''] = refUrl.split('#')
+    const [beforeHash = '', rawFragment = ''] = refUrl.split('#')
     const [cleanedRef = ''] = beforeHash.split('?')
 
     if (!cleanedRef.endsWith('.json')) {
       return null
     }
 
-    if (!cleanedRef.includes('/')) {
-      return cleanedRef
+    const fileName = cleanedRef.includes('/') ? path.posix.basename(cleanedRef) : cleanedRef
+
+    return {
+      fileName,
+      fragment: rawFragment || null
+    }
+  }
+
+  private resolveFragment(document: JsonSchema, fragment: string | null): JsonSchema | null {
+    if (!fragment) {
+      return document
     }
 
-    return path.posix.basename(cleanedRef)
+    if (fragment.startsWith('/')) {
+      let current: any = document
+
+      for (const segment of fragment.replace(/^\//, '').split('/')) {
+        const decodedSegment = decodeURIComponent(segment.replace(/~1/g, '/').replace(/~0/g, '~'))
+
+        if (current === null || current === undefined) {
+          return null
+        }
+
+        current = current[decodedSegment]
+      }
+
+      return current
+    }
+
+    for (const candidate of this.getFragmentCandidates(fragment)) {
+      const anchoredSchema = this.findAnchor(document, candidate)
+      if (anchoredSchema) {
+        return anchoredSchema
+      }
+
+      const keyedSchema = this.findObjectByKey(document, candidate)
+      if (keyedSchema) {
+        return keyedSchema
+      }
+    }
+
+    return null
+  }
+
+  private getFragmentCandidates(fragment: string): string[] {
+    const withoutExtension = fragment.replace(/\.json$/i, '')
+    const candidates = [
+      fragment,
+      withoutExtension,
+      withoutExtension.replace(/_/g, '-'),
+      withoutExtension.replace(/-/g, '_')
+    ]
+
+    return Array.from(new Set(candidates.filter(Boolean)))
+  }
+
+  private findAnchor(obj: any, anchor: string): JsonSchema | null {
+    if (obj === null || typeof obj !== 'object') {
+      return null
+    }
+
+    if (!Array.isArray(obj) && obj.$anchor === anchor) {
+      return obj
+    }
+
+    if (Array.isArray(obj)) {
+      for (const item of obj) {
+        const resolved = this.findAnchor(item, anchor)
+        if (resolved) {
+          return resolved
+        }
+      }
+
+      return null
+    }
+
+    for (const value of Object.values(obj)) {
+      const resolved = this.findAnchor(value, anchor)
+      if (resolved) {
+        return resolved
+      }
+    }
+
+    return null
+  }
+
+  private findObjectByKey(obj: any, key: string): JsonSchema | null {
+    if (obj === null || typeof obj !== 'object') {
+      return null
+    }
+
+    if (!Array.isArray(obj) && key in obj && this.isPlainObject(obj[key])) {
+      return obj[key]
+    }
+
+    for (const value of Object.values(obj)) {
+      const resolved = this.findObjectByKey(value, key)
+      if (resolved) {
+        return resolved
+      }
+    }
+
+    return null
+  }
+
+  private isPlainObject(value: unknown): value is JsonSchema {
+    return typeof value === 'object' && value !== null && !Array.isArray(value)
+  }
+
+  private mergeSchemaValues(baseValue: any, nextValue: any): any {
+    if (Array.isArray(baseValue) && Array.isArray(nextValue)) {
+      return Array.from(new Set([...baseValue, ...nextValue]))
+    }
+
+    if (this.isPlainObject(baseValue) && this.isPlainObject(nextValue)) {
+      return this.mergeSchemas(baseValue, nextValue)
+    }
+
+    return nextValue
+  }
+
+  private mergeSchemas(baseSchema: JsonSchema, nextSchema: JsonSchema): JsonSchema {
+    const merged: JsonSchema = { ...baseSchema }
+
+    for (const [key, value] of Object.entries(nextSchema)) {
+      if (!(key in merged)) {
+        merged[key] = value
+        continue
+      }
+
+      merged[key] = this.mergeSchemaValues(merged[key], value)
+    }
+
+    return merged
+  }
+
+  private mergeAllOf(schema: JsonSchema): JsonSchema {
+    if (!this.isPlainObject(schema) || !Array.isArray(schema.allOf)) {
+      return schema
+    }
+
+    const { allOf, ...rest } = schema
+    const mergedAllOf = allOf.reduce<JsonSchema>((accumulator, entry) => {
+      if (!this.isPlainObject(entry)) {
+        return accumulator
+      }
+
+      return this.mergeSchemas(accumulator, entry)
+    }, {})
+
+    return this.mergeSchemas(mergedAllOf, rest)
   }
 
   private isExternalSchemaRef(refUrl: string): boolean {
@@ -165,28 +316,35 @@ export class SchemaResolver {
     visitedRefs.add(refUrl)
 
     // Extract filename from URL
-    const fileName = this.extractSchemaFileName(refUrl)
+    const refParts = this.extractExternalRefParts(refUrl)
 
-    if (!fileName) {
+    if (!refParts) {
       console.warn(`Could not extract filename from: ${refUrl}`)
       visitedRefs.delete(refUrl)
       return { $ref: refUrl }
     }
 
     try {
-      const schema = this.loadLocalSchema(fileName)
+      const schema = this.loadLocalSchema(refParts.fileName)
+      const referencedSchema = this.resolveFragment(schema, refParts.fragment)
+
+      if (!referencedSchema) {
+        console.warn(`Could not resolve fragment from: ${refUrl}`)
+        visitedRefs.delete(refUrl)
+        return { $ref: refUrl }
+      }
 
       // Cache the schema before resolving its refs to handle circular dependencies
-      this.refCache[refUrl] = schema
+      this.refCache[refUrl] = referencedSchema
 
       // Recursively resolve all $ref in this schema
-      const resolved = this.resolveAllRefs(schema, visitedRefs)
+      const resolved = this.resolveAllRefs(referencedSchema, visitedRefs)
       this.refCache[refUrl] = resolved
 
       visitedRefs.delete(refUrl)
       return resolved
     } catch (error) {
-      console.error(`Error loading schema ${fileName}:`, error)
+      console.error(`Error loading schema ${refParts.fileName}:`, error)
       visitedRefs.delete(refUrl)
       return { $ref: refUrl }
     }
@@ -218,9 +376,12 @@ export class SchemaResolver {
 
       // Merge other properties if they exist (besides $ref)
       const { $ref, ...rest } = obj
-      return Object.keys(rest).length > 0
-        ? { ...resolved, ...this.resolveAllRefs(rest, visitedRefs) }
-        : resolved
+      const merged =
+        Object.keys(rest).length > 0
+          ? { ...resolved, ...this.resolveAllRefs(rest, visitedRefs) }
+          : resolved
+
+      return this.mergeAllOf(merged)
     }
 
     // Otherwise, recursively resolve all properties
@@ -228,7 +389,8 @@ export class SchemaResolver {
     for (const [key, value] of Object.entries(obj)) {
       result[key] = this.resolveAllRefs(value, visitedRefs)
     }
-    return result
+
+    return this.mergeAllOf(result)
   }
 
   public resolve(schema: JsonSchema): JsonSchema {

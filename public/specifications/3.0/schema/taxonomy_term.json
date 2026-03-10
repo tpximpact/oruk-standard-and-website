@@ -11,7 +11,7 @@
   },
   "allOf": [
     {
-      "$ref": "https://openreferraluk.org/specifications/3.0/schema/base-entity.json"
+      "$ref": "http://localhost:3000/specifications/3.0/schema/base-entity.json"
     },
     {
       "type": "object",
@@ -21,7 +21,7 @@
           "description": "If this is a child term in a hierarchical taxonomy, give the identifier of the parent category. For top-level categories, this is not required.",
           "example": "0bc248fa-dc27-4650-9ba4-8f1a24ef16a2",
           "core": "Y",
-          "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#uuid_reference.json"
+          "$ref": "http://localhost:3000/specifications/3.0/schema/definitions.json#uuid_reference"
         },
         "taxonomy": {
           "name": "taxonomy",
@@ -35,13 +35,13 @@
           "title": "Taxonomy Identifier",
           "description": "The identifier of the taxonomy containing the term.",
           "example": "07ff6aee-a219-438c-b694-d2fcb6c5373b",
-          "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#uuid_reference.json"
+          "$ref": "http://localhost:3000/specifications/3.0/schema/definitions.json#uuid_reference"
         },
         "term_uri": {
           "title": "Term URI",
           "description": "URI of the term.",
           "example": "http://example.com",
-          "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#uri.json"
+          "$ref": "http://localhost:3000/specifications/3.0/schema/definitions.json#uri"
         },
         "term": {
           "name": "term",

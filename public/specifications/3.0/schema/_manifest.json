@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://openreferraluk.org/specifications/3.0/schema/_manifest.json",
+  "$id": "http://localhost:3000/specifications/3.0/schema/_manifest.json",
   "title": "Open Referral UK Schema Manifest",
   "description": "Complete metadata and organizational information for all HSDS-UK-3.0 schemas",
   "version": "3.0",

@@ -28,7 +28,7 @@
   ],
   "externalDocs": {
     "description": "Open Referral UK Schema Documentation",
-    "url": "https://openreferraluk.org/specifications/3.0/"
+    "url": "http://localhost:3000/specifications/3.0/"
   },
   "paths": {
     "/": {
@@ -46,7 +46,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "https://openreferraluk.org/specifications/3.0/schema/api_details.json"
+                  "$ref": "http://localhost:3000/specifications/3.0/schema/api_details.json"
                 }
               }
             }
@@ -95,7 +95,7 @@
                 "schema": {
                   "allOf": [
                     {
-                      "$ref": "https://openreferraluk.org/specifications/3.0/schema/page.json"
+                      "$ref": "http://localhost:3000/specifications/3.0/schema/page.json"
                     },
                     {
                       "type": "object",
@@ -103,7 +103,7 @@
                         "contents": {
                           "type": "array",
                           "items": {
-                            "$ref": "https://openreferraluk.org/specifications/3.0/schema/organization_list.json"
+                            "$ref": "http://localhost:3000/specifications/3.0/schema/organization_list.json"
                           }
                         }
                       }
@@ -153,7 +153,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "https://openreferraluk.org/specifications/3.0/schema/organization.json"
+                  "$ref": "http://localhost:3000/specifications/3.0/schema/organization.json"
                 }
               }
             }
@@ -220,7 +220,7 @@
                 "schema": {
                   "allOf": [
                     {
-                      "$ref": "https://openreferraluk.org/specifications/3.0/schema/page.json"
+                      "$ref": "http://localhost:3000/specifications/3.0/schema/page.json"
                     },
                     {
                       "type": "object",
@@ -228,7 +228,7 @@
                         "contents": {
                           "type": "array",
                           "items": {
-                            "$ref": "https://openreferraluk.org/specifications/3.0/schema/service_at_location_list.json"
+                            "$ref": "http://localhost:3000/specifications/3.0/schema/service_at_location_list.json"
                           }
                         }
                       }
@@ -273,7 +273,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "https://openreferraluk.org/specifications/3.0/schema/service_at_location.json"
+                  "$ref": "http://localhost:3000/specifications/3.0/schema/service_at_location.json"
                 }
               }
             }
@@ -338,7 +338,7 @@
                 "schema": {
                   "allOf": [
                     {
-                      "$ref": "https://openreferraluk.org/specifications/3.0/schema/page.json"
+                      "$ref": "http://localhost:3000/specifications/3.0/schema/page.json"
                     },
                     {
                       "type": "object",
@@ -346,7 +346,7 @@
                         "contents": {
                           "type": "array",
                           "items": {
-                            "$ref": "https://openreferraluk.org/specifications/3.0/schema/service_list.json"
+                            "$ref": "http://localhost:3000/specifications/3.0/schema/service_list.json"
                           }
                         }
                       }
@@ -391,7 +391,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "https://openreferraluk.org/specifications/3.0/schema/service.json"
+                  "$ref": "http://localhost:3000/specifications/3.0/schema/service.json"
                 }
               }
             }
@@ -435,7 +435,7 @@
               "application/json": {
                 "allOf": [
                   {
-                    "$ref": "https://openreferraluk.org/specifications/3.0/schema/page.json"
+                    "$ref": "http://localhost:3000/specifications/3.0/schema/page.json"
                   },
                   {
                     "type": "object",
@@ -443,7 +443,7 @@
                       "contents": {
                         "type": "array",
                         "items": {
-                          "$ref": "https://openreferraluk.org/specifications/3.0/schema/taxonomy_list.json"
+                          "$ref": "http://localhost:3000/specifications/3.0/schema/taxonomy_list.json"
                         }
                       }
                     }
@@ -488,7 +488,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "https://openreferraluk.org/specifications/3.0/schema/taxonomy.json"
+                  "$ref": "http://localhost:3000/specifications/3.0/schema/taxonomy.json"
                 }
               }
             }
@@ -554,7 +554,7 @@
                 "schema": {
                   "allOf": [
                     {
-                      "$ref": "https://openreferraluk.org/specifications/3.0/schema/page.json"
+                      "$ref": "http://localhost:3000/specifications/3.0/schema/page.json"
                     },
                     {
                       "type": "object",
@@ -562,7 +562,7 @@
                         "contents": {
                           "type": "array",
                           "items": {
-                            "$ref": "https://openreferraluk.org/specifications/3.0/schema/taxonomy_term_list.json"
+                            "$ref": "http://localhost:3000/specifications/3.0/schema/taxonomy_term_list.json"
                           }
                         }
                       }
@@ -608,7 +608,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "https://openreferraluk.org/specifications/3.0/schema/taxonomy_term.json"
+                  "$ref": "http://localhost:3000/specifications/3.0/schema/taxonomy_term.json"
                 }
               }
             }
@@ -771,7 +771,7 @@
         "required": false,
         "description": "Return results in the specified format. Default is `json`. Could be `ndjson` which should stream all the results without pagination.",
         "schema": {
-          "$ref": "../../../specifications/3.0/schema/enums.json#format",
+          "$ref": "http://localhost:3000/specifications/3.0/schema/enums.json#format",
           "default": "json"
         }
       }

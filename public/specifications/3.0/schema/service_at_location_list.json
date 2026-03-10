@@ -1,12 +1,12 @@
 {
   "allOf": [
     {
-      "$ref": "https://openreferraluk.org/specifications/3.0/schema/service_at_location.json"
+      "$ref": "http://localhost:3000/specifications/3.0/schema/service_at_location.json"
     },
     {
       "properties": {
         "service": {
-          "$ref": "https://openreferraluk.org/specifications/3.0/schema/service_list.json"
+          "$ref": "http://localhost:3000/specifications/3.0/schema/service_list.json"
         }
       }
     }

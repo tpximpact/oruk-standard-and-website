@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://openreferraluk.org/specifications/3.0/schema/location.json",
+  "$id": "http://localhost:3000/specifications/3.0/schema/location.json",
   "name": "location",
   "path": "locations.csv",
   "description": "The locations where organizations operate. Locations may be virtual, and one organization may have many locations.",
@@ -12,22 +12,22 @@
   },
   "allOf": [
     {
-      "$ref": "https://openreferraluk.org/specifications/3.0/schema/base-entity.json"
+      "$ref": "http://localhost:3000/specifications/3.0/schema/base-entity.json"
     },
     {
       "type": "object",
       "properties": {
         "location_type": {
           "example": "physical",
-          "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#location-type"
+          "$ref": "http://localhost:3000/specifications/3.0/schema/enums.json#location-type"
         },
         "latitude": {
           "example": 100,
-          "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#latitude-field"
+          "$ref": "http://localhost:3000/specifications/3.0/schema/definitions.json#latitude-field"
         },
         "longitude": {
           "example": 101,
-          "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#longitude-field"
+          "$ref": "http://localhost:3000/specifications/3.0/schema/definitions.json#longitude-field"
         },
         "external_identifier": {
           "type": "string",
@@ -46,7 +46,7 @@
           "title": "Addresses",
           "description": "The addresses of locations where organizations operate.",
           "items": {
-            "$ref": "https://openreferraluk.org/specifications/3.0/schema/address.json"
+            "$ref": "http://localhost:3000/specifications/3.0/schema/address.json"
           }
         },
         "accessibility": {
@@ -54,7 +54,7 @@
           "title": "Accessibility",
           "description": "The details of the arrangements for access to locations for people who have disabilities",
           "items": {
-            "$ref": "https://openreferraluk.org/specifications/3.0/schema/accessibility.json"
+            "$ref": "http://localhost:3000/specifications/3.0/schema/accessibility.json"
           }
         },
         "attributes": {
@@ -62,7 +62,7 @@
           "title": "Attributes",
           "description": "A link between a service and one or more classifications that describe the nature of the service provided.",
           "items": {
-            "$ref": "https://openreferraluk.org/specifications/3.0/schema/attribute.json"
+            "$ref": "http://localhost:3000/specifications/3.0/schema/attribute.json"
           }
         }
       }

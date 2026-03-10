@@ -10,7 +10,7 @@
   },
   "allOf": [
     {
-      "$ref": "https://openreferraluk.org/specifications/3.0/schema/base-entity.json"
+      "$ref": "http://localhost:3000/specifications/3.0/schema/base-entity.json"
     },
     {
       "type": "object",
@@ -19,7 +19,7 @@
           "title": "URI",
           "description": "The URI of the taxonomy.",
           "example": "http://example.com",
-          "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#uri-field"
+          "$ref": "http://localhost:3000/specifications/3.0/schema/definitions.json#uri-field"
         },
         "version": {
           "name": "version",
@@ -34,7 +34,7 @@
           "title": "Taxonomy Terms",
           "description": "A link between a taxonomy and one or more taxonomy terms.",
           "items": {
-            "$ref": "https://openreferraluk.org/specifications/3.0/schema/taxonomy_term.json"
+            "$ref": "http://localhost:3000/specifications/3.0/schema/taxonomy_term.json"
           }
         }
       }

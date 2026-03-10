@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://openreferraluk.org/specifications/3.0/schema/accessibility.json",
+  "$id": "http://localhost:3000/specifications/3.0/schema/accessibility.json",
   "name": "accessibility",
   "path": "accessibility.csv",
   "description": "The details of the arrangements for access to locations for people who have disabilities.",
@@ -15,17 +15,17 @@
     "id": {
       "description": "The identifier for this accessibility information. Each entry must have a unique identifier.",
       "example": "afcf296e-1cb2-4139-9c88-33d587d1a50b",
-      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#uuid-id"
+      "$ref": "http://localhost:3000/specifications/3.0/schema/definitions.json#uuid-id"
     },
     "location_id": {
       "description": "The identifier for the location of the accessibility provision.",
       "example": "3a19ff88-4620-4d17-9830-ac1d859eb5d5",
-      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#uuid-reference"
+      "$ref": "http://localhost:3000/specifications/3.0/schema/definitions.json#uuid-reference"
     },
     "description": {
       "description": "A free text description of the assistance or infrastructure that facilitates access to clients with disabilities.",
       "example": "The building is equipped with induction loops for hearing aids. Wheelchair access is possible on all levels.",
-      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#description-field"
+      "$ref": "http://localhost:3000/specifications/3.0/schema/definitions.json#description-field"
     },
     "details": {
       "type": "string",
@@ -36,14 +36,14 @@
     "url": {
       "description": "The URL of a page giving more information about the accessibility of the location.",
       "example": "http://example.com",
-      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#url-field"
+      "$ref": "http://localhost:3000/specifications/3.0/schema/definitions.json#url-field"
     },
     "attributes": {
       "type": "array",
       "title": "Attributes",
       "description": "A link between a service and one or more classifications that describe the nature of the service provided.",
       "items": {
-        "$ref": "https://openreferraluk.org/specifications/3.0/schema/attribute.json"
+        "$ref": "http://localhost:3000/specifications/3.0/schema/attribute.json"
       }
     },
     "accessibility": {
