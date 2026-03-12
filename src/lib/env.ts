@@ -11,10 +11,7 @@ const envSchema = z.object({
   MONGODB_DB: z.string().min(1, 'MONGODB_DB is required'),
 
   // External Services
-  OPENAPI_VALIDATOR_ENDPOINT: z
-    .string()
-    .url('OPENAPI_VALIDATOR_ENDPOINT must be a valid URL')
-    .optional(),
+  VALIDATOR_ENDPOINT: z.string().url('VALIDATOR_ENDPOINT must be a valid URL').optional(),
 
   // Feature Flags
   USE_COOKIES: z.string().optional().default('true'),
