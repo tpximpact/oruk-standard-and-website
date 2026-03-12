@@ -25,11 +25,11 @@ async function validateApiEndpoint(page: Page, apiUrl: string, expectedResult: '
 }
 
 test('validates the API endpoint URL for pass', async ({ page }) => {
-  const apiUrl = 'https://oruk-api-2a920f51d6bb.herokuapp.com/api/mock'
+  const apiUrl = `${process.env.API_ENDPOINT_URL}/api/mock`
   await validateApiEndpoint(page, apiUrl, 'Pass')
 })
 
 test('validates the API endpoint URL for fail', async ({ page }) => {
-  const apiUrl = 'https://oruk-api-2a920f51d6bb.herokuapp.com/api/mock/fail'
+  const apiUrl = `${process.env.API_ENDPOINT_URL}/api/mock/fail`
   await validateApiEndpoint(page, apiUrl, 'Fail')
 })

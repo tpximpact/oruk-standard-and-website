@@ -6,32 +6,37 @@ import { v4 as uuidv4 } from 'uuid'
 import styles from './ValidatorForm.module.css'
 import { Button } from '@/components/Button'
 import { useState, useRef, MouseEvent } from 'react'
+import { getMockApiEndpoint } from '@/utilities/mockApiEndpoint'
 
 const Heading = ({ title }: { title: string }) => <h2 className={styles.formHeading}>{title}</h2>
 
-const Samples = () => (
-  <div className={styles.samples}>
-    <Heading title='Sample reports' />
-    <p>For a quick preview of the results this tool reports, choose an example:</p>
-    <ol className={styles.samplesList}>
-      <li>
-        <Link href='/developers/validator/edcf9d03-47dd-4c46-833b-e9831d505c72?uri=https://oruk-api-2a920f51d6bb.herokuapp.com/api/mock'>
-          Pass
-        </Link>
-      </li>
-      <li>
-        <Link href='/developers/validator/edcf9d03-47dd-4c46-833b-e9831d505c72?uri=https://oruk-api-2a920f51d6bb.herokuapp.com/api/mock/warn'>
-          Pass (with warnings)
-        </Link>
-      </li>
-      <li>
-        <Link href='/developers/validator/edcf9d03-47dd-4c46-833b-e9831d505c72?uri=https://oruk-api-2a920f51d6bb.herokuapp.com/api/mock/fail'>
-          Fail
-        </Link>
-      </li>
-    </ol>
-  </div>
-)
+const Samples = () => {
+  const mockApiEndpoint = getMockApiEndpoint()
+
+  return (
+    <div className={styles.samples}>
+      <Heading title='Sample reports' />
+      <p>For a quick preview of the results this tool reports, choose an example:</p>
+      <ol className={styles.samplesList}>
+        <li>
+          <Link href={`/developers/validator?url=${encodeURIComponent(mockApiEndpoint)}`}>
+            Pass
+          </Link>
+        </li>
+        <li>
+          <Link href={`/developers/validator?url=${encodeURIComponent(`${mockApiEndpoint}/warn`)}`}>
+            Pass (with warnings)
+          </Link>
+        </li>
+        <li>
+          <Link href={`/developers/validator?url=${encodeURIComponent(`${mockApiEndpoint}/fail`)}`}>
+            Fail
+          </Link>
+        </li>
+      </ol>
+    </div>
+  )
+}
 
 interface ValidatorFormProps {
   title?: string

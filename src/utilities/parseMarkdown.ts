@@ -1,5 +1,6 @@
 import { marked } from 'marked'
 import matter from 'gray-matter'
+import { replaceMarkdownEnvPlaceholders } from './mockApiEndpoint'
 
 interface ParsedMarkdown {
   content: string
@@ -12,7 +13,7 @@ export const parseMarkdown = (fileContents: string): ParsedMarkdown | null => {
   const hasFrontmatter = Object.keys(parsed.data).length > 0
 
   if (hasContent || hasFrontmatter) {
-    const content = marked.parse(parsed.content) as string
+    const content = marked.parse(replaceMarkdownEnvPlaceholders(parsed.content)) as string
     const frontmatter = parsed.data
     return {
       content: content,
