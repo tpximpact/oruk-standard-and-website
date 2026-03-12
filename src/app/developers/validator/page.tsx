@@ -8,13 +8,14 @@ import ValidationResults from './_components/ValidationResults'
 import { getAllContentVersions } from '@/utilities/getAllContentVersions'
 
 interface PageProps {
-  searchParams: Promise<{ url?: string; t?: string }>
+  searchParams: Promise<{ url?: string; t?: string; schemaBearerToken?: string }>
 }
 
 export default async function Page({ searchParams }: PageProps) {
   const params = await searchParams
   const urlToValidate = params.url
   const timestamp = params.t
+  const schemaBearerToken = params.schemaBearerToken
 
   const apiData = getAllContentVersions({
     contentFolder: '/developers/api',
@@ -37,7 +38,7 @@ export default async function Page({ searchParams }: PageProps) {
             <Columns layout='42'>
               <div>
                 <Heading>Check feed</Heading>
-                <ValidatorForm />
+                <ValidatorForm initialSchemaBearerToken={schemaBearerToken} />
               </div>
               <div>
                 <Heading>Sample reports</Heading>
@@ -51,12 +52,16 @@ export default async function Page({ searchParams }: PageProps) {
                 <ValidationResults
                   key={`${urlToValidate}-${timestamp}`}
                   url={urlToValidate}
+                  schemaBearerToken={schemaBearerToken}
                   apiData={apiData}
                 />
               </div>
               <div style={{ marginBottom: '2rem' }}>
                 <Heading>Check feed</Heading>
-                <ValidatorForm initialUrl={urlToValidate} />
+                <ValidatorForm
+                  initialUrl={urlToValidate}
+                  initialSchemaBearerToken={schemaBearerToken}
+                />
               </div>
             </>
           )}
