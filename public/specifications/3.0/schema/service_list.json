@@ -1,7 +1,7 @@
 {
   "allOf": [
     {
-      "$ref": "http://localhost:3000/specifications/3.0/schema/service.json"
+      "$ref": "https://openreferraluk.org/specifications/3.0/schema/service.json"
     },
     {
       "properties": {

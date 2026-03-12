@@ -28,7 +28,7 @@
   ],
   "externalDocs": {
     "description": "Open Referral UK Schema Documentation",
-    "url": "http://localhost:3000/specifications/3.0/"
+    "url": "https://openreferraluk.org/specifications/3.0/"
   },
   "paths": {
     "/": {
@@ -46,7 +46,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "http://localhost:3000/specifications/3.0/schema/api_details.json"
+                  "$ref": "https://openreferraluk.org/specifications/3.0/schema/api_details.json"
                 }
               }
             }
@@ -74,7 +74,6 @@
             "$ref": "#/components/parameters/full_service"
           },
           {
-            "description": "Contains full nested organization information",
             "$ref": "#/components/parameters/full"
           },
           {
@@ -95,7 +94,7 @@
                 "schema": {
                   "allOf": [
                     {
-                      "$ref": "http://localhost:3000/specifications/3.0/schema/page.json"
+                      "$ref": "https://openreferraluk.org/specifications/3.0/schema/page.json"
                     },
                     {
                       "type": "object",
@@ -103,7 +102,7 @@
                         "contents": {
                           "type": "array",
                           "items": {
-                            "$ref": "http://localhost:3000/specifications/3.0/schema/organization_list.json"
+                            "$ref": "https://openreferraluk.org/specifications/3.0/schema/organization_list.json"
                           }
                         }
                       }
@@ -125,13 +124,7 @@
     "/organizations/{id}": {
       "parameters": [
         {
-          "in": "path",
-          "name": "id",
-          "required": true,
-          "description": "The id of the organization that the request is intended to retrieve.",
-          "schema": {
-            "type": "string"
-          }
+          "$ref": "#/components/parameters/organization_path_id"
         }
       ],
       "get": {
@@ -153,7 +146,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "http://localhost:3000/specifications/3.0/schema/organization.json"
+                  "$ref": "https://openreferraluk.org/specifications/3.0/schema/organization.json"
                 }
               }
             }
@@ -193,7 +186,6 @@
             "$ref": "#/components/parameters/modified_after"
           },
           {
-            "description": "true, false return fully nested service_at_location.",
             "$ref": "#/components/parameters/full"
           },
           {
@@ -220,7 +212,7 @@
                 "schema": {
                   "allOf": [
                     {
-                      "$ref": "http://localhost:3000/specifications/3.0/schema/page.json"
+                      "$ref": "https://openreferraluk.org/specifications/3.0/schema/page.json"
                     },
                     {
                       "type": "object",
@@ -228,7 +220,7 @@
                         "contents": {
                           "type": "array",
                           "items": {
-                            "$ref": "http://localhost:3000/specifications/3.0/schema/service_at_location_list.json"
+                            "$ref": "https://openreferraluk.org/specifications/3.0/schema/service_at_location_list.json"
                           }
                         }
                       }
@@ -250,13 +242,7 @@
     "/service_at_locations/{id}": {
       "parameters": [
         {
-          "in": "path",
-          "name": "id",
-          "required": true,
-          "description": "The id of the service that the request is intended to retrieve.",
-          "schema": {
-            "type": "string"
-          }
+          "$ref": "#/components/parameters/service_path_id"
         }
       ],
       "get": {
@@ -273,7 +259,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "http://localhost:3000/specifications/3.0/schema/service_at_location.json"
+                  "$ref": "https://openreferraluk.org/specifications/3.0/schema/service_at_location.json"
                 }
               }
             }
@@ -322,11 +308,9 @@
             "$ref": "#/components/parameters/modified_after"
           },
           {
-            "description": "Return array of just services with just 'id' and 'modified_date'.  When using this parameter aim to return all services within one page.",
             "$ref": "#/components/parameters/minimal"
           },
           {
-            "description": "true, false return fully nested service.",
             "$ref": "#/components/parameters/full"
           }
         ],
@@ -338,7 +322,7 @@
                 "schema": {
                   "allOf": [
                     {
-                      "$ref": "http://localhost:3000/specifications/3.0/schema/page.json"
+                      "$ref": "https://openreferraluk.org/specifications/3.0/schema/page.json"
                     },
                     {
                       "type": "object",
@@ -346,7 +330,7 @@
                         "contents": {
                           "type": "array",
                           "items": {
-                            "$ref": "http://localhost:3000/specifications/3.0/schema/service_list.json"
+                            "$ref": "https://openreferraluk.org/specifications/3.0/schema/service_list.json"
                           }
                         }
                       }
@@ -368,13 +352,7 @@
     "/services/{id}": {
       "parameters": [
         {
-          "in": "path",
-          "name": "id",
-          "required": true,
-          "description": "The id of the service that the request is intended to retrieve.",
-          "schema": {
-            "type": "string"
-          }
+          "$ref": "#/components/parameters/service_path_id"
         }
       ],
       "get": {
@@ -391,7 +369,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "http://localhost:3000/specifications/3.0/schema/service.json"
+                  "$ref": "https://openreferraluk.org/specifications/3.0/schema/service.json"
                 }
               }
             }
@@ -435,7 +413,7 @@
               "application/json": {
                 "allOf": [
                   {
-                    "$ref": "http://localhost:3000/specifications/3.0/schema/page.json"
+                    "$ref": "https://openreferraluk.org/specifications/3.0/schema/page.json"
                   },
                   {
                     "type": "object",
@@ -443,7 +421,7 @@
                       "contents": {
                         "type": "array",
                         "items": {
-                          "$ref": "http://localhost:3000/specifications/3.0/schema/taxonomy_list.json"
+                          "$ref": "https://openreferraluk.org/specifications/3.0/schema/taxonomy_list.json"
                         }
                       }
                     }
@@ -464,14 +442,7 @@
     "/taxonomies/{id}": {
       "parameters": [
         {
-          "in": "path",
-          "name": "id",
-          "required": true,
-          "description": "The id of the taxonomy that the request is intended to retrieve.",
-          "summary": "Does the taxonomy by id endpoint return the full information of a taxonomy in the correct schema",
-          "schema": {
-            "type": "string"
-          }
+          "$ref": "#/components/parameters/taxonomy_path_id"
         }
       ],
       "get": {
@@ -488,7 +459,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "http://localhost:3000/specifications/3.0/schema/taxonomy.json"
+                  "$ref": "https://openreferraluk.org/specifications/3.0/schema/taxonomy.json"
                 }
               }
             }
@@ -554,7 +525,7 @@
                 "schema": {
                   "allOf": [
                     {
-                      "$ref": "http://localhost:3000/specifications/3.0/schema/page.json"
+                      "$ref": "https://openreferraluk.org/specifications/3.0/schema/page.json"
                     },
                     {
                       "type": "object",
@@ -562,7 +533,7 @@
                         "contents": {
                           "type": "array",
                           "items": {
-                            "$ref": "http://localhost:3000/specifications/3.0/schema/taxonomy_term_list.json"
+                            "$ref": "https://openreferraluk.org/specifications/3.0/schema/taxonomy_term_list.json"
                           }
                         }
                       }
@@ -584,14 +555,7 @@
     "/taxonomy_terms/{id}": {
       "parameters": [
         {
-          "in": "path",
-          "name": "id",
-          "required": true,
-          "description": "The id of the taxonomy terms that the request is intended to retrieve.",
-          "summary": "Does the taxonomy term by id endpoint return the full information of a taxonomy term in the correct schema",
-          "schema": {
-            "type": "string"
-          }
+          "$ref": "#/components/parameters/taxonomy_term_path_id"
         }
       ],
       "get": {
@@ -608,7 +572,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "http://localhost:3000/specifications/3.0/schema/taxonomy_term.json"
+                  "$ref": "https://openreferraluk.org/specifications/3.0/schema/taxonomy_term.json"
                 }
               }
             }
@@ -654,6 +618,44 @@
           "type": "string"
         },
         "example": "mental health support"
+      },
+      "organization_path_id": {
+        "name": "id",
+        "in": "path",
+        "required": true,
+        "description": "The id of the organization that the request is intended to retrieve.",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "service_path_id": {
+        "name": "id",
+        "in": "path",
+        "required": true,
+        "description": "The id of the service that the request is intended to retrieve.",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "taxonomy_path_id": {
+        "name": "id",
+        "in": "path",
+        "required": true,
+        "description": "The id of the taxonomy that the request is intended to retrieve.",
+        "summary": "Does the taxonomy by id endpoint return the full information of a taxonomy in the correct schema",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "taxonomy_term_path_id": {
+        "name": "id",
+        "in": "path",
+        "required": true,
+        "description": "The id of the taxonomy terms that the request is intended to retrieve.",
+        "summary": "Does the taxonomy term by id endpoint return the full information of a taxonomy term in the correct schema",
+        "schema": {
+          "type": "string"
+        }
       },
       "page": {
         "name": "page",
@@ -771,7 +773,7 @@
         "required": false,
         "description": "Return results in the specified format. Default is `json`. Could be `ndjson` which should stream all the results without pagination.",
         "schema": {
-          "$ref": "http://localhost:3000/specifications/3.0/schema/enums.json#format",
+          "$ref": "https://openreferraluk.org/specifications/3.0/schema/enums.json#format",
           "default": "json"
         }
       }

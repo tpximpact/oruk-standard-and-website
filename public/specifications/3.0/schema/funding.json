@@ -13,13 +13,13 @@
     "id": {
       "title": "Identifier",
       "description": "The identifier for the funding. Each entry must have a unique identifier.",
-      "$ref": "http://localhost:3000/specifications/3.0/schema/definitions.json#uuid_id"
+      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#uuid_id"
     },
     "service_id": {
       "title": "Service Identifier",
       "description": "The identifier of the service in receipt of this funding.",
       "example": "ac148810-d857-441c-9679-408f346de14b",
-      "$ref": "http://localhost:3000/specifications/3.0/schema/definitions.json#uuid_reference"
+      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#uuid_reference"
     },
     "source": {
       "name": "source",

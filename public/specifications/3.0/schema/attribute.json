@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "http://localhost:3000/specifications/3.0/schema/attribute.json",
+  "$id": "https://openreferraluk.org/specifications/3.0/schema/attribute.json",
   "name": "attribute",
   "path": "attribute.csv",
   "description": "The other_attributes table creates a link between entities other than service and one or more classifications that describe the entity.",
@@ -15,19 +15,19 @@
     "id": {
       "description": "The identifier of the attribute entry. Each attribute entry should have a unique identifier.",
       "example": "ae58cc39-8b70-4ab1-8aea-786882e5ac8e",
-      "$ref": "http://localhost:3000/specifications/3.0/schema/definitions.json#uuid-id"
+      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#uuid-id"
     },
     "link_id": {
       "title": "Link Identifier",
       "description": "The identifier of the entity to which this taxonomy term applies.",
       "example": "f28dd44b-0c4d-479f-8e90-4c52219a8b3c",
-      "$ref": "http://localhost:3000/specifications/3.0/schema/definitions.json#uuid-reference"
+      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#uuid-reference"
     },
     "taxonomy_term_id": {
       "title": "Taxonomy Term Identifier",
       "description": "The identifier of this taxonomy term from the taxonomy table.",
       "example": "3f7b145d-84af-42d7-8fae-eaca714b02b2",
-      "$ref": "http://localhost:3000/specifications/3.0/schema/definitions.json#uuid-reference"
+      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#uuid-reference"
     },
     "link_type": {
       "type": "string",
@@ -36,7 +36,7 @@
       "example": "link_type"
     },
     "taxonomy_term": {
-      "$ref": "http://localhost:3000/specifications/3.0/schema/taxonomy_term.json"
+      "$ref": "https://openreferraluk.org/specifications/3.0/schema/taxonomy_term.json"
     }
   },
   "required": [

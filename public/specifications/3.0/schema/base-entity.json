@@ -1,21 +1,21 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "http://localhost:3000/specifications/3.0/schema/base-entity.json",
+  "$id": "https://openreferraluk.org/specifications/3.0/schema/base-entity.json",
   "title": "Base Entity",
   "description": "Common properties and structure for all entity schemas in HSDS-UK",
   "type": "object",
   "properties": {
     "id": {
       "description": "The unique identifier for this entity. Each entity must have a unique identifier.",
-      "$ref": "http://localhost:3000/specifications/3.0/schema/definitions.json#uuid-id"
+      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#uuid-id"
     },
     "name": {
       "description": "The name of the entity",
-      "$ref": "http://localhost:3000/specifications/3.0/schema/definitions.json#name-field"
+      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#name-field"
     },
     "description": {
       "description": "A free text description of this entity",
-      "$ref": "http://localhost:3000/specifications/3.0/schema/definitions.json#description-field"
+      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#description-field"
     }
   },
   "required": [

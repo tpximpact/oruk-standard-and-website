@@ -13,13 +13,13 @@
     "id": {
       "title": "Identifier",
       "description": "The identifier for the cost option. Each entry must have a unique identifier",
-      "$ref": "http://localhost:3000/specifications/3.0/schema/definitions.json#uuid_id"
+      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#uuid_id"
     },
     "service_id": {
       "title": "Service Identifier",
       "description": "The identifier of the services for which the entry describes the cost.",
       "example": "ac148810-d857-441c-9679-408f346de14b",
-      "$ref": "http://localhost:3000/specifications/3.0/schema/definitions.json#uuid_reference"
+      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#uuid_reference"
     },
     "valid_from": {
       "name": "valid_from",
@@ -27,7 +27,7 @@
       "description": "The date when this price is valid from.",
       "example": "2020-01-01",
       "datapackage_type": "date",
-      "$ref": "http://localhost:3000/specifications/3.0/schema/definitions.json#date-field"
+      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#date-field"
     },
     "valid_to": {
       "name": "valid_to",
@@ -35,7 +35,7 @@
       "description": "The date when this price is valid to.",
       "example": "2022-12-31",
       "datapackage_type": "date",
-      "$ref": "http://localhost:3000/specifications/3.0/schema/definitions.json#date-field"
+      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#date-field"
     },
     "option": {
       "name": "option",

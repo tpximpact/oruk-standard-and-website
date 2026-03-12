@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "http://localhost:3000/specifications/3.0/schema/contact.json",
+  "$id": "https://openreferraluk.org/specifications/3.0/schema/contact.json",
   "name": "contact",
   "path": "contacts.csv",
   "description": "The details of the named contacts for services and organizations.",
@@ -12,7 +12,7 @@
   },
   "allOf": [
     {
-      "$ref": "http://localhost:3000/specifications/3.0/schema/base-entity.json"
+      "$ref": "https://openreferraluk.org/specifications/3.0/schema/base-entity.json"
     },
     {
       "type": "object",
@@ -20,7 +20,7 @@
         "service_id": {
           "description": "The identifier of the service for which this is a contact.",
           "example": "ac148810-d857-441c-9679-408f346de14b",
-          "$ref": "http://localhost:3000/specifications/3.0/schema/definitions.json#uuid-reference"
+          "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#uuid-reference"
         },
         "title": {
           "type": "string",
@@ -33,7 +33,7 @@
           "title": "Attributes",
           "description": "A link between a service and one or more classifications that describe the nature of the service provided.",
           "items": {
-            "$ref": "http://localhost:3000/specifications/3.0/schema/attribute.json"
+            "$ref": "https://openreferraluk.org/specifications/3.0/schema/attribute.json"
           }
         }
       }

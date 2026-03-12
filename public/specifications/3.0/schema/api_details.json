@@ -11,12 +11,12 @@
     "profile": {
       "description": "URL of the information on the HSDS profile of this API.",
       "example": "https://github.com/OpenReferralUK/uk-profile/blob/main/docs/index.md",
-      "$ref": "http://localhost:3000/specifications/3.0/schema/definitions.json#uri-field"
+      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#uri-field"
     },
     "openapi_url": {
       "description": "URL of the openapi JSON file which defines this API.",
       "example": "https://docs.openreferraluk.org/en/latest/openapi30.json",
-      "$ref": "http://localhost:3000/specifications/3.0/schema/definitions.json#uri-field"
+      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#uri-field"
     }
   },
   "required": [
