@@ -52,7 +52,7 @@ Three of the nine endpoints are most important. These are:
 - GET /services - giving a paginated list of services
 - GET /services/{id} - giving full details of a single service
 
-[The tool to check compliance](/developers/validator) will consider a feed to “pass” if these three endpoints comply. It will simply “warn” if other endpoints don’t exist or comply. The “Sample reports” on that page show what complies. Take a look at the text at the bottom of the samples (e.g. for [Pass](/developers/validator/edcf9d03-47dd-4c46-833b-e9831d505c72?uri=https://oruk-api-2a920f51d6bb.herokuapp.com/api/mock)) for more details.
+[The tool to check compliance](/developers/validator) will consider a feed to “pass” if these three endpoints comply. It will simply “warn” if other endpoints don’t exist or comply. The “Sample reports” on that page show what complies. Take a look at the text at the bottom of the samples (e.g. for [Pass](/developers/validator/edcf9d03-47dd-4c46-833b-e9831d505c72?uri={{API_ENDPOINT_URL}}/api/mock)) for more details.
 
 ## 3. Going beyond basic compliance
 

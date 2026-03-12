@@ -246,6 +246,7 @@ Copy `.env.example` to `.env.local` and configure the following:
 **External Service Endpoints:**
 
 - `OPENAPI_VALIDATOR_ENDPOINT` - OpenAPI validator service endpoint
+- `API_ENDPOINT_URL` - Base URL used for validator and sample report links
 
 **GitHub Integration (for service registration):**
 
