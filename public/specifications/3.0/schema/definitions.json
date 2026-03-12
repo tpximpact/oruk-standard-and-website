@@ -71,7 +71,7 @@
       "title": "Identifier",
       "type": "string",
       "format": "uuid",
-      "constraints": {
+      "x-constraints": {
         "unique": true
       }
     },

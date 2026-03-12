@@ -1,9 +1,9 @@
 {
-  "name": "taxonomy_term",
-  "path": "taxonomy_terms.csv",
+  "x-name": "taxonomy_term",
+  "x-path": "taxonomy_terms.csv",
   "description": "Each service can be categorized according to one or more taxonomy terms. The taxonomy_term object contains a list of taxonomy terms, their names, and, for hierarchical taxonomies, their structure.",
   "title": "Taxonomy Term",
-  "datapackage_metadata": {
+  "x-datapackage_metadata": {
     "format": "csv",
     "mediatype": "text/csv",
     "profile": "tabular-data-resource",
@@ -20,36 +20,36 @@
           "title": "Parent Identifier",
           "description": "If this is a child term in a hierarchical taxonomy, give the identifier of the parent category. For top-level categories, this is not required.",
           "example": "0bc248fa-dc27-4650-9ba4-8f1a24ef16a2",
-          "core": "Y",
-          "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#uuid_reference"
+          "x-core": "Y",
+          "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#/$defs/uuid_reference"
         },
         "taxonomy": {
-          "name": "taxonomy",
+          "x-name": "taxonomy",
           "type": "string",
           "title": "Taxonomy",
           "description": "If this is an established taxonomy, a free text description of which taxonomy is in use. If possible, provide a URI.",
           "example": "taxonomy",
-          "core": "Y"
+          "x-core": "Y"
         },
         "taxonomy_id": {
           "title": "Taxonomy Identifier",
           "description": "The identifier of the taxonomy containing the term.",
           "example": "07ff6aee-a219-438c-b694-d2fcb6c5373b",
-          "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#uuid_reference"
+          "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#/$defs/uuid_reference"
         },
         "term_uri": {
           "title": "Term URI",
           "description": "URI of the term.",
           "example": "http://example.com",
-          "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#uri"
+          "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#/$defs/uri"
         },
         "term": {
-          "name": "term",
+          "x-name": "term",
           "type": "string",
           "title": "Term",
           "description": "The taxonomy term itself.",
           "example": "name",
-          "core": "Y"
+          "x-core": "Y"
         }
       }
     }

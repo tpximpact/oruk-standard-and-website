@@ -1,5 +1,5 @@
 {
-  "name": "api_details",
+  "x-name": "api_details",
   "description": "Information about this API and its relationship with HSDS",
   "type": "object",
   "properties": {
@@ -11,12 +11,12 @@
     "profile": {
       "description": "URL of the information on the HSDS profile of this API.",
       "example": "https://github.com/OpenReferralUK/uk-profile/blob/main/docs/index.md",
-      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#uri-field"
+      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#/$defs/uri"
     },
     "openapi_url": {
       "description": "URL of the openapi JSON file which defines this API.",
       "example": "https://docs.openreferraluk.org/en/latest/openapi30.json",
-      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#uri-field"
+      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#/$defs/uri"
     }
   },
   "required": [

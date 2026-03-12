@@ -1,10 +1,10 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://openreferraluk.org/specifications/3.0/schema/language.json",
-  "name": "language",
-  "path": "languages.csv",
+  "x-name": "language",
+  "x-path": "languages.csv",
   "description": "The languages that are spoken at locations or services. This does not include languages which can only be used with interpretation.",
-  "datapackage_metadata": {
+  "x-datapackage_metadata": {
     "format": "csv",
     "mediatype": "text/csv",
     "profile": "tabular-data-resource",
@@ -15,18 +15,18 @@
     "id": {
       "description": "The identifier for the language. Each entry must have a unique identifier.",
       "example": "2989d3ed-c547-48f8-8f9d-432d81c7892e",
-      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#uuid-id"
+      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#/$defs/uuid_id"
     },
     "service_id": {
       "description": "The identifier of the service for which the entry describes the languages in which services are delivered.",
       "example": "ac148810-d857-441c-9679-408f346de14b",
-      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#uuid-reference"
+      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#/$defs/uuid_reference"
     },
     "phone_id": {
       "title": "Phone Identifier",
       "description": "The identifier of the phone for which the entry describes the languages in which services delivered.",
       "example": "1554f2e2-a373-45db-a3fa-9fc48a61c15e",
-      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#uuid-reference"
+      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#/$defs/uuid_reference"
     }
   },
   "required": [

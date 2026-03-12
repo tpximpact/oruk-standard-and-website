@@ -1,10 +1,10 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://openreferraluk.org/specifications/3.0/schema/service.json",
-  "name": "service",
-  "path": "services.csv",
+  "x-name": "service",
+  "x-path": "services.csv",
   "description": "The details of the services provided by organizations to a range of different groups.",
-  "datapackage_metadata": {
+  "x-datapackage_metadata": {
     "format": "csv",
     "mediatype": "text/csv",
     "profile": "tabular-data-resource",
@@ -20,21 +20,21 @@
         "organization_id": {
           "description": "The identifier of the organization that provides this service.",
           "example": "d9d5e0f5-d3ce-4f73-9a2f-4dd0ecc6c610",
-          "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#uuid-reference"
+          "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#/$defs/uuid_reference"
         },
         "url": {
           "description": "URL of the service",
           "example": "http://example.com/counselling",
-          "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#url-field"
+          "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#/$defs/url"
         },
         "email": {
           "description": "An email address which can be used to contact the service provider.",
           "example": "email@example.com",
-          "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#email-field"
+          "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#/$defs/email"
         },
         "status": {
           "example": "active",
-          "$ref": "https://openreferraluk.org/specifications/3.0/schema/enums.json#service-status"
+          "$ref": "https://openreferraluk.org/specifications/3.0/schema/enums.json#/$defs/service_status"
         },
         "fees": {
           "type": "string",
@@ -52,19 +52,19 @@
           "title": "Minimum Age",
           "description": "The minimum age of a person required to meet this eligibility requirement.",
           "example": 12,
-          "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#minimum-age-field"
+          "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#/$defs/minimum_age"
         },
         "maximum_age": {
           "title": "Maximum Age",
           "description": "The maximum age of a person required to meet this eligibility requirement.",
           "example": 100,
-          "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#maximum-age-field"
+          "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#/$defs/maximum_age"
         },
         "assured_date": {
           "title": "Assured Date",
           "description": "The date that the information about the service was last checked.",
           "example": "2005-01-01",
-          "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#date-field"
+          "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#/$defs/date_string"
         },
         "assurer_email": {
           "type": "string",
@@ -83,7 +83,7 @@
           "title": "Last Modified",
           "description": "The datetime when the service, or any related information about the service, has changed. Should have millisecond accuracy.",
           "example": "2023-03-15T10:30:45.123Z",
-          "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#datetime-field"
+          "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#/$defs/datetime_string"
         },
         "schedules": {
           "type": "array",
@@ -160,7 +160,7 @@
     "name",
     "status"
   ],
-  "tabular_required": [
+  "x-tabular_required": [
     "organization_id"
   ]
 }

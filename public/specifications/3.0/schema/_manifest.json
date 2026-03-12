@@ -63,7 +63,7 @@
       },
       {
         "file": "page.json",
-        "name": "page",
+        "x-name": "page",
         "category": "infrastructure",
         "description": "Pagination metadata for list responses.",
         "purpose": "Defines pagination structure across all list endpoints"
@@ -73,7 +73,7 @@
       {
         "order": 1,
         "file": "organization.json",
-        "name": "organization",
+        "x-name": "organization",
         "csvPath": "organizations.csv",
         "pattern": "base-entity.json",
         "description": "The details about each organization delivering services. Each service should be linked to the organization responsible for its delivery. One organization may deliver many services.",
@@ -89,7 +89,7 @@
       {
         "order": 3,
         "file": "service.json",
-        "name": "service",
+        "x-name": "service",
         "csvPath": "services.csv",
         "pattern": "base-entity.json",
         "description": "The details of the services provided by organizations to a range of different groups.",
@@ -110,7 +110,7 @@
       {
         "order": 4,
         "file": "attribute.json",
-        "name": "attribute",
+        "x-name": "attribute",
         "csvPath": "attribute.csv",
         "description": "The other_attributes table creates a link between entities other than service and one or more classifications that describe the entity.",
         "relatedEntities": [
@@ -120,7 +120,7 @@
       {
         "order": 5,
         "file": "service_at_location.json",
-        "name": "service_at_location",
+        "x-name": "service_at_location",
         "csvPath": "service_at_location.csv",
         "description": "A link between a service and a specific location.",
         "relatedEntities": [
@@ -133,7 +133,7 @@
       {
         "order": 6,
         "file": "location.json",
-        "name": "location",
+        "x-name": "location",
         "csvPath": "locations.csv",
         "pattern": "base-entity.json",
         "description": "The locations where organizations operate. Locations may be virtual, and one organization may have many locations.",
@@ -151,7 +151,7 @@
       {
         "order": 7,
         "file": "phone.json",
-        "name": "phone",
+        "x-name": "phone",
         "csvPath": "phones.csv",
         "description": "The details of the telephone numbers used to contact organizations, services, and locations.",
         "relatedEntities": [
@@ -165,7 +165,7 @@
       {
         "order": 8,
         "file": "contact.json",
-        "name": "contact",
+        "x-name": "contact",
         "csvPath": "contacts.csv",
         "pattern": "base-entity.json",
         "description": "The details of the named contacts for services and organizations.",
@@ -180,7 +180,7 @@
       {
         "order": 9,
         "file": "address.json",
-        "name": "address",
+        "x-name": "address",
         "csvPath": "address.csv",
         "description": "The addresses table contains the physical addresses for locations",
         "relatedEntities": [
@@ -190,7 +190,7 @@
       {
         "order": 10,
         "file": "schedule.json",
-        "name": "schedule",
+        "x-name": "schedule",
         "csvPath": "schedule.csv",
         "description": "The details of when a service or location is open. Entries are RFC 5545 RRULES.",
         "relatedEntities": [
@@ -201,7 +201,7 @@
       {
         "order": 11,
         "file": "funding.json",
-        "name": "funding",
+        "x-name": "funding",
         "csvPath": "funding.csv",
         "description": "The sources of funding for a service or organization.",
         "relatedEntities": [
@@ -212,7 +212,7 @@
       {
         "order": 12,
         "file": "service_area.json",
-        "name": "service_area",
+        "x-name": "service_area",
         "csvPath": "service_areas.csv",
         "description": "The details of the geographic area for which a service is available.",
         "relatedEntities": [
@@ -222,7 +222,7 @@
       {
         "order": 14,
         "file": "language.json",
-        "name": "language",
+        "x-name": "language",
         "csvPath": "languages.csv",
         "description": "The languages that are spoken at locations or services. This does not include languages which can only be used with interpretation.",
         "relatedEntities": [
@@ -233,7 +233,7 @@
       {
         "order": 15,
         "file": "accessibility.json",
-        "name": "accessibility",
+        "x-name": "accessibility",
         "csvPath": "accessibility.csv",
         "description": "The details of the arrangements for access to locations for people who have disabilities.",
         "relatedEntities": [
@@ -243,7 +243,7 @@
       {
         "order": 16,
         "file": "taxonomy_term.json",
-        "name": "taxonomy_term",
+        "x-name": "taxonomy_term",
         "csvPath": "taxonomy_terms.csv",
         "pattern": "base-entity.json",
         "description": "Each service can be categorized according to one or more taxonomy terms. The taxonomy_term object contains a list of taxonomy terms, their names, and, for hierarchical taxonomies, their structure.",
@@ -256,7 +256,7 @@
       {
         "order": 19,
         "file": "cost_option.json",
-        "name": "cost_option",
+        "x-name": "cost_option",
         "csvPath": "cost_options.csv",
         "description": "The costs of a service at certain points in time. This is an LGA Extension. This object provides a structured version of the text information contained in the 'fees' field of the 'service' object.",
         "relatedEntities": [
@@ -267,7 +267,7 @@
       {
         "order": 20,
         "file": "organization_identifier.json",
-        "name": "organization_identifier",
+        "x-name": "organization_identifier",
         "csvPath": "organization_identifiers.csv",
         "description": "The details of the third party identifiers for organizations, such as: company registration number, charity number, tax registration number.",
         "relatedEntities": [
@@ -277,7 +277,7 @@
       {
         "order": 21,
         "file": "taxonomy.json",
-        "name": "taxonomy",
+        "x-name": "taxonomy",
         "csvPath": "taxonomies.csv",
         "pattern": "base-entity.json",
         "description": "The taxonomies from which taxonomy terms are taken.",
@@ -289,7 +289,7 @@
     "lists": [
       {
         "file": "organization_list.json",
-        "name": "organization_list",
+        "x-name": "organization_list",
         "baseEntity": "organization",
         "description": "Flattened organization response for list endpoints. Excludes nested arrays.",
         "excludeProperties": [
@@ -299,7 +299,7 @@
       },
       {
         "file": "service_list.json",
-        "name": "service_list",
+        "x-name": "service_list",
         "baseEntity": "service",
         "description": "Flattened service response for list endpoints. Excludes nested arrays.",
         "excludeProperties": [
@@ -315,19 +315,19 @@
       },
       {
         "file": "service_at_location_list.json",
-        "name": "service_at_location_list",
+        "x-name": "service_at_location_list",
         "baseEntity": "service_at_location",
         "description": "Service at location response for list endpoints."
       },
       {
         "file": "taxonomy_list.json",
-        "name": "taxonomy_list",
+        "x-name": "taxonomy_list",
         "baseEntity": "taxonomy",
         "description": "Taxonomy results for list endpoints."
       },
       {
         "file": "taxonomy_term_list.json",
-        "name": "taxonomy_term_list",
+        "x-name": "taxonomy_term_list",
         "baseEntity": "taxonomy_term",
         "description": "Taxonomy term results for list endpoints."
       }

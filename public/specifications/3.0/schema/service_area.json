@@ -1,8 +1,8 @@
 {
-  "name": "service_area",
-  "path": "service_areas.csv",
+  "x-name": "service_area",
+  "x-path": "service_areas.csv",
   "description": "The details of the geographic area for which a service is available.",
-  "datapackage_metadata": {
+  "x-datapackage_metadata": {
     "format": "csv",
     "mediatype": "text/csv",
     "profile": "tabular-data-resource",
@@ -14,31 +14,31 @@
       "title": "Identifier",
       "description": "The identifier for the service area. Each service area must have a unique identifier.",
       "example": "381c64f1-a724-4884-9c21-ac96c21cca3e",
-      "core": "Y",
-      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#uuid-id"
+      "x-core": "Y",
+      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#/$defs/uuid_id"
     },
     "service_id": {
       "title": "Service Identifier",
       "description": "The identifier of the service for which this entry describes the service area",
       "example": "ac148810-d857-441c-9679-408f346de14b",
-      "core": "Y",
-      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#uuid-reference"
+      "x-core": "Y",
+      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#/$defs/uuid_reference"
     },
     "name": {
       "description": "A free text geographic area where a service is available.",
       "example": "The service is available to all residents of the MyCity area. We provide the service in our offices or via video conferencing to any who can provide evidence of their residency.",
-      "core": "Y",
-      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#name-field"
+      "x-core": "Y",
+      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#/$defs/name"
     },
     "extent": {
-      "name": "extent",
+      "x-name": "extent",
       "type": "string",
       "title": "Extent",
       "description": "A definition of the polygon defining the area.",
       "example": "extent"
     },
     "extent_type": {
-      "name": "extent_type",
+      "x-name": "extent_type",
       "type": "string",
       "title": "Extent Type",
       "description": "The format of the extent field  populated from an enum of  \"geojson\", \"topojson\",  \"kml\",and (for legacy systems or early state during transformation) \"text\".",
@@ -48,15 +48,15 @@
       "title": "URI",
       "description": "A URI which acts as a persistent identifier to identify an area.",
       "example": "http://example.com",
-      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#uri-field"
+      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#/$defs/uri"
     },
     "service_area": {
-      "name": "service_area",
+      "x-name": "service_area",
       "type": "string",
       "title": "Service Area",
       "description": "A free text geographic area where a service is available.",
       "example": "The service is available to all residents of the MyCity area. We provide the service in our offices or via video conferencing to any who can provide evidence of their residency.",
-      "core": "Y"
+      "x-core": "Y"
     }
   },
   "required": [

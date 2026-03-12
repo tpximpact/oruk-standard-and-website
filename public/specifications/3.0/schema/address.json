@@ -1,10 +1,10 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://openreferraluk.org/specifications/3.0/schema/address.json",
-  "name": "address",
-  "path": "address.csv",
+  "x-name": "address",
+  "x-path": "address.csv",
   "description": "The addresses table contains the physical addresses for locations",
-  "datapackage_metadata": {
+  "x-datapackage_metadata": {
     "format": "csv",
     "mediatype": "text/csv",
     "profile": "tabular-data-resource",
@@ -15,12 +15,12 @@
     "id": {
       "description": "The identifier of the postal address. Each postal address must have a unique identifier.",
       "example": "74706e55-df26-4b84-80fe-ecc30b5befb4",
-      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#uuid-id"
+      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#/$defs/uuid_id"
     },
     "location_id": {
       "description": "The identifier of the location for this postal address.",
       "example": "3a19ff88-4620-4d17-9830-ac1d859eb5d5",
-      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#uuid-reference"
+      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#/$defs/uuid_reference"
     },
     "attention": {
       "type": "string",
@@ -65,7 +65,7 @@
       "example": "US"
     },
     "address_type": {
-      "$ref": "https://openreferraluk.org/specifications/3.0/schema/enums.json#location-type"
+      "$ref": "https://openreferraluk.org/specifications/3.0/schema/enums.json#/$defs/location_type"
     },
     "attributes": {
       "type": "array",

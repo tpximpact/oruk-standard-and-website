@@ -1,8 +1,8 @@
 {
-  "name": "funding",
-  "path": "funding.csv",
+  "x-name": "funding",
+  "x-path": "funding.csv",
   "description": "The sources of funding for a service or organization.",
-  "datapackage_metadata": {
+  "x-datapackage_metadata": {
     "format": "csv",
     "mediatype": "text/csv",
     "profile": "tabular-data-resource",
@@ -13,16 +13,16 @@
     "id": {
       "title": "Identifier",
       "description": "The identifier for the funding. Each entry must have a unique identifier.",
-      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#uuid_id"
+      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#/$defs/uuid_id"
     },
     "service_id": {
       "title": "Service Identifier",
       "description": "The identifier of the service in receipt of this funding.",
       "example": "ac148810-d857-441c-9679-408f346de14b",
-      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#uuid_reference"
+      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#/$defs/uuid_reference"
     },
     "source": {
-      "name": "source",
+      "x-name": "source",
       "type": "string",
       "title": "Source",
       "description": "A free text description of the source of funds for this organization or service.",

@@ -1,8 +1,8 @@
 {
-  "name": "cost_option",
-  "path": "cost_options.csv",
+  "x-name": "cost_option",
+  "x-path": "cost_options.csv",
   "description": "The costs of a service at certain points in time. This is an LGA Extension. This object provides a structured version of the text information contained in the 'fees' field of the 'service' object.",
-  "datapackage_metadata": {
+  "x-datapackage_metadata": {
     "format": "csv",
     "mediatype": "text/csv",
     "profile": "tabular-data-resource",
@@ -13,46 +13,46 @@
     "id": {
       "title": "Identifier",
       "description": "The identifier for the cost option. Each entry must have a unique identifier",
-      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#uuid_id"
+      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#/$defs/uuid_id"
     },
     "service_id": {
       "title": "Service Identifier",
       "description": "The identifier of the services for which the entry describes the cost.",
       "example": "ac148810-d857-441c-9679-408f346de14b",
-      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#uuid_reference"
+      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#/$defs/uuid_reference"
     },
     "valid_from": {
-      "name": "valid_from",
+      "x-name": "valid_from",
       "title": "Valid From",
       "description": "The date when this price is valid from.",
       "example": "2020-01-01",
-      "datapackage_type": "date",
-      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#date-field"
+      "x-datapackage_type": "date",
+      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#/$defs/date_string"
     },
     "valid_to": {
-      "name": "valid_to",
+      "x-name": "valid_to",
       "title": "Valid To",
       "description": "The date when this price is valid to.",
       "example": "2022-12-31",
-      "datapackage_type": "date",
-      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#date-field"
+      "x-datapackage_type": "date",
+      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#/$defs/date_string"
     },
     "option": {
-      "name": "option",
+      "x-name": "option",
       "type": "string",
       "title": "Option",
       "description": "Conditions associated with the cost option.",
       "example": "Under 18s and Over 60s"
     },
     "amount": {
-      "name": "amount",
+      "x-name": "amount",
       "type": "number",
       "title": "Amount",
       "description": "The cost of the option, expressed as an amount.",
-      "example": "35"
+      "example": 35
     },
     "amount_description": {
-      "name": "amount_description",
+      "x-name": "amount_description",
       "type": "string",
       "title": "Amount Description",
       "description": "Specific details qualifying the cost amount.",
@@ -62,7 +62,7 @@
   "required": [
     "id"
   ],
-  "tabular_required": [
+  "x-tabular_required": [
     "service_id"
   ]
 }

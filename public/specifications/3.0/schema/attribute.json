@@ -1,10 +1,10 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://openreferraluk.org/specifications/3.0/schema/attribute.json",
-  "name": "attribute",
-  "path": "attribute.csv",
+  "x-name": "attribute",
+  "x-path": "attribute.csv",
   "description": "The other_attributes table creates a link between entities other than service and one or more classifications that describe the entity.",
-  "datapackage_metadata": {
+  "x-datapackage_metadata": {
     "format": "csv",
     "mediatype": "text/csv",
     "profile": "tabular-data-resource",
@@ -15,19 +15,19 @@
     "id": {
       "description": "The identifier of the attribute entry. Each attribute entry should have a unique identifier.",
       "example": "ae58cc39-8b70-4ab1-8aea-786882e5ac8e",
-      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#uuid-id"
+      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#/$defs/uuid_id"
     },
     "link_id": {
       "title": "Link Identifier",
       "description": "The identifier of the entity to which this taxonomy term applies.",
       "example": "f28dd44b-0c4d-479f-8e90-4c52219a8b3c",
-      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#uuid-reference"
+      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#/$defs/uuid_reference"
     },
     "taxonomy_term_id": {
       "title": "Taxonomy Term Identifier",
       "description": "The identifier of this taxonomy term from the taxonomy table.",
       "example": "3f7b145d-84af-42d7-8fae-eaca714b02b2",
-      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#uuid-reference"
+      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#/$defs/uuid_reference"
     },
     "link_type": {
       "type": "string",
@@ -42,7 +42,7 @@
   "required": [
     "id"
   ],
-  "tabular_required": [
+  "x-tabular_required": [
     "link_id",
     "taxonomy_term_id",
     "link_entity"

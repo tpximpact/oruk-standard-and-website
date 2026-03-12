@@ -1,5 +1,5 @@
 {
-  "name": "page",
+  "x-name": "page",
   "description": "Pagination metadata for list responses.",
   "type": "object",
   "properties": {

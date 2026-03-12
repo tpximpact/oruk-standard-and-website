@@ -1,8 +1,8 @@
 {
-  "name": "service_at_location",
-  "path": "service_at_location.csv",
+  "x-name": "service_at_location",
+  "x-path": "service_at_location.csv",
   "description": "A link between a service and a specific location.",
-  "datapackage_metadata": {
+  "x-datapackage_metadata": {
     "format": "csv",
     "mediatype": "text/csv",
     "profile": "tabular-data-resource",
@@ -14,22 +14,22 @@
       "title": "Identifier",
       "description": "The identifier of the service at location entry. Each entry must have a unique identifier.",
       "example": "e94c9f38-1e8f-4564-91d4-d53501ab1765",
-      "core": "Y",
-      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#uuid_id"
+      "x-core": "Y",
+      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#/$defs/uuid_id"
     },
     "service_id": {
       "title": "Service Identifier",
       "description": "The identifier of the service at a given location.",
       "example": "ac148810-d857-441c-9679-408f346de14b",
-      "core": "Y",
-      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#uuid_reference"
+      "x-core": "Y",
+      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#/$defs/uuid_reference"
     },
     "location_id": {
       "title": "Location Identifier",
       "description": "The identifier of the location where this service operates.",
       "example": "3a19ff88-4620-4d17-9830-ac1d859eb5d5",
-      "core": "Y",
-      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#uuid_reference"
+      "x-core": "Y",
+      "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#/$defs/uuid_reference"
     },
     "location": {
       "$ref": "https://openreferraluk.org/specifications/3.0/schema/location.json"
@@ -38,7 +38,7 @@
   "required": [
     "id"
   ],
-  "tabular_required": [
+  "x-tabular_required": [
     "service_id",
     "location_id"
   ]

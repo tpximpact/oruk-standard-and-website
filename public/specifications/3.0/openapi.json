@@ -1,5 +1,5 @@
 {
-  "openapi": "3.0.0",
+  "openapi": "3.1.0",
   "info": {
     "title": "Open Referral UK Profile",
     "version": "HSDS-UK-3.0",
@@ -33,7 +33,6 @@
   "paths": {
     "/": {
       "get": {
-        "name": "API meta info - API & schema validation",
         "description": "Retrieve information about this API and its relationship with HSDS.",
         "summary": "Does the base endpoint return meta information about the API, and does it adhere to the schema",
         "operationId": "getAPIMetaInformation",
@@ -51,6 +50,9 @@
               }
             }
           },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
           "500": {
             "$ref": "#/components/responses/InternalServerError"
           }
@@ -62,7 +64,6 @@
         "tags": [
           "optional"
         ],
-        "name": "Organizations list - API & schema validation",
         "description": "Paginated list of basic Organization information.",
         "summary": "Paginated list of basic Organization information",
         "operationId": "getPaginatedListOfOrganizations",
@@ -131,7 +132,6 @@
         "tags": [
           "optional"
         ],
-        "name": "Organization by id - API & schema validation",
         "description": "Fully nested organization with service array that contains simple information which could only contain the service.id.",
         "summary": "Fully nested organization with service array that contains simple information which could only contain the service.id.",
         "operationId": "getOrganizationById",
@@ -162,7 +162,6 @@
     },
     "/service_at_locations": {
       "get": {
-        "name": "Service at locations list - API & schema validation",
         "description": "Retrieve paginated listings of service_at_location that only have one-to-one fields in them.",
         "summary": "Does the service at locations list endpoint return a paginated list of service at locations in the correct schema",
         "operationId": "getPaginatedListOfServiceAtLocation",
@@ -246,7 +245,6 @@
         }
       ],
       "get": {
-        "name": "Service at location by id - API & schema validation",
         "description": "Retrieve fully nested service_at_location with all related data with specified id.",
         "summary": "Does the service at location by id endpoint return a fully nested service at location in the correct schema",
         "operationId": "getServiceAtLocationWithNestedDataById",
@@ -275,7 +273,6 @@
     },
     "/services": {
       "get": {
-        "name": "Services list - API & schema validation",
         "description": "Retrieves paginated listings of services that only have one-to-one fields in them.",
         "summary": "Does the services list endpoint return a paginated list of services in the correct schema",
         "operationId": "getPaginatedListOfServices",
@@ -356,7 +353,6 @@
         }
       ],
       "get": {
-        "name": "Service by id - API & schema validation",
         "description": "Retrieve fully nested service with all related data with id.",
         "summary": "Does the service by id endpoint return a fully nested service in the correct schema",
         "operationId": "getFullyNestedServiceById",
@@ -385,7 +381,6 @@
     },
     "/taxonomies": {
       "get": {
-        "name": "Taxonomies list - API & schema validation",
         "description": "Paginated listing of taxonomies.",
         "summary": "Does the taxonomies list endpoint return a paginated list of taxonomies in the correct schema",
         "operationId": "getPaginatedListOfTaxonomies",
@@ -411,22 +406,24 @@
             "description": "Paginated listing of taxonomies.",
             "content": {
               "application/json": {
-                "allOf": [
-                  {
-                    "$ref": "https://openreferraluk.org/specifications/3.0/schema/page.json"
-                  },
-                  {
-                    "type": "object",
-                    "properties": {
-                      "contents": {
-                        "type": "array",
-                        "items": {
-                          "$ref": "https://openreferraluk.org/specifications/3.0/schema/taxonomy_list.json"
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "https://openreferraluk.org/specifications/3.0/schema/page.json"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "contents": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "https://openreferraluk.org/specifications/3.0/schema/taxonomy_list.json"
+                          }
                         }
                       }
                     }
-                  }
-                ]
+                  ]
+                }
               }
             }
           },
@@ -446,7 +443,6 @@
         }
       ],
       "get": {
-        "name": "Taxonomy by id - API & schema validation",
         "description": "Full information on taxonomy.",
         "summary": "Retrieves full information on a taxonomy by {id}.",
         "operationId": "getTaxonomyById",
@@ -475,7 +471,6 @@
     },
     "/taxonomy_terms": {
       "get": {
-        "name": "Taxonomy terms list - API & schema validation",
         "description": "Paginated listing of taxonomy terms",
         "summary": "Does the taxonomy terms list endpoint return a paginated list of taxonomy terms in the correct schema",
         "operationId": "getPaginatedListOfTaxonomyTerms",
@@ -559,7 +554,6 @@
         }
       ],
       "get": {
-        "name": "Taxonomy term by id - API & schema validation",
         "description": "Full information on a taxonomy term.",
         "summary": "Full information on a taxonomy term.",
         "operationId": "getTaxonomyTermById",
@@ -642,7 +636,6 @@
         "in": "path",
         "required": true,
         "description": "The id of the taxonomy that the request is intended to retrieve.",
-        "summary": "Does the taxonomy by id endpoint return the full information of a taxonomy in the correct schema",
         "schema": {
           "type": "string"
         }
@@ -652,7 +645,6 @@
         "in": "path",
         "required": true,
         "description": "The id of the taxonomy terms that the request is intended to retrieve.",
-        "summary": "Does the taxonomy term by id endpoint return the full information of a taxonomy term in the correct schema",
         "schema": {
           "type": "string"
         }
@@ -773,7 +765,7 @@
         "required": false,
         "description": "Return results in the specified format. Default is `json`. Could be `ndjson` which should stream all the results without pagination.",
         "schema": {
-          "$ref": "https://openreferraluk.org/specifications/3.0/schema/enums.json#format",
+          "$ref": "https://openreferraluk.org/specifications/3.0/schema/enums.json#/$defs/format",
           "default": "json"
         }
       }
@@ -811,6 +803,7 @@
       }
     }
   },
+  "security": [],
   "servers": [
     {
       "url": "https://api.example.org/v3",

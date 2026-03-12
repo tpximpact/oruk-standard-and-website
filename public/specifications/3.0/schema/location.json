@@ -1,10 +1,10 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://openreferraluk.org/specifications/3.0/schema/location.json",
-  "name": "location",
-  "path": "locations.csv",
+  "x-name": "location",
+  "x-path": "locations.csv",
   "description": "The locations where organizations operate. Locations may be virtual, and one organization may have many locations.",
-  "datapackage_metadata": {
+  "x-datapackage_metadata": {
     "format": "csv",
     "mediatype": "text/csv",
     "profile": "tabular-data-resource",
@@ -19,15 +19,15 @@
       "properties": {
         "location_type": {
           "example": "physical",
-          "$ref": "https://openreferraluk.org/specifications/3.0/schema/enums.json#location-type"
+          "$ref": "https://openreferraluk.org/specifications/3.0/schema/enums.json#/$defs/location_type"
         },
         "latitude": {
           "example": 100,
-          "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#latitude-field"
+          "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#/$defs/latitude"
         },
         "longitude": {
           "example": 101,
-          "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#longitude-field"
+          "$ref": "https://openreferraluk.org/specifications/3.0/schema/definitions.json#/$defs/longitude"
         },
         "external_identifier": {
           "type": "string",
