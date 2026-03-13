@@ -40,12 +40,12 @@ This is a modern Next.js 16 application built with:
 - **Styling**: CSS Modules for component-scoped styles
 - **Database**: MongoDB 7.0 for service feed tracking and dashboard data
 - **Schema Validation**: Zod 4.3.6 for runtime type safety and data validation
-- **Testing**: Jest 30 for unit tests, Playwright 1.58 for end-to-end testing with accessibility checks
+- **Testing**: Vitest for unit tests, Playwright 1.58 for end-to-end testing with accessibility checks
 - **Deployment**: Vercel with continuous deployment and analytics
 - **Code Quality**: ESLint 9, Prettier 3.8, Husky for Git hooks, and lint-staged for pre-commit checks
 - **Integrations**: GitHub API via Octokit for issue tracking and workflow automation
 
-> **📖 Full Technical Documentation**: For comprehensive architecture details, development guides, and implementation documentation, visit the [project wiki](https://github.com/tpximpact/oruk-standard-and-website/wiki).
+> **📖 Full Technical Documentation**: For comprehensive architecture details, development guides, and implementation documentation, visit the [project wiki](https://github.com/OpenReferralUK/oruk-standard-and-website/wiki).
 
 ### Architecture Components
 
@@ -116,8 +116,8 @@ Open Referral UK is built on the foundation of the international [Open Referral]
 - **International Forum**: Participate in global Open Referral discussions at [forum.openreferral.org](https://forum.openreferral.org/)
 - **GitHub Issues**: Report bugs, request features, and discuss technical matters on our [GitHub issue tracker](https://github.com/OpenReferralUK/human-services/issues)
 - **Code Repository**: Contribute to the codebase via our public repositories:
-  - [Frontend Repository](https://github.com/tpximpact/oruk-standard-and-website)
-  - [API Repository](https://github.com/tpximpact/OpenReferralApi)
+  - [Frontend Repository](https://github.com/OpenReferralUK/oruk-standard-and-website)
+  - [API Repository](https://github.com/OpenReferralUK/OpenReferralApi)
 
 ### Attribution
 
@@ -167,7 +167,7 @@ See the repository license file for full BSD 3-Clause terms.
 1. **Clone the repository**
 
    ```bash
-   git clone https://github.com/tpximpact/oruk-standard-and-website.git
+   git clone https://github.com/OpenReferralUK/oruk-standard-and-website.git
    cd oruk-standard-and-website
    ```
 
@@ -245,7 +245,8 @@ Copy `.env.example` to `.env.local` and configure the following:
 
 **External Service Endpoints:**
 
-- `OPENAPI_VALIDATOR_ENDPOINT` - OpenAPI validator service endpoint
+- `VALIDATOR_ENDPOINT` - OpenAPI validator service endpoint
+- `API_ENDPOINT_URL` - Base URL used for validator and sample report links
 
 **GitHub Integration (for service registration):**
 
@@ -272,11 +273,11 @@ Copy `.env.example` to `.env.local` and configure the following:
 
 For comprehensive technical documentation, including detailed architecture, testing guides, content management, and development workflows, visit:
 
-**📖 [Project Wiki](https://github.com/tpximpact/oruk-standard-and-website/wiki)**
+**📖 [Project Wiki](https://github.com/OpenReferralUK/oruk-standard-and-website/wiki)**
 
 Key documentation sections:
 
-- [Architecture](https://github.com/tpximpact/oruk-standard-and-website/wiki) - Technical architecture and system design
-- [Managing Content](https://github.com/tpximpact/oruk-standard-and-website/wiki/Managing-Content) - Content authoring and management
-- [Testing](https://github.com/tpximpact/oruk-standard-and-website/wiki/Testing) - Testing strategies and guidelines
-- [GitHub Integration](https://github.com/tpximpact/oruk-standard-and-website/wiki/GitHub-Issue-Creation-for-Service-Verification) - Service verification workflow
+- [Architecture](https://github.com/OpenReferralUK/oruk-standard-and-website/wiki) - Technical architecture and system design
+- [Managing Content](https://github.com/OpenReferralUK/oruk-standard-and-website/wiki/Managing-Content) - Content authoring and management
+- [Testing](https://github.com/OpenReferralUK/oruk-standard-and-website/wiki/Testing) - Testing strategies and guidelines
+- [GitHub Integration](https://github.com/OpenReferralUK/oruk-standard-and-website/wiki/GitHub-Issue-Creation-for-Service-Verification) - Service verification workflow
