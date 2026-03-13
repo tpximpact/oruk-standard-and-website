@@ -5,7 +5,15 @@ import { useRouter } from 'next/navigation'
 import styles from './ValidatorForm.module.css'
 import { Button } from '@/components/Button'
 
-export default function ValidatorForm({ initialUrl = '' }: { initialUrl?: string }) {
+interface ValidatorFormProps {
+  initialUrl?: string
+  initialSchemaBearerToken?: string
+}
+
+export default function ValidatorForm({
+  initialUrl = '',
+  initialSchemaBearerToken = ''
+}: ValidatorFormProps) {
   const [url, setUrl] = useState(initialUrl)
   const [error, setError] = useState('')
   const router = useRouter()
@@ -34,9 +42,15 @@ export default function ValidatorForm({ initialUrl = '' }: { initialUrl?: string
 
     // Redirect to URL with query parameter for bookmarkable results
     // Add timestamp to force re-validation even if URL is the same
-    const encodedUrl = encodeURIComponent(url)
+    const params = new URLSearchParams({ url })
     const timestamp = Date.now()
-    router.push(`/developers/validator?url=${encodedUrl}&t=${timestamp}`)
+    params.set('t', `${timestamp}`)
+
+    if (initialSchemaBearerToken) {
+      params.set('schemaBearerToken', initialSchemaBearerToken)
+    }
+
+    router.push(`/developers/validator?${params.toString()}`)
   }
 
   const handleReset = () => {

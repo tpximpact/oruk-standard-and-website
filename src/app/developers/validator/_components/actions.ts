@@ -17,11 +17,29 @@ export interface ValidationState {
   baseUrl?: string
 }
 
+function buildValidationRequestBody(baseUrl: string, schemaBearerToken?: string | null) {
+  const trimmedSchemaBearerToken = schemaBearerToken?.trim()
+
+  if (!trimmedSchemaBearerToken) {
+    return { baseUrl }
+  }
+
+  return {
+    baseUrl,
+    openApiSchema: {
+      authentication: {
+        bearerToken: trimmedSchemaBearerToken
+      }
+    }
+  }
+}
+
 export async function validateFeed(
   _prevState: ValidationState | null,
   formData: FormData
 ): Promise<ValidationState> {
   const baseUrl = formData.get('baseUrl') as string
+  const schemaBearerToken = formData.get('schemaBearerToken') as string | null
 
   if (!baseUrl || !baseUrl.trim()) {
     return {
@@ -36,9 +54,7 @@ export async function validateFeed(
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({
-        baseUrl
-      })
+      body: JSON.stringify(buildValidationRequestBody(baseUrl, schemaBearerToken))
     })
 
     if (!response.ok) {
@@ -62,7 +78,10 @@ export async function validateFeed(
   }
 }
 
-export async function fetchValidationResults(url: string): Promise<ValidationState> {
+export async function fetchValidationResults(
+  url: string,
+  schemaBearerToken?: string
+): Promise<ValidationState> {
   if (!url || !url.trim()) {
     return {
       error: 'Please provide a URL',
@@ -76,9 +95,7 @@ export async function fetchValidationResults(url: string): Promise<ValidationSta
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({
-        baseUrl: url
-      })
+      body: JSON.stringify(buildValidationRequestBody(url, schemaBearerToken))
     })
 
     if (!response.ok) {
