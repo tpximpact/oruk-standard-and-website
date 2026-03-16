@@ -2,6 +2,7 @@ import { join } from 'path'
 import fs from 'fs'
 import matter from 'gray-matter'
 import { marked } from 'marked'
+import { replaceMarkdownEnvPlaceholders } from './mockApiEndpoint'
 
 const CONTENT_ROOT = join(process.cwd(), 'content')
 
@@ -31,7 +32,7 @@ export const getMarkdownData = async (
     const fullFileName = join(CONTENT_ROOT, folderName, `${fileName}.md`)
     const fileContents = fs.readFileSync(fullFileName, { encoding: 'utf-8' })
     const { data, content } = matter(fileContents)
-    const markdownContent = await marked.parse(content)
+    const markdownContent = await marked.parse(replaceMarkdownEnvPlaceholders(content))
 
     return { data: data as MarkdownMetadata, content: markdownContent }
   } catch {

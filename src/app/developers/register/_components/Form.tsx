@@ -5,17 +5,10 @@ import { useActionState } from 'react'
 import { createMessage } from '@/actions/service-actions'
 import { SubmitButton } from './SubmitButton'
 import { EMPTY_FORM_STATE } from '@/utilities/to-form-state'
+import type { FormState } from '@/utilities/to-form-state'
 import { useToastMessage } from '@/hooks/use-toast-message'
 import { FieldError } from './FieldError'
 import { useFormReset } from '@/hooks/use-form-reset'
-
-interface FormState {
-  status?: string
-  updateLink?: string
-  formData?: Record<string, any>
-  fieldErrors?: Record<string, string[] | undefined>
-  [key: string]: any
-}
 
 interface TextFieldProps {
   id: string
@@ -25,7 +18,12 @@ interface TextFieldProps {
 }
 
 const TextField = ({ id, label, note, formState }: TextFieldProps) => {
-  const v = formState?.formData?.[id] ?? ''
+  const formData =
+    typeof formState?.formData === 'object' && formState.formData !== null
+      ? (formState.formData as Record<string, unknown>)
+      : {}
+  const rawValue = formData[id]
+  const v = rawValue === null || rawValue === undefined ? '' : String(rawValue)
 
   return (
     <div className={styles.Field}>
@@ -38,7 +36,12 @@ const TextField = ({ id, label, note, formState }: TextFieldProps) => {
 }
 
 const TextArea = ({ id, label, note, formState }: TextFieldProps) => {
-  const v = formState?.formData?.[id] ?? ''
+  const formData =
+    typeof formState?.formData === 'object' && formState.formData !== null
+      ? (formState.formData as Record<string, unknown>)
+      : {}
+  const rawValue = formData[id]
+  const v = rawValue === null || rawValue === undefined ? '' : String(rawValue)
 
   return (
     <div className={styles.Field}>

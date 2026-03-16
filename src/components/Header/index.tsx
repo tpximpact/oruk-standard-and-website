@@ -1,22 +1,14 @@
 'use client'
 
-import { useState, useEffect, Dispatch, SetStateAction } from 'react'
+import { useState, useEffect, Dispatch, SetStateAction, type ComponentProps } from 'react'
 import styles from './Header.module.css'
 import { PageMargin } from '@/components/PageMargin'
 import { Logo } from '@/components/Logo'
 import { Menu } from '@/components/Menu'
 import Link from 'next/link'
 
-interface MenuItem {
-  label: string
-  urlPath?: string
-  childNodes?: any[]
-  dynamicChildNodes?: any[]
-  dynamicOverflow?: string
-}
-
 interface HeaderProps {
-  items: MenuItem[]
+  items: NonNullable<ComponentProps<typeof Menu>['items']>
   enableMenu?: boolean
 }
 

@@ -10,7 +10,7 @@ interface OpenAPIModelProps {
   data: {
     htmlContent: string
     rootSpec: {
-      parsed: any
+      parsed: Record<string, unknown>
     }
   }
 }

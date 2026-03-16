@@ -1,5 +1,5 @@
 import { EMPTY_FORM_STATE, fromErrorToFormState, toFormState } from '../to-form-state'
-import { ZodError, z } from 'zod'
+import { z } from 'zod'
 
 describe('to-form-state', () => {
   describe('EMPTY_FORM_STATE', () => {

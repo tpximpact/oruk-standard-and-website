@@ -7,8 +7,14 @@ import { ValidationError } from '@/lib/mongodb-errors'
 import { serviceInputSchema, type ServiceInput } from '@/models/service'
 import { createVerificationIssue } from '@/lib/github-service'
 import { logger } from '@/lib/logger'
+import type { FormState } from '@/utilities/to-form-state'
 
-export const createMessage = async (_formState: any, formData: FormData): Promise<any> => {
+type CreateMessageState = FormState & { issueUrl?: string }
+
+export const createMessage = async (
+  _formState: unknown,
+  formData: FormData
+): Promise<CreateMessageState> => {
   let data: ServiceInput
   let values: Record<string, unknown> | undefined
   let updateLink: string | undefined
@@ -51,7 +57,9 @@ export const createMessage = async (_formState: any, formData: FormData): Promis
     } catch (githubError) {
       // Log the error but don't fail the entire operation
       // The service was successfully created, GitHub issue creation is supplementary
-      logger.error('Failed to create GitHub issue for service verification:', githubError as Error)
+      logger.error('Failed to create GitHub issue for service verification:', {
+        error: githubError instanceof Error ? githubError.message : String(githubError)
+      })
     }
   } catch (error) {
     logger.error('Error creating service:', { error })
@@ -64,8 +72,8 @@ export const createMessage = async (_formState: any, formData: FormData): Promis
 
   revalidatePath('/developers/register')
 
-  const result: any = toFormState('SUCCESS', 'Service requested')
-  ;(result as any).updateLink = updateLink
-  ;(result as any).issueUrl = html_url
+  const result: CreateMessageState = toFormState('SUCCESS', 'Service requested')
+  result.updateLink = updateLink
+  result.issueUrl = html_url
   return result
 }

@@ -42,7 +42,7 @@ interface Schema {
 interface Property {
   type: string
   description?: string
-  [key: string]: any
+  [key: string]: unknown
 }
 
 const table = (schema: Schema, name: string): string => `

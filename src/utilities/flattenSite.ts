@@ -7,7 +7,7 @@ interface SiteItem {
   offsite?: boolean
   parent?: string
   childNodes?: string[] | SiteItem[]
-  [key: string]: any
+  [key: string]: unknown
 }
 
 export const flattenSite = (): SiteItem[] => {

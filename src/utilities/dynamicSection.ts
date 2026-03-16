@@ -6,11 +6,11 @@ import { parseMarkdown } from '@/utilities/parseMarkdown'
 import { PATHS } from './PATHS'
 import { notFound } from 'next/navigation'
 
-const CONTENT_ROOT = join(process.cwd(), PATHS.contentRoot)
+const CONTENT_ROOT = PATHS.contentRoot
 
 interface DynamicPageContent {
   date: string
-  metadata: Record<string, any>
+  metadata: Record<string, unknown>
   html: string
   next: LinkedItem | null
   previous: LinkedItem | null
@@ -66,8 +66,12 @@ export const getAllFiles = (contentFolder: string): string[] => {
     .filter(f => f !== '.DS_Store')
 }
 
-const getDate = (metadata: Record<string, any>, contentPath: string): string => {
-  const raw = metadata.modified || fileLastModified(contentPath)
+const getDate = (metadata: Record<string, unknown>, contentPath: string): string => {
+  const modified = metadata.modified
+  const raw =
+    modified instanceof Date || typeof modified === 'string' || typeof modified === 'number'
+      ? modified
+      : fileLastModified(contentPath)
   const date = new Date(raw)
   return date.toLocaleDateString('en-GB')
 }

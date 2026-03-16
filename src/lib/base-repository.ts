@@ -6,6 +6,7 @@ import type {
   Filter,
   ObjectId,
   OptionalUnlessRequiredId,
+  UpdateFilter,
   WithId
 } from 'mongodb'
 import { z } from 'zod'
@@ -48,7 +49,9 @@ export abstract class BaseRepository<
         // need a real ObjectId instance.
 
         // eslint-disable-next-line @typescript-eslint/no-require-imports
-        const { ObjectId: ObjId } = require('mongodb') as any
+        const { ObjectId: ObjId } = require('mongodb') as {
+          ObjectId: new (id: string) => ObjectId
+        }
         _id = new ObjId(id)
       } catch {
         _id = id
@@ -96,7 +99,9 @@ export abstract class BaseRepository<
     if (typeof id === 'string') {
       try {
         // eslint-disable-next-line @typescript-eslint/no-require-imports
-        const { ObjectId: ObjId } = require('mongodb') as any
+        const { ObjectId: ObjId } = require('mongodb') as {
+          ObjectId: new (id: string) => ObjectId
+        }
         _id = new ObjId(id)
       } catch {
         _id = id
@@ -121,7 +126,7 @@ export abstract class BaseRepository<
       await this.collection
     ).findOneAndUpdate(
       { _id } as Filter<TSchema>,
-      { $set: { ...validated, updatedAt: new Date() } } as any,
+      { $set: { ...validated, updatedAt: new Date() } } as UpdateFilter<TSchema>,
       { returnDocument: 'after' }
     )
 
@@ -133,7 +138,9 @@ export abstract class BaseRepository<
     if (typeof id === 'string') {
       try {
         // eslint-disable-next-line @typescript-eslint/no-require-imports
-        const { ObjectId: ObjId } = require('mongodb') as any
+        const { ObjectId: ObjId } = require('mongodb') as {
+          ObjectId: new (id: string) => ObjectId
+        }
         _id = new ObjId(id)
       } catch {
         _id = id

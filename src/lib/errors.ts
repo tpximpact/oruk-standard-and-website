@@ -8,7 +8,7 @@ export class AppError extends Error {
     message: string,
     public readonly code: string,
     public readonly statusCode: number = 500,
-    public readonly meta?: Record<string, any>
+    public readonly meta?: Record<string, unknown>
   ) {
     super(message)
     this.name = this.constructor.name
@@ -37,7 +37,7 @@ export class ValidationError extends AppError {
 }
 
 export class DatabaseError extends AppError {
-  constructor(message: string, meta?: Record<string, any>) {
+  constructor(message: string, meta?: Record<string, unknown>) {
     super(message, 'DATABASE_ERROR', 500, meta)
     this.name = 'DatabaseError'
   }
@@ -62,7 +62,7 @@ export class DuplicateError extends AppError {
 }
 
 export class ExternalServiceError extends AppError {
-  constructor(service: string, message: string, meta?: Record<string, any>) {
+  constructor(service: string, message: string, meta?: Record<string, unknown>) {
     super(`${service} error: ${message}`, 'EXTERNAL_SERVICE_ERROR', 502, { service, ...meta })
     this.name = 'ExternalServiceError'
   }

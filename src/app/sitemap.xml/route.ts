@@ -46,14 +46,12 @@ const processNodes = (
     if (node.offsite) return
 
     // Build the URL
-    let nodeUrl = ''
-    if (depth === 0) {
-      // Root level
-      nodeUrl = node.urlPath ? `${baseUrl}/${node.urlPath}` : baseUrl
-    } else {
-      // Child level
-      nodeUrl = `${parentPath}/${node.urlPath}`
-    }
+    const nodeUrl =
+      depth === 0
+        ? node.urlPath
+          ? `${baseUrl}/${node.urlPath}`
+          : baseUrl
+        : `${parentPath}/${node.urlPath}`
 
     // Add this node to the sitemap
     sitemap.push({

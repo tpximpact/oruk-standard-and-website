@@ -86,7 +86,8 @@ describe('getContentVersion', () => {
 
     expect(result.rootSpec.parsed).toEqual(specContent)
     expect(result.rootSpec.parsed.openapi).toBe('3.0.0')
-    expect(result.rootSpec.parsed.paths['/test']).toBeDefined()
+    const paths = result.rootSpec.parsed.paths as Record<string, unknown>
+    expect(paths['/test']).toBeDefined()
   })
 
   it('should process schemata if present in spec', () => {

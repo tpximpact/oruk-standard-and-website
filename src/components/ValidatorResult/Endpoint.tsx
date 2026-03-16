@@ -4,6 +4,7 @@ import { useState } from 'react'
 import styles from './ValidatorResult.module.css'
 import { Group } from './Group'
 import { Path } from '@/components/APIModel'
+import type { ApiDocsData, EndpointData, ValidationTest } from './types'
 
 import { APIRequest } from './APIRequest'
 
@@ -12,12 +13,12 @@ export const TabsMenu = ({
   activeTab,
   setActiveTab
 }: {
-  tabData: { id: string; title: string; content: any }[]
+  tabData: { id: string; title: string; content: React.ReactNode }[]
   activeTab: string
   setActiveTab: (id: string) => void
 }) => (
   <div className={styles.tabs}>
-    {tabData.map((tab: any) => (
+    {tabData.map(tab => (
       <button
         key={tab.id}
         className={activeTab === tab.id ? styles.activeTab : ''}
@@ -33,11 +34,11 @@ export const TabsContent = ({
   tabData,
   activeTab
 }: {
-  tabData: { id: string; title: string; content: any }[]
+  tabData: { id: string; title: string; content: React.ReactNode }[]
   activeTab: string
 }) => <div className={styles.tabContent}>{tabData.find(tab => tab.id === activeTab)?.content}</div>
 
-const ValidationTab = ({ groups }: { groups: Record<string, any[]> }) => (
+const ValidationTab = ({ groups }: { groups: Record<string, ValidationTest[]> }) => (
   <div>
     {Object.keys(groups).map((k, i) => (
       <Group key={i} data={groups[k] || []} />
@@ -45,9 +46,18 @@ const ValidationTab = ({ groups }: { groups: Record<string, any[]> }) => (
   </div>
 )
 
-const DocsTab = ({ apiData, path }: { apiData: any; path: string }) => {
+const DocsTab = ({ apiData, path }: { apiData?: ApiDocsData; path: string }) => {
+  if (!apiData) {
+    return null
+  }
+
   const endpoints = apiData.rootSpec.parsed.paths
   const parametersReferences = apiData.rootSpec.parsed.components.parameters
+  const endpointData = endpoints[path]
+
+  if (!endpointData) {
+    return null
+  }
 
   return (
     <Path
@@ -56,7 +66,7 @@ const DocsTab = ({ apiData, path }: { apiData: any; path: string }) => {
       path={path}
       allData={apiData}
       parametersReferences={parametersReferences}
-      data={endpoints[path]}
+      data={endpointData}
     />
   )
 }
@@ -66,8 +76,8 @@ const profileNameToVersionNumber = (name: string) => {
   return atoms.reverse().shift()
 }
 
-const getExampleId = (data: any) => {
-  let id
+const getExampleId = (data: EndpointData): string | undefined => {
+  let id: string | number | undefined
   const firstKey = Object.keys(data.groups)[0]
   const defaultGroup = firstKey ? data.groups[firstKey] : undefined
 
@@ -77,7 +87,7 @@ const getExampleId = (data: any) => {
       id = defaultItem.id
     }
   }
-  return id
+  return id === undefined ? undefined : String(id)
 }
 
 export const Endpoint = ({
@@ -89,8 +99,8 @@ export const Endpoint = ({
 }: {
   rootPath: string
   path: string
-  data: any
-  apiData: any
+  data: EndpointData
+  apiData: Record<string, ApiDocsData>
   profile: string
 }) => {
   const profileVersion = profileNameToVersionNumber(profile)

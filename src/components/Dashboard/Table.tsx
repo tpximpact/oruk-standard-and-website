@@ -17,21 +17,21 @@ const formatDate = (dateString: string) => {
 }
 
 interface TableProps {
-  headers: any[]
-  data: any[]
+  headers: string[]
+  data: TableRow[]
 }
 
 export const Table = ({ headers, data }: TableProps) => (
   <table className={styles.table}>
     <thead>
       <tr>
-        {headers.map((header: any, idx: number) => (
+        {headers.map((header, idx: number) => (
           <th key={idx}>{header}</th>
         ))}
       </tr>
     </thead>
     <tbody>
-      {data.map((row: any, idx: number) => (
+      {data.map((row, idx: number) => (
         <Row key={idx} data={row} />
       ))}
     </tbody>
@@ -60,7 +60,16 @@ const StatusReadout = ({ pass }: StatusReadoutProps) => {
 }
 
 interface RowProps {
-  data: any
+  data: TableRow
+}
+
+interface TableRow {
+  id: string | number
+  label: string
+  isUp: boolean
+  isServicesValid: boolean
+  isSearchEnabled: boolean
+  lastCheck: string
 }
 
 const Row = ({ data }: RowProps) => {
