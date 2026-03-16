@@ -11,10 +11,9 @@ const envSchema = z.object({
   MONGODB_DB: z.string().min(1, 'MONGODB_DB is required'),
 
   // External Services
-  OPENAPI_VALIDATOR_ENDPOINT: z
-    .string()
-    .url('OPENAPI_VALIDATOR_ENDPOINT must be a valid URL')
-    .optional(),
+  VALIDATOR_ENDPOINT: z.url('VALIDATOR_ENDPOINT must be a valid URL').optional(),
+  API_ENDPOINT_URL: z.url('API_ENDPOINT_URL must be a valid URL').optional(),
+  MOCK_SCHEMA_BEARER_TOKEN: z.string().optional(),
 
   // Feature Flags
   USE_COOKIES: z.string().optional().default('true'),
@@ -30,7 +29,7 @@ const envSchema = z.object({
   GITHUB_ISSUE_ASSIGNEES: z.string().optional(),
 
   // NextAuth
-  NEXTAUTH_URL: z.string().url().optional(),
+  NEXTAUTH_URL: z.url('NEXTAUTH_URL must be a valid URL').optional(),
 
   // System
   NODE_ENV: z.enum(['development', 'production', 'test']).default('development'),

@@ -11,10 +11,15 @@ import type { ValidationResultData } from '@/components/ValidatorResult/types'
 
 interface ValidationResultsProps {
   url: string
+  schemaBearerToken?: string
   apiData: unknown
 }
 
-export default function ValidationResults({ url, apiData }: ValidationResultsProps) {
+export default function ValidationResults({
+  url,
+  schemaBearerToken,
+  apiData
+}: ValidationResultsProps) {
   const [result, setResult] = useState<ValidationResultData | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
@@ -26,7 +31,7 @@ export default function ValidationResults({ url, apiData }: ValidationResultsPro
       setResult(null)
 
       try {
-        const response = await fetchValidationResults(url)
+        const response = await fetchValidationResults(url, schemaBearerToken)
 
         if (response.error) {
           throw new Error(response.error)
@@ -45,7 +50,7 @@ export default function ValidationResults({ url, apiData }: ValidationResultsPro
     if (url) {
       validateUrl()
     }
-  }, [url])
+  }, [schemaBearerToken, url])
 
   if (loading) {
     return <LoadingOverlay url={url} />
