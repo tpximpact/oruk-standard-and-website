@@ -209,6 +209,12 @@ jobs:
           output: 'trivy-image-results.sarif'
           severity: 'CRITICAL,HIGH'
 
+      - name: Upload Trivy Image SARIF
+        uses: github/codeql-action/upload-sarif@v4.32.6
+        if: always() && hashFiles('trivy-image-results.sarif') != ''
+        with:
+          sarif_file: trivy-image-results.sarif
+
       # --- START APP FOR SCANNING ---
       - name: Run App for Zap
         run: |
@@ -239,14 +245,6 @@ jobs:
           artifact_name: 'zap-security-report'
           allow_issue_writing: true
           cmd_options: '-a'
-
-      - name: Upload Security Scan Results
-        uses: github/codeql-action/upload-sarif@v4.32.6
-        if: always()
-        with:
-          sarif_file: |
-            zap-security-report.sarif
-            trivy-image-results.sarif
 
       - name: Stop App
         if: always()
