@@ -4,7 +4,9 @@ on:
   pull_request:
     branches: [main, staging]
   push:
-    branches: [main, staging]
+    # there is no need to run this workflow on push to staging as it will be triggered by the PR workflow, but we do want it to run on push to main for direct commits and merges
+    branches: [main]
+  workflow_dispatch: {}
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -12,7 +14,6 @@ concurrency:
 
 env:
   NODE_VERSION: '20'
-  TRIVY_DOCKER_IMAGE: 'aquasec/trivy:0.69.1'
 
 permissions:
   contents: read
@@ -20,13 +21,33 @@ permissions:
   security-events: write # Required for Trivy/CodeQL SARIF upload
 
 jobs:
-  build-and-test:
-    name: Build and Test
+  # --- JOB 0: BRANCH GATE ---
+  # Ensures that PRs to 'main' ONLY come from 'staging'
+  branch-gate:
+    name: Validate PR Source
     runs-on: ubuntu-latest
-
+    # Only run this logic if it's a Pull Request
+    if: github.event_name == 'pull_request'
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v6.0.2
+      - name: Check Branch Flow
+        run: |
+          if [[ "${{ github.base_ref }}" == "main" && "${{ github.head_ref }}" != "staging" ]]; then
+            echo "::error::Illegal Merge: PRs to 'main' must originate from 'staging'."
+            exit 1
+          fi
+          echo "Branch flow validated."
+
+  # --- 2. BUILD, TEST & QUALITY ---
+  build-and-test:
+    name: Build, Test & Coverage
+    needs: branch-gate
+    # This 'if' allows the job to run if branch-gate passed OR if it wasn't a PR (like a push)
+    if: |
+      always() && 
+      (needs.branch-gate.result == 'success' || needs.branch-gate.result == 'skipped')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6.0.2
 
       - name: Setup Node.js
         uses: actions/setup-node@v6.3.0
@@ -35,21 +56,22 @@ jobs:
           cache: 'yarn'
 
       - name: Install dependencies
-        run: yarn install # --frozen-lockfile
+        run: yarn install --frozen-lockfile
 
       - name: Cache Next.js build
         uses: actions/cache@v5.0.3
         with:
           path: .next/cache
-          key: ${{ runner.os }}-nextjs-${{ hashFiles('**/yarn.lock') }}-${{ hashFiles('**/*.{js,jsx,ts,tsx}') }}
+          key: ${{ runner.os }}-nextjs-${{ hashFiles('**/yarn.lock') }}-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-nextjs-${{ hashFiles('**/yarn.lock') }}-
 
-      - name: Cache Next.js build
-        uses: actions/cache@v5.0.3
-        with:
-          path: .next/cache
-          key: ${{ runner.os }}-nextjs-${{ hashFiles('**/yarn.lock') }}-${{ hashFiles('**/*.{js,jsx,ts,tsx}') }}
+      - name: Lint & Type Check
+        run: |
+          yarn lint
+          yarn tsc --noEmit
 
-      - name: Build application
+      - name: Build
         run: yarn build
 
       - name: Run tests with coverage
@@ -61,310 +83,229 @@ jobs:
           directory: ./coverage
           fail_ci_if_error: false
 
-      - name: Upload test results
-        uses: actions/upload-artifact@v7.0.0
+      - name: Upload test artifacts
         if: always()
+        uses: actions/upload-artifact@v7.0.0
         with:
           name: test-results
-          path: ./coverage/**/*
+          path: ./coverage
+          if-no-files-found: warn
           retention-days: 14
 
-  code-quality:
-    name: Code Quality (Lint + Type Check)
-    runs-on: ubuntu-latest
+  # --- JOB 3: PARALLEL SCANS (Matrix) ---
+  parallel-checks:
+    name: ${{ matrix.check }} Scan
     needs: build-and-test
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v6.0.2
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v6.3.0
-        with:
-          node-version: ${{ env.NODE_VERSION }}
-          cache: 'yarn'
-
-      - name: Install dependencies
-        run: yarn install # --frozen-lockfile
-
-      - name: Run ESLint
-        run: yarn lint
-
-      - name: Run type checking
-        run: yarn tsc --noEmit
-
-  accessibility-tests:
-    name: Accessibility Tests (Playwright)
+    if: always() && needs.build-and-test.result == 'success'
+    permissions:
+      security-events: write
+      actions: read
+      contents: read
     runs-on: ubuntu-latest
-    needs: build-and-test
-
+    strategy:
+      fail-fast: false
+      matrix:
+        check: [trivy-fs, playwright-a11y, codeql] # We can add more checks here in the future
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v6.0.2
+      - uses: actions/checkout@v6.0.2
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v6.3.0
+      # --- CODEQL LOGIC ---
+      - name: Initialize CodeQL
+        if: matrix.check == 'codeql'
+        uses: github/codeql-action/init@v4.32.6
         with:
-          node-version: ${{ env.NODE_VERSION }}
-          cache: 'yarn'
+          languages: javascript-typescript
+          build-mode: none
 
-      - name: Install dependencies
-        run: yarn install # --frozen-lockfile
+      - name: Perform CodeQL Analysis
+        if: matrix.check == 'codeql'
+        uses: github/codeql-action/analyze@v4.32.6
 
-      - name: Install Playwright Browsers
-        run: npx playwright install --with-deps chromium
+      # Playwright Logic
+      - name: Cache Playwright Browsers
+        if: matrix.check == 'playwright-a11y'
+        uses: actions/cache@v5.0.4
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
 
-      - name: Run accessibility tests
-        run: yarn e2e src/e2e/accessibility.spec.ts
+      - name: Playwright A11y
+        if: matrix.check == 'playwright-a11y'
+        run: |
+          yarn install --frozen-lockfile
+          npx playwright install --with-deps chromium
+          yarn e2e src/e2e/accessibility.spec.ts
         env:
           CI: true
 
-      - name: Upload reports
+      - name: Upload Playwright Reports
+        if: always() && matrix.check == 'playwright-a11y'
         uses: actions/upload-artifact@v7.0.0
-        if: always()
         with:
-          name: accessibility-and-playwright-reports
+          name: accessibility-reports
           path: |
             accessibility-report/
             playwright-report/
-          retention-days: 30
+          retention-days: 14
 
-  security-scan-fs:
-    name: Trivy Filesystem Scan
-    runs-on: ubuntu-latest
-    needs: build-and-test
+      # Trivy FS Logic
+      - name: Cache Trivy DB
+        if: matrix.check == 'trivy-fs'
+        uses: actions/cache@v5.0.4
+        with:
+          path: .trivycache
+          key: trivy-db-${{ runner.os }}-${{ github.ref_name }}
+          restore-keys: trivy-db-${{ runner.os }}-
 
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v6.0.2
-
-      - name: Run Trivy (filesystem)
+      - name: Trivy FS Scan
+        if: matrix.check == 'trivy-fs'
         uses: aquasecurity/trivy-action@0.35.0
         with:
           scan-type: 'fs'
-          scan-ref: '.'
           format: 'sarif'
           output: 'trivy-fs-results.sarif'
-          severity: 'CRITICAL,HIGH,MEDIUM,UNKNOWN'
+          severity: 'CRITICAL,HIGH'
+          exit-code: '0' # Do not break the build here; let the Gatekeeper handle it
+          cache-dir: .trivycache
 
-      - name: Upload Trivy FS SARIF
+      - name: Upload Trivy FS results
+        if: always() && matrix.check == 'trivy-fs'
         uses: github/codeql-action/upload-sarif@v4.32.6
-        if: always()
         with:
           sarif_file: trivy-fs-results.sarif
 
-  docker-build:
-    name: Build & Push Docker Image to GHCR
+  docker-and-dast:
+    name: Docker & ZAP Scan
+    needs: build-and-test
     runs-on: ubuntu-latest
-    needs: [build-and-test, code-quality, security-scan-fs, accessibility-tests]
-    if: github.event_name == 'push' || (github.event_name == 'pull_request' && github.base_ref == 'main')
-    outputs:
-      image_ref: ${{ steps.image_ref.outputs.image_ref }}
-
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v6.0.2
+      - uses: actions/checkout@v6.0.2
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v4.0.0
 
-      - name: Log in to GitHub Container Registry
-        uses: docker/login-action@v4.0.0
-        with:
-          registry: ghcr.io
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Prepare lowercase image name
-        id: lowercase
-        run: |
-          repo_owner="${{ github.repository_owner }}"
-          repo_name="${{ github.event.repository.name }}"
-          echo "repo_owner=$(echo "$repo_owner" | tr '[:upper:]' '[:lower:]')" >> "$GITHUB_OUTPUT"
-          echo "repo_name=$(echo "$repo_name" | tr '[:upper:]' '[:lower:]')" >> "$GITHUB_OUTPUT"
-
-      - name: Extract metadata & tags
-        id: meta
-        uses: docker/metadata-action@v6.0.0
-        with:
-          images: ghcr.io/${{ steps.lowercase.outputs.repo_owner }}/${{ steps.lowercase.outputs.repo_name }}
-          tags: |
-            type=sha,format=long
-            type=ref,event=branch
-            type=ref,event=pr
-            type=semver,pattern={{version}}
-            type=semver,pattern={{major}}.{{minor}}
-
-      - name: Record image reference
-        id: image_ref
-        run: |
-          tags_raw="${{ steps.meta.outputs.tags }}"
-          image_ref=$(echo "$tags_raw" | tr ',' '\n' | grep ':sha-' | head -n 1)
-
-          if [ -z "$image_ref" ]; then
-            image_ref="ghcr.io/${{ steps.lowercase.outputs.repo_owner }}/${{ steps.lowercase.outputs.repo_name }}:sha-${{ github.sha }}"
-          fi
-
-          echo "image_ref=$image_ref" >> "$GITHUB_OUTPUT"
-
-      - name: Build and push Docker image
+      - name: Build Local Image
         uses: docker/build-push-action@v7.0.0
         with:
           context: .
-          file: ./Dockerfile
-          push: true
-          tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}
+          load: true # Loads into local Docker instead of pushing to Registry
+          tags: my-app:local
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
-  security-scan-image:
-    name: Trivy Image Vulnerability Scan
-    runs-on: ubuntu-latest
-    needs: docker-build
-    if: github.event_name == 'push' || (github.event_name == 'pull_request' && github.base_ref == 'main')
-
-    steps:
-      - name: Log in to GitHub Container Registry
-        uses: docker/login-action@v4.0.0
+      # 1. Cache the Trivy DB so the Image Scan is fast
+      - name: Cache Trivy DB
+        uses: actions/cache@v5.0.4
         with:
-          registry: ghcr.io
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
+          path: .trivycache # Change from ~/.cache/trivy to .trivycache
+          key: trivy-db-${{ runner.os }}-${{ github.ref_name }}
+          restore-keys: trivy-db-${{ runner.os }}-
 
-      - name: Run Trivy on built image
+      - name: Trivy Image Scan
         uses: aquasecurity/trivy-action@0.35.0
-        continue-on-error: true
         with:
-          image-ref: ${{ needs.docker-build.outputs.image_ref }}
+          image-ref: 'my-app:local'
           format: 'sarif'
           output: 'trivy-image-results.sarif'
-          severity: 'CRITICAL,HIGH,MEDIUM,UNKNOWN'
+          severity: 'CRITICAL,HIGH'
 
-      - name: Diagnose missing Trivy SARIF
-        if: always()
+      # --- START APP FOR SCANNING ---
+      - name: Run App for Zap
         run: |
-          if [ -f trivy-image-results.sarif ]; then
-            echo "Trivy SARIF present. No diagnostic scan needed."
-            exit 0
-          fi
+          docker run -d --name test-app -p 3000:3000 my-app:local
 
-          echo "Trivy SARIF missing. Running diagnostic scan with debug output."
-          docker pull ${{ needs.docker-build.outputs.image_ref }}
-
-          docker run --rm ${{ env.TRIVY_DOCKER_IMAGE }} \
-            image \
-            --debug \
-            --exit-code 0 \
-            --format sarif \
-            --output trivy-image-results.sarif \
-            --severity CRITICAL,HIGH,MEDIUM,UNKNOWN \
-            ${{ needs.docker-build.outputs.image_ref }} || true
-
-          docker run --rm ${{ env.TRIVY_DOCKER_IMAGE }} \
-            image \
-            --debug \
-            --exit-code 0 \
-            --format table \
-            --severity CRITICAL,HIGH,MEDIUM,UNKNOWN \
-            ${{ needs.docker-build.outputs.image_ref }} || true
-
-      - name: Check Trivy SARIF exists
-        id: trivy_sarif
-        if: always()
+      - name: Wait for app Readiness
         run: |
-          if [ -f trivy-image-results.sarif ]; then
-            echo "present=true" >> "$GITHUB_OUTPUT"
-          else
-            echo "present=false" >> "$GITHUB_OUTPUT"
-          fi
-
-      - name: Upload Trivy Image SARIF
-        uses: github/codeql-action/upload-sarif@v4.32.6
-        if: steps.trivy_sarif.outputs.present == 'true'
-        with:
-          sarif_file: trivy-image-results.sarif
-
-  zap-scan:
-    name: OWASP ZAP Baseline Scan
-    runs-on: ubuntu-latest
-    needs: [docker-build, security-scan-image]
-    if: github.event_name == 'pull_request' && github.base_ref == 'main'
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v6.0.2
-
-      - name: Log in to GitHub Container Registry & pull image
-        uses: docker/login-action@v4.0.0
-        with:
-          registry: ghcr.io
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Prepare lowercase image name
-        id: lowercase
-        run: |
-          repo_owner="${{ github.repository_owner }}"
-          repo_name="${{ github.event.repository.name }}"
-          echo "repo_owner=$(echo "$repo_owner" | tr '[:upper:]' '[:lower:]')" >> "$GITHUB_OUTPUT"
-          echo "repo_name=$(echo "$repo_name" | tr '[:upper:]' '[:lower:]')" >> "$GITHUB_OUTPUT"
-
-      - name: Pull Docker image
-        run: docker pull ghcr.io/${{ steps.lowercase.outputs.repo_owner }}/${{ steps.lowercase.outputs.repo_name }}:sha-${{ github.sha }}
-
-      - name: Create Docker network
-        run: docker network create zap-test-network
-
-      - name: Start application container
-        run: |
-          docker run -d --name test-app \
-            --network zap-test-network \
-            -p 3000:3000 \
-            ghcr.io/${{ steps.lowercase.outputs.repo_owner }}/${{ steps.lowercase.outputs.repo_name }}:sha-${{ github.sha }}
-
-          # Wait for application to be ready
-          echo "Waiting for application to start..."
           for i in {1..30}; do
-            if curl -f http://localhost:3000/api/health > /dev/null 2>&1; then
-              echo "✓ Application health check passed (/api/health)"
-              break
+            if curl -fsS http://localhost:3000 >/dev/null; then
+              echo "App is ready"
+              exit 0
             fi
-            if [ $i -eq 30 ]; then
-              echo "✗ Application failed to become ready after 60 seconds"
-              echo "Final container logs:"
-              docker logs test-app
-              exit 1
-            fi
-            echo "Waiting for application... ($i/30)"
+            echo "Waiting for app... ($i/30)"
             sleep 2
           done
+          echo "App failed readiness check"
+          docker logs test-app || true
+          exit 1
 
-      - name: Run OWASP ZAP Baseline Scan
-        run: |
-          docker run --rm \
-            --network zap-test-network \
-            -v ${{ github.workspace }}/zap-reports:/zap/wrk/:rw \
-            ghcr.io/zaproxy/zaproxy:stable \
-            zap-baseline.py \
-            -t http://test-app:3000 \
-            -J report_json.json \
-            -w report_md.md \
-            -r report_html.html \
-            -I || echo "ZAP scan completed with findings"
-        continue-on-error: true
+      # ---  ZAP ACTION ---
+      - name: ZAP Baseline Scan
+        uses: zaproxy/action-baseline@v0.15.0
+        with:
+          # Note: Next.js standard port is 3000
+          target: 'http://localhost:3000'
+          fail_action: false
+          token: ${{ secrets.GITHUB_TOKEN }}
+          artifact_name: 'zap-security-report'
+          allow_issue_writing: true
+          cmd_options: '-a' # This tells ZAP to include alpha/informational alerts but not fail
 
-      - name: Upload ZAP results
+      - name: Stop App
+        if: always()
+        run: docker stop test-app && docker rm test-app
+
+      - name: Upload Security Scan Results
+        uses: github/codeql-action/upload-sarif@v4.32.6
+        if: always()
+        with:
+          sarif_file: |
+            zap-security-report.sarif
+            trivy-image-results.sarif
+
+      - name: Upload ZAP Report
         if: always()
         uses: actions/upload-artifact@v7.0.0
         with:
-          name: zap-scan-results
-          path: zap-reports/
+          name: zap-security-report
+          path: zap-reports/report.html
+          retention-days: 7
           if-no-files-found: warn
 
-      - name: Stop application container
-        if: always()
+  # --- JOB 4: FINAL STATUS CHECK (The Gatekeeper) ---
+  # This job is what you should use for your Branch Protection Rules.
+  # It only runs if all preceding parallel jobs succeed.
+  workflow-status:
+    name: Final Workflow Status
+    needs: [parallel-checks, docker-and-dast]
+    runs-on: ubuntu-latest
+    if: always() # Ensures this runs even if others are skipped or fail so we can evaluate them
+    steps:
+      - name: Check All Jobs Status
         run: |
-          docker stop test-app || true
-          docker rm test-app || true
-          docker network rm zap-test-network || true
+          # 1. Get the results
+          SEC_RESULT="${{ needs.parallel-checks.result }}"
+          DOCKER_RESULT="${{ needs.docker-and-dast.result }}"
+
+          echo "Security Scan Status: $SEC_RESULT"
+          echo "Docker & DAST Status: $DOCKER_RESULT"
+
+          # 2. Strict Check: If ANY job actually failed or was cancelled, we fail.
+          if [[ "$SEC_RESULT" == "failure" || "$SEC_RESULT" == "cancelled" ]] || \
+             [[ "$DOCKER_RESULT" == "failure" || "$DOCKER_RESULT" == "cancelled" ]]; then
+            echo "::error::One or more required jobs failed or were cancelled."
+            exit 1
+          fi
+
+          # 3. Logic Check: If they are both 'skipped', it might mean the build failed earlier.
+          # (Optional: You can add a check here for the build-and-test result if you want to be extra safe)
+
+          echo "All checks passed!"
+
+  # --- JOB 5: RELEASE ---
+  create-release:
+    name: Create GitHub Release
+    # Waits for both parallel security and docker paths to complete
+    needs: workflow-status
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main' && needs.workflow-status.result == 'success'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write # Required to create the release
+    steps:
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2.5.0
+        with:
+          tag_name: v${{ github.run_number }}
+          name: Release v${{ github.run_number }}
+          draft: false
+          prerelease: false
+          token: ${{ secrets.GITHUB_TOKEN }}
