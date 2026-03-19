@@ -178,6 +178,10 @@ jobs:
     name: Docker & ZAP Scan
     needs: build-and-test
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      security-events: write
+      issues: write
     steps:
       - uses: actions/checkout@v6.0.2
 
@@ -188,6 +192,7 @@ jobs:
         uses: docker/build-push-action@v7.0.0
         with:
           context: .
+          file: ./Dockerfile
           load: true # Loads into local Docker instead of pushing to Registry
           tags: my-app:local
           cache-from: type=gha
@@ -208,6 +213,7 @@ jobs:
           format: 'sarif'
           output: 'trivy-image-results.sarif'
           severity: 'CRITICAL,HIGH'
+          cache-dir: .trivycache
 
       - name: Upload Trivy Image SARIF
         uses: github/codeql-action/upload-sarif@v4.32.6
@@ -238,7 +244,6 @@ jobs:
       - name: ZAP Baseline Scan
         uses: zaproxy/action-baseline@v0.15.0
         with:
-          # Note: Next.js standard port is 3000
           target: 'http://localhost:3000'
           fail_action: false
           token: ${{ secrets.GITHUB_TOKEN }}
